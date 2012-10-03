@@ -6,6 +6,6 @@ Members:
 * Florian Matter
 * Lars Vögtlin
 * Michael Kohler
-* Paul Frischknecht
+* Paul Frischknecht, paul_frischknecht@bluewin.ch, https://github.com/Masterxilo
 * Simon Rothfahl
 * Benedikt Schürch
