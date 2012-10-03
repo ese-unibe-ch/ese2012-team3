@@ -7,5 +7,5 @@ Members:
 * Lars Vögtlin
 * Michael Kohler
 * Paul Frischknecht, paul_frischknecht@bluewin.ch, https://github.com/Masterxilo
-* Simon Rothfahl
+* Simon Rothfahl, simon@rothfahl.ch, https://github.com/rothfahl, skype: rothfahlsi
 * Benedikt Schürch
