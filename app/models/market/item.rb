@@ -11,7 +11,7 @@ module Market
     @@item_id_counter = 0
 
     # constructor - give a name to the item and set a specified price
-    # @param [Object] params - dictionary of symbols
+    # @param [Object] params - dictionary of symbols. Recognized: :name, :price, :active, :owner
     def self.init(params={})
       item = self.new
       item.id = @@item_id_counter
