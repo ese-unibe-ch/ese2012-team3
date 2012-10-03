@@ -19,10 +19,9 @@ class Marketplace < Sinatra::Application
     else
       redirect '/error'
     end
-    
-    # this does what it needs to
-    # but still returns a 500 error..
-    # yesterday this worked with the same code, intermittent?
+
+    redirect '/'
+
   end
 
 end
