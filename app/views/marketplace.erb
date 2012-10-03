@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Dashboard - Marketplace</title>
+    <%= includeERB('head.erb') %>
+  </head>
+  <body>
+    <%= includeERB('nav.erb') %>
+    <div class="container">
+      <section id="content">
+        <div class="row">
+          <%= includeERB('sidebar.erb') %>
+          <div class="span10">
+            <div class="alert-success alert" id="loggedin">
+              <strong>Logged in!</strong><br />You've been logged in successfully!
+            </div>
+            <h1>Marketplace</h1>
+
+            <table class="table">
+              <thead>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Owner</th>
+                <th></th>
+              </thead>
+              <tbody>
+                <% for user in @users %>
+                  <% for item in user.sell_items %>
+                    <tr>
+                    <td><%= item.name %></td>
+                    <td><%= item.price %></td>
+                    <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
+                    <td><button onClick="javascript:buyItem('<%= item.id %>', '<%= item.owner.name %>');" class="btn btn-info small">Buy Item</button></td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <%= includeERB('libs.erb') %>
+
+    <script type="text/javascript">
+      if (typeof($.getUrlVar('loggedin')) == 'undefined')
+        $('#loggedin').hide();
+
+      function buyItem(itemID, ownerName) {
+        $.ajax({
+          type: "POST",
+          url: "/buy_item",
+          data: { item: itemID, owner: ownerName }
+        }).done(function(msg) {
+          window.location.reload();
+        });
+      }
+    </script>
+  </body>
+</html>

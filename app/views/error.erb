@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Error</title>
+    <%= includeERB('head.erb') %>
+  </head>
+  <body>
+    <%= includeERB('nav.erb') %>
+    <div class="container">
+      <section id="content">
+        <div class="row">
+          <%= includeERB('sidebar.erb') %>
+          <div class="span10">
+            <h1>Error</h1>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <%= includeERB('libs.erb') %>
+  </body>
+</html>

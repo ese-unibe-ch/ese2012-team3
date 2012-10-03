@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>User profile</title>
+    <%= includeERB('head.erb') %>
+  </head>
+  <body>
+    <%= includeERB('nav.erb') %>
+    <div class="container">
+      <section id="content">
+        <div class="row">
+          <%= includeERB('sidebar.erb') %>
+          <div class="span10">
+            <h1>User: <%= @user.name %></h1>
+            <table style="margin-top: 25px;">
+              <tbody>
+                <tr><td>Name:</td><td><%= @user.name %></td></tr>
+                <tr><td>Credits:</td><td><%= @user.credit %></td></tr>
+              </tbody>
+            </table>
+
+            <h3 style="padding-top: 50px;">User's items</h3>
+
+            <table class="table">
+              <thead>
+                <th>Name</th>
+                <th>Price</th>
+                <th>State</th>
+              </thead>
+              <tbody>
+                <% for item in @user.items %>
+                <tr>
+                  <td><%= item.name %></td>
+                  <td><%= item.price %></td>
+                  <% if item.active %>
+                  <td style="color:#00FF00;">Active</td>
+                  <% else %>
+                  <td style="color:#FF0000;">Inactive</td>
+                  <% end %>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <%= includeERB('libs.erb') %>

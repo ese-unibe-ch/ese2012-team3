@@ -1,0 +1,11 @@
+<div class="span2">
+  <div class="well" style="padding: 8px 0;">
+    <ul class="nav nav-list">
+      <li><a href="/"><i class="icon-home"></i>Marketplace</a></li>
+      <li><a href="/all_users"><i class="icon-align-left"></i>All users</a></li>
+    </ul>
+  </div>
+  <% if session[:name] %>
+  <div style="font-size:0.8em;">Logged in as <%= @current_name %>.</div>
+  <% end %>
+</div>
