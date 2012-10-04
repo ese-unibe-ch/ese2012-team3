@@ -21,3 +21,7 @@ doc/
 .idea
 /**/*.iml
 *.iml
+.idea/ese2012-team3.iml
+.DS_Store
+.idea/ese2012-team3.iml
+Gemfile.lock
