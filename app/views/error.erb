@@ -2,14 +2,15 @@
 <html lang="en">
   <head>
     <title>Error</title>
-    <%= includeERB('head.erb') %>
+    <%= erb :head %>
+    <%= erb :libs %>
   </head>
   <body>
-    <%= includeERB('nav.erb') %>
+    <%= erb :nav %>
     <div class="container">
       <section id="content">
         <div class="row">
-          <%= includeERB('sidebar.erb') %>
+          <%= erb :sidebar %>
           <div class="span10">
             <h1>Error</h1>
           </div>
@@ -17,6 +18,5 @@
       </section>
     </div>
 
-    <%= includeERB('libs.erb') %>
   </body>
 </html>

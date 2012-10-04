@@ -10,6 +10,11 @@ require_relative 'controllers/marketplace'
 
 include Market
 
+def relative(path)
+  File.join(File.expand_path(File.dirname(__FILE__)), path)
+end
+Views = relative('views')
+
 class App < Sinatra::Base
 
   use Authentication
@@ -18,9 +23,7 @@ class App < Sinatra::Base
 
   enable :sessions
   set :public_folder, 'app/public'
-
-  # a global variable is quite hacky, but it seems to be the only way..
-  $VIEWS_FOLDER = File.dirname(__FILE__) + "/views"
+  set :views, Views
 
   configure :development do
     john = User.init(:name => "John", :credit => 500)

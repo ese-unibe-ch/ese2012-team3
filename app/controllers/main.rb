@@ -2,20 +2,13 @@ require 'erb'
 
 class Main < Sinatra::Application
 
-  def includeERB(path)
-    content = File.read($VIEWS_FOLDER + "/" + path)
-    t = ERB.new(content)
-    t.result(binding)
-  end
-
   get "/" do
     redirect '/login' unless session[:name]
 
     @current_name = session[:name]
     @users = Market::User.all
 
-    template = ERB.new File.new($VIEWS_FOLDER + "/marketplace.erb").read, nil, "%"
-    template.result(binding)
+    erb :marketplace
   end
 
   get "/all_users" do
@@ -24,8 +17,7 @@ class Main < Sinatra::Application
     @current_name = session[:name]
     @users = Market::User.all
 
-    template = ERB.new File.new($VIEWS_FOLDER + "/userlist.erb").read, nil, "%"
-    template.result(binding)
+    erb :userlist
   end
 
   get "/profile/:username" do
@@ -33,15 +25,13 @@ class Main < Sinatra::Application
 
     @user = Market::User.user_by_name(params[:username])
 
-    template = ERB.new File.new($VIEWS_FOLDER + "/userprofile.erb").read, nil, "%"
-    template.result(binding)
+    erb :userprofile
   end
 
   get "/error" do
     redirect '/login' unless session[:name]
 
-    template = ERB.new File.new($VIEWS_FOLDER + "/error.erb").read, nil, "%"
-    template.result(binding)
+    erb :error
   end
 
 end

@@ -6,12 +6,6 @@ require relative('../../app/models/market/user')
 
 class Authentication < Sinatra::Application
 
-  def includeERB(path)
-    content = File.read($VIEWS_FOLDER + "/" + path)
-    t = ERB.new(content)
-    t.result(binding)
-  end
-
   post "/login" do
     username = params[:username]
     password = params[:password]
@@ -29,8 +23,7 @@ class Authentication < Sinatra::Application
 
     @current_name = session[:name]
 
-    template = ERB.new File.new($VIEWS_FOLDER + "/login.erb").read, nil, "%"
-    template.result(binding)
+    erb :login
   end
 
   get "/logout" do

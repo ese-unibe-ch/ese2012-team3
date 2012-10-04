@@ -2,14 +2,15 @@
 <html lang="en">
   <head>
     <title>Login</title>
-    <%= includeERB('head.erb') %>
+    <%= erb :head %>
+    <%= erb :libs %>
   </head>
   <body>
-    <%= includeERB('nav.erb') %>
+    <%= erb :nav %>
     <div class="container">
       <section id="content">
         <div class="row">
-          <%= includeERB('sidebar.erb') %>
+          <%= erb :sidebar %>
           <div class="span10">
             <h1>Login</h1>
             <form class="form-horizontal" method="POST" action="/login">
@@ -36,4 +37,3 @@
       </section>
     </div>
 
-    <%= includeERB('libs.erb') %>

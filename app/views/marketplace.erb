@@ -2,14 +2,15 @@
 <html lang="en">
   <head>
     <title>Dashboard - Marketplace</title>
-    <%= includeERB('head.erb') %>
+    <%= erb :head %>
+    <%= erb :libs %>
   </head>
   <body>
-    <%= includeERB('nav.erb') %>
+    <%= erb :nav %>
     <div class="container">
       <section id="content">
         <div class="row">
-          <%= includeERB('sidebar.erb') %>
+          <%= erb :sidebar %>
           <div class="span10">
             <div class="alert-success alert" id="loggedin">
               <strong>Logged in!</strong><br />You've been logged in successfully!
@@ -40,8 +41,6 @@
         </div>
       </section>
     </div>
-
-    <%= includeERB('libs.erb') %>
 
     <script type="text/javascript">
       if (typeof($.getUrlVar('loggedin')) == 'undefined')

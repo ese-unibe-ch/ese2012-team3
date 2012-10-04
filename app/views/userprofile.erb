@@ -2,14 +2,15 @@
 <html lang="en">
   <head>
     <title>User profile</title>
-    <%= includeERB('head.erb') %>
+    <%= erb :head %>
+    <%= erb :libs %>
   </head>
   <body>
-    <%= includeERB('nav.erb') %>
+    <%= erb :nav %>
     <div class="container">
       <section id="content">
         <div class="row">
-          <%= includeERB('sidebar.erb') %>
+          <%= erb :sidebar %>
           <div class="span10">
             <h1>User: <%= @user.name %></h1>
             <table style="margin-top: 25px;">
@@ -46,4 +47,4 @@
       </section>
     </div>
 
-    <%= includeERB('libs.erb') %>
+
