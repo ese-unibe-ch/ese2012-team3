@@ -16,3 +16,8 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+#rubymine stuff
+.idea
+/**/*.iml
+*.iml

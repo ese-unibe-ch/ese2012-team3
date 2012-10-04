@@ -1,11 +1,12 @@
 require 'rubygems'
 require 'sinatra'
 require 'tilt/haml'
-require 'app/models/market/user'
-require 'app/models/market/item'
-require 'app/controllers/main'
-require 'app/controllers/authentication'
-require 'app/controllers/marketplace'
+require 'require_relative'
+require_relative 'models/market/user'
+require_relative 'models/market/item'
+require_relative 'controllers/main'
+require_relative 'controllers/authentication'
+require_relative 'controllers/marketplace'
 
 include Market
 
