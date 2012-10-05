@@ -36,7 +36,7 @@ class ItemTest < Test::Unit::TestCase
     user = User.init(:name => "Buyer")
     initialOwner = User.init(:name => "Owner")
     item = Item.init(:name => "normalItem", :price => 100, :owner => initialOwner, :active => true)
-    user.buy_item(item) if user.buy_item?(item)
+    user.buy_item(item)
     assert(!user.sell_items.include?(item), "item is still active!")
   end
 

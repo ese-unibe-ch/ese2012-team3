@@ -66,7 +66,9 @@ class UserTest < Test::Unit::TestCase
     user = User.init(:name => "Buyer")
     owner = User.init(:name => "Owner")
     owner.add_item(item)
-    assert(!user.buy_item?(item), "user could have bought the too expensive item!")
+    assert_raise RuntimeError do
+      user.buy_item(item)
+    end
   end
 
   def test_become_owner_at_trade
@@ -74,9 +76,9 @@ class UserTest < Test::Unit::TestCase
     item = Item.init(:credit => 100)
     owner = User.init(:name => "Owner")
     owner.add_item(item)
-    user.buy_item(item) if user.buy_item?(item)
-    assert(user.items.length == 1, "user was not able to buy!")
-    assert(item.owner == user, "user is not the owner!")
+    user.buy_item(item)
+    assert_equal(1, user.items.length, "user was not able to buy!")
+    assert_equal(user, item.owner, "user is not the owner!")
   end
 
   def test_transfer_credit_at_trade
@@ -84,9 +86,9 @@ class UserTest < Test::Unit::TestCase
     item = Item.init(:name => "normalItem", :price => 100)
     owner = User.init(:name => "Owner")
     owner.add_item(item)
-    user.buy_item(item) if user.buy_item?(item)
-    assert(user.credit == 0, "user has too much credit!")
-    assert(owner.credit == 200, "owner has too less credit!")
+    user.buy_item(item)
+    assert_equal(0, user.credit, "user has too much credit!")
+    assert_equal(200, owner.credit, "owner has too less credit!")
   end
 
   def test_removes_from_user
@@ -94,15 +96,35 @@ class UserTest < Test::Unit::TestCase
     item = Item.init(:name => "normalItem", :price => 100)
     owner = User.init(:name => "Owner")
     owner.add_item(item)
-    user.buy_item(item) if user.buy_item?(item)
-    assert(owner.sell_items.length == 0, "owner still has the item on his list!")
+    user.buy_item(item)
+    assert_equal(0, owner.sell_items.length, "owner still has the item on his list!")
   end
 
   def test_fail_inactive
     user = User.init(:name => "Buyer")
     owner = User.init(:name => "Owner")
     item = Item.init(:active => false, :owner => owner)
-    assert(!user.buy_item?(item), "user could have bought the inactive item!")
+    assert_raise RuntimeError do
+      user.buy_item(item)
+    end
+  end
+
+  def test_buy_nil_item_fails
+    user = User.init(:name => "Buyer")
+    owner = User.init(:name => "Owner")
+    item = nil
+    assert_raise RuntimeError do
+      user.buy_item(item)
+    end
+  end
+
+  def test_buy_from_self_fails
+    user = User.init(:name => "Buyer")
+    owner = user
+    item = Item.init(:active => false, :owner => owner)
+    assert_raise RuntimeError do
+      user.buy_item(item)
+    end
   end
 
   def test_all_users
@@ -110,7 +132,7 @@ class UserTest < Test::Unit::TestCase
     user = User.init(:name => "Buyer")
     owner = User.init(:name => "Owner")
     # we should have 2 students now
-    assert(User.all.length == 2, "there are not 2 users in the users list!")
+    assert_equal(2, User.all.length, "there are not 2 users in the users list!")
   end
 
 end

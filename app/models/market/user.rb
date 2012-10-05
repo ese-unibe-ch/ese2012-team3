@@ -74,15 +74,6 @@ module Market
       self.items << item unless self.items.include?(item)
     end
 
-    # checks if a user can buy the specified item
-    # when a user has not enough credits, the trade is not acceptable
-    # also the item should be active so it can be bought
-    # @param [Item] item - item to be bought
-    def buy_item?(item)
-      return true unless item == nil || item.owner == nil || self.credit < item.price || !item.active || item.owner == self
-      return false
-    end
-
     # buy a specified item from another user
     # -> pay credits, change ownership, add item to user's list
     # @param [Item] item - item to be bought
