@@ -1,3 +1,5 @@
+require_relative '../passwordcheck'
+
 module Market
 
   class User
@@ -11,16 +13,18 @@ module Market
     # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
     # A user provides a method that lists his/her active items to sell.
 
-    attr_accessor :name, :credit, :items
+    attr_accessor :name, :credit, :items, :password
 
     @@users = []
 
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
-    # @param [Object] params - dictionary of symbols
+    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :password -- must be strong (see PasswordCheck)
     def self.init(params={})
       user = self.new
       user.name = params[:name] || "default user"
       user.credit = params[:credit] || 100
+      PasswordCheck::ensure_password_strong(params[:password], params[:name], "")
+      user.password = params[:password] || ""
       @@users << user
       user
     end

@@ -460,6 +460,7 @@ h6 small {
 }
 
 h1 {
+  margin-bottom: 20px; /* MX added, looks better with text right below */
   font-size: 30px;
   line-height: 36px;
 }

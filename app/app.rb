@@ -26,10 +26,11 @@ class App < Sinatra::Base
   set :views, Views
 
   configure :development do
-    john = User.init(:name => "John", :credit => 500)
-    User.init(:name => "Jimmy", :credit => 30)
-    User.init(:name => "Jack", :credit => 400)
-    User.init(:name => "ese", :credit => 1000)
+    defpw = "Ax1301!3";
+    john = User.init(:name => "John", :credit => 500, :password => defpw)
+    User.init(:name => "Jimmy", :credit => 30, :password => defpw)
+    User.init(:name => "Jack", :credit => 400, :password => defpw)
+    User.init(:name => "ese", :credit => 1000, :password => defpw)
     User.all.each_with_index do |user, i|
       item = Item.init(:name => "item" + i.to_s, :price => 100)
       user.add_item(item)

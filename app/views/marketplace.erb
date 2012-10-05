@@ -15,6 +15,9 @@
             <div class="alert-success alert" id="loggedin">
               <strong>Logged in!</strong><br />You've been logged in successfully!
             </div>
+            <div class="alert-success alert" id="registered">
+              <strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
+            </div>
             <h1>Marketplace</h1>
 
             <table class="table">
@@ -35,7 +38,9 @@
                       <form action="/buy_item" method="post">
                         <input type="hidden" name="owner" value="<%= item.owner.name %>" />
                         <input type="hidden" name="item" value="<%= item.id %>" />
+                        <% if session[:name] %>
                         <input type="submit" class="btn btn-info small" name="submit" value="Buy Item" />
+                        <% end %>
                       </form>
                     </td>
                    </tr>
@@ -51,6 +56,8 @@
     <script type="text/javascript">
       if (typeof($.getUrlVar('loggedin')) == 'undefined')
         $('#loggedin').hide();
+      if (typeof($.getUrlVar('registered')) == 'undefined')
+        $('#registered').hide();
     </script>
   </body>
 </html>

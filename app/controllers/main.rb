@@ -3,7 +3,7 @@ require 'erb'
 class Main < Sinatra::Application
 
   get "/" do
-    redirect '/login' unless session[:name]
+    # redirect '/login' unless session[:name]
 
     @current_user = Market::User.user_by_name(session[:name])
     @users = Market::User.all
