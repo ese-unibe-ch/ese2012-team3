@@ -33,5 +33,9 @@ module Market
     def inactivate
       self.active = false
     end
+
+    def to_s
+      "#{self.name} (#{self.price})"
+    end
   end
 end

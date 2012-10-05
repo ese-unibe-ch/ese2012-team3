@@ -14,10 +14,11 @@ class Marketplace < Sinatra::Application
     @item = @owner.item_by_id(params[:item].to_i)
     
     @current_user = Market::User.user_by_name(session[:name])
-    if @current_user.buy_item?(@item)
+
+    begin
       @current_user.buy_item(@item)
-    else
-      redirect '/error'
+    rescue Exception => e
+      halt erb :error, :locals => {:message => e.message}
     end
 
     redirect '/'

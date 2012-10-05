@@ -10,9 +10,12 @@ class Authentication < Sinatra::Application
     username = params[:username]
     password = params[:password]
 
-    fail "User does not exist" unless Market::User.allNames.include?(username)
-    fail "Empty username or password" if username.nil? or password.nil?
-    fail "Password wrong!" if password != username
+    halt erb :error, :locals =>
+        {:message => "User #{username} does not exist"} unless Market::User.allNames.include?(username)
+    halt erb :error, :locals =>
+        {:message => "no username or password given"} unless username && password
+    halt erb :error, :locals =>
+        {:message => "wrong password"} unless username == password
 
     session[:name] = username
     redirect "/?loggedin=true"

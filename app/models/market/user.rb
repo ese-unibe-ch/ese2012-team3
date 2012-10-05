@@ -87,6 +87,21 @@ module Market
     # -> pay credits, change ownership, add item to user's list
     # @param [Item] item - item to be bought
     def buy_item(item)
+      if(item == nil)
+        raise "no item to buy given"
+      end
+      if(item.owner == nil)
+        raise "item #{item} has no owner"
+      end
+      if(self.credit < item.price)
+        raise "cannot afford item #{item}"
+      end
+      if(!item.active)
+        raise "item #{item} is inactive"
+      end
+      if(item.owner == self)
+        raise "cannot buy item #{item} from myself"
+      end
       self.decrease_credit(item.price)
       item.owner.increase_credit(item.price)
       item.owner.remove_from_user(item)

@@ -27,7 +27,7 @@ class App < Sinatra::Base
 
   configure :development do
     john = User.init(:name => "John", :credit => 500)
-    User.init(:name => "Jimmy", :credit => 300)
+    User.init(:name => "Jimmy", :credit => 30)
     User.init(:name => "Jack", :credit => 400)
     User.init(:name => "ese", :credit => 1000)
     User.all.each_with_index do |user, i|
