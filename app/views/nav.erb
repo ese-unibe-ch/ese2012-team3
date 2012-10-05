@@ -7,7 +7,7 @@
           <div class=".nav-collapse">
             <ul class="nav">
               <li><a href="/">Home</a></li>
-              <% if session[:name] %>
+              <% if @current_user %>
               <li><a href="/logout">Logout</a></li>
               <% else %>
               <li><a href="/login">Login</a></li>

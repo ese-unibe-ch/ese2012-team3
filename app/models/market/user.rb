@@ -13,19 +13,23 @@ module Market
     # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
     # A user provides a method that lists his/her active items to sell.
 
-    attr_accessor :name, :credit, :items, :password
+    attr_accessor :name, :credit, :items, :password, :interests, :id, :image_file_name
 
     @@users = []
 
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
-    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :password -- must be strong (see PasswordCheck)
+    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :password -- must be strong (see PasswordCheck), :interests
     def self.init(params={})
+      fail "Username missing" unless params[:name]
+      fail "User with given username already exists" if self.user_by_name(params[:name])
       user = self.new
-      user.name = params[:name] || "default user"
+      user.name = params[:name]
       user.credit = params[:credit] || 100
+      user.interests = params[:interests] || ""
       PasswordCheck::ensure_password_strong(params[:password], params[:name], "")
       user.password = params[:password] || ""
       @@users << user
+      user.id = @@users.size
       user
     end
 

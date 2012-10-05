@@ -14,8 +14,17 @@
           <div class="span10">
             <h1>User: <%= @user.name %></h1>
 
+            <% if @user.image_file_name %>
+            <img style="width:300px" src='<%= @HOSTNAME+"/userimages/"+@user.image_file_name %>'/>
+            <% end %>
+
+            <% if @user.interests.length > 0 %>
+            <p>Interests: <%=@user.interests%></p>
+            <% end %>
+
             <h3 style="padding-top: 50px;">User's items</h3>
 
+            <% if @user.items.size > 0%>
             <table class="table">
               <thead>
                 <th>Name</th>
@@ -28,7 +37,7 @@
                   <td><%= item.name %></td>
                   <td><%= item.price %></td>
                   <% if item.active %>
-                  <td style="color:#00FF00;">Active</td>
+                  <td style="color:#00CC00;">Active</td>
                   <% else %>
                   <td style="color:#FF0000;">Inactive</td>
                   <% end %>
@@ -36,6 +45,9 @@
                 <% end %>
               </tbody>
             </table>
+            <% else %>
+            <i>This user has no items.</i>
+            <% end %>
           </div>
         </div>
       </section>
