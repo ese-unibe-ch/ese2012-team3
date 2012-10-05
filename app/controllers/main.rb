@@ -5,7 +5,7 @@ class Main < Sinatra::Application
   get "/" do
     redirect '/login' unless session[:name]
 
-    @current_name = session[:name]
+    @current_user = Market::User.user_by_name(session[:name])
     @users = Market::User.all
 
     erb :marketplace
@@ -14,7 +14,7 @@ class Main < Sinatra::Application
   get "/all_users" do
     redirect '/login' unless session[:name]
 
-    @current_name = session[:name]
+    @current_user = Market::User.user_by_name(session[:name])
     @users = Market::User.all
 
     erb :userlist
@@ -23,6 +23,7 @@ class Main < Sinatra::Application
   get "/profile/:username" do
     redirect '/login' unless session[:name]
 
+    @current_user = Market::User.user_by_name(session[:name])
     @user = Market::User.user_by_name(params[:username])
 
     erb :userprofile

@@ -6,6 +6,9 @@
     </ul>
   </div>
   <% if session[:name] %>
-  <div style="font-size:0.8em;">Logged in as <%= @current_name %>.</div>
+  <div style="font-size:0.8em;">
+    <p>Logged in as <b><%= @current_user.name %></b></p>
+    <p>Credits: <%= @current_user.credit %></p>
+  </div>
   <% end %>
 </div>
