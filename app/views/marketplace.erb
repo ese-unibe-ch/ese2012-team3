@@ -31,8 +31,14 @@
                     <td><%= item.name %></td>
                     <td><%= item.price %></td>
                     <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
-                    <td><button onClick="javascript:buyItem('<%= item.id %>', '<%= item.owner.name %>');" class="btn btn-info small">Buy Item</button></td>
-                    </tr>
+                    <td>
+                      <form action="/buy_item" method="post">
+                        <input type="hidden" name="owner" value="<%= item.owner.name %>" />
+                        <input type="hidden" name="item" value="<%= item.id %>" />
+                        <input type="submit" class="btn btn-info small" name="submit" value="Buy Item" />
+                      </form>
+                    </td>
+                   </tr>
                   <% end %>
                 <% end %>
               </tbody>
@@ -45,16 +51,6 @@
     <script type="text/javascript">
       if (typeof($.getUrlVar('loggedin')) == 'undefined')
         $('#loggedin').hide();
-
-      function buyItem(itemID, ownerName) {
-        $.ajax({
-          type: "POST",
-          url: "/buy_item",
-          data: { item: itemID, owner: ownerName }
-        }).done(function(msg) {
-          window.location.reload();
-        });
-      }
     </script>
   </body>
 </html>
