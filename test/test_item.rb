@@ -23,7 +23,7 @@ class ItemTest < Test::Unit::TestCase
   def test_has_owner
     user = User.init(:name => "John")
     item = Item.init(:owner => user)
-    assert(item.owner == user, "item has an incorrect owner!")
+    assert_equal(user, item.owner, "item has an incorrect owner!")
   end
 
   def test_changes_state
@@ -50,6 +50,6 @@ class ItemTest < Test::Unit::TestCase
   def test_item_has_id
     user = User.init(:name => "user")
     item = Item.init(:name => "testItem", :owner => user)
-    assert(item.id != nil, "ID is not correct")
+    assert_not_nil(item.id, "ID is not correct")
   end
 end
