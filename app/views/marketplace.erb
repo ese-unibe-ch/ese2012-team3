@@ -35,13 +35,7 @@
                     <td><%= item.price %></td>
                     <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
                     <td>
-                      <form action="/buy_item" method="post">
-                        <input type="hidden" name="owner" value="<%= item.owner.name %>" />
-                        <input type="hidden" name="item" value="<%= item.id %>" />
-                        <% if session[:name] && user != @current_user %>
-                        <input type="submit" class="btn btn-info small" name="submit" value="Buy Item" />
-                        <% end %>
-                      </form>
+                      <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
                     </td>
                    </tr>
                   <% end %>
