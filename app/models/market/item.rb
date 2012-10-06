@@ -34,6 +34,10 @@ module Market
       self.active = false
     end
 
+    def active?
+      :active?
+    end
+
     def to_s
       "#{self.name} (#{self.price})"
     end

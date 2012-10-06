@@ -37,9 +37,35 @@
                   <td><%= item.name %></td>
                   <td><%= item.price %></td>
                   <% if item.active %>
-                  <td style="color:#00CC00;">Active</td>
+                      <%if @user == @current_user %>
+                          <td style="color:#00CC00;">Active</td>
+                          <td>
+                            <form action="/status_change" method="post">
+                              <input type="hidden" name="owner" value="<%= item.owner.name %>" />
+                              <input type="hidden" name="item" value="<%= item.id %>" />
+                              <input type="hidden" name="new_state" value="inactive" />
+                              <input type="submit" class="btn btn-info small" name="submit" value="Inactivate item" />
+                            </form>
+                          </td>
+                      <% else %>
+                          <td>
+                            <input type="submit" class="btn btn-info small" name="submit" value="Buy Item" />
+                          </td>
+                      <% end %>
                   <% else %>
-                  <td style="color:#FF0000;">Inactive</td>
+                      <%if @user == @current_user %>
+                          <td style="color:#FF0000;">Inactive</td>
+                          <td>
+                            <form action="/status_change" method="post">
+                              <input type="hidden" name="owner" value="<%= item.owner.name %>" />
+                              <input type="hidden" name="item" value="<%= item.id %>" />
+                              <input type="hidden" name="new_state" value="active" />
+                              <input type="submit" class="btn btn-info small" name="submit" value="Activate item" />
+                            </form>
+                          </td>
+                      <% else %>
+                        <td style="color:#FF0000;">Inactive</td>
+                      <% end %>
                   <% end %>
                 </tr>
                 <% end %>

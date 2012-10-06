@@ -21,8 +21,22 @@ class Marketplace < Sinatra::Application
       halt erb :error, :locals => {:message => e.message}
     end
 
-    redirect '/'
+    redirect back
 
+  end
+
+  post "/status_change" do
+    redirect '/login' unless session[:name]
+
+    @owner = Market::User.user_by_name(params[:owner])
+    @item = @owner.item_by_id(params[:item].to_i)
+    @current_user = Market::User.user_by_name(session[:name])
+
+    if @current_user == @owner
+      @item.inactivate if params[:new_state] == "inactive"
+      @item.activate if params[:new_state] == "active"
+    end
+    redirect back
   end
 
 end
