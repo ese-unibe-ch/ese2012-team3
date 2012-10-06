@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'require_relative'
 require_relative '../passwordcheck'
 
 module Market
