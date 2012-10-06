@@ -26,6 +26,7 @@
                 <th>Price</th>
                 <th>Owner</th>
                 <th></th>
+                <th></th>
               </thead>
               <tbody>
                 <% for user in @users %>
@@ -34,9 +35,7 @@
                     <td><%= item.name %></td>
                     <td><%= item.price %></td>
                     <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
-                    <td>
-                      <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
-                    </td>
+                    <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
                    </tr>
                   <% end %>
                 <% end %>
