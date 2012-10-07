@@ -11,6 +11,10 @@ class Main < Sinatra::Application
     erb :marketplace
   end
 
+  get "/strongpass" do
+    erb :strongpass
+  end
+
   get "/all_users" do
     redirect '/login' unless session[:name]
 

@@ -5,8 +5,8 @@
       <li><a href="/all_users"><i class="icon-align-left"></i>All users</a></li>
       <% if @current_user %>
           <li><a href='<%= "/profile/"+@current_user.name %>'><i class="icon-align-left"></i>My items</a></li>
+          <li><a href="/item/create"><i class="icon-align-left"></i>Create new item</a></li>
       <%end%>
-      <li><a href="/item/create"><i class="icon-align-left"></i>Create new item</a></li>
     </ul>
   </div>
   <% if @current_user %>

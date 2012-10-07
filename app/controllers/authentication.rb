@@ -59,8 +59,8 @@ class Authentication < Sinatra::Application
     file = params[:image_file]
 
     if file
-      user.image_file_name = "#{user.id}"+File.extname(file[:filename])
-      FileUtils::copy_file(file[:tempfile].path, File.join("app/public/userimages", user.image_file_name) )
+      user.image_file_name = "#{user.id}"+"_"+(file[:filename])
+      FileUtils::cp(file[:tempfile].path, File.join("public", "userimages", user.image_file_name) )
     end
 
     session[:name] = username
@@ -68,8 +68,8 @@ class Authentication < Sinatra::Application
   end
 
   # TODO move
-  get "/userimages/:userimgfname" do # we could also just make them request the right file
-    send_file(File.join("app/public/userimages", params[:userimgfname]))
+  get "public/userimages/:userimgfname" do # we could also just make them request the right file
+    send_file(File.join("public","userimages", params[:userimgfname]))
   end
 
   get "/register" do
