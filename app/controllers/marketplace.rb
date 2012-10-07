@@ -7,11 +7,11 @@ require relative('../../app/models/market/user')
 
 class Marketplace < Sinatra::Application
 
-  post "/buy_item" do
+  post "/item/:id/buy" do
     redirect '/login' unless session[:name]
 
     @owner = Market::User.user_by_name(params[:owner])
-    @item = @owner.item_by_id(params[:item].to_i)
+    @item = @owner.item_by_id(params[:id].to_i)
     
     @current_user = Market::User.user_by_name(session[:name])
 
@@ -25,11 +25,11 @@ class Marketplace < Sinatra::Application
 
   end
 
-  post "/status_change" do
+  post "/item/:id/status_change" do
     redirect '/login' unless session[:name]
 
     @owner = Market::User.user_by_name(params[:owner])
-    @item = @owner.item_by_id(params[:item].to_i)
+    @item = @owner.item_by_id(params[:id].to_i)
     @current_user = Market::User.user_by_name(session[:name])
 
     if @current_user == @owner
@@ -39,11 +39,11 @@ class Marketplace < Sinatra::Application
     redirect back
   end
 
-  post "/edit_item" do
+  post "/item/:id/edit" do
     redirect '/login' unless session[:name]
 
     @owner = Market::User.user_by_name(params[:owner])
-    @item = @owner.item_by_id(params[:item].to_i)
+    @item = @owner.item_by_id(params[:id].to_i)
     @current_user = Market::User.user_by_name(session[:name])
 
     if @current_user == @owner
