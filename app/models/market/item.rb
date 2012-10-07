@@ -41,5 +41,9 @@ module Market
     def to_s
       "#{self.name} (#{self.price})"
     end
+
+    def self.by_id id
+      @@items.detect{|item| item.id == id}
+    end
   end
 end

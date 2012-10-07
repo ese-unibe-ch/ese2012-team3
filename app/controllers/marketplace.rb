@@ -53,4 +53,12 @@ class Marketplace < Sinatra::Application
     redirect back
   end
 
+
+  get "/item/:id/edit" do
+    @owner = Market::User.user_by_name(params[:owner])
+    @item = @owner.item_by_id(params[:id].to_i)
+    @current_user = Market::User.user_by_name(session[:name])
+    erb :create_item, params[:name] => @item.name
+  end
+
 end
