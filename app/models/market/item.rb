@@ -20,7 +20,7 @@ module Market
       item.price = params[:price] || 0
       item.active = params[:active] || false
       item.owner = params[:owner]
-      @@items << self
+      @@items << item
       params[:owner].items << item if params[:owner]
       @@item_id_counter += 1
       item
@@ -45,7 +45,7 @@ module Market
     end
 
     def self.by_id id
-      @@items.detect{ |item| item.id == id }
+      @@items.detect{ |item| item.id.to_i == id }
     end
 
     def self.all

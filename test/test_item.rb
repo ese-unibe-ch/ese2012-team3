@@ -57,7 +57,7 @@ class ItemTest < Test::Unit::TestCase
     user = User.init(:name => "user", :password => "Zz!45678")
     item = Item.init(:name => "testItem", :owner => user)
     item2 = Item.init(:name => "testItem", :owner => user)
-    assert(Item.by_id(item2.id) == item2)
+    assert(Item.by_id(item2.id.to_i) == item2)
   end
 
 end

@@ -39,29 +39,29 @@ class Marketplace < Sinatra::Application
     redirect back
   end
 
-  post "/item/:id/edit" do
+  post "/item/edit" do
     redirect '/login' unless session[:name]
-
-    @owner = Market::User.user_by_name(params[:owner])
-    @item = @owner.item_by_id(params[:id].to_i)
+    @item = Item.by_id(params[:item_id].to_i)
+    @owner = @item.owner
     @current_user = Market::User.user_by_name(session[:name])
-
+    puts @item.name
     if @current_user == @owner
+      puts params[:item_name]
       @item.name = params[:item_name]
       @item.price = params[:item_price]
     end
-    redirect back
+    redirect "/profile/#{@owner.name}"
   end
 
 
   get "/item/:id/edit" do
+    redirect '/login' unless session[:name]
     @item = Item.by_id(params[:id].to_i)
     @owner = @item.owner
-    puts params[:id]
-    puts @item
     @current_user = Market::User.user_by_name(session[:name])
     @errors = {}
-    erb :edit_item, :locals => {:item_name => @item.name, :item_price => @item.price}
+    erb :edit_item, :locals => {:item => @item}
   end
+
 
 end
