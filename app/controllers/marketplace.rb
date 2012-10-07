@@ -39,4 +39,18 @@ class Marketplace < Sinatra::Application
     redirect back
   end
 
+  post "/edit_item" do
+    redirect '/login' unless session[:name]
+
+    @owner = Market::User.user_by_name(params[:owner])
+    @item = @owner.item_by_id(params[:item].to_i)
+    @current_user = Market::User.user_by_name(session[:name])
+
+    if @current_user == @owner
+      @item.name = params[:item_name]
+      @item.price = params[:item_price]
+    end
+    redirect back
+  end
+
 end
