@@ -36,15 +36,15 @@
                     <%if item.active%>
                         <td style="color:#00CC00;"><%= item.name %></td>
                         <td><%= item.price %></td>
+                        <td> </td>
                     <%else%>
-                        <form class="form-horizontal" method="POST" action="/item/<%= item.id %>/edit">
-                          <input type="hidden" name="owner" value="<%= item.owner.name %>" />
-                          <input type="hidden" name="item" value="<%= item.id %>" />
-                          <td> <input class="input" id="new_name" type="text" name="item_name" value="<%=item.name%>"/></td>
-                          <td> <input class="input" id="new_price" type="text" name="item_price" value="<%=item.price%>"/></td>
-                          <td> <button class="btn btn-info" type="submit">Save changes</button> </td>
-                          <td> <li><a href="/item/<%= item.id %>/edit"> Edit <%= item.name %></a></li> </td>
-                        </form>
+                        <td style="color:#FF0000;"><%= item.name %></td>
+                        <td><%= item.price %></td>
+                        <td>
+                          <form action="/item/<%= item.id %>/edit" method="link">
+                            <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
+                          </form>
+                        </td>
                     <%end%>
                     <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
                   </tr>
