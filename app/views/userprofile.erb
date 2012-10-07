@@ -29,12 +29,15 @@
               <thead>
                 <th>Name</th>
                 <th>Price</th>
-                <th>State</th>
               </thead>
               <tbody>
                 <% for item in @user.items %>
                   <tr>
-                    <td><%= item.name %></td>
+                    <%if !item.active%>
+                        <td style="color:#FF0000;"><%= item.name %></td>
+                    <%else%>
+                        <td style="color:#00CC00;"><%= item.name %></td>
+                    <%end%>
                     <td><%= item.price %></td>
                     <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
                   </tr>

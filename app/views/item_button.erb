@@ -1,6 +1,5 @@
 <% if item.active %>
     <%if item.owner == @current_user %>
-        <td style="color:#00CC00;">Active</td>
         <td>
           <form action="/status_change" method="post">
             <input type="hidden" name="owner" value="<%= item.owner.name %>" />
@@ -23,7 +22,6 @@
     <% end %>
 <% else %>
     <%if item.owner == @current_user %>
-        <td style="color:#FF0000;">Inactive</td>
         <td>
           <form action="/status_change" method="post">
             <input type="hidden" name="owner" value="<%= item.owner.name %>" />
