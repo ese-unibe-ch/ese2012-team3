@@ -1,8 +1,12 @@
-<link href="http://localhost:4567/bootstrap/css/bootstrap.css" rel="stylesheet" />
+<%@current_user = Market::User.user_by_name(session[:name])
+@HOSTNAME = "http://localhost:4567"
+%>
+
+<link href="<%@HOSTNAME%>/bootstrap/css/bootstrap.css" rel="stylesheet" />
 <style type="text/css">
   body {
     padding-top: 100px;
     padding-bottom: 40px;
   }
 </style>
-<link href="http://localhost:4567/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
+<link href="<%@HOSTNAME%>/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />

@@ -21,9 +21,9 @@ class ItemTest < Test::Unit::TestCase
   end
 
   def test_has_owner
-    user = User.init(:name => "John")
+    user = User.init(:name => "John", :password => "Zz!45678")
     item = Item.init(:owner => user)
-    assert(item.owner == user, "item has an incorrect owner!")
+    assert_equal(user, item.owner, "item has an incorrect owner!")
   end
 
   def test_changes_state
@@ -33,23 +33,23 @@ class ItemTest < Test::Unit::TestCase
   end
 
   def test_is_inactive_after_trade
-    user = User.init(:name => "Buyer")
-    initialOwner = User.init(:name => "Owner")
+    user = User.init(:name => "Buyer", :password => "Zz!45678")
+    initialOwner = User.init(:name => "Owner", :password => "Zz!45678")
     item = Item.init(:name => "normalItem", :price => 100, :owner => initialOwner, :active => true)
     user.buy_item(item)
     assert(!user.sell_items.include?(item), "item is still active!")
   end
 
   def test_user_has_item_without_add
-    user = User.init(:name => "user")
+    user = User.init(:name => "user1", :password => "Zz!45678")
     item = Item.init(:name => "testItem", :owner => user)
     assert(item.owner == user, "user is not the owner!")
     assert(user.items.include?(item), "user doesn't have the item!")
   end
 
   def test_item_has_id
-    user = User.init(:name => "user")
+    user = User.init(:name => "user", :password => "Zz!45678")
     item = Item.init(:name => "testItem", :owner => user)
-    assert(item.id != nil, "ID is not correct")
+    assert_not_nil(item.id, "ID is not correct")
   end
 end

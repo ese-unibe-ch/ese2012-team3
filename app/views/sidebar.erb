@@ -6,9 +6,9 @@
       <li><a href="/item/create"><i class="icon-align-left"></i>Create new item</a></li>
     </ul>
   </div>
-  <% if session[:name] %>
+  <% if @current_user %>
   <div style="font-size:0.8em;">
-    <p>Logged in as <b><%= @current_user.name %></b></p>
+    <p>Logged in as <b><a href='<%= "/profile/"+@current_user.name %>'><%= @current_user.name %></a></b></p>
     <p>Credits: <%= @current_user.credit %></p>
   </div>
   <% end %>
