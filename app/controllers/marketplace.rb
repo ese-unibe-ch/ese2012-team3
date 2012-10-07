@@ -39,15 +39,64 @@ class Marketplace < Sinatra::Application
     redirect back
   end
 
+  get "/item/create" do
+    redirect '/login' unless session[:name]
+
+    @errors = {}
+    @current_user = Market::User.user_by_name(session[:name])
+
+    erb :create_item
+  end
+
+  post "/item/create" do
+    redirect '/login' unless session[:name]
+
+    @current_user = Market::User.user_by_name(session[:name])
+
+    #input validation
+    @errors = {}
+    @errors[:name] = "item must have a name!" if params[:name].empty?
+    @errors[:price] = "item must have a price!" if params[:price].empty?
+    @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
+
+    #create item
+    if @errors.empty?
+      @current_user = Market::User.user_by_name(session[:name])
+      item_name = params[:name]
+      item_price = params[:price].to_i
+      Market::Item.init(:name   => item_name,
+                        :price  => item_price,
+                        :active => false,
+                        :owner  => @current_user)
+      #display form with errors
+    else
+      halt erb :create_item
+    end
+
+    redirect "/profile/#{@current_user.name}"
+  end
+
   post "/item/edit" do
     redirect '/login' unless session[:name]
     @item = Item.by_id(params[:item_id].to_i)
     @current_user = User.user_by_name(session[:name])
-    if @current_user == @item.owner
-      @item.name = params[:item_name]
-      @item.price = params[:item_price]
+
+    #input validation
+    @errors = {}
+    @errors[:name] = "item must have a name!" if params[:item_name].empty?
+    @errors[:price] = "item must have a price!" if params[:item_price].empty?
+    @errors[:price] = "price must be a positive integer!" unless params[:item_price].to_i > 0
+
+    if @errors.empty?
+      if @current_user == @item.owner
+        @item.name = params[:item_name]
+        @item.price = params[:item_price]
+      end
+      redirect "/profile/#{@item.owner.name}"
+    #display form with errors
+    else
+      halt erb :edit_item
     end
-    redirect "/profile/#{@item.owner.name}"
   end
 
 

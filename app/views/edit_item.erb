@@ -14,13 +14,13 @@
       <div class="span10">
         <h1>Edit item</h1>
         <form class="form-horizontal" method="POST" action="/item/edit">
-          <input type="hidden" name="item_owner" value="<%= item.owner.name %>" />
-          <input type="hidden" name="item_id" value="<%= item.id %>" />
+          <input type="hidden" name="item_owner" value="<%= @item.owner.name %>" />
+          <input type="hidden" name="item_id" value="<%= @item.id %>" />
           <fieldset>
             <div class="control-group <%= "error" if @errors[:name]%>">
               <label class="control-label" for="name">Name</label>
               <div class="controls">
-                <input class="input-xlarge" id="name" type="text" name="item_name" value="<%=item.name%>" />
+                <input class="input-xlarge" id="name" type="text" name="item_name" value="<%=@item.name%>" />
                 <% if @errors[:name]%>
                     <span class="help-inline"><%= @errors[:name]%></span>
                 <%end%>
@@ -29,7 +29,7 @@
             <div class="control-group <%= 'error' if @errors[:price]%>">
               <label class="control-label" for="price">Price</label>
               <div class="controls">
-                <input class="input-xlarge" id="price" type="text" name="item_price"  value="<%=item.price%>" />
+                <input class="input-xlarge" id="price" type="text" name="item_price"  value="<%=@item.price%>" />
                 <% if @errors[:price]%>
                     <span class="help-inline"><%= @errors[:price]%></span>
                 <%end%>
