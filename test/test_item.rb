@@ -37,24 +37,24 @@ class ItemTest < Test::Unit::TestCase
     initialOwner = User.init(:name => "Owner", :password => "Zz!45678")
     item = Item.init(:name => "normalItem", :price => 100, :owner => initialOwner, :active => true)
     user.buy_item(item)
-    assert(!user.sell_items.include?(item), "item is still active!")
+    assert(!Item.sell_items_by_user(user).include?(item), "item is still active!")
   end
 
   def test_user_has_item_without_add
     user = User.init(:name => "user1", :password => "Zz!45678")
     item = Item.init(:name => "testItem", :owner => user)
     assert(item.owner == user, "user is not the owner!")
-    assert(user.items.include?(item), "user doesn't have the item!")
+    assert(Item.items_by_user(user).include?(item), "user doesn't have the item!")
   end
 
   def test_item_has_id
-    user = User.init(:name => "user", :password => "Zz!45678")
+    user = User.init(:name => "user20", :password => "Zz!45678")
     item = Item.init(:name => "testItem", :owner => user)
     assert_not_nil(item.id, "ID is not correct")
   end
 
   def test_item_by_id
-    user = User.init(:name => "user", :password => "Zz!45678")
+    user = User.init(:name => "user21", :password => "Zz!45678")
     item = Item.init(:name => "testItem", :owner => user)
     item2 = Item.init(:name => "testItem", :owner => user)
     assert(Item.by_id(item2.id.to_i) == item2)

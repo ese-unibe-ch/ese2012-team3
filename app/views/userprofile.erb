@@ -24,14 +24,14 @@
 
             <h3 style="padding-top: 50px;">User's items</h3>
 
-            <% if @user.items.size > 0%>
+            <% if @items.size > 0%>
             <table class="table">
               <thead>
                 <th>Name</th>
                 <th>Price</th>
               </thead>
               <tbody>
-                <% for item in @user.items %>
+                <% for item in @items %>
                   <tr>
                     <%if item.active%>
                         <td style="color:#00CC00;"><%= item.name %></td>
@@ -46,7 +46,7 @@
                           </form>
                         </td>
                     <%end%>
-                    <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
+                    <%= erb :item_button, :locals => {:item => item, :current_user => @current_user} %>
                   </tr>
                 <% end %>
               </tbody>

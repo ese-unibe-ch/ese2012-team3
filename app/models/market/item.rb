@@ -21,7 +21,6 @@ module Market
       item.active = params[:active] || false
       item.owner = params[:owner]
       @@items << item
-      params[:owner].items << item if params[:owner]
       @@item_id_counter += 1
       item
     end
@@ -50,6 +49,21 @@ module Market
 
     def self.all
       @@items
+    end
+
+    # list of all active item
+    def self.active_items
+      @@items.select { |item| item.active }
+    end
+
+    # list of user's items to sell
+    def self.sell_items_by_user (user)
+      @@items.select { |item| item.active && item.owner == user }
+    end
+
+    # list of user's items
+    def self.items_by_user (user)
+      @@items.select { |item| item.owner == user }
     end
 
   end

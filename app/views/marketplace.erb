@@ -29,15 +29,13 @@
                 <th></th>
               </thead>
               <tbody>
-                <% for user in @users %>
-                  <% for item in user.sell_items %>
-                    <tr>
+                <% for item in @items %>
+                  <tr>
                     <td><%= item.name %></td>
                     <td><%= item.price %></td>
                     <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
-                    <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>
-                   </tr>
-                  <% end %>
+                    <%= erb :item_button, :locals => {:item => item, :current_user => @current_user} %>
+                  </tr>
                 <% end %>
               </tbody>
             </table>

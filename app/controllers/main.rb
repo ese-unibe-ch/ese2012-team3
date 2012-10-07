@@ -6,7 +6,7 @@ class Main < Sinatra::Application
     redirect '/login' unless session[:name]
 
     @current_user = Market::User.user_by_name(session[:name])
-    @users = Market::User.all
+    @items = Market::Item.active_items
 
     erb :marketplace
   end
@@ -25,6 +25,7 @@ class Main < Sinatra::Application
 
     @current_user = Market::User.user_by_name(session[:name])
     @user = Market::User.user_by_name(params[:username])
+    @items = Market::Item.items_by_user(@user)
 
     erb :userprofile
   end

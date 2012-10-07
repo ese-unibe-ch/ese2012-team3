@@ -15,7 +15,7 @@ module Market
     # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
     # A user provides a method that lists his/her active items to sell.
 
-    attr_accessor :name, :credit, :items, :password, :interests, :id, :image_file_name
+    attr_accessor :name, :credit, :password, :interests, :id, :image_file_name
 
     @@users = []
 
@@ -33,11 +33,6 @@ module Market
       @@users << user
       user.id = @@users.size
       user
-    end
-
-    # initialize the items array
-    def initialize
-      self.items = []
     end
 
     # returns the global user list
@@ -59,11 +54,6 @@ module Market
       @@users.detect { |user| user.name == name }
     end
 
-    # returns an item with the given name
-    def item_by_id(id)
-      self.items.detect { |item| item.id.to_i == id }
-    end
-
     # increase the balance
     # @param [Numeric] amount - amount to be added
     def increase_credit(amount)
@@ -81,7 +71,6 @@ module Market
     def add_item(item)
       item.owner = self
       item.activate
-      self.items << item unless self.items.include?(item)
     end
 
     # buy a specified item from another user
@@ -108,20 +97,14 @@ module Market
       item.owner.remove_from_user(item)
       item.owner = self
       item.inactivate
-      self.items << item
     end
 
     # remove item from user's list and set the item's owner to nil
     # @param [Item] item - item to be removed
     def remove_from_user(item)
-      self.items.delete(item)
       item.owner = nil
     end
 
-    # list of user's items to sell
-    def sell_items
-      self.items.select { |item| item.active }
-    end
   end
 
 end
