@@ -55,10 +55,13 @@ class Marketplace < Sinatra::Application
 
 
   get "/item/:id/edit" do
-    @owner = Market::User.user_by_name(params[:owner])
-    @item = @owner.item_by_id(params[:id].to_i)
+    @item = Item.by_id(params[:id].to_i)
+    @owner = @item.owner
+    puts params[:id]
+    puts @item
     @current_user = Market::User.user_by_name(session[:name])
-    erb :create_item, params[:name] => @item.name
+    @errors = {}
+    erb :edit_item, :locals => {:item_name => @item.name, :item_price => @item.price}
   end
 
 end

@@ -43,6 +43,7 @@
                           <td> <input class="input" id="new_name" type="text" name="item_name" value="<%=item.name%>"/></td>
                           <td> <input class="input" id="new_price" type="text" name="item_price" value="<%=item.price%>"/></td>
                           <td> <button class="btn btn-info" type="submit">Save changes</button> </td>
+                          <td> <li><a href="/item/<%= item.id %>/edit"> Edit <%= item.name %></a></li> </td>
                         </form>
                     <%end%>
                     <%= erb :item_button, :locals => {:item => item, :user => @user, :current_user => @current_user} %>

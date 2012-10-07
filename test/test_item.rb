@@ -52,4 +52,12 @@ class ItemTest < Test::Unit::TestCase
     item = Item.init(:name => "testItem", :owner => user)
     assert_not_nil(item.id, "ID is not correct")
   end
+
+  def test_item_by_id
+    user = User.init(:name => "user", :password => "Zz!45678")
+    item = Item.init(:name => "testItem", :owner => user)
+    item2 = Item.init(:name => "testItem", :owner => user)
+    assert(Item.by_id(item2.id) == item2)
+  end
+
 end

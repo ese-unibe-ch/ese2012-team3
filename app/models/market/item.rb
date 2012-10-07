@@ -9,6 +9,7 @@ module Market
     attr_accessor :id, :name, :price, :owner, :active
 
     @@item_id_counter = 0
+    @@items = []
 
     # constructor - give a name to the item and set a specified price
     # @param [Object] params - dictionary of symbols. Recognized: :name, :price, :active, :owner
@@ -19,6 +20,7 @@ module Market
       item.price = params[:price] || 0
       item.active = params[:active] || false
       item.owner = params[:owner]
+      @@items << self
       params[:owner].items << item if params[:owner]
       @@item_id_counter += 1
       item
@@ -43,7 +45,12 @@ module Market
     end
 
     def self.by_id id
-      @@items.detect{|item| item.id == id}
+      @@items.detect{ |item| item.id == id }
     end
+
+    def self.all
+      @@items
+    end
+
   end
 end

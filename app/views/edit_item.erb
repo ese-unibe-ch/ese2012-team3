@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Create new item</title>
+  <%= erb :head %>
+  <%= erb :libs %>
+</head>
+<body>
+<%= erb :nav %>
+<div class="container">
+  <section id="content">
+    <div class="row">
+      <%= erb :sidebar %>
+      <div class="span10">
+        <h1>Edit item</h1>
+        <form class="form-horizontal" method="POST" action="/item/create">
+          <fieldset>
+            <div class="control-group <%= "error" if @errors[:name]%>">
+              <label class="control-label" for="name">Name</label>
+              <div class="controls">
+                <input class="input-xlarge" id="name" type="text" name="name" value="<%=item_name%>" />
+                <% if @errors[:name]%>
+                    <span class="help-inline"><%= @errors[:name]%></span>
+                <%end%>
+              </div>
+            </div>
+            <div class="control-group <%= 'error' if @errors[:price]%>">
+              <label class="control-label" for="price">Price</label>
+              <div class="controls">
+                <input class="input-xlarge" id="price" type="text" name="price"  value="<%=item_price%>" />
+                <% if @errors[:price]%>
+                    <span class="help-inline"><%= @errors[:price]%></span>
+                <%end%>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-info" type="submit">Save</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+
