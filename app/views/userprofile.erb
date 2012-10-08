@@ -31,20 +31,21 @@
             <p>Interests: <%=@user.interests%></p>
             <% end %>
 
-            <% if @user == @current_user%>
-                            <h3 style="padding-top: 50px;">
-            <% if @user == @current_user%>
-            Your items
-           <% else %>
-            User's items
-            <% end %>
+            <h3 style="padding-top: 50px;">
+              <% if @user == @current_user%>
+                Your items
+              <% else %>
+                User's items
+              <% end %>
             </h3>
 
-            <% if @items.size > 0%>
+            <% if @items.size > 0 %>
             <table class="table">
               <thead>
                 <th>Name</th>
                 <th>Price</th>
+                <th></th>
+                <th></th>
               </thead>
               <tbody>
                 <% for item in @items %>
@@ -73,12 +74,10 @@
                 <% else %>
                     <i>This user has no items.</i>
                 <% end %>
-
             <% end %>
 
             <% if @user == @current_user%>
             <form class="form-horizontal" method="GET" action="/item/create">
-
               <fieldset>
                 <div class="form-actions">
                   <button class="btn btn-info" type="submit">Add a new item...</button>
@@ -95,10 +94,9 @@
                 </div>
               </fieldset>
             </form>
-            <% end %>
             
-                <h3>Account settings</h3>
-                <h4>Change Password</h4>
+            <h3>Account settings</h3>
+              <h4>Change Password</h4>
                 <form class="form-horizontal" method="POST" action="/change_password">
 
                   <fieldset>
@@ -128,20 +126,19 @@
                   <button class="btn btn-info" type="submit">Change my password</button>
                 </div>
                 </fieldset>
-                   </form>
-                <!-- suggestion by MX
-                <h4>Update Interests</h4>
-                <form action="/user/update_interests" method="post">
-                  <div id="cg-interests" class="control-group">
-                    <label class="control-label" for="interests">Interests</label>
-                    <div class="controls">
-                      <input class="input-large" id="interests" type="text" name="interests" />
-                    </div>
+              </form>
+              <!-- suggestion by MX
+              <h4>Update Interests</h4>
+              <form action="/user/update_interests" method="post">
+                <div id="cg-interests" class="control-group">
+                  <label class="control-label" for="interests">Interests</label>
+                  <div class="controls">
+                    <input class="input-large" id="interests" type="text" name="interests" />
                   </div>
+                </div>
 
-                  <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
-                </form>
-                -->
+                <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
+              </form> -->
             <% end %>
           </div>
         </div>
