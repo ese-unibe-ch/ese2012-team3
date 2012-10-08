@@ -22,8 +22,8 @@ class Marketplace < Sinatra::Application
       halt erb :error, :locals => {:message => e.message}
     end
 
-    redirect back
-
+    #redirect back
+    redirect "/?itembought=true"
   end
 
   post "/item/:id/status_change" do
