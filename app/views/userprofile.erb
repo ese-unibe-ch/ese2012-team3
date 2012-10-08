@@ -32,54 +32,7 @@
             <% end %>
 
             <% if @user == @current_user%>
-                <h3>Account settings</h3>
-                <h4>Change Password</h4>
-                <form class="form-horizontal" method="POST" action="/change_password">
-
-                  <fieldset>
-                    <div id="cg-cpassword" class="control-group">
-                      <label class="control-label" for="cpwinput"><i>Current Password</i></label>
-                      <div class="controls">
-                        <input class="input-large" id="cpwinput" type="password" name="currentpassword" />
-                      </div>
-                    </div>
-
-                <div id="cg-password" class="control-group">
-                  <label class="control-label" for="pwinput"><i>New Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
-                  <div class="controls">
-                    <input class="input-large" id="pwinput" type="password" name="password" />
-                  </div>
-                </div>
-
-                <div id="cg-password-confirm" class="control-group">
-                  <label class="control-label" for="pwcinput"><i>Re-type New Password</i></label>
-                  <div class="controls">
-                    <input class="input-large" id="pwcinput" type="password" name="passwordc" />
-                  </div>
-                </div>
-
-
-                <div class="form-actions">
-                  <button class="btn btn-info" type="submit">Change my password</button>
-                </div>
-                </fieldset>
-                   </form>
-                <!-- suggestion by MX
-                <h4>Update Interests</h4>
-                <form action="/user/update_interests" method="post">
-                  <div id="cg-interests" class="control-group">
-                    <label class="control-label" for="interests">Interests</label>
-                    <div class="controls">
-                      <input class="input-large" id="interests" type="text" name="interests" />
-                    </div>
-                  </div>
-
-                  <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
-                </form>
-                -->
-            <% end %>
-
-            <h3 style="padding-top: 50px;">
+                            <h3 style="padding-top: 50px;">
             <% if @user == @current_user%>
             Your items
            <% else %>
@@ -132,6 +85,53 @@
                 </div>
               </fieldset>
             </form>
+            <% end %>
+            
+                <h3>Account settings</h3>
+                <h4>Change Password</h4>
+                <form class="form-horizontal" method="POST" action="/change_password">
+
+                  <fieldset>
+                    <div id="cg-cpassword" class="control-group">
+                      <label class="control-label" for="cpwinput"><i>Current Password</i></label>
+                      <div class="controls">
+                        <input class="input-large" id="cpwinput" type="password" name="currentpassword" />
+                      </div>
+                    </div>
+
+                <div id="cg-password" class="control-group">
+                  <label class="control-label" for="pwinput"><i>New Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
+                  <div class="controls">
+                    <input class="input-large" id="pwinput" type="password" name="password" />
+                  </div>
+                </div>
+
+                <div id="cg-password-confirm" class="control-group">
+                  <label class="control-label" for="pwcinput"><i>Re-type New Password</i></label>
+                  <div class="controls">
+                    <input class="input-large" id="pwcinput" type="password" name="passwordc" />
+                  </div>
+                </div>
+
+
+                <div class="form-actions">
+                  <button class="btn btn-info" type="submit">Change my password</button>
+                </div>
+                </fieldset>
+                   </form>
+                <!-- suggestion by MX
+                <h4>Update Interests</h4>
+                <form action="/user/update_interests" method="post">
+                  <div id="cg-interests" class="control-group">
+                    <label class="control-label" for="interests">Interests</label>
+                    <div class="controls">
+                      <input class="input-large" id="interests" type="text" name="interests" />
+                    </div>
+                  </div>
+
+                  <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
+                </form>
+                -->
             <% end %>
           </div>
         </div>
