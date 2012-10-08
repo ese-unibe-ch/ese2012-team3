@@ -27,7 +27,7 @@ class PasswordCheck
     # http://www.java2s.com/Code/Ruby/String/stringcontainsuppercasecharacters.htm
     fail "Password not strong: Contains no uppercase letters A-Z." unless pw =~ /[A-Z]/
     fail "Password not strong: Contains no lowercase letters a-z." unless pw =~ /[a-z]/
-    fail "Password not strong: Contains no numbers letters 0-9."   unless pw =~ /[0-9]/
+    fail "Password not strong: Contains no numbers 0-9."   unless pw =~ /[0-9]/
     fail "Password not strong: Contains no special characters ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /." unless pw =~ /[\`\~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\{\}\[\]\\\|\:\;\"\'\<\>\,\.\?\/\.]/
   end
 

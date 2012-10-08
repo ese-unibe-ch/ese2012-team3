@@ -3,6 +3,7 @@ def relative path
   File.join(File.dirname(__FILE__), path)
 end
 require relative('../../app/models/market/user')
+require relative('../../app/models/passwordcheck')
 
 class Authentication < Sinatra::Application
 
@@ -29,6 +30,21 @@ class Authentication < Sinatra::Application
     erb :login
   end
 
+  def passwordcheck(password, passwordc, username, oldpass)
+
+    halt erb :error, :locals =>
+        {:message => "No password given"} unless password
+    halt erb :error, :locals =>
+        {:message => "Password and retyped password don't match"} unless passwordc == password
+
+    begin
+      PasswordCheck::ensure_password_strong(password, username, oldpass)
+    rescue => e
+      halt erb :error, :locals =>
+          {:message => e.message}
+    end
+  end
+
   post "/register" do
     redirect '/' if session[:name]
 
@@ -43,14 +59,16 @@ class Authentication < Sinatra::Application
           {:message => "Images file too large, may be #{MAXIMAGESIZE/1024} kB, is #{file[:tempfile].size/1024} kB"} if file[:tempfile].size > MAXIMAGESIZE
     end
 
+
     halt erb :error, :locals =>
-        {:message => "No username or password given"} unless username && password
-    halt erb :error, :locals =>
-        {:message => "Password and retyped password don't match"} unless passwordc == password
+        {:message => "No username given"} unless username && password
+
+    passwordcheck(password, passwordc,username, "")
 
     user = nil
     begin
-      user = User.init(:name => username, :credit => 0, :password => password, :interests => params[:interests])
+      user = User.init(:name => username, :credit => 200,  # Whatever
+                       :password => password, :interests => params[:interests])
     rescue => e
       halt erb :error, :locals =>
           {:message => e.message}
@@ -76,6 +94,26 @@ class Authentication < Sinatra::Application
     redirect '/' if session[:name]
 
     erb :register
+  end
+
+  post "/change_password" do
+    user = Market::User.user_by_name(session[:name])
+
+    #halt erb :error, :locals =>
+    #    {:message => "N"} unless user
+
+    password = params[:password]
+    passwordc = params[:passwordc]
+    currentpassword = params[:currentpassword]
+
+    halt erb :error, :locals =>
+            {:message => "Current password is wrong"} unless user.password == currentpassword
+
+    passwordcheck(password, passwordc, session[:name], currentpassword)
+    user.password = password
+
+    #redirect "/profile/"+session[:name]
+    redirect "/?pwchanged=true"
   end
 
   get "/logout" do

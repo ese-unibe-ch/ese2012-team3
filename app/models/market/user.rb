@@ -22,7 +22,7 @@ module Market
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
     # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :password -- must be strong (see PasswordCheck), :interests
     def self.init(params={})
-      fail "Username missing" unless params[:name]
+      fail "Username missing" unless params[:name] && params[:name].length > 0
       fail "User with given username already exists" if self.user_by_name(params[:name])
       user = self.new
       user.name = params[:name]

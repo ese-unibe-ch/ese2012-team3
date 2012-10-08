@@ -18,6 +18,9 @@
             <div class="alert-success alert" id="registered">
               <strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
             </div>
+            <div class="alert-success alert" id="pwchanged">
+              <strong>Password changed!</strong><br />Your password has been successfully changed.
+            </div>
             <h1>Marketplace</h1>
 
             <table class="table">
@@ -49,6 +52,8 @@
         $('#loggedin').hide();
       if (typeof($.getUrlVar('registered')) == 'undefined')
         $('#registered').hide();
+      if (typeof($.getUrlVar('pwchanged')) == 'undefined')
+          $('#pwchanged').hide();
     </script>
   </body>
 </html>
