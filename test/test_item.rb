@@ -10,6 +10,11 @@ include Market
 
 class ItemTest < Test::Unit::TestCase
 
+  def setup
+    Item.delete_all
+    User.delete_all
+  end
+
   def test_has_name
     item = Item.init(:name => "testItem")
     assert(item.name.to_s.include?("testItem"), "item has a wrong name!")
@@ -58,6 +63,18 @@ class ItemTest < Test::Unit::TestCase
     item = Item.init(:name => "testItem", :owner => user)
     item2 = Item.init(:name => "testItem", :owner => user)
     assert(Item.by_id(item2.id.to_i) == item2)
+  end
+
+  def test_delete_item
+    user = User.init(:name => "user21", :password => "Zz!45678")
+    item = Item.init(:name => "testItem", :owner => user)
+    item2 = Item.init(:name => "testItem", :owner => user)
+    assert_equal(2, Item.all.size)
+
+    item2.delete
+    assert_equal(1, Item.all.size)
+    assert_equal(item, Item.all.first)
+    assert_nil(Item.all[1])
   end
 
 end

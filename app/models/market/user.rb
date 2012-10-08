@@ -54,6 +54,10 @@ module Market
       @@users.detect { |user| user.name == name }
     end
 
+    def self.delete_all
+      @@users = []
+    end
+
     # increase the balance
     # @param [Numeric] amount - amount to be added
     def increase_credit(amount)
@@ -103,6 +107,13 @@ module Market
     # @param [Item] item - item to be removed
     def remove_from_user(item)
       item.owner = nil
+    end
+
+    def delete
+      for item in Market::Item.items_by_user(self)
+        item.delete
+      end
+      @@users.delete(self)
     end
 
   end

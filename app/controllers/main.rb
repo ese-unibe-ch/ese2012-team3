@@ -34,6 +34,15 @@ class Main < Sinatra::Application
     erb :userprofile
   end
 
+  delete "/profile/:username" do
+    redirect '/login' unless session[:name]
+
+    @current_user = Market::User.user_by_name(session[:name])
+    @current_user.delete
+
+    redirect "/logout"
+  end
+
   get "/error" do
     redirect '/login' unless session[:name]
 

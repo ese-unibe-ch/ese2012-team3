@@ -10,6 +10,11 @@ include Market
 
 class UserTest < Test::Unit::TestCase
 
+  def setup
+    User.delete_all
+    Item.delete_all
+  end
+
   def test_has_name
     user = User.init(:name => "user1", :password => "Zz!45678")
     assert(user.name.to_s.include?("user1"), "name is not user1!")
@@ -133,6 +138,35 @@ class UserTest < Test::Unit::TestCase
     owner = User.init(:name => "owner9", :password => "Zz!45678")
     # we should have 2 students now
     assert_equal(2, User.all.length, "there are not 2 users in the users list!")
+  end
+
+  def test_delete_user
+    donald = User.init(:name => "donald", :password => "Zz!45678")
+    dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
+    assert_equal(2, User.all.size)
+    assert_equal(dagobert, User.user_by_name('dagobert'))
+
+    dagobert.delete
+    assert_equal(1, User.all.size)
+    assert_nil(User.user_by_name('dagobert'))
+  end
+
+  def test_delete_items_when_user_deleted
+    donald = User.init(:name => "donald", :password => "Zz!45678")
+    dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
+    beer = Item.init(:name => 'beer', :owner => donald)
+    pizza = Item.init(:name => 'pizza', :owner => donald)
+    sandwich = Item.init(:name => 'sandwich', :owner => dagobert)
+
+    assert_equal(2, User.all.size)
+    assert_equal(3, Item.all.size)
+
+    donald.delete
+    assert_equal(1, User.all.size)
+    assert_equal(1, Item.all.size)
+    assert(!Item.all.include?(beer))
+    assert(!Item.all.include?(pizza))
+    assert(Item.all.include?(sandwich))
   end
 
 end

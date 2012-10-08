@@ -66,5 +66,13 @@ module Market
       @@items.select { |item| item.owner == user }
     end
 
+    def self.delete_all
+      @@items = []
+    end
+
+    def delete
+      @@items.delete(self)
+    end
+
   end
 end

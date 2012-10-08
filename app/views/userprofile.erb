@@ -132,10 +132,22 @@
                 </div>
               </fieldset>
             </form>
+
+            <h3>Delete my account</h3>
+            <form class="form-horizontal" method="POST" action="/profile/<%=@current_user.name%>">
+              <fieldset>
+                <div class="form-actions">
+                  <input type="hidden" name="_method" value="delete" />
+                  <button class="btn btn-info" type="submit">delete</button>
+                </div>
+              </fieldset>
+            </form>
             <% end %>
+
           </div>
         </div>
       </section>
+
     </div>
 
 
