@@ -57,11 +57,13 @@
                     <%else%>
                         <td style="color:#FF0000;"><%= item.name %></td>
                         <td><%= item.price %></td>
-                        <td>
-                          <form action="/item/<%= item.id %>/edit" method="link">
-                            <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
-                          </form>
-                        </td>
+                        <%if @current_user == item.owner%>
+                            <td>
+                              <form action="/item/<%= item.id %>/edit" method="link">
+                                <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
+                              </form>
+                            </td>
+                        <%end%>
                     <%end%>
                     <%= erb :item_button, :locals => {:item => item, :current_user => @current_user} %>
                   </tr>
