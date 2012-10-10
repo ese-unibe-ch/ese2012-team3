@@ -1,40 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Login</title>
-    <%= erb :head %>
-    <%= erb :libs %>
-  </head>
-  <body>
-    <%= erb :nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :sidebar %>
-          <div class="span10">
-            <h1>Login</h1>
-            <p>Don't have an account? <a href="/register">Click here to register</a>!</p>
-            <form class="form-horizontal" method="POST" action="/login">
-              <fieldset>
-                <div id="cg-username" class="control-group">
-                  <label class="control-label" for="nameinput">Username</label>
-                  <div class="controls">
-                    <input class="input-xlarge" id="nameinput" type="text" name="username" />
-                  </div>
-                </div>
-                <div id="cg-password" class="control-group">
-                  <label class="control-label" for="pwinput">Password</label>
-                  <div class="controls">
-                    <input class="input-xlarge" id="pwinput" type="password" name="password" />
-                  </div>
-                </div>
-                <div class="form-actions">
-                  <button class="btn btn-info" type="submit">Login</button>
-                </div>
-              </fieldset>
-            </form>
+<% @title = "Marketplace" %>
+
+<section id="content">
+<div class="row">
+  <%= erb :_sidebar %>
+  <div class="span10">
+    <h1>Login</h1>
+    <p>Don't have an account? <a href="/register">Click here to register</a>!</p>
+    <form class="form-horizontal" method="POST" action="/login">
+      <fieldset>
+        <div id="cg-username" class="control-group">
+          <label class="control-label" for="nameinput">Username</label>
+          <div class="controls">
+            <input class="input-xlarge" id="nameinput" type="text" name="username" />
           </div>
         </div>
-      </section>
-    </div>
+        <div id="cg-password" class="control-group">
+          <label class="control-label" for="pwinput">Password</label>
+          <div class="controls">
+            <input class="input-xlarge" id="pwinput" type="password" name="password" />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-info" type="submit">Login</button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</section>
 

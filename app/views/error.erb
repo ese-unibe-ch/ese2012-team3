@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Error</title>
-    <%= erb :head %>
-    <%= erb :libs %>
-  </head>
-  <body>
-    <%= erb :nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :sidebar %>
-          <div class="span10">
-            <h1>Error</h1>
-            <div class="alert-error alert">
-              <strong>Error</strong><br /><%= message %>
-            </div>
+<% @title = "Ooops" %>
 
-          </div>
+<section id="content">
+    <div class="row">
+      <%= erb :sidebar %>
+      <div class="span10">
+        <h1>Error</h1>
+        <div class="alert-error alert">
+          <strong>Error</strong><br /><%= message %>
         </div>
-      </section>
-    </div>
 
-  </body>
-</html>
+      </div>
+    </div>
+</section>

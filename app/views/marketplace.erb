@@ -1,64 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Dashboard - Marketplace</title>
-    <%= erb :head %>
-    <%= erb :libs %>
-  </head>
-  <body>
-    <%= erb :nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :sidebar %>
-          <div class="span10">
-            <div class="alert-success alert" id="loggedin">
-              <strong>Logged in!</strong><br />You've been logged in successfully!
-            </div>
-            <div class="alert-success alert" id="registered">
-              <strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
-            </div>
-            <div class="alert-success alert" id="pwchanged">
-              <strong>Password changed!</strong><br />Your password has been successfully changed.
-            </div>
-            <div class="alert-success alert" id="itembought">
-              <strong>Item bought!</strong><br />Your successfully purchased an item.
-            </div>
-            <h1>Marketplace</h1>
+<% @title = "marketplace" %>
 
-            <table class="table">
-              <thead>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Owner</th>
-                <th></th>
-                <th></th>
-              </thead>
-              <tbody>
-                <% for item in @items %>
-                  <tr>
-                    <td><%= item.name %></td>
-                    <td><%= item.price %></td>
-                    <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
-                    <%= erb :item_button, :locals => {:item => item, :current_user => @current_user} %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
+<section id="content">
+<div class="row">
+  <%= erb :_sidebar %>
+  <div class="span10">
+    <div class="alert-success alert" id="loggedin">
+      <strong>Logged in!</strong><br />You've been logged in successfully!
     </div>
+    <div class="alert-success alert" id="registered">
+      <strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
+    </div>
+    <div class="alert-success alert" id="pwchanged">
+      <strong>Password changed!</strong><br />Your password has been successfully changed.
+    </div>
+    <div class="alert-success alert" id="itembought">
+      <strong>Item bought!</strong><br />Your successfully purchased an item.
+    </div>
+    <h1>Marketplace</h1>
 
-    <script type="text/javascript">
-      if (typeof($.getUrlVar('loggedin')) == 'undefined')
-        $('#loggedin').hide();
-      if (typeof($.getUrlVar('registered')) == 'undefined')
-        $('#registered').hide();
-      if (typeof($.getUrlVar('pwchanged')) == 'undefined')
-          $('#pwchanged').hide();
-      if (typeof($.getUrlVar('itembought')) == 'undefined')
-          $('#itembought').hide();
-    </script>
-  </body>
-</html>
+    <table class="table">
+      <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Owner</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% for item in @items %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.price %></td>
+            <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
+            <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<script type="text/javascript">
+  if (typeof($.getUrlVar('loggedin')) == 'undefined')
+    $('#loggedin').hide();
+  if (typeof($.getUrlVar('registered')) == 'undefined')
+    $('#registered').hide();
+  if (typeof($.getUrlVar('pwchanged')) == 'undefined')
+      $('#pwchanged').hide();
+  if (typeof($.getUrlVar('itembought')) == 'undefined')
+      $('#itembought').hide();
+</script>

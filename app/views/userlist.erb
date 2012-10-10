@@ -1,53 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Users</title>
-    <%= erb :head %>
-    <%= erb :libs %>
-  </head>
-  <body>
-    <%= erb :nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :sidebar %>
-          <div class="span10">
-            <h1>Users</h1>
-            <!--
-            <ul style="margin-top: 25px;">
-              <% for user in @users %>
-              <li><a href="/profile/<%= user.name %>"><%= user.name %></a></li>
-              <% end %>
-            </ul>  -->
+<% @title = "All users" %>
 
-            <table class="table">
-              <thead>
-              <th>Picture</th>
-              <th>Name</th>
-              <th>Interests</th>
-              <th></th>
-              <th></th>
-              <th></th>
-              </thead>
-              <tbody>
-              <% for user in @users %>
-                  <tr style="height:72px">
+<section id="content">
+<div class="row">
+  <%= erb :_sidebar %>
+  <div class="span10">
+    <h1>Users</h1>
+    <!--
+    <ul style="margin-top: 25px;">
+      <% for user in @users %>
+      <li><a href="/profile/<%= user.name %>"><%= user.name %></a></li>
+      <% end %>
+    </ul>  -->
 
-                       <td><% if user.image_file_name %>
-                             <div style="width:64px;height:64px;background-image: url('<%= @HOSTNAME+"/userimages/"+user.image_file_name %>');
-                                     background-repeat: no-repeat;
-                                     background-size: contain;">
-                               <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
-                             </div>
-                        <% end %></td>
+    <table class="table">
+      <thead>
+      <th>Picture</th>
+      <th>Name</th>
+      <th>Interests</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      </thead>
+      <tbody>
+      <% for user in @users %>
+          <tr style="height:72px">
 
-                    <td><a href="/profile/<%= user.name %>"><%= user.name %></a></td>
-                    <td><%= user.interests %></td>
-                  </tr>
-              <% end %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-    </div>
+               <td><% if user.image_file_name %>
+                     <div style="width:64px;height:64px;background-image: url('<%= @HOSTNAME+"/userimages/"+user.image_file_name %>');
+                             background-repeat: no-repeat;
+                             background-size: contain;">
+                       <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
+                     </div>
+                <% end %></td>
+
+            <td><a href="/profile/<%= user.name %>"><%= user.name %></a></td>
+            <td><%= user.interests %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>

@@ -1,149 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>User profile</title>
-    <%= erb :head %>
-    <%= erb :libs %>
-  </head>
-  <body>
-    <%= erb :nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :sidebar %>
-          <div class="span10">
-            <% if @user == @current_user%>
-            <h1><%= @user.name %> - My account </h1>
-            <% else %>
-            <h1>User: <%= @user.name %></h1>
-            <% end %>
+<% @title = "User profile" %>
 
-            <h3>Profile</h3>
-            <% if @user.image_file_name %>
-            <div style="width:300px;height:300px;background-image: url('<%= @HOSTNAME+"/userimages/"+@user.image_file_name %>');
-                    background-repeat: no-repeat;
-                    background-size: contain;">
-                   <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
-            </div>
-            <% end %>
+<section id="content">
+<div class="row">
+  <%= erb :_sidebar %>
+  <div class="span10">
+    <% if @user == @current_user%>
+    <h1><%= @user.name %> - My account </h1>
+    <% else %>
+    <h1>User: <%= @user.name %></h1>
+    <% end %>
 
-            <% if @user.interests.length > 0 %>
-            <p>Interests: <%=@user.interests%></p>
-            <% end %>
+    <h3>Profile</h3>
+    <% if @user.image_file_name %>
+    <div style="width:300px;height:300px;background-image: url('<%= @HOSTNAME+"/userimages/"+@user.image_file_name %>');
+            background-repeat: no-repeat;
+            background-size: contain;">
+           <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
+    </div>
+    <% end %>
 
-            <h3 style="padding-top: 50px;">
-              <% if @user == @current_user%>
-                Your items
-              <% else %>
-                User's items
-              <% end %>
-            </h3>
+    <% if @user.interests.length > 0 %>
+    <p>Interests: <%=@user.interests%></p>
+    <% end %>
 
-            <% if @items.size > 0 %>
-            <table class="table">
-              <thead>
-                <th>Name</th>
-                <th>Price</th>
-                <th></th>
-                <th></th>
-              </thead>
-              <tbody>
-                <% for item in @items %>
-                  <tr>
-                    <%if item.active%>
-                        <td style="color:#00CC00;"><%= item.name %></td>
-                        <td><%= item.price %></td>
-                        <td> </td>
-                    <%else%>
-                        <td style="color:#FF0000;"><%= item.name %></td>
-                        <td><%= item.price %></td>
-                        <%if @current_user == item.owner%>
-                            <td>
-                              <form action="/item/<%= item.id %>/edit" method="link">
-                                <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
-                              </form>
-                            </td>
-                        <%end%>
-                    <%end%>
-                    <%= erb :item_button, :locals => {:item => item, :current_user => @current_user} %>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-            <% else %>
-                <% if @user == @current_user%>
-                    <i>You have no items.</i>
-                <% else %>
-                    <i>This user has no items.</i>
-                <% end %>
-            <% end %>
+    <h3 style="padding-top: 50px;">
+      <% if @user == @current_user%>
+        Your items
+      <% else %>
+        User's items
+      <% end %>
+    </h3>
 
-            <% if @user == @current_user%>
-            <form class="form-horizontal" method="GET" action="/item/create">
-              <fieldset>
-                <div class="form-actions">
-                  <button class="btn btn-info" type="submit">Add a new item...</button>
-                </div>
-              </fieldset>
-            </form>
-            
-            <h3>Account settings</h3>
-            <h4>Change Password</h4>
-            <form class="form-horizontal" method="POST" action="/change_password">
-              <fieldset>
-                <div id="cg-cpassword" class="control-group">
-                  <label class="control-label" for="cpwinput"><i>Current Password</i></label>
-                  <div class="controls">
-                    <input class="input-large" id="cpwinput" type="password" name="currentpassword" />
-                  </div>
-                </div>
+    <% if @items.size > 0 %>
+    <table class="table">
+      <thead>
+        <th>Name</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+      </thead>
+      <tbody>
+        <% for item in @items %>
+          <tr>
+            <%if item.active%>
+                <td style="color:#00CC00;"><%= item.name %></td>
+                <td><%= item.price %></td>
+                <td> </td>
+            <%else%>
+                <td style="color:#FF0000;"><%= item.name %></td>
+                <td><%= item.price %></td>
+                <%if @current_user == item.owner%>
+                    <td>
+                      <form action="/item/<%= item.id %>/edit" method="link">
+                        <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
+                      </form>
+                    </td>
+                <%end%>
+            <%end%>
+            <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% else %>
+        <% if @user == @current_user%>
+            <i>You have no items.</i>
+        <% else %>
+            <i>This user has no items.</i>
+        <% end %>
+    <% end %>
 
-                <div id="cg-password" class="control-group">
-                  <label class="control-label" for="pwinput"><i>New Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
-                  <div class="controls">
-                    <input class="input-large" id="pwinput" type="password" name="password" />
-                  </div>
-                </div>
+    <% if @user == @current_user%>
+    <form class="form-horizontal" method="GET" action="/item/create">
+      <fieldset>
+        <div class="form-actions">
+          <button class="btn btn-info" type="submit">Add a new item...</button>
+        </div>
+      </fieldset>
+    </form>
 
-                <div id="cg-password-confirm" class="control-group">
-                  <label class="control-label" for="pwcinput"><i>Re-type New Password</i></label>
-                  <div class="controls">
-                    <input class="input-large" id="pwcinput" type="password" name="passwordc" />
-                  </div>
-                </div>
-
-                <div class="form-actions">
-                  <button class="btn btn-info" type="submit">Change my password</button>
-                </div>
-              </fieldset>
-            </form>
-            <!-- suggestion by MX
-            <h4>Update Interests</h4>
-            <form action="/user/update_interests" method="post">
-              <div id="cg-interests" class="control-group">
-                <label class="control-label" for="interests">Interests</label>
-                <div class="controls">
-                  <input class="input-large" id="interests" type="text" name="interests" />
-                </div>
-              </div>
-
-              <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
-            </form> -->
-
-            <h3>Delete my account</h3>
-            <form class="form-horizontal" method="POST" action="/profile/<%=@current_user.name%>">
-              <fieldset>
-                <div class="form-actions">
-                  <input type="hidden" name="_method" value="delete" />
-                  <button class="btn btn-danger" type="submit">Delete account</button>
-                </div>
-              </fieldset>
-            </form>
-            <% end %>
+    <h3>Account settings</h3>
+    <h4>Change Password</h4>
+    <form class="form-horizontal" method="POST" action="/change_password">
+      <fieldset>
+        <div id="cg-cpassword" class="control-group">
+          <label class="control-label" for="cpwinput"><i>Current Password</i></label>
+          <div class="controls">
+            <input class="input-large" id="cpwinput" type="password" name="currentpassword" />
           </div>
         </div>
-      </section>
 
-    </div>
+        <div id="cg-password" class="control-group">
+          <label class="control-label" for="pwinput"><i>New Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
+          <div class="controls">
+            <input class="input-large" id="pwinput" type="password" name="password" />
+          </div>
+        </div>
+
+        <div id="cg-password-confirm" class="control-group">
+          <label class="control-label" for="pwcinput"><i>Re-type New Password</i></label>
+          <div class="controls">
+            <input class="input-large" id="pwcinput" type="password" name="passwordc" />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-info" type="submit">Change my password</button>
+        </div>
+      </fieldset>
+    </form>
+    <!-- suggestion by MX
+    <h4>Update Interests</h4>
+    <form action="/user/update_interests" method="post">
+      <div id="cg-interests" class="control-group">
+        <label class="control-label" for="interests">Interests</label>
+        <div class="controls">
+          <input class="input-large" id="interests" type="text" name="interests" />
+        </div>
+      </div>
+
+      <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
+    </form> -->
+
+    <h3>Delete my account</h3>
+    <form class="form-horizontal" method="POST" action="/profile/<%=@current_user.name%>">
+      <fieldset>
+        <div class="form-actions">
+          <input type="hidden" name="_method" value="delete" />
+          <button class="btn btn-danger" type="submit">Delete account</button>
+        </div>
+      </fieldset>
+    </form>
+    <% end %>
+  </div>
+</div>
+</section>
 
 
