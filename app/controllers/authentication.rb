@@ -50,6 +50,8 @@ class Authentication < Sinatra::Application
   end
 
   # TODO Restore previous input in interests and username field on failure...
+  # Do we really want inline errors with this?
+  # Losing the image one selected is annoying..
   post "/register" do
     redirect '/' if session[:name]
 
@@ -94,7 +96,7 @@ class Authentication < Sinatra::Application
     file = params[:image_file]
 
     if file
-      user.image_file_name = "#{user.id}"+"_"+(file[:filename])
+      user.image_file_name = "#{user.id}"+File.extname(file[:filename]) #(file[:filename])
       FileUtils::cp(file[:tempfile].path, File.join(File.dirname(__FILE__),"../public/userimages", user.image_file_name) )
     end
 
