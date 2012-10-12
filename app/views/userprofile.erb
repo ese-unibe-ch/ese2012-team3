@@ -35,7 +35,7 @@
     <table class="table">
       <thead>
         <th>Name</th>
-        <th>Price</th>
+        <th style="text-align: right; padding-right: 10em;">Price</th>
         <th></th>
         <th></th>
       </thead>
@@ -44,11 +44,11 @@
           <tr>
             <% if item.active %>
                 <td style="color:#00CC00;"><%= xss item.name %></td>
-                <td><%= xss item.price %></td>
+                <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
                 <td></td>
             <% else %>
                 <td style="color:#FF0000;"><%= xss item.name %></td>
-                <td><%= xss item.price %></td>
+                <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
                 <% if @current_user == item.owner %>
                     <td>
                       <form action="/item/<%= item.id %>/edit" method="link">
