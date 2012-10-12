@@ -58,11 +58,18 @@ module Market
       @@users = []
     end
 
+    # TODO "I can delete my account only if there's a second admin" (in every org I work for)
     def delete
-      for item in Market::Item.items_by_agent(self)
+      for item in Item.items_by_agent(self)
         item.delete
       end
+
+      for org in Organization.organizations_by_user(self)
+        org.remove_member(self)
+      end
       @@users.delete(self)
+
+
     end
 
 

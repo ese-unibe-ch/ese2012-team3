@@ -125,9 +125,32 @@ class OrganizationTest < Test::Unit::TestCase
 
   def test_all_orgs
     org = Organization.init(:name => "org15", :password => "Zz!45678")
-    owner = Organization.init(:name => "owner9", :password => "Zz!45678")
+    org2 = Organization.init(:name => "owner9", :password => "Zz!45678")
     # we should have 2 students now
     assert_equal(2, Organization.all.length, "there are not 2 orgs in the orgs list!")
   end
 
+  def test_members
+    donald = User.init(:name => "donald", :password => "Zz!45678")
+    dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
+
+    org = Organization.init(:name => "org15", :password => "Zz!45678")
+    org2 = Organization.init(:name => "owner9", :password => "Zz!45678")
+
+    org.add_member(donald)
+    org2.add_member(donald)
+
+    org2.add_member(dagobert)
+
+    assert_equal(2, Organization.organizations_by_user(donald).size, "donald not in 2 orgs")
+    assert_equal(1, Organization.organizations_by_user(dagobert).size, "dagobert not in 1 org")
+    assert_equal(2, org2.members.size, "org2 doesn't have 2 members")
+    assert_equal(1, org.members.size, "org2 doesn't have 1 member")
+
+    dagobert.delete
+
+    assert_equal(2, Organization.organizations_by_user(donald).size, "donald not in 2 orgs")
+    assert_equal(1, org2.members.size, "org2 doesn't have 1 members")
+    assert_equal(1, org.members.size, "org2 doesn't have 1 member")
+  end
 end
