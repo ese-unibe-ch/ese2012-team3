@@ -1,11 +1,17 @@
 class Authentication < Sinatra::Application
 
+  before do
+    @current_name = session[:name]
+    puts session[:name].to_s
+    @current_user = Market::User.user_by_name(session[:name])
+    @errors = {}
+  end
+
   post "/login" do
     username = params[:username]
     password = params[:password]
 
     # error handling...
-    @errors = {}
     @errors[:name] = "User '#{username}' does not exist"  unless Market::User.allNames.include?(username)
     @errors[:name] = "No username given"  unless username && username.length > 0
     @username = username unless @errors[:name] # restore
@@ -21,10 +27,6 @@ class Authentication < Sinatra::Application
 
   get "/login" do
     redirect '/' if session[:name]
-
-    @errors = {}
-    @current_name = session[:name]
-
     erb :login
   end
 
@@ -44,7 +46,6 @@ class Authentication < Sinatra::Application
   end
 
   def register_error(at, text)
-    @errors = {}
     @errors[at] = text
     halt erb :register
   end
@@ -109,26 +110,22 @@ class Authentication < Sinatra::Application
 
   get "/register" do
     redirect '/' if session[:name]
-
-    @errors = {}
     erb :register
   end
 
   post "/change_password" do
-    user = Market::User.user_by_name(session[:name])
-
     #halt erb :error, :locals =>
-    #    {:message => "N"} unless user
+    #    {:message => "N"} unless @current_user
 
     password = params[:password]
     passwordc = params[:passwordc]
     currentpassword = params[:currentpassword]
 
     halt erb :error, :locals =>
-            {:message => "Current password is wrong"} unless user.password == currentpassword
+            {:message => "Current password is wrong"} unless @current_user.password == currentpassword
 
     passwordcheck(password, passwordc, session[:name], currentpassword)
-    user.password = password
+    @current_user.password = password
 
     redirect "/?pwchanged=true"
   end
