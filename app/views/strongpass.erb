@@ -1,52 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Tips for creating a strong password</title>
-    <%= erb :head %>
-    <%= erb :libs %>
-  </head>
-  <body>
-    <%= erb :nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :sidebar %>
-          <div class="span10" style="width:600px">
-            <h1>Tips for creating a strong password</h1>
-            <p>What makes a password strong (or weak)? A strong password:
-               <ul><li>
-              Is at least eight characters long.
-                  </li><li>
-              Does not contain your user name, real name, or company name.
-               </li><li>
-              Does not contain a complete word.
-               </li><li>
-              Is significantly different from previous passwords.
-               </li><li>
-              Contains characters from each of the following four categories:
-<ul>         <li>
+<% @title = "Strong password" %>
+
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10" style="width:600px">
+      <h1>Tips for creating a strong password</h1>
+      <p>What makes a password strong (or weak)? A strong password:
+      <ul>
+        <li>Is at least eight characters long.</li>
+        <li>Does not contain your user name, real name, or company name.</li>
+        <li>Does not contain a complete word.</li>
+        <li>Is significantly different from previous passwords.</li>
+        <li>Contains characters from each of the following four categories:
+
+          <ul>
+            <li>
               Uppercase letters:
               <i>A, B, C</i>
-               </li><li>
+            </li>
+            <li>
               Lowercase letters:
-
               <i>a, b, c</i>
-               </li><li>
+            </li>
+            <li>
               Numbers:
-
               <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i>
-               </li><li>
+            </li>
+            <li>
               Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces:
-
               <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i>
-               </li>
-               </ul>
-                 </li>
+            </li>
+          </ul>
 
-                  </ul>
+        </li>
+      </ul>
 
-          </div>
-        </div>
-      </section>
     </div>
-
+  </div>
+</section>

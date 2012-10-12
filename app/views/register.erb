@@ -1,65 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Register</title>
-  </head>
-  <body>
-    <%= erb :_nav %>
-    <div class="container">
-      <section id="content">
-        <div class="row">
-          <%= erb :_sidebar %>
-          <div class="span10">
-            <h1>Registration</h1>
+<% @title = "Register" %>
 
-            <form class="form-horizontal" method="POST" action="/register" enctype="multipart/form-data">
-              <p>Select a username and password</p>
-              <fieldset>
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10">
+      <h1>Registration</h1>
 
-                <div id="cg-username" class="control-group">
-                  <label class="control-label" for="nameinput"><i>Username</i></label>
-                  <div class="controls">
-                    <input class="input-large" id="nameinput" type="text" name="username" />
-                  </div>
-                </div>
+      <form class="form-horizontal" method="POST" action="/register" enctype="multipart/form-data">
+        <p>Select a username and password</p>
+        <fieldset>
 
-                <div id="cg-password" class="control-group">
-                  <label class="control-label" for="pwinput"><i>Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
-                  <div class="controls">
-                    <input class="input-large" id="pwinput" type="password" name="password" />
-                  </div>
-                </div>
-
-                <div id="cg-password-confirm" class="control-group">
-                  <label class="control-label" for="pwcinput"><i>Re-type Password</i></label>
-                  <div class="controls">
-                    <input class="input-large" id="pwcinput" type="password" name="passwordc" />
-                  </div>
-                </div>
-
-                <div id="cg-image" class="control-group">
-                  <label class="control-label" for="image">Picture (< 400 kB)</label>
-                  <div class="controls">
-                    <input class="input-large" id="image" type="file" name="image_file" accept="image/*" />
-                  </div>
-                </div>
-
-                <div id="cg-interests" class="control-group">
-                  <label class="control-label" for="interests">Interests</label>
-                  <div class="controls">
-                    <input class="input-large" id="interests" type="text" name="interests" />
-                  </div>
-                </div>
-
-                <div class="form-actions">
-                  <button class="btn btn-info" type="submit">Create My Account</button>
-                </div>
-              </fieldset>
-
-
-            </form>
+          <div id="cg-username" class="control-group">
+            <label class="control-label" for="nameinput"><i>Username</i></label>
+            <div class="controls">
+              <input class="input-large" id="nameinput" type="text" name="username" />
+            </div>
           </div>
-        </div>
-      </section>
+
+          <div id="cg-password" class="control-group">
+            <label class="control-label" for="pwinput"><i>Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
+            <div class="controls">
+              <input class="input-large" id="pwinput" type="password" name="password" />
+            </div>
+          </div>
+
+          <div id="cg-password-confirm" class="control-group">
+            <label class="control-label" for="pwcinput"><i>Re-type Password</i></label>
+            <div class="controls">
+              <input class="input-large" id="pwcinput" type="password" name="passwordc" />
+            </div>
+          </div>
+
+          <div id="cg-image" class="control-group">
+            <label class="control-label" for="image">Picture (< 400 kB)</label>
+            <div class="controls">
+              <input class="input-large" id="image" type="file" name="image_file" accept="image/*" />
+            </div>
+          </div>
+
+          <div id="cg-interests" class="control-group">
+           <label class="control-label" for="interests">Interests</label>
+           <div class="controls">
+              <input class="input-large" id="interests" type="text" name="interests" />
+           </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-info" type="submit">Create My Account</button>
+          </div>
+        </fieldset>
+
+      </form>
     </div>
+  </div>
+</section>
 
