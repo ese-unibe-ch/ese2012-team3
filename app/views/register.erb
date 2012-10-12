@@ -10,42 +10,42 @@
         <p>Select a username and password</p>
         <fieldset>
 
-          <div id="cg-username" class="control-group <%= "error" if @errors[:name]%>">
+          <div id="cg-username" class="control-group <%= "error" if @errors[:name] %>">
             <label class="control-label" for="nameinput"><i>Username</i></label>
             <div class="controls">
               <input class="input-large" id="nameinput" type="text" name="username" />
-              <% if @errors[:name]%>
-                  <span class="help-inline"><%= @errors[:name]%></span>
-              <%end%>
+              <% if @errors[:name] %>
+                  <span class="help-inline"><%= xss @errors[:name] %></span>
+              <% end %>
             </div>
           </div>
 
-          <div id="cg-password" class="control-group <%= "error" if @errors[:pwinput]%>">
+          <div id="cg-password" class="control-group <%= "error" if @errors[:pwinput] %>">
             <label class="control-label" for="pwinput"><i>Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
             <div class="controls">
               <input class="input-large" id="pwinput" type="password" name="password" />
-              <% if @errors[:pwinput]%>
-                  <span class="help-inline"><%= @errors[:pwinput]%></span>
-              <%end%>
+              <% if @errors[:pwinput] %>
+                  <span class="help-inline"><%= xss @errors[:pwinput] %></span>
+              <% end %>
             </div>
           </div>
 
-          <div id="cg-password-confirm" class="control-group <%= "error" if @errors[:pwcinput]%>">
+          <div id="cg-password-confirm" class="control-group <%= "error" if @errors[:pwcinput] %>">
             <label class="control-label" for="pwcinput"><i>Re-type Password</i></label>
             <div class="controls">
               <input class="input-large" id="pwcinput" type="password" name="passwordc" />
-              <% if @errors[:pwcinput]%>
-                  <span class="help-inline"><%= @errors[:pwcinput]%></span>
-              <%end%>
+              <% if @errors[:pwcinput] %>
+                  <span class="help-inline"><%= xss @errors[:pwcinput] %></span>
+              <% end %>
             </div>
           </div>
 
-          <div id="cg-image" class="control-group <%= "error" if @errors[:image_file]%>">
+          <div id="cg-image" class="control-group <%= "error" if @errors[:image_file] %>">
             <label class="control-label" for="image">Picture (< 400 kB)</label>
             <div class="controls">
               <input class="input-large" id="image" type="file" name="image_file" accept="image/*" />
-              <% if @errors[:image_file]%>
-                  <span class="help-inline"><%= @errors[:image_file]%></span>
+              <% if @errors[:image_file] %>
+                  <span class="help-inline"><%= xss @errors[:image_file] %></span>
               <%end%>
             </div>
           </div>

@@ -5,9 +5,9 @@
   <%= erb :_sidebar %>
   <div class="span10">
     <% if @user == @current_user%>
-    <h1><%= @user.name %> - My account </h1>
+    <h1><%= xss @user.name %> - My account </h1>
     <% else %>
-    <h1>User: <%= @user.name %></h1>
+    <h1>User: <%= xss @user.name %></h1>
     <% end %>
 
     <h3>Profile</h3>
@@ -20,11 +20,11 @@
     <% end %>
 
     <% if @user.about.length > 0 %>
-    <p>Interests: <%=@user.about%></p>
+    <p>Interests: <%= xss @user.about %></p>
     <% end %>
 
     <h3 style="padding-top: 50px;">
-      <% if @user == @current_user%>
+      <% if @user == @current_user %>
         Your items
       <% else %>
         User's items
@@ -42,21 +42,21 @@
       <tbody>
         <% for item in @items %>
           <tr>
-            <%if item.active%>
-                <td style="color:#00CC00;"><%= item.name %></td>
-                <td><%= item.price %></td>
-                <td> </td>
-            <%else%>
-                <td style="color:#FF0000;"><%= item.name %></td>
-                <td><%= item.price %></td>
-                <%if @current_user == item.owner%>
+            <% if item.active %>
+                <td style="color:#00CC00;"><%= xss item.name %></td>
+                <td><%= xss item.price %></td>
+                <td></td>
+            <% else %>
+                <td style="color:#FF0000;"><%= xss item.name %></td>
+                <td><%= xss item.price %></td>
+                <% if @current_user == item.owner %>
                     <td>
                       <form action="/item/<%= item.id %>/edit" method="link">
                         <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
                       </form>
                     </td>
-                <%end%>
-            <%end%>
+                <% end %>
+            <% end %>
             <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
           </tr>
         <% end %>
@@ -70,7 +70,7 @@
         <% end %>
     <% end %>
 
-    <% if @user == @current_user%>
+    <% if @user == @current_user %>
     <form class="form-horizontal" method="GET" action="/item/create">
       <fieldset>
         <div class="form-actions">
@@ -83,33 +83,33 @@
     <h4>Change Password</h4>
     <form class="form-horizontal" method="POST" action="/change_password">
       <fieldset>
-        <div id="cg-cpassword" class="control-group <%= "error" if @errors[:cpwinput]%>">
+        <div id="cg-cpassword" class="control-group <%= "error" if @errors[:cpwinput] %>">
           <label class="control-label" for="cpwinput"><i>Current Password</i></label>
           <div class="controls">
             <input class="input-large" id="cpwinput" type="password" name="currentpassword" />
-            <% if @errors[:cpwinput]%>
-                <span class="help-inline"><%= @errors[:cpwinput]%></span>
-            <%end%>
+            <% if @errors[:cpwinput] %>
+                <span class="help-inline"><%= xss @errors[:cpwinput] %></span>
+            <% end %>
           </div>
         </div>
 
-        <div id="cg-password" class="control-group <%= "error" if @errors[:pwinput]%>">
+        <div id="cg-password" class="control-group <%= "error" if @errors[:pwinput] %>">
           <label class="control-label" for="pwinput"><i>New Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
           <div class="controls">
             <input class="input-large" id="pwinput" type="password" name="password" />
-            <% if @errors[:pwinput]%>
-                <span class="help-inline"><%= @errors[:pwinput]%></span>
-            <%end%>
+            <% if @errors[:pwinput] %>
+                <span class="help-inline"><%= xss @errors[:pwinput] %></span>
+            <% end %>
           </div>
         </div>
 
-        <div id="cg-password-confirm" class="control-group <%= "error" if @errors[:pwcinput]%>">
+        <div id="cg-password-confirm" class="control-group <%= "error" if @errors[:pwcinput] %>">
           <label class="control-label" for="pwcinput"><i>Re-type New Password</i></label>
           <div class="controls">
             <input class="input-large" id="pwcinput" type="password" name="passwordc" />
-            <% if @errors[:pwcinput]%>
-                <span class="help-inline"><%= @errors[:pwcinput]%></span>
-            <%end%>
+            <% if @errors[:pwcinput] %>
+                <span class="help-inline"><%= xss @errors[:pwcinput] %></span>
+            <% end %>
           </div>
         </div>
 
@@ -120,7 +120,7 @@
     </form>
 
     <h3>Delete my account</h3>
-    <form class="form-horizontal" method="POST" action="/profile/<%=@current_user.id%>">
+    <form class="form-horizontal" method="POST" action="/profile/<%= @current_user.id %>">
       <fieldset>
         <div class="form-actions">
           <input type="hidden" name="_method" value="delete" />

@@ -6,6 +6,7 @@ require_relative 'models'
 # App-only requirements
 require 'sinatra'
 require 'erb'
+require_relative 'helpers'
 
 # Controllers
 require_relative 'controllers/main'

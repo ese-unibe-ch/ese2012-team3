@@ -2,8 +2,8 @@
     <%if item.owner == @current_user %>
         <td>
           <form action="/item/<%= item.id %>/status_change" method="post">
-            <input type="hidden" name="owner" value="<%= item.owner.name %>" />
-            <input type="hidden" name="item" value="<%= item.id %>" />
+            <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
+            <input type="hidden" name="item" value="<%= xss item.id %>" />
             <input type="hidden" name="new_state" value="inactive" />
             <input type="submit" class="btn btn-info small" name="submit" value="Inactivate item" />
           </form>
@@ -11,8 +11,8 @@
     <% else %>
         <td>
           <form action="/item/<%= item.id %>/buy" method="post">
-            <input type="hidden" name="owner" value="<%= item.owner.name %>" />
-            <input type="hidden" name="item" value="<%= item.id %>" />
+            <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
+            <input type="hidden" name="item" value="<%= xss item.id %>" />
             <% if session[:name] && item.owner != @current_user %>
                 <input type="submit" class="btn btn-info small" name="submit" value="Buy Item" />
             <% end %>
@@ -24,8 +24,8 @@
     <%if item.owner == @current_user %>
         <td>
           <form action="/item/<%= item.id %>/status_change" method="post">
-            <input type="hidden" name="owner" value="<%= item.owner.name %>" />
-            <input type="hidden" name="item" value="<%= item.id %>" />
+            <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
+            <input type="hidden" name="item" value="<%= xss item.id %>" />
             <input type="hidden" name="new_state" value="active" />
             <input type="submit" class="btn btn-info small" name="submit" value="Activate item" />
           </form>

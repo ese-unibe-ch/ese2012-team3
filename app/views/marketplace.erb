@@ -29,9 +29,9 @@
       <tbody>
         <% for item in @all_items %>
           <tr>
-            <td><%= item.name %></td>
-            <td><%= item.price %></td>
-            <td><a href="/profile/<%= item.owner.id %>"><%= item.owner.name %></a></td>
+            <td><%= xss(item.name) %></td>
+            <td><%= xss item.price %></td>
+            <td><a href="/profile/<%= xss item.owner.id %>"><%= xss item.owner.name %></a></td>
             <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
           </tr>
         <% end %>

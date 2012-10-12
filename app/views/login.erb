@@ -8,22 +8,22 @@
     <p>Don't have an account? <a href="/register">Click here to register</a>!</p>
     <form class="form-horizontal" method="POST" action="/login">
       <fieldset>
-        <div id="cg-username" class="control-group <%= "error" if @errors[:name]%>">
+        <div id="cg-username" class="control-group <%= "error" if @errors[:name] %>">
           <label class="control-label" for="nameinput">Username</label>
           <div class="controls">
-            <input class="input-xlarge" id="nameinput" type="text" name="username" value="<%= @username if @username%>" />
-            <% if @errors[:name]%>
-                <span class="help-inline"><%= @errors[:name]%></span>
-            <%end%>
+            <input class="input-xlarge" id="nameinput" type="text" name="username" value="<%= xss @username if @username %>" />
+            <% if @errors[:name] %>
+                <span class="help-inline"><%= xss @errors[:name] %></span>
+            <% end %>
           </div>
         </div>
-        <div id="cg-password" class="control-group <%= "error" if @errors[:password]%>">
+        <div id="cg-password" class="control-group <%= "error" if @errors[:password] %>">
           <label class="control-label" for="pwinput">Password</label>
           <div class="controls">
             <input class="input-xlarge" id="pwinput" type="password" name="password" />
-            <% if @errors[:password]%>
-                <span class="help-inline"><%= @errors[:password]%></span>
-            <%end%>
+            <% if @errors[:password] %>
+                <span class="help-inline"><%= xss @errors[:password] %></span>
+            <% end %>
           </div>
         </div>
         <div class="form-actions">

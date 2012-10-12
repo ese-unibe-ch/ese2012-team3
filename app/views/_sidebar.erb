@@ -6,13 +6,13 @@
           <li><a href="/all_users"><i class="icon-align-left"></i>All users</a></li>
           <li><a href='<%= "/profile/#{@current_user.id}" %>'><i class="icon-align-left"></i>My account</a></li>
           <li><a href="/item/create"><i class="icon-align-left"></i>Create new item</a></li>
-      <%end%>
+      <% end %>
     </ul>
   </div>
   <% if @current_user %>
   <div style="font-size:0.8em;">
-    <p>Logged in as <b><a href='<%= "/profile/#{@current_user.id}" %>'><%= @current_user.name %></a></b></p>
-    <p>Credits: <%= @current_user.credit %></p>
+    <p>Logged in as <b><a href='<%= "/profile/#{@current_user.id}" %>'><%= xss @current_user.name %></a></b></p>
+    <p>Credits: <%= xss @current_user.credit %></p>
   </div>
   <% end %>
 </div>

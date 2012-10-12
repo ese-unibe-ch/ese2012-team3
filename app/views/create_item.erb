@@ -7,21 +7,21 @@
     <h1>Create new item</h1>
     <form class="form-horizontal" method="POST" action="/item/create">
       <fieldset>
-        <div class="control-group <%= "error" if @errors[:name]%>">
+        <div class="control-group <%= "error" if @errors[:name] %>">
           <label class="control-label" for="name">Name</label>
           <div class="controls">
-            <input class="input-xlarge" id="name" type="text" name="name" value="<%=@params['name']%>" />
-            <% if @errors[:name]%>
-                <span class="help-inline"><%= @errors[:name]%></span>
+            <input class="input-xlarge" id="name" type="text" name="name" value="<%= xss @params['name'] %>" />
+            <% if @errors[:name] %>
+                <span class="help-inline"><%= xss @errors[:name] %></span>
             <%end%>
           </div>
         </div>
-        <div class="control-group <%= 'error' if @errors[:price]%>">
+        <div class="control-group <%= 'error' if @errors[:price] %>">
           <label class="control-label" for="price">Price</label>
           <div class="controls">
-            <input class="input-xlarge" id="price" type="text" name="price"  value="<%=@params['price']%>" />
+            <input class="input-xlarge" id="price" type="text" name="price"  value="<%= xss @params['price'] %>" />
             <% if @errors[:price]%>
-                <span class="help-inline"><%= @errors[:price]%></span>
+                <span class="help-inline"><%= xss @errors[:price]%></span>
             <%end%>
           </div>
         </div>
