@@ -6,7 +6,11 @@ module Market
     # An item can be active or inactive.
     # An item has an owner.
 
-    attr_accessor :id, :name, :price, :owner, :active
+    attr_accessor :id,
+                  :name,
+                  :price, # positive number
+                  :owner, # an Agent
+                  :active # Boolean
 
     @@item_id_counter = 0
     @@items = []
@@ -57,12 +61,12 @@ module Market
     end
 
     # list of user's items to sell
-    def self.sell_items_by_user (user)
+    def self.sell_items_by_agent (user)
       @@items.select { |item| item.active && item.owner == user }
     end
 
     # list of user's items
-    def self.items_by_user (user)
+    def self.items_by_agent(user)
       @@items.select { |item| item.owner == user }
     end
 

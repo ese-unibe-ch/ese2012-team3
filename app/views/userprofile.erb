@@ -19,8 +19,8 @@
     </div>
     <% end %>
 
-    <% if @user.interests.length > 0 %>
-    <p>Interests: <%=@user.interests%></p>
+    <% if @user.about.length > 0 %>
+    <p>Interests: <%=@user.about%></p>
     <% end %>
 
     <h3 style="padding-top: 50px;">
@@ -109,18 +109,6 @@
         </div>
       </fieldset>
     </form>
-    <!-- suggestion by MX
-    <h4>Update Interests</h4>
-    <form action="/user/update_interests" method="post">
-      <div id="cg-interests" class="control-group">
-        <label class="control-label" for="interests">Interests</label>
-        <div class="controls">
-          <input class="input-large" id="interests" type="text" name="interests" />
-        </div>
-      </div>
-
-      <input type="submit" class="btn btn-info small" name="submit" value="Update Interests" />
-    </form> -->
 
     <h3>Delete my account</h3>
     <form class="form-horizontal" method="POST" action="/profile/<%=@current_user.name%>">

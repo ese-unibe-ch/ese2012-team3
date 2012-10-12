@@ -38,11 +38,11 @@ class UserTest < Test::Unit::TestCase
   def test_add_item
     # list is empty now
     user = User.init(:name => "user6", :password => "Zz!45678")
-    assert(Item.sell_items_by_user(user).length == 0, "sell list is not empty")
+    assert(Item.sell_items_by_agent(user).length == 0, "sell list is not empty")
     someitem = Item.init(:name => "someItem", :price => 300)
     someitem.owner = User.init(:name => "owner1", :password => "Zz!45678")
     user.add_item(someitem)
-    assert(Item.sell_items_by_user(user).include?(someitem), "item was not added!")
+    assert(Item.sell_items_by_agent(user).include?(someitem), "item was not added!")
   end
 
   def test_list_all_sell_items
@@ -53,9 +53,9 @@ class UserTest < Test::Unit::TestCase
     user.add_item(otheritem)
     user.add_item(someitem)
     # list should have 2 sell items now
-    assert(Item.sell_items_by_user(user).length == 2, "there are not 2 items in the sell list!")
-    assert(Item.sell_items_by_user(user).include?(otheritem), "otherItem is not in the sell list!")
-    assert(Item.sell_items_by_user(user).include?(someitem), "someItem is not in the sell list!")
+    assert(Item.sell_items_by_agent(user).length == 2, "there are not 2 items in the sell list!")
+    assert(Item.sell_items_by_agent(user).include?(otheritem), "otherItem is not in the sell list!")
+    assert(Item.sell_items_by_agent(user).include?(someitem), "someItem is not in the sell list!")
   end
 
   def test_fail_not_enough_credit
@@ -74,7 +74,7 @@ class UserTest < Test::Unit::TestCase
     owner = User.init(:name => "owner4", :password => "Zz!45678")
     owner.add_item(item)
     user.buy_item(item)
-    assert_equal(1, Item.items_by_user(user).length, "user was not able to buy!")
+    assert_equal(1, Item.items_by_agent(user).length, "user was not able to buy!")
     assert_equal(user, item.owner, "user is not the owner!")
   end
 
@@ -94,7 +94,7 @@ class UserTest < Test::Unit::TestCase
     owner = User.init(:name => "owner6", :password => "Zz!45678")
     owner.add_item(item)
     user.buy_item(item)
-    assert_equal(0, Item.sell_items_by_user(owner).length, "owner still has the item on his list!")
+    assert_equal(0, Item.sell_items_by_agent(owner).length, "owner still has the item on his list!")
   end
 
   def test_fail_inactive

@@ -17,7 +17,6 @@ include Market
 def relative(path)
   File.join(File.expand_path(File.dirname(__FILE__)), path)
 end
-Views = relative('views')
 
 class App < Sinatra::Base
 
@@ -26,8 +25,8 @@ class App < Sinatra::Base
   use Marketplace
 
   enable :sessions
-  set :public_folder, 'app/public'
-  set :views, Views
+  set :public_folder, relative('public')
+  set :views, relative('views')
 
   configure :development do
     defpw = "Ax1301!3";

@@ -61,7 +61,7 @@ class Authentication < Sinatra::Application
     user = nil
     begin
       user = User.init(:name => username, :credit => 200,  # Whatever
-                       :password => password, :interests => params[:interests])
+                       :password => password, :about => params[:about])
     rescue => e
       halt erb :error, :locals =>
           {:message => e.message}

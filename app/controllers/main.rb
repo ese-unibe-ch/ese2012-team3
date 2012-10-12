@@ -27,7 +27,7 @@ class Main < Sinatra::Application
 
     @current_user = Market::User.user_by_name(session[:name])
     @user = Market::User.user_by_name(params[:username])
-    @items = Market::Item.items_by_user(@user)
+    @items = Market::Item.items_by_agent(@user)
 
     erb :userprofile
   end
