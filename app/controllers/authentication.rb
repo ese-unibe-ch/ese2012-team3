@@ -1,10 +1,3 @@
-require 'erb'
-def relative path
-  File.join(File.dirname(__FILE__), path)
-end
-require relative('../../app/models/market/user')
-require relative('../../app/models/passwordcheck')
-
 class Authentication < Sinatra::Application
 
   post "/login" do

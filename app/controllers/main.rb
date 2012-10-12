@@ -1,5 +1,3 @@
-require 'erb'
-
 class Main < Sinatra::Application
 
   get "/" do

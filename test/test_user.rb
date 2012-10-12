@@ -1,11 +1,3 @@
-require "test/unit"
-
-def relative path
-  File.join(File.dirname(__FILE__), path)
-end
-require relative('../app/models/market/item')
-require relative('../app/models/market/user')
-
 include Market
 
 class UserTest < Test::Unit::TestCase

@@ -1,10 +1,3 @@
-require "test/unit"
-
-def relative path
-  File.join(File.dirname(__FILE__), path)
-end
-require relative('../app/models/passwordcheck')
-
 class TestPasswordCheck  < Test::Unit::TestCase
   def test_not_strong_word
     assert_raise RuntimeError do

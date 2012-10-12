@@ -1,8 +1,13 @@
+# Common requs
 require 'rubygems'
-require 'sinatra'
 require 'require_relative'
-require_relative 'models/market/user'
-require_relative 'models/market/item'
+require_relative 'models'
+
+# App-only requirements
+require 'sinatra'
+require 'erb'
+
+# Controllers
 require_relative 'controllers/main'
 require_relative 'controllers/authentication'
 require_relative 'controllers/marketplace'
