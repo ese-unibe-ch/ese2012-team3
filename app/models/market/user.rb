@@ -68,12 +68,7 @@ module Market
         org.remove_member(self)
       end
       @@users.delete(self)
-
-
     end
-
-
-
   end
 
 end
