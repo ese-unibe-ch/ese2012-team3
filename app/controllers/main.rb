@@ -1,9 +1,9 @@
 class Main < Sinatra::Application
 
   get "/" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_user = Market::User.user_by_id(session[:user_id])
     @items = Market::Item.active_items
 
     erb :marketplace
@@ -14,19 +14,19 @@ class Main < Sinatra::Application
   end
 
   get "/all_users" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_user = Market::User.user_by_id(session[:user_id])
     @users = Market::User.all
 
     erb :userlist
   end
 
   get "/profile/:id" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @errors = {}
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_user = Market::User.user_by_id(session[:user_id])
     @user = Market::User.user_by_id(params[:id])
     @items = Market::Item.items_by_agent(@user)
 
@@ -34,7 +34,7 @@ class Main < Sinatra::Application
   end
 
   delete "/profile/:id" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @user = Market::User.user_by_id(params[:id]).delete
 
@@ -42,7 +42,7 @@ class Main < Sinatra::Application
   end
 
   get "/error" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     erb :error
   end
