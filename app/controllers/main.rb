@@ -25,6 +25,7 @@ class Main < Sinatra::Application
   get "/profile/:username" do
     redirect '/login' unless session[:name]
 
+    @errors = {}
     @current_user = Market::User.user_by_name(session[:name])
     @user = Market::User.user_by_name(params[:username])
     @items = Market::Item.items_by_agent(@user)

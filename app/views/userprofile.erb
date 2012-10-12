@@ -83,24 +83,33 @@
     <h4>Change Password</h4>
     <form class="form-horizontal" method="POST" action="/change_password">
       <fieldset>
-        <div id="cg-cpassword" class="control-group">
+        <div id="cg-cpassword" class="control-group <%= "error" if @errors[:cpwinput]%>">
           <label class="control-label" for="cpwinput"><i>Current Password</i></label>
           <div class="controls">
             <input class="input-large" id="cpwinput" type="password" name="currentpassword" />
+            <% if @errors[:cpwinput]%>
+                <span class="help-inline"><%= @errors[:cpwinput]%></span>
+            <%end%>
           </div>
         </div>
 
-        <div id="cg-password" class="control-group">
+        <div id="cg-password" class="control-group <%= "error" if @errors[:pwinput]%>">
           <label class="control-label" for="pwinput"><i>New Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
           <div class="controls">
             <input class="input-large" id="pwinput" type="password" name="password" />
+            <% if @errors[:pwinput]%>
+                <span class="help-inline"><%= @errors[:pwinput]%></span>
+            <%end%>
           </div>
         </div>
 
-        <div id="cg-password-confirm" class="control-group">
+        <div id="cg-password-confirm" class="control-group <%= "error" if @errors[:pwcinput]%>">
           <label class="control-label" for="pwcinput"><i>Re-type New Password</i></label>
           <div class="controls">
             <input class="input-large" id="pwcinput" type="password" name="passwordc" />
+            <% if @errors[:pwcinput]%>
+                <span class="help-inline"><%= @errors[:pwcinput]%></span>
+            <%end%>
           </div>
         </div>
 
