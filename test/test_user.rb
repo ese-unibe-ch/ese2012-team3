@@ -166,7 +166,9 @@ class UserTest < Test::Unit::TestCase
     dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
     assert_equal(donald, User.user_by_id(0))
     assert_equal(dagobert, User.user_by_id(1))
-    assert_nil(User.user_by_id(2))
+    assert_raise RuntimeError do
+      User.user_by_id(2)
+    end
   end
 
 end
