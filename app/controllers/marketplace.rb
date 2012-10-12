@@ -66,10 +66,10 @@ class Marketplace < Sinatra::Application
       halt erb :create_item
     end
 
-    redirect "/profile/#{@current_user.name}"
+    redirect "/profile/#{@current_user.id}"
   end
 
-  post "/item/edit" do
+  post "/item/:item_id/edit" do
     redirect '/login' unless session[:name]
     @item = Item.by_id(params[:item_id].to_i)
     @current_user = User.user_by_name(session[:name])
@@ -85,7 +85,7 @@ class Marketplace < Sinatra::Application
         @item.name = params[:item_name]
         @item.price = params[:item_price]
       end
-      redirect "/profile/#{@item.owner.name}"
+      redirect "/profile/#{@item.owner.id}"
     #display form with errors
     else
       halt erb :edit_item

@@ -5,7 +5,7 @@
   <%= erb :_sidebar %>
   <div class="span10">
     <h1>Edit item</h1>
-    <form class="form-horizontal" method="POST" action="/item/edit">
+    <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/edit"%>">
       <fieldset>
         <div class="control-group <%= "error" if @errors[:name]%>">
           <label class="control-label" for="name">Name</label>
