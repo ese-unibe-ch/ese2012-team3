@@ -4,7 +4,6 @@ module Market
     attr_accessor :members  # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
     # TODO Store roles of members. Make sure there's always an admin.
 
-
     @@organizations = []
     @@organization_id_counter = 0
 
@@ -41,7 +40,7 @@ module Market
     end
 
     # Lists organizations the user works for
-    def self.organizations_by_user (user)
+    def self.organizations_by_user(user)
       @@organizations.select { |org| org.members.include?(user) }
     end
 
