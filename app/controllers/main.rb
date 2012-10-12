@@ -1,11 +1,15 @@
 class Main < Sinatra::Application
 
+  before do
+    @current_id = session[:user_id]
+    @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    @all_items = Market::Item.active_items
+    @users = Market::User.all
+    @errors = {}
+  end
+
   get "/" do
-    redirect '/login' unless session[:user_id]
-
-    @current_user = Market::User.user_by_id(session[:user_id])
-    @items = Market::Item.active_items
-
+    redirect '/login' unless @current_user
     erb :marketplace
   end
 
@@ -15,18 +19,12 @@ class Main < Sinatra::Application
 
   get "/all_users" do
     redirect '/login' unless session[:user_id]
-
-    @current_user = Market::User.user_by_id(session[:user_id])
-    @users = Market::User.all
-
     erb :userlist
   end
 
   get "/profile/:id" do
     redirect '/login' unless session[:user_id]
 
-    @errors = {}
-    @current_user = Market::User.user_by_id(session[:user_id])
     @user = Market::User.user_by_id(params[:id])
     @items = Market::Item.items_by_agent(@user)
 

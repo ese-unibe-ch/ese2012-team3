@@ -1,5 +1,15 @@
 class Authentication < Sinatra::Application
 
+  before do
+    @current_id = session[:user_id]
+    begin
+      @current_user = Market::User.user_by_id(session[:user_id])
+    rescue
+      @current_user = nil
+    end
+    @errors = {}
+  end
+
   post "/login" do
     username = params[:username]
     password = params[:password]
@@ -23,7 +33,7 @@ class Authentication < Sinatra::Application
 
   get "/login" do
     redirect '/' if session[:user_id]
-	@errors = {}
+	  @errors = {}
 
     erb :login
   end
@@ -88,9 +98,9 @@ class Authentication < Sinatra::Application
     begin
       user = User.init(:name => username, :credit => 200,  # Whatever
                        :password => password, :about => params[:about])
-    rescue => e
+    rescue => e  # should not fail here anymore...
       halt erb :error, :locals =>
-          {:message => e.message}
+          {:message => "Unexpected: "+e.message}
     end
 
     file = params[:image_file]
@@ -120,14 +130,14 @@ class Authentication < Sinatra::Application
     user = Market::User.user_by_id(session[:user_id])
 
     #halt erb :error, :locals =>
-    #    {:message => "N"} unless user
+    #    {:message => "N"} unless @current_user
 
     password = params[:password]
     passwordc = params[:passwordc]
     currentpassword = params[:currentpassword]
 
     halt erb :error, :locals =>
-        {:message => "Current password is wrong"} unless user.password == currentpassword
+            {:message => "Current password is wrong"} unless @current_user.password == currentpassword
 
     passwordcheck(password, passwordc, user.name, currentpassword)
     user.password = password
@@ -137,6 +147,8 @@ class Authentication < Sinatra::Application
 
   get "/logout" do
     session[:user_id] = nil
+    @current_user = nil
+
     redirect "/login"
   end
 
