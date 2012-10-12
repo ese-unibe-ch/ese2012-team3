@@ -37,5 +37,10 @@ module Market
       @@organizations.detect { |user| user.name == name }
     end
 
+    # Lists organizations the user works for
+    def self.organizations_by_user (user)
+      @@organizations.select { |org| org.members.include?(user) }
+    end
+
   end
 end

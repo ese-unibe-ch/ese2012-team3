@@ -65,6 +65,8 @@ module Market
       @@users.delete(self)
     end
 
+
+
   end
 
 end
