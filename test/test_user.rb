@@ -161,4 +161,12 @@ class UserTest < Test::Unit::TestCase
     assert(Item.all.include?(sandwich))
   end
 
+  def test_get_user_by_id
+    donald = User.init(:name => "donald", :password => "Zz!45678")
+    dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
+    assert_equal(donald, User.user_by_id(0))
+    assert_equal(dagobert, User.user_by_id(1))
+    assert_nil(User.user_by_id(2))
+  end
+
 end
