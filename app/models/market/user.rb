@@ -13,7 +13,7 @@ module Market
 
     attr_accessor :password
 
-    @@user_id_counter = 0 # cannot use @@users.size as user may be deleted
+    @@user_id_counter = 1 # cannot use @@users.size as user may be deleted
     @@users = []
 
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
@@ -54,8 +54,17 @@ module Market
       @@users.detect { |user| user.name == name }
     end
 
+    def self.user_by_id(id)
+      user = @@users.detect { |user| user.id == id.to_i }
+      if user == nil
+        raise "no user with id #{id}"
+      end
+      user
+    end
+
     def self.delete_all
       @@users = []
+      @@user_id_counter = 0
     end
 
     # TODO "I can delete my account only if there's a second admin" (in every org I work for)
@@ -68,12 +77,7 @@ module Market
         org.remove_member(self)
       end
       @@users.delete(self)
-
-
     end
-
-
-
   end
 
 end

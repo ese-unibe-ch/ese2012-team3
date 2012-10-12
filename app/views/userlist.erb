@@ -8,7 +8,7 @@
     <!--
     <ul style="margin-top: 25px;">
       <% for user in @users %>
-      <li><a href="/profile/<%= user.name %>"><%= user.name %></a></li>
+      <li><a href="<%= "/profile/#{user.id}" %>"><%= user.name %></a></li>
       <% end %>
     </ul>  -->
 
@@ -26,14 +26,14 @@
           <tr style="height:72px">
 
                <td><% if user.image_file_name %>
-                     <div style="width:64px;height:64px;background-image: url('<%= @HOSTNAME+"/userimages/"+user.image_file_name %>');
+                     <div style="width:64px;height:64px;background-image: url('<%= "/userimages/"+user.image_file_name %>');
                              background-repeat: no-repeat;
                              background-size: contain;">
                        <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
                      </div>
                 <% end %></td>
 
-            <td><a href="/profile/<%= user.name %>"><%= user.name %></a></td>
+            <td><a href="<%= "/profile/#{user.id}" %>"><%= user.name %></a></td>
             <td><%= user.about %></td>
           </tr>
       <% end %>

@@ -130,7 +130,6 @@ class Authentication < Sinatra::Application
     passwordcheck(password, passwordc, session[:name], currentpassword)
     user.password = password
 
-    #redirect "/profile/"+session[:name]
     redirect "/?pwchanged=true"
   end
 

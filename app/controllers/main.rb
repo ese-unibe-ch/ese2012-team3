@@ -22,22 +22,21 @@ class Main < Sinatra::Application
     erb :userlist
   end
 
-  get "/profile/:username" do
+  get "/profile/:id" do
     redirect '/login' unless session[:name]
 
     @errors = {}
     @current_user = Market::User.user_by_name(session[:name])
-    @user = Market::User.user_by_name(params[:username])
+    @user = Market::User.user_by_id(params[:id])
     @items = Market::Item.items_by_agent(@user)
 
     erb :userprofile
   end
 
-  delete "/profile/:username" do
+  delete "/profile/:id" do
     redirect '/login' unless session[:name]
 
-    @current_user = Market::User.user_by_name(session[:name])
-    @current_user.delete
+    @user = Market::User.user_by_id(params[:id]).delete
 
     redirect "/logout"
   end

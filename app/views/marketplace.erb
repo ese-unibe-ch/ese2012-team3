@@ -31,7 +31,7 @@
           <tr>
             <td><%= item.name %></td>
             <td><%= item.price %></td>
-            <td><a href="/profile/<%= item.owner.name %>"><%= item.owner.name %></a></td>
+            <td><a href="/profile/<%= item.owner.id %>"><%= item.owner.name %></a></td>
             <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
           </tr>
         <% end %>
