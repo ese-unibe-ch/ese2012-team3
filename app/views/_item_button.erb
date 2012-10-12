@@ -13,7 +13,7 @@
           <form action="/item/<%= item.id %>/buy" method="post">
             <input type="hidden" name="owner" value="<%= item.owner.name %>" />
             <input type="hidden" name="item" value="<%= item.id %>" />
-            <% if session[:name] && item.owner != @current_user %>
+            <% if item.owner != @current_user %>
                 <input type="submit" class="btn btn-info small" name="submit" value="Buy Item" />
             <% end %>
           </form>

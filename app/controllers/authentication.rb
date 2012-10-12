@@ -8,17 +8,16 @@ class Authentication < Sinatra::Application
         {:message => "User '#{username}' does not exist"} unless Market::User.allNames.include?(username)
     halt erb :error, :locals =>
         {:message => "No username or password given"} unless username && password
+    user = Market::User.user_by_name(username)
     halt erb :error, :locals =>
-        {:message => "Wrong password"} unless Market::User.user_by_name(username).password == password
+        {:message => "Wrong password"} unless user.password == password
 
-    session[:name] = username
+    session[:user_id] = user.id
     redirect "/?loggedin=true"
   end
 
   get "/login" do
-    redirect '/' if session[:name]
-
-    @current_name = session[:name]
+    redirect '/' if session[:user_id]
 
     erb :login
   end
@@ -39,7 +38,7 @@ class Authentication < Sinatra::Application
   end
 
   post "/register" do
-    redirect '/' if session[:name]
+    redirect '/' if session[:user_id]
 
     username = params[:username]
     password = params[:password]
@@ -74,7 +73,7 @@ class Authentication < Sinatra::Application
       FileUtils::cp(file[:tempfile].path, File.join(File.dirname(__FILE__),"../public/userimages", user.image_file_name) )
     end
 
-    session[:name] = username
+    session[:user_id] = user.id
     redirect "/?registered=true"
   end
 
@@ -84,13 +83,13 @@ class Authentication < Sinatra::Application
   end
 
   get "/register" do
-    redirect '/' if session[:name]
+    redirect '/' if session[:user_id]
 
     erb :register
   end
 
   post "/change_password" do
-    user = Market::User.user_by_name(session[:name])
+    user = Market::User.user_by_id(session[:user_id])
 
     #halt erb :error, :locals =>
     #    {:message => "N"} unless user
@@ -100,16 +99,16 @@ class Authentication < Sinatra::Application
     currentpassword = params[:currentpassword]
 
     halt erb :error, :locals =>
-            {:message => "Current password is wrong"} unless user.password == currentpassword
+        {:message => "Current password is wrong"} unless user.password == currentpassword
 
-    passwordcheck(password, passwordc, session[:name], currentpassword)
+    passwordcheck(password, passwordc, user.name, currentpassword)
     user.password = password
 
     redirect "/?pwchanged=true"
   end
 
   get "/logout" do
-    session[:name] = nil
+    session[:user_id] = nil
     redirect "/login"
   end
 

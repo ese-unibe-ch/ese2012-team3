@@ -3,11 +3,11 @@ include Market
 class Marketplace < Sinatra::Application
 
   post "/item/:id/buy" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
     
-    @current_user = User.user_by_name(session[:name])
+    @current_user = User.user_by_id(session[:user_id])
 
     begin
       @current_user.buy_item(@item)
@@ -20,10 +20,10 @@ class Marketplace < Sinatra::Application
   end
 
   post "/item/:id/status_change" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
-    @current_user = User.user_by_name(session[:name])
+    @current_user = User.user_by_id(session[:user_id])
 
     if @current_user == @item.owner
       @item.inactivate if params[:new_state] == "inactive"
@@ -33,18 +33,18 @@ class Marketplace < Sinatra::Application
   end
 
   get "/item/create" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @errors = {}
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_user = Market::User.user_by_id(session[:user_id])
 
     erb :create_item
   end
 
   post "/item/create" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_user = Market::User.user_by_id(session[:user_id])
 
     #input validation
     @errors = {}
@@ -54,7 +54,7 @@ class Marketplace < Sinatra::Application
 
     #create item
     if @errors.empty?
-      @current_user = Market::User.user_by_name(session[:name])
+      @current_user = Market::User.user_by_id(session[:user_id])
       item_name = params[:name]
       item_price = params[:price].to_i
       Market::Item.init(:name   => item_name,
@@ -70,9 +70,9 @@ class Marketplace < Sinatra::Application
   end
 
   post "/item/:item_id/edit" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:item_id].to_i)
-    @current_user = User.user_by_name(session[:name])
+    @current_user = User.user_by_id(session[:user_id])
 
     #input validation
     @errors = {}
@@ -94,9 +94,9 @@ class Marketplace < Sinatra::Application
 
 
   get "/item/:id/edit" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:id].to_i)
-    @current_user = User.user_by_name(session[:name])
+    @current_user = User.user_by_id(session[:user_id])
     @errors = {}
     erb :edit_item, :locals => {:item => @item}
   end
