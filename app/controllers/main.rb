@@ -1,15 +1,15 @@
 class Main < Sinatra::Application
 
   before do
-    @current_name = session[:name]
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_id = session[:user_id]
+    @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     @all_items = Market::Item.active_items
     @users = Market::User.all
     @errors = {}
   end
 
   get "/" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless @current_user
     erb :marketplace
   end
 
@@ -18,12 +18,12 @@ class Main < Sinatra::Application
   end
 
   get "/all_users" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
     erb :userlist
   end
 
   get "/profile/:id" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @user = Market::User.user_by_id(params[:id])
     @items = Market::Item.items_by_agent(@user)
@@ -32,7 +32,7 @@ class Main < Sinatra::Application
   end
 
   delete "/profile/:id" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @user = Market::User.user_by_id(params[:id]).delete
 
@@ -40,7 +40,7 @@ class Main < Sinatra::Application
   end
 
   get "/error" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     erb :error
   end

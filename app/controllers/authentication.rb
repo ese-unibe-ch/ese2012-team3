@@ -1,9 +1,12 @@
 class Authentication < Sinatra::Application
 
   before do
-    @current_name = session[:name]
-    puts session[:name].to_s
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_id = session[:user_id]
+    begin
+      @current_user = Market::User.user_by_id(session[:user_id])
+    rescue
+      @current_user = nil
+    end
     @errors = {}
   end
 
@@ -12,21 +15,26 @@ class Authentication < Sinatra::Application
     password = params[:password]
 
     # error handling...
+    @errors = {}
     @errors[:name] = "User '#{username}' does not exist"  unless Market::User.allNames.include?(username)
     @errors[:name] = "No username given"  unless username && username.length > 0
     @username = username unless @errors[:name] # restore
     @errors[:password] = "No password given"  unless password && password.length > 0
+
+    user = Market::User.user_by_name(username)
     if @errors.empty?
-      @errors[:password] = "Wrong password"  unless Market::User.user_by_name(username).password == password
+      @errors[:password] = "Wrong password"  unless user.password == password
     end
     halt erb :login unless @errors.empty?
 
-    session[:name] = username
+    session[:user_id] = user.id
     redirect "/?loggedin=true"
   end
 
   get "/login" do
-    redirect '/' if session[:name]
+    redirect '/' if session[:user_id]
+	  @errors = {}
+
     erb :login
   end
 
@@ -46,6 +54,7 @@ class Authentication < Sinatra::Application
   end
 
   def register_error(at, text)
+    @errors = {}
     @errors[at] = text
     halt erb :register
   end
@@ -54,7 +63,7 @@ class Authentication < Sinatra::Application
   # Do we really want inline errors with this?
   # Losing the image one selected is annoying..
   post "/register" do
-    redirect '/' if session[:name]
+    redirect '/' if session[:user_id]
 
     username = params[:username]
     password = params[:password]
@@ -97,11 +106,11 @@ class Authentication < Sinatra::Application
     file = params[:image_file]
 
     if file
-      user.image_file_name = "#{user.id}"+File.extname(file[:filename]) #(file[:filename])
+      user.image_file_name = "#{user.id}"+"_"+(file[:filename])
       FileUtils::cp(file[:tempfile].path, File.join(File.dirname(__FILE__),"../public/userimages", user.image_file_name) )
     end
 
-    session[:name] = username
+    session[:user_id] = user.id
     redirect "/?registered=true"
   end
 
@@ -111,11 +120,15 @@ class Authentication < Sinatra::Application
   end
 
   get "/register" do
-    redirect '/' if session[:name]
+    redirect '/' if session[:user_id]
+
+    @errors = {}
     erb :register
   end
 
   post "/change_password" do
+    user = Market::User.user_by_id(session[:user_id])
+
     #halt erb :error, :locals =>
     #    {:message => "N"} unless @current_user
 
@@ -126,14 +139,16 @@ class Authentication < Sinatra::Application
     halt erb :error, :locals =>
             {:message => "Current password is wrong"} unless @current_user.password == currentpassword
 
-    passwordcheck(password, passwordc, session[:name], currentpassword)
-    @current_user.password = password
+    passwordcheck(password, passwordc, user.name, currentpassword)
+    user.password = password
 
     redirect "/?pwchanged=true"
   end
 
   get "/logout" do
-    session[:name] = nil
+    session[:user_id] = nil
+    @current_user = nil
+
     redirect "/login"
   end
 

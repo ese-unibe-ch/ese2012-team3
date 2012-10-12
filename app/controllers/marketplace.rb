@@ -3,17 +3,17 @@ include Market
 class Marketplace < Sinatra::Application
 
   before do
-    @current_user = Market::User.user_by_name(session[:name])
+    @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     @all_items = Market::Item.active_items
     @users = Market::User.all
     @errors = {}
   end
 
   post "/item/:id/buy" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
-
+    
     begin
       @current_user.buy_item(@item)
     rescue Exception => e
@@ -25,7 +25,7 @@ class Marketplace < Sinatra::Application
   end
 
   post "/item/:id/status_change" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
 
@@ -37,12 +37,12 @@ class Marketplace < Sinatra::Application
   end
 
   get "/item/create" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
     erb :create_item
   end
 
   post "/item/create" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
 
     #input validation
     @errors[:name] = "item must have a name!" if params[:name].empty?
@@ -66,7 +66,7 @@ class Marketplace < Sinatra::Application
   end
 
   post "/item/:item_id/edit" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:item_id].to_i)
 
     #input validation
@@ -88,8 +88,9 @@ class Marketplace < Sinatra::Application
 
 
   get "/item/:id/edit" do
-    redirect '/login' unless session[:name]
+    redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:id].to_i)
+
     erb :edit_item, :locals => {:item => @item}
   end
 
