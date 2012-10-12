@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra'
-require 'tilt/haml'
 require 'require_relative'
 require_relative 'models/market/user'
 require_relative 'models/market/item'
