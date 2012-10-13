@@ -24,7 +24,8 @@ class Authentication < Sinatra::Application
     if @errors.empty?
       @errors[:password] = "Wrong password"  unless user.password == password
     end
-    halt erb :login unless @errors.empty?
+
+    halt erb :login, :locals => {:username => params[:username] || ''}  unless @errors.empty?
 
     session[:user_id] = user.id
     redirect "/?loggedin=true"
@@ -34,7 +35,7 @@ class Authentication < Sinatra::Application
     redirect '/' if session[:user_id]
 	  @errors = {}
 
-    erb :login
+    erb :login, :locals => {:username => ''}
   end
 
   def passwordcheck(password, passwordc, username, oldpass)
@@ -55,7 +56,6 @@ class Authentication < Sinatra::Application
   def register_error(at, text)
     @errors = {}
     @errors[at] = text
-    halt erb :register
   end
 
   # TODO Restore previous input in interests and username field on failure...
@@ -67,12 +67,14 @@ class Authentication < Sinatra::Application
     username = params[:username]
     password = params[:password]
     passwordc = params[:passwordc]
+    about = params[:about]
     file = params[:image_file]
 
     if file
       MAXIMAGESIZE = 400*1024
       register_error :image_file,
-                     "Image file too large, must be < #{MAXIMAGESIZE/1024} kB, is #{file[:tempfile].size/1024} kB" if file[:tempfile].size > MAXIMAGESIZE
+                     "Image file too large, must be < #{MAXIMAGESIZE/1024} kB,
+                      is #{file[:tempfile].size/1024} kB" if file[:tempfile].size > MAXIMAGESIZE
     end
 
     # ======================= Error handling... basically copy of what exceptions already do, but with categorizing
@@ -88,6 +90,11 @@ class Authentication < Sinatra::Application
       PasswordCheck::ensure_password_strong(password, username, "")
     rescue => e
       register_error :pwinput, e.message
+    end
+
+    if !@errors.empty?
+      halt erb :register, :locals => {:user_name => username || '',
+                                      :about     => about || ''}
     end
 
     #passwordcheck(password, passwordc,username, "")   # cannot use
@@ -121,8 +128,8 @@ class Authentication < Sinatra::Application
   get "/register" do
     redirect '/' if session[:user_id]
 
-    @errors = {}
-    erb :register
+    erb :register, :locals => {:user_name => '',
+                               :about => ''}
   end
 
   post "/change_password" do

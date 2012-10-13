@@ -82,7 +82,8 @@ class Marketplace < Sinatra::Application
       redirect "/profile/#{@item.owner.id}"
     #display form with errors
     else
-      halt erb :edit_item
+      halt erb :edit_item, :locals => {:name  => params[:item_name] || '',
+                                       :price => params[:item_price] || ''}
     end
   end
 
@@ -91,7 +92,8 @@ class Marketplace < Sinatra::Application
     redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:id].to_i)
 
-    erb :edit_item, :locals => {:item => @item}
+    erb :edit_item, :locals => {:name  => @item.name,
+                                :price => @item.price}
   end
 
 

@@ -10,7 +10,7 @@
         <div class="control-group <%= "error" if @errors[:name] %>">
           <label class="control-label" for="name">Name</label>
           <div class="controls">
-            <input class="input-xlarge" id="name" type="text" name="item_name" value="<%= xss @item.name %>" />
+            <input class="input-xlarge" id="name" type="text" name="item_name" value="<%= xss name %>" />
             <% if @errors[:name] %>
                 <span class="help-inline"><%= xss @errors[:name] %></span>
             <%end%>
@@ -19,7 +19,7 @@
         <div class="control-group <%= 'error' if @errors[:price] %>">
           <label class="control-label" for="price">Price</label>
           <div class="controls">
-            <input class="input-xlarge" id="price" type="text" name="item_price"  value="<%= xss @item.price %>" />
+            <input class="input-xlarge" id="price" type="text" name="item_price"  value="<%= xss price %>" />
             <% if @errors[:price] %>
                 <span class="help-inline"><%= xss @errors[:price] %></span>
             <%end%>
