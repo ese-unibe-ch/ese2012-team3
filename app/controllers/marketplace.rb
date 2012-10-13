@@ -77,7 +77,7 @@ class Marketplace < Sinatra::Application
     if @errors.empty?
       if @current_user == @item.owner
         @item.name = params[:item_name]
-        @item.price = params[:item_price]
+        @item.price = params[:item_price].to_i
       end
       redirect "/profile/#{@item.owner.id}"
     #display form with errors
