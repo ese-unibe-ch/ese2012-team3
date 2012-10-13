@@ -32,8 +32,7 @@
                        <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
                      </div>
                 <% end %></td>
-
-            <td><a href="<%= "/profile/#{user.id}" %>"><%= xss user.name %></a></td>
+            <td><a href="<%= "/profile/#{user.id}" %>"><i class="icon-user"></i><%= xss user.name %></a></td>
             <td><%= xss user.about %></td>
           </tr>
       <% end %>
