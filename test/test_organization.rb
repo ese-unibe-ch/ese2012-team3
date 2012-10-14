@@ -153,4 +153,13 @@ class OrganizationTest < Test::Unit::TestCase
     assert_equal(1, org2.members.size, "org2 doesn't have 1 members")
     assert_equal(1, org.members.size, "org2 doesn't have 1 member")
   end
+
+  def test_get_by_id
+    org = Organization.init(:name => "org15", :password => "Zz!45678")
+    org2 = Organization.init(:name => "owner9", :password => "Zz!45678")
+
+    assert_equal(org, Organization.organization_by_id(0))
+    assert_equal(org2, Organization.organization_by_id(1))
+    assert_nil(Organization.organization_by_id(2))
+  end
 end

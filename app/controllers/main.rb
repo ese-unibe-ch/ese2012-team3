@@ -1,3 +1,5 @@
+include Market
+
 class Main < Sinatra::Application
 
   before do
@@ -37,6 +39,17 @@ class Main < Sinatra::Application
     @user = Market::User.user_by_id(params[:id]).delete
 
     redirect "/logout"
+  end
+
+  get "/organization/:id" do
+    redirect '/login' unless session[:user_id]
+
+    @org = Organization.organization_by_id(params[:id].to_i)
+    @items = Item.items_by_agent(@org)
+
+    halt erb :error, :locals => {:message => "no organization found"} unless @org
+
+    erb :organization
   end
 
   get "/error" do

@@ -2,11 +2,7 @@ class Authentication < Sinatra::Application
 
   before do
     @current_id = session[:user_id]
-    begin
-      @current_user = Market::User.user_by_id(session[:user_id])
-    rescue
-      @current_user = nil
-    end
+    @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     @errors = {}
   end
 

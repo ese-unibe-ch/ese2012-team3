@@ -35,8 +35,14 @@ class App < Sinatra::Base
     User.init(:name => "Jimmy", :credit => 30, :password => defpw)
     User.init(:name => "Jack", :credit => 400, :password => defpw)
     ese = User.init(:name => "ese", :credit => 1000, :password => defpw)
+
     eseo = Organization.init(:name => "The ESE Organization", :credit => 10000)
+    eseo.add_item(Item.init(:name => "pizza", :price => 18, :active => true, :owner => eseo))
     eseo.add_member(ese)
+
+    uno = Organization.init(:name => "UNO", :credit => 1000, :about => 'united nations')
+    uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
+    uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 
     User.all.each_with_index do |user, i|
       item = Item.init(:name => "item" + i.to_s, :price => 100)

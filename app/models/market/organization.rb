@@ -5,7 +5,7 @@ module Market
     # TODO Store roles of members. Make sure there's always an admin.
 
     @@organizations = []
-    @@organization_id_counter = 0
+    @@organization_id_counter = 1
 
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
     # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :about
@@ -25,13 +25,18 @@ module Market
       org
     end
 
-    # returns the global user list
+    # returns the global organization list
     def self.all
       @@organizations
     end
 
     def self.delete_all
       @@organizations = []
+      @@organization_id_counter = 0
+    end
+
+    def self.organization_by_id(id)
+      @@organizations.detect { |org| org.id == id }
     end
 
     # TODO Reduce usage - use id instead
@@ -51,6 +56,11 @@ module Market
     # TODO What to do if an organization runs out of members?
     def remove_member(user)
       members.delete(user)
+    end
+
+    # TODO move to a more appropriate place
+    def profile_route
+      "/organization/#{self.id}"
     end
   end
 end

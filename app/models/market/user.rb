@@ -78,6 +78,12 @@ module Market
       end
       @@users.delete(self)
     end
+
+    # TODO move to a more appropriate place
+    def profile_route
+      "/profile/#{self.id}"
+    end
+
   end
 
 end
