@@ -30,7 +30,7 @@ class App < Sinatra::Base
   set :views, relative('views')
 
   configure :development do
-    defpw = "Ax1301!3";
+    defpw = "Ax1301!3"
     john = User.init(:name => "John", :credit => 500, :password => defpw)
     User.init(:name => "Jimmy", :credit => 30, :password => defpw)
     User.init(:name => "Jack", :credit => 400, :password => defpw)
