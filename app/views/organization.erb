@@ -1,0 +1,53 @@
+<% @title = "Organization: #{@org.name}" %>
+
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10">
+      <h1>Organization: <%= xss @org.name %></h1>
+
+      <% if !@org.about.empty? %>
+          <p>About: <%= xss @org.about %></p>
+      <% end %>
+
+      <h3 style="padding-top: 50px;"><%= xss @org.name %>'s Items</h3>
+
+      <% if @items.size > 0 %>
+          <table class="table">
+            <thead>
+            <th>Name</th>
+            <th style="text-align: right; padding-right: 10em;">Price</th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            <% for item in @items %>
+                <tr>
+                  <% if item.active %>
+                      <td style="color:#00CC00;"><%= xss item.name %></td>
+                      <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
+                      <td></td>
+                  <% else %>
+                      <td style="color:#FF0000;"><%= xss item.name %></td>
+                      <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
+                      <% if @current_user == item.owner %>
+                          <td>
+                            <form action="/item/<%= item.id %>/edit" method="link">
+                              <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
+                            </form>
+                          </td>
+                      <% end %>
+                  <% end %>
+                  <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+      <% else %>
+        <i>This organization has no items.</i>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+

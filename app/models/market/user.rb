@@ -76,8 +76,15 @@ module Market
       for org in Organization.organizations_by_user(self)
         org.remove_member(self)
       end
+      File.delete "#{App.public_folder}/userimages/#{self.image_file_name}" # Delete userpic from folder
       @@users.delete(self)
     end
+
+    # TODO move to a more appropriate place
+    def profile_route
+      "/profile/#{self.id}"
+    end
+
   end
 
 end
