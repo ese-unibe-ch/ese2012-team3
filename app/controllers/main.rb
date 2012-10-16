@@ -23,6 +23,11 @@ class Main < Sinatra::Application
     redirect '/login' unless session[:user_id]
     erb :userlist
   end
+  
+  get "/settings" do
+    redirect '/login' unless session[:user_id]
+    erb :settings
+  end
 
   get "/profile/:id" do
     redirect '/login' unless session[:user_id]
