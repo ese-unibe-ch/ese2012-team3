@@ -3,12 +3,12 @@
 ## Tools ##
 
 * We make heavy use of the tools github provides 
- * Wiki: for documenting
+ * Wiki: for documenting and making meeting notes available to everybody 
  * Issue-Tracker: We create issues for every workunit
  * User stories are split into issues
  * Issues are labeled and filed under milestones, each sprint is a milestone
  * If an issue requires discussion within the team we use issue comments
- * Issues are assigned to team members to keep transparent who is doing what and to avoid having to two members on the same issue
+ * Team members assign issues to themselves to keep transparent who is doing what and to avoid having to two members on the same issue
  * Issue number in commit message to link commits and issues
 * ESE-Mailing-List for discussions about more general topics
 
