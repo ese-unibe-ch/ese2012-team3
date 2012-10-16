@@ -76,7 +76,9 @@ module Market
       for org in Organization.organizations_by_user(self)
         org.remove_member(self)
       end
+      if self.image_file_name != nil
       File.delete "#{App.public_folder}/userimages/#{self.image_file_name}" # Delete userpic from folder
+      end
       @@users.delete(self)
     end
 
