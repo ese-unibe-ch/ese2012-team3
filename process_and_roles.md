@@ -21,5 +21,6 @@
 
 * Development on localhost
 * Development on master or local topic branch
-* Branch 'stable': Regular merge from master
-* 'stable' regularly deployed to http://ese.michaelkohler.info
+* Branch 'stable': Regular merge from master (only when tested well)
+* 'stable' regularly deployed to http://ese.michaelkohler.info (manual 'git pull' on the server and restart within a 'screen')
+* tests are run automatically every 15 minutes at http://jenkins.michaelkohler.info/job/ESE2012-team3/
