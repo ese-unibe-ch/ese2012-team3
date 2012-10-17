@@ -3,7 +3,7 @@
     <ul class="nav nav-list">
       <li><a href="/"><i class="icon-home"></i>Marketplace</a></li>
       <% if @current_user %>
-          <li><a href="/all_users"><i class="icon-list"></i>All users</a></li>
+          <li><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
           <li><a href='<%= "/profile/#{@current_user.id}" %>'><i class="icon-user"></i>My profile</a></li>
           <li><a href="/item/create"><i class="icon-plus"></i>Create new item</a></li>
           <li><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
