@@ -82,6 +82,10 @@ module Market
       @@users.delete(self)
     end
 
+    def is_member_of?(organization)
+      organization.has_member(self)
+    end
+
     # TODO move to a more appropriate place
     def profile_route
       "/profile/#{self.id}"

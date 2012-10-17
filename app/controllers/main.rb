@@ -51,10 +51,30 @@ class Main < Sinatra::Application
 
     @org = Organization.organization_by_id(params[:id].to_i)
     @items = Item.items_by_agent(@org)
+    addable_users = User.all.select {|u| !u.is_member_of?(@org)}
 
     halt erb :error, :locals => {:message => "no organization found"} unless @org
 
-    erb :organization
+    erb :organization, :locals => {:addable_users   => addable_users}
+  end
+
+  post "/organization/:id/add_member" do
+    redirect '/login' unless session[:user_id]
+
+    @org = Organization.organization_by_id(params[:id].to_i)
+    halt erb :error, :locals => {:message => "no organization found"} unless @org
+
+    user_to_add = User.user_by_id(params[:user_to_add])
+    halt erb :error, :locals => {:message => "no user found to add"} unless user_to_add
+
+    begin
+      @org.add_member(user_to_add)
+    rescue RuntimeError => e
+      halt erb :error, :locals => {:message => e.message}
+    end
+
+
+    redirect "/organization/#{params[:id]}"
   end
 
   get "/error" do

@@ -47,15 +47,30 @@
         <i>This organization has no items.</i>
       <% end %>
 
+      <h3><%= xss @org.name %>'s Members</h3>
+
+      <ul>
+        <% for mem in @org.members %>
+          <li><a href="<%= xss mem.profile_route %>"><%= xss mem.name %></a></li>
+        <% end %>
+      </ul>
+
       <% if @org.admin == @current_user %>
-        <h2>Organization Admin</h2>
-        <p>You are the admin of this organization</p>
-
-        <h3>Add new members</h3>
-
-
-        <h3>Remove members</h3>
-
+        <h2>Add member to organization</h2>
+        <% if addable_users.length > 0 %>
+            <form action="/organization/<%= @org.id %>/add_member" method="POST">
+              <fieldset>
+                <select name="user_to_add">
+                <% for user in addable_users %>
+                  <option value="<%= user.id %>"><%= user.name %></option>
+                <% end %>
+                </select>
+                <button class="btn btn-info" type="submit">ok</button>
+              </fieldset>
+            </form>
+        <% else %>
+          <p>No users to add available</p>
+        <% end %>
       <% end %>
 
     </div>
