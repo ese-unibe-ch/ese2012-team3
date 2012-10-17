@@ -16,8 +16,11 @@
         <div class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><%= xss @current_user.name %></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <a href='<%= "/profile/#{@current_user.id}" %>'><i class="icon-user"></i><%= xss @current_user.name %></a>
-                <a href='<%= "/profile/#{@current_user.id}" %>'><i class="icon-user"></i>Dummy item</a>
+                <!-- individual items link to route for switching user "role" -->
+                <a href='<%= "#" %>'><i class="icon-user"></i><%= xss @current_user.name %></a>
+                <%for organization in @current_user.list_organizations %>
+                    <a href='<%= "#" %>'><i class="icon-asterisk"></i><%= xss organization.name %></a>
+                <%end%>
             </ul>
         </div>
     </p>
