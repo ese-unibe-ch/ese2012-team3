@@ -46,6 +46,8 @@
       <% else %>
         <i>This organization has no items.</i>
       <% end %>
+      
+      <hr />
 
       <h3><%= xss @org.name %>'s Members</h3>
 
@@ -56,7 +58,7 @@
       </ul>
 
       <% if @org.admin == @current_user %>
-        <h2>Add member to organization</h2>
+        <h3>Add member to organization</3>
         <% if addable_users.length > 0 %>
             <form action="/organization/<%= @org.id %>/add_member" method="POST">
               <fieldset>
@@ -65,7 +67,7 @@
                   <option value="<%= user.id %>"><%= user.name %></option>
                 <% end %>
                 </select>
-                <button class="btn btn-info" type="submit">ok</button>
+                <button class="btn btn-info" type="submit">Add user</button>
               </fieldset>
             </form>
         <% else %>
