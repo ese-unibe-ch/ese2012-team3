@@ -28,5 +28,6 @@ doc/
 Gemfile.lock
 
 .idea/misc.xml
+.idea/modules.xml
 
 /app/public/userimages/*
