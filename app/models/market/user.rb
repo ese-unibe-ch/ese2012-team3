@@ -86,6 +86,10 @@ module Market
       organization.has_member(self)
     end
 
+    def list_organizations
+      Organization.organizations_by_user(self)
+    end
+
     # TODO move to a more appropriate place
     def profile_route
       "/profile/#{self.id}"
