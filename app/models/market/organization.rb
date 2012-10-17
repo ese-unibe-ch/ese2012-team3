@@ -1,7 +1,7 @@
 module Market
   class Organization < Agent
     # Very similar to user
-    attr_accessor :members  # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
+    attr_accessor :members, :admin  # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
     # TODO Store roles of members. Make sure there's always an admin.
 
     @@organizations = []
@@ -14,7 +14,9 @@ module Market
     def self.init(params={})
       fail "Organization name missing" unless params[:name] && params[:name].length > 0
       fail "Organization with given name already exists" if self.organization_by_name(params[:name])
+      fail "Organization needs an admin" unless params[:admin].is_a?(Market::User)
       org = self.new
+      org.admin = params[:admin]
       org.members = []
       org.name = params[:name]
       org.credit = params[:credit] || 100
