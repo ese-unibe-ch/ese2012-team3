@@ -35,7 +35,7 @@
               <%if item.owner.class.name == "Market::User" %>
                   <i class="icon-user">
               <%else%>
-                  <i class="icon-asterisk">
+                  <i class="icon-briefcase">
               <%end%>
             </i><%= xss item.owner.name %></a></td>
             <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>

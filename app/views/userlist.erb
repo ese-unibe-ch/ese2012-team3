@@ -6,18 +6,6 @@
   <div class="span10">
     <h1>Users</h1>
 
-    <ul style="margin-top: 25px;">
-      <% for user in @users %>
-      <td><a href="<%= xss user.profile_route %>">
-              <%if user.class.name == "Market::User" %>
-                  <i class="icon-user">
-              <%else%>
-                  <i class="icon-asterisk">
-              <%end%>
-            </i><%= xss user.name %></a></td>
-      <% end %>
-    </ul>
-
     <table class="table">
       <thead>
       <th>Picture</th>
@@ -38,7 +26,13 @@
                        <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
                      </div>
                 <% end %></td>
-            <td><a href="<%= user.profile_route %>"><i class="icon-user"></i><%= xss user.name %></a></td>
+            <td><a href="<%= user.profile_route %>">
+              <%if user.class.name == "Market::User" %>
+                  <i class="icon-user">
+              <%else%>
+                  <i class="icon-briefcase">
+              <%end%>
+              </i><%= xss user.name %></a></td>
             <td><%= xss user.about %></td>
           </tr>
       <% end %>
