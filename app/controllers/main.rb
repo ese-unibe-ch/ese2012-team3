@@ -6,7 +6,7 @@ class Main < Sinatra::Application
     @current_id = session[:user_id]
     @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     @all_items = Market::Item.active_items
-    @users = Market::User.all
+    @users = Market::User.all + Market::Organization.all
     @errors = {}
   end
 

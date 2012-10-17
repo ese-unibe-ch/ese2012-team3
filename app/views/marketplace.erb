@@ -31,7 +31,13 @@
           <tr>
             <td><%= xss(item.name) %></td>
             <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
-            <td><a href="<%= xss item.owner.profile_route %>"><i class="icon-user"></i><%= xss item.owner.name %></a></td>
+            <td><a href="<%= xss item.owner.profile_route %>">
+              <%if item.owner.class.name == "Market::User" %>
+                  <i class="icon-user">
+              <%else%>
+                  <i class="icon-asterisk">
+              <%end%>
+            </i><%= xss item.owner.name %></a></td>
             <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
           </tr>
         <% end %>

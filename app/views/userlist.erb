@@ -8,7 +8,13 @@
     <!--
     <ul style="margin-top: 25px;">
       <% for user in @users %>
-      <li><a href="<%= "/profile/#{user.id}" %>"><%= xss user.name %></a></li>
+      <td><a href="<%= xss user.profile_route %>">
+              <%if user.class.name == "Market::User" %>
+                  <i class="icon-user">
+              <%else%>
+                  <i class="icon-asterisk">
+              <%end%>
+            </i><%= xss user.name %></a></td>
       <% end %>
     </ul>  -->
 
