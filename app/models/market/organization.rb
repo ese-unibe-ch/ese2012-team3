@@ -64,6 +64,8 @@ module Market
     # TODO What to do if an organization runs out of members?
     def remove_member(user)
       raise 'cannot remove admin, set a new admin first!' if user == self.admin
+      raise "cannot remove member #{user.name}, he isn't a member!" unless self.members.include?(user)
+
       members.delete(user)
     end
 

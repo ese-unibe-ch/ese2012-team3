@@ -73,6 +73,26 @@ class Main < Sinatra::Application
       halt erb :error, :locals => {:message => e.message}
     end
 
+    redirect "/organization/#{params[:id]}"
+  end
+
+  post "/organization/:id/remove_member" do
+    redirect '/login' unless session[:user_id]
+
+    @org = Organization.organization_by_id(params[:id].to_i)
+    halt erb :error, :locals => {:message => "no organization found"} unless @org
+
+    begin
+      user_to_remove = User.user_by_id(params[:user_to_remove])
+    rescue RuntimeError
+      halt erb :error, :locals => {:message => "no user found to remove"} unless user_to_remove
+    end
+
+    begin
+      @org.remove_member(user_to_remove)
+    rescue RuntimeError => e
+      halt erb :error, :locals => {:message => e.message}
+    end
 
     redirect "/organization/#{params[:id]}"
   end
