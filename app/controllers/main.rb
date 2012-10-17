@@ -32,7 +32,12 @@ class Main < Sinatra::Application
   get "/profile/:id" do
     redirect '/login' unless session[:user_id]
 
-    @user = Market::User.user_by_id(params[:id])
+    begin
+      @user = Market::User.user_by_id(params[:id])
+    rescue
+      halt erb :error, :locals => {:message => "no user found to id #{params[:id]}"} unless @user
+    end
+
     @items = Market::Item.items_by_agent(@user)
 
     erb :userprofile
@@ -50,10 +55,10 @@ class Main < Sinatra::Application
     redirect '/login' unless session[:user_id]
 
     @org = Organization.organization_by_id(params[:id].to_i)
+    halt erb :error, :locals => {:message => "no organization found to id #{params[:id]}"} unless @org
+
     @items = Item.items_by_agent(@org)
     addable_users = User.all.select {|u| !u.is_member_of?(@org)}
-
-    halt erb :error, :locals => {:message => "no organization found"} unless @org
 
     erb :organization, :locals => {:addable_users   => addable_users}
   end
