@@ -36,11 +36,10 @@ class App < Sinatra::Base
     User.init(:name => "Jack", :credit => 400, :password => defpw)
     ese = User.init(:name => "ese", :credit => 1000, :password => defpw)
 
-    eseo = Organization.init(:name => "The ESE Organization", :credit => 10000)
+    eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
     eseo.add_item(Item.init(:name => "pizza", :price => 18, :active => true, :owner => eseo))
-    eseo.add_member(ese)
 
-    uno = Organization.init(:name => "UNO", :credit => 1000, :about => 'united nations')
+    uno = Organization.init(:name => "UNO", :credit => 1000, :about => 'united nations', :admin => john)
     uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
     uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 

@@ -46,6 +46,11 @@
       <% else %>
         <i>This organization has no items.</i>
       <% end %>
+
+      <% if @org.admin == @current_user %>
+        <h2>admin!</h2>
+      <% end %>
+
     </div>
   </div>
 </section>

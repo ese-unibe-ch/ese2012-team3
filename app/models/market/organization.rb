@@ -16,8 +16,9 @@ module Market
       fail "Organization with given name already exists" if self.organization_by_name(params[:name])
       fail "Organization needs an admin" unless params[:admin].is_a?(Market::User)
       org = self.new
-      org.admin = params[:admin]
       org.members = []
+      org.admin = params[:admin]
+      org.add_member(params[:admin])
       org.name = params[:name]
       org.credit = params[:credit] || 100
       org.about = params[:about] || ""
@@ -51,12 +52,18 @@ module Market
       @@organizations.select { |org| org.members.include?(user) }
     end
 
+    def has_member(user)
+      self.members.include?(user)
+    end
+
     def add_member(user)
+      raise "cannot add same user twice!" if self.has_member(user)
       members << user
     end
 
     # TODO What to do if an organization runs out of members?
     def remove_member(user)
+      raise 'cannot remove admin, set a new admin first!' if user == self.admin
       members.delete(user)
     end
 

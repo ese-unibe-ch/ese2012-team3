@@ -155,14 +155,48 @@ class OrganizationTest < Test::Unit::TestCase
 
     assert_equal(2, Organization.organizations_by_user(donald).size, "donald not in 2 orgs")
     assert_equal(1, Organization.organizations_by_user(dagobert).size, "dagobert not in 1 org")
-    assert_equal(2, org2.members.size, "org2 doesn't have 2 members")
-    assert_equal(1, org.members.size, "org2 doesn't have 1 member")
+    assert_equal(3, org2.members.size, "org2 doesn't have 3 members")
+    assert_equal(2, org.members.size, "org doesn't have 2 member")
 
     dagobert.delete
 
     assert_equal(2, Organization.organizations_by_user(donald).size, "donald not in 2 orgs")
-    assert_equal(1, org2.members.size, "org2 doesn't have 1 members")
-    assert_equal(1, org.members.size, "org2 doesn't have 1 member")
+    assert_equal(2, org2.members.size, "org2 doesn't have 1 members")
+    assert_equal(2, org.members.size, "org2 doesn't have 1 member")
+  end
+
+  def test_remove_members
+    donald = User.init(:name => "donald", :password => 'Ax1301!3')
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+
+    org = Organization.init(:name => "org15", :admin => @user)
+    org.add_member(donald)
+    org.add_member(dagobert)
+
+    assert_equal(3, org.members.size)
+
+    org.remove_member(donald)
+    assert_equal(2, org.members.size)
+    assert(org.has_member(dagobert))
+    assert(!org.has_member(donald))
+
+    org.remove_member(dagobert)
+    assert_equal(1, org.members.size)
+    assert(!org.has_member(dagobert))
+  end
+
+  def test_cannot_remove_admin
+    org = Organization.init(:name => "org15", :admin => @user)
+    assert_raise RuntimeError do
+      org.remove_member(@user)
+    end
+  end
+
+  def test_cannot_add_member_twice
+    org = Organization.init(:name => "org15", :admin => @user)
+    assert_raise RuntimeError do
+      org.add_member(@user)
+    end
   end
 
   def test_get_by_id
