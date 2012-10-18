@@ -51,19 +51,30 @@
 
       <h3><%= xss @org.name %>'s Members</h3>
 
-      <ul>
+
+      <table class="table">
+        <thead>
+        <th>Name</th>
+        <th>Credits</th>
+        <th></th>
+        </thead>
+        <tbody>
         <% for mem in @org.members %>
-          <li>
-            <% if @org.admin == @current_user && @org.admin != mem %>
-                <form action="/organization/<%= xss @org.id %>/remove_member" method="post" style="display: inline;">
-                  <input type="hidden" name="user_to_remove" value="<%= xss mem.id %>" />
-                  <button class="btn btn-danger btn-mini"><i class="icon-white icon-minus"></i></button>
-                </form>
-            <% end %>
-            <a href="<%= xss mem.profile_route %>"><%= xss mem.name %></a>
-          </li>
+            <tr>
+              <td><%= erb :_user_link, :locals => {:user => mem} %></td>
+              <td><%= mem.credit %></td>
+              <td>
+                <% if @org.admin == @current_user && @org.admin != mem %>
+                    <form action="/organization/<%= xss @org.id %>/remove_member" method="post" style="display: inline;">
+                      <input type="hidden" name="user_to_remove" value="<%= xss mem.id %>" />
+                      <button class="close">&times;</button>
+                    </form>
+                <% end %>
+              </td>
+            </tr>
         <% end %>
-      </ul>
+        </tbody>
+      </table>
 
       <% if @org.admin == @current_user %>
         <h3>Add member to organization</h3>
