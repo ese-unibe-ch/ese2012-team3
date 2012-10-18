@@ -46,11 +46,10 @@
       <% else %>
         <i>This organization has no items.</i>
       <% end %>
-      
+
       <hr />
 
       <h3><%= xss @org.name %>'s Members</h3>
-
 
       <table class="table">
         <thead>
@@ -75,6 +74,8 @@
         <% end %>
         </tbody>
       </table>
+
+      <hr />
 
       <% if @org.admin == @current_user %>
         <h3>Add member to organization</h3>

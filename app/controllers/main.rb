@@ -4,7 +4,11 @@ class Main < Sinatra::Application
 
   before do
     @current_id = session[:user_id]
-    @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    if session[:organization_id].nil?
+      @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    else
+      @current_user = Organization.organization_by_id(session[:organization_id].to_i)
+    end
     @all_items = Market::Item.active_items
     @users = Market::User.all + Market::Organization.all
     @errors = {}

@@ -17,9 +17,9 @@
                   </a>
                   <ul class="dropdown-menu">
                     <!-- TODO: individual items link to route for switching user "role" -->
-                    <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss @current_user.name %></a></li>
+                    <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss User.user_by_id(session[:user_id]).name %></a></li>
                     <li class="divider"></li>
-                    <%for organization in @current_user.list_organizations %>
+                    <%for organization in User.user_by_id(session[:user_id]).list_organizations %>
                       <li><a href='<%= organization.profile_route %>/switch'><i class="icon-briefcase"></i><%= xss organization.name %></a></li>
                     <%end%>
                   </ul>
