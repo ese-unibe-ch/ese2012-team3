@@ -54,13 +54,13 @@
       <ul>
         <% for mem in @org.members %>
           <li>
-            <a href="<%= xss mem.profile_route %>"><%= xss mem.name %></a>
             <% if @org.admin == @current_user && @org.admin != mem %>
                 <form action="/organization/<%= xss @org.id %>/remove_member" method="post" style="display: inline;">
                   <input type="hidden" name="user_to_remove" value="<%= xss mem.id %>" />
-                  <input type="submit" class="btn btn-info small" name="submit" value="remove from organization" />
+                  <button class="btn btn-danger btn-mini"><i class="icon-white icon-minus"></i></button>
                 </form>
             <% end %>
+            <a href="<%= xss mem.profile_route %>"><%= xss mem.name %></a>
           </li>
         <% end %>
       </ul>
