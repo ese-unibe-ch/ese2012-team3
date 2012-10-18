@@ -1,7 +1,7 @@
 <% @title = "User profile" %>
 
 <section id="content">
-<div class="row">
+  <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
     <h3>Account settings</h3>
@@ -45,10 +45,10 @@
     </form>
 
     <h3>Delete my account</h3>
-    <form class="form-horizontal" method="POST" action="/profile/<%= @current_user.id %>">
+    <form class="form-horizontal" method="GET" action="/delete_confirmation">
       <fieldset>
         <div class="form-actions">
-          <input type="hidden" name="_method" value="delete" />
+          <input type="hidden" name="_method" value="delete"/>
           <button class="btn btn-danger" type="submit">Delete account</button>
         </div>
       </fieldset>

@@ -51,6 +51,10 @@ class Main < Sinatra::Application
     redirect "/logout"
   end
 
+  get "/delete_confirmation" do
+    erb :delete_confirmation
+  end
+
   get "/organization/:id" do
     redirect '/login' unless session[:user_id]
 

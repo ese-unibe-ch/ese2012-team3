@@ -1,0 +1,33 @@
+<% @title = "Delete Account?" %>
+
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10">
+      <h1>Do you really want to delete your Account?</h1>
+
+
+      <form class="form-horizontal" method="POST" action="/profile/<%= @current_user.id %>">
+        <fieldset>
+          <div class="form-actions">
+            <input type="hidden" name="_method" value="delete"/>
+            <button class="btn btn-danger" type="submit">Delete account</button>
+          </div>
+        </fieldset>
+        </form>
+
+        <form class="form-horizontal" method="GET" action="/settings">
+
+        <fieldset>
+          <div class="form-actions">
+            <button class="btn btn-success" type="submit">No, I want to keep it</button>
+          </div>
+        </fieldset>
+
+      </form>
+
+
+    </div>
+  </div>
+</section>
+

@@ -57,7 +57,7 @@ module Market
     def self.user_by_id(id)
       user = @@users.detect { |user| user.id == id.to_i }
       if user == nil
-        raise "no user with id #{id}"
+         raise "no user with id #{id}"
       end
       user
     end
