@@ -23,9 +23,9 @@
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss User.user_by_id(session[:user_id]).name %></a></li>
+        <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss @current_login.name %></a></li>
         <li class="divider"></li>
-        <%for organization in User.user_by_id(session[:user_id]).list_organizations %>
+        <%for organization in @current_login.list_organizations %>
             <li><a href='<%= organization.profile_route %>/switch'><i class="icon-briefcase"></i><%= xss organization.name %></a></li>
         <%end%>
       </ul>

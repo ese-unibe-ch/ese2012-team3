@@ -3,6 +3,7 @@ include Market
 class Marketplace < Sinatra::Application
 
   before do
+    @current_login = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     if session[:organization_id].nil?
       @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     else

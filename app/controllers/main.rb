@@ -4,6 +4,7 @@ class Main < Sinatra::Application
 
   before do
     @current_id = session[:user_id]
+    @current_login = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     if session[:organization_id].nil?
       @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
     else
@@ -113,7 +114,7 @@ class Main < Sinatra::Application
 
   get "/organization/:id/switch" do
     redirect '/login' unless session[:user_id]
-    session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(User.user_by_id(session[:user_id]))
+    session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_login)
     redirect "/?switcheduser=true"
   end
 
