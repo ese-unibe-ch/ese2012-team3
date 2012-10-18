@@ -13,8 +13,7 @@
           <div id="cg-username" class="control-group <%= "error" if @errors[:name] %>">
             <label class="control-label" for="nameinput"><i>Username</i></label>
             <div class="controls">
-              <input class="input-large" id="nameinput" type="text" name="username" value="<%=
-                  name %>" />
+              <input class="input-large" id="nameinput" type="text" name="username" value="<%= xss user_name %>" />
               <% if @errors[:name] %>
                   <span class="help-inline"><%= xss @errors[:name] %></span>
               <% end %>
