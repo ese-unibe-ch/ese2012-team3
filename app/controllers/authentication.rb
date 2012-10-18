@@ -3,6 +3,12 @@ class Authentication < Sinatra::Application
   before do
     @current_id = session[:user_id]
     @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    @current_login = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    if session[:organization_id].nil?
+      @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    else
+      @current_user = Organization.organization_by_id(session[:organization_id].to_i)
+    end
     @errors = {}
   end
 
@@ -150,7 +156,7 @@ class Authentication < Sinatra::Application
 
   post "/change_profile_picture" do
     file = params[:image_file]
-    user = Market::User.user_by_id(session[:user_id])
+    user = @current_login
     if user.image_file_name != nil && file != nil
       user.delete_profile_picture
     end
@@ -176,7 +182,7 @@ class Authentication < Sinatra::Application
   end
 
   delete "/delete_profile_picture" do
-    user = Market::User.user_by_id(session[:user_id])
+    user = @current_login
     file = user.image_file_name
     user.delete_profile_picture
 
