@@ -13,7 +13,23 @@
   <% if @current_user %>
   <div style="font-size:1em;">
     <p>Logged in as
-      <%= erb :_user_link, :locals => {:user => @current_user} %>
+    <div class="btn-group">
+      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+        <%if session[:organization_id].nil?%>
+            <%= xss @current_user.name %>
+        <%else%>
+            <%= xss Organization.organization_by_id(session[:organization_id].to_i).name %>
+        <%end%>
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss User.user_by_id(session[:user_id]).name %></a></li>
+        <li class="divider"></li>
+        <%for organization in User.user_by_id(session[:user_id]).list_organizations %>
+            <li><a href='<%= organization.profile_route %>/switch'><i class="icon-briefcase"></i><%= xss organization.name %></a></li>
+        <%end%>
+      </ul>
+    </div>
     </p>
     <p>Credits: <%= xss @current_user.credit %></p>
   </div>
