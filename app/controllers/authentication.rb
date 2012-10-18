@@ -151,9 +151,12 @@ class Authentication < Sinatra::Application
   post "/change_profile_picture" do
     file = params[:image_file]
     user = Market::User.user_by_id(session[:user_id])
-    if user.image_file_name != nil
+    if user.image_file_name != nil && file != nil
       user.delete_profile_picture
     end
+
+    halt erb :error, :locals =>
+        {:message => "You didn't chose a file"} until file != nil
 
     if file
       MAXIMAGESIZE = 400*1024
@@ -170,6 +173,17 @@ class Authentication < Sinatra::Application
     end
 
     redirect "/profile/#{user.id}"
+  end
+
+  delete "/delete_profile_picture" do
+    user = Market::User.user_by_id(session[:user_id])
+    file = user.image_file_name
+    user.delete_profile_picture
+
+    halt erb :error, :locals =>
+        {:message => "You don't have a profile picture"} until file != nil
+
+  redirect "/profile/#{user.id}"
   end
 
   get "/logout" do

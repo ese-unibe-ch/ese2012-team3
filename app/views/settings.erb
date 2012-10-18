@@ -4,6 +4,7 @@
   <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
+
     <h3>Account settings</h3>
     <h4>Change Password</h4>
     <form class="form-horizontal" method="POST" action="/change_password">
@@ -59,6 +60,16 @@
       <div class="form-actions">
         <button class="btn btn-info" type="submit">Change my picture</button>
       </div>
+      </fieldset>
+    </form>
+
+    <h3>Delete my profile picture</h3>
+    <form class="form-horizontal" method="POST" action="/delete_profile_picture" >
+      <fieldset>
+        <div class="form-actions">
+          <input type="hidden" name="_method" value="delete"/>
+          <button class="btn btn-danger" type="submit">Delete profile picture</button>
+        </div>
       </fieldset>
     </form>
 
