@@ -24,6 +24,7 @@ class Authentication < Sinatra::Application
     halt erb :login, :locals => {:username => params[:username] || ''}  unless @errors.empty?
 
     session[:user_id] = user.id
+    session[:organization_id] = nil
     redirect "/?loggedin=true"
   end
 

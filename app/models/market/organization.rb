@@ -73,5 +73,6 @@ module Market
     def profile_route
       "/organization/#{self.id}"
     end
+
   end
 end

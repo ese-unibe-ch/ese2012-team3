@@ -16,6 +16,14 @@
     <div class="alert-success alert" id="itembought">
       <strong>Item bought!</strong><br />Your successfully purchased an item.
     </div>
+    <div class="alert-success alert" id="switcheduser">
+      <strong>Switched user!</strong><br />
+      <%if session[:organization_id].nil?%>
+        You are not representing an organization.
+      <%else%>
+        You are now representing <%= erb :_user_link, :locals => {:user => Organization.organization_by_id(session[:organization_id].to_i)} %>.
+      <%end%>
+    </div>
     <h1>Marketplace</h1>
 
     <table class="table">
@@ -50,4 +58,6 @@
       $('#pwchanged').hide();
   if (typeof($.getUrlVar('itembought')) == 'undefined')
       $('#itembought').hide();
+  if (typeof($.getUrlVar('switcheduser')) == 'undefined')
+      $('#switcheduser').hide();
 </script>
