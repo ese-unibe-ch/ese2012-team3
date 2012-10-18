@@ -27,7 +27,8 @@ module Market
     # -> pay credits, change ownership, add item to user's list
     # @param [Item] item - item to be bought
     def buy_item(item)
-      if(item == nil)
+#      raise "no item to buy given" unless item
+      if(item == nil) # AK you can use postfix. Also anything except nil and false are true
         raise "no item to buy given"
       end
       if(item.owner == nil)

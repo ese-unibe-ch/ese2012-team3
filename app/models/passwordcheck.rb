@@ -12,7 +12,8 @@ class PasswordCheck
     fail "Password not strong: Contains your user name." if username.length > 0 and pw.include?(username) # Does not contain your user name, (real name, or company name).
 
     lpw = pw.downcase
-    @PASSWORD_FORBIDDEN_WORDS = read_words_from_CSV
+    @PASSWORD_FORBIDDEN_WORDS = read_words_from_CSV # AK or
+#    c = read_words_from_CSV.detect {|w| w.length > 1 and lpw.include? w}
     c = nil
     for w in @PASSWORD_FORBIDDEN_WORDS
       c = w if w.length > 1 and lpw.include?(w)
