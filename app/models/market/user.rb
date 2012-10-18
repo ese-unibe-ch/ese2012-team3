@@ -49,7 +49,6 @@ module Market
     end
 
     # returns a user with the given name
-    # TODO Reduce usage - use id instead
     def self.user_by_name(name)
       @@users.detect { |user| user.name == name }
     end

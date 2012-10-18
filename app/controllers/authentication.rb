@@ -61,7 +61,6 @@ class Authentication < Sinatra::Application
     @errors[at] = text
   end
 
-  # TODO Restore previous input in interests and username field on failure...
   # Do we really want inline errors with this?
   # Losing the image one selected is annoying..
   post "/register" do
@@ -100,17 +99,8 @@ class Authentication < Sinatra::Application
                                       :about     => about || ''}
     end
 
-    #passwordcheck(password, passwordc,username, "")   # cannot use
-
-    # =========================
-    user = nil
-    begin
-      user = User.init(:name => username, :credit => 200,  # Whatever
+    user = User.init(:name => username, :credit => 200, 
                        :password => password, :about => params[:about])
-    rescue => e  # should not fail here anymore...
-      halt erb :error, :locals =>
-          {:message => "Unexpected: "+e.message}
-    end
 
     file = params[:image_file]
 

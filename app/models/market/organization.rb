@@ -10,7 +10,6 @@ module Market
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
     # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :about
     # required: :name
-    # TODO There should be an initial member. "Acceptance criteria: the user is the admin of the newly created organization"
     def self.init(params={})
       fail "Organization name missing" unless params[:name] && params[:name].length > 0
       fail "Organization with given name already exists" if self.organization_by_name(params[:name])
@@ -61,7 +60,6 @@ module Market
       members << user
     end
 
-    # TODO What to do if an organization runs out of members?
     def remove_member(user)
       raise 'cannot remove admin, set a new admin first!' if user == self.admin
       raise "cannot remove member #{user.name}, he isn't a member!" unless self.members.include?(user)
