@@ -1,0 +1,14 @@
+# Coach Review Preview
+## Code Quality
+* Non-semantic class names in view
+* Good use of `@error` hash
+* Inline style definition e.g. in `strongpass.erb`
+* Good route design and use of `before`
+* Password check seems very complex, do you need these criteria?
+* Generally very ruby-ish 
+
+## Testing
+* Very cool selenium tests
+* Good tests for model
+* No functional tests for controller. This is somewhat ok, since integration
+  tests in the selenium run the controllers as well.
