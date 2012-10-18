@@ -173,6 +173,7 @@ class Authentication < Sinatra::Application
 
   get "/logout" do
     session[:user_id] = nil
+    session[:organization_id] = nil
     @current_user = nil
 
     redirect "/login"
