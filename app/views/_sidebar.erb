@@ -13,19 +13,7 @@
   <% if @current_user %>
   <div style="font-size:1em;">
     <p>Logged in as
-        <div class="dropdown">
-          <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-            <%= xss @current_user.name %>
-            <b class="caret"></b>
-          </a>
-          <ul class="dropdown-menu" role="button" aria-labelledby="dLabel">
-            <!-- TODO: individual items link to route for switching user "role" -->
-            <a href='<%= "#" %>'><i class="icon-user"></i><%= xss @current_user.name %></a>
-            <%for organization in @current_user.list_organizations %>
-                <a href='<%= "#" %>'><i class="icon-asterisk"></i><%= xss organization.name %></a>
-            <%end%>
-          </ul>
-        </div>
+      <%= erb :_user_link, :locals => {:user => @current_user} %>
     </p>
     <p>Credits: <%= xss @current_user.credit %></p>
   </div>
