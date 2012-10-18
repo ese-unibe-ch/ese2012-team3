@@ -66,7 +66,7 @@ class Marketplace < Sinatra::Application
       halt erb :create_item
     end
 
-    redirect "/profile/#{@current_user.id}"
+    redirect @current_user.profile_route
   end
 
   post "/item/:item_id/edit" do
@@ -83,7 +83,7 @@ class Marketplace < Sinatra::Application
         @item.name = params[:item_name]
         @item.price = params[:item_price].to_i
       end
-      redirect "/profile/#{@item.owner.id}"
+      redirect @current_user.profile_route
     #display form with errors
     else
       halt erb :edit_item, :locals => {:name  => params[:item_name] || '',
