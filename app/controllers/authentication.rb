@@ -147,6 +147,30 @@ class Authentication < Sinatra::Application
     redirect "/?pwchanged=true"
   end
 
+  post "/change_profile_picture" do
+    file = params[:image_file]
+    user = Market::User.user_by_id(session[:user_id])
+    if user.image_file_name != nil
+      user.delete_profile_picture
+    end
+
+    if file
+      MAXIMAGESIZE = 400*1024
+      register_error :image_file,
+                     "Image file too large, must be < #{MAXIMAGESIZE/1024} kB,
+                      is #{file[:tempfile].size/1024} kB" if file[:tempfile].size > MAXIMAGESIZE
+    end
+
+    file = params[:image_file]
+
+    if file
+      user.image_file_name = "#{user.id}"+"_"+(file[:filename])
+      FileUtils::cp(file[:tempfile].path, File.join(File.dirname(__FILE__),"../public/userimages", user.image_file_name) )
+    end
+
+    redirect "/profile/#{user.id}"
+  end
+
   get "/logout" do
     session[:user_id] = nil
     @current_user = nil

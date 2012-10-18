@@ -76,10 +76,15 @@ module Market
       for org in Organization.organizations_by_user(self)
         org.remove_member(self)
       end
-      if self.image_file_name != nil
-      File.delete "#{App.public_folder}/userimages/#{self.image_file_name}" # Delete userpic from folder
-      end
+      self.delete_profile_picture
       @@users.delete(self)
+    end
+
+    def delete_profile_picture
+      if self.image_file_name != nil
+        File.delete "#{App.public_folder}/userimages/#{self.image_file_name}" # Delete userpic from folder
+        self.image_file_name=nil
+      end
     end
 
     def is_member_of?(organization)
