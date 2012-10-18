@@ -113,7 +113,7 @@ class Main < Sinatra::Application
 
   get "/organization/:id/switch" do
     redirect '/login' unless session[:user_id]
-    session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_user)
+    session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(User.user_by_id(session[:user_id]))
     redirect "/?switcheduser=true"
   end
 
