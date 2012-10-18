@@ -16,6 +16,9 @@
     <div class="alert-success alert" id="itembought">
       <strong>Item bought!</strong><br />Your successfully purchased an item.
     </div>
+    <div class="alert-success alert" id="orgcreated">
+      <strong>Organization created!</strong><br />The organization was successfully created.
+    </div>
     <div class="alert-success alert" id="switcheduser">
       <strong>Switched user!</strong><br />
       <%if session[:organization_id].nil?%>
@@ -60,4 +63,6 @@
       $('#itembought').hide();
   if (typeof($.getUrlVar('switcheduser')) == 'undefined')
       $('#switcheduser').hide();
+  if (typeof($.getUrlVar('orgcreated')) == 'undefined')
+      $('#orgcreated').hide();
 </script>

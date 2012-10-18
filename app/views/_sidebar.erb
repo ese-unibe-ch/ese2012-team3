@@ -5,7 +5,8 @@
       <% if @current_user %>
           <li><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
           <li><a href= <%= @current_user.profile_route %>><i class="icon-user"></i>My profile</a></li>
-          <li><a href="/item/create"><i class="icon-plus"></i>Create new item</a></li>
+          <li><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
+          <li><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
           <li><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
       <% end %>
     </ul>

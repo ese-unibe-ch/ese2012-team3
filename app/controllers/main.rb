@@ -60,6 +60,29 @@ class Main < Sinatra::Application
     erb :delete_confirmation
   end
 
+  get "/organization/create" do
+    redirect '/login' unless session[:user_id]
+    erb :create_organization, :locals => {:name => '', :about => ''}
+  end
+
+  post "/organization/create" do
+    redirect '/login' unless session[:user_id]
+
+    name = params[:name]
+    about = params[:about]
+
+    @errors[:name] = "organization must have a name!" if name.empty?
+
+    if !@errors.empty?
+      halt erb :create_organization, :locals => {:name => name || '',
+                                                 :about => about || ''}
+    end
+
+    Organization.init(:name => name, :about => about, :admin => @current_login)
+
+    redirect "/?orgcreated=true"
+  end
+
   get "/organization/:id" do
     redirect '/login' unless session[:user_id]
 

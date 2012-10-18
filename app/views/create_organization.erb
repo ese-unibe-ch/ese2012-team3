@@ -1,0 +1,38 @@
+<% @title = "Create organization" %>
+
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10">
+      <h1>Registration</h1>
+
+      <form class="form-horizontal" method="POST" action="/organization/create">
+        <p>Select a name for the organization</p>
+        <fieldset>
+
+          <div id="cg-name" class="control-group <%= "error" if @errors[:name] %>">
+            <label class="control-label" for="nameinput">Name</label>
+            <div class="controls">
+              <input class="input-large" id="nameinput" type="text" name="name" value="<%= xss name %>" />
+              <% if @errors[:name] %>
+                  <span class="help-inline"><%= xss @errors[:name] %></span>
+              <% end %>
+            </div>
+          </div>
+
+          <div id="cg-about" class="control-group">
+           <label class="control-label" for="about">About</label>
+           <div class="controls">
+              <input class="input-large" id="about" type="text" name="about" value="<%= xss about %>" />
+           </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-info" type="submit">Create organization</button>
+          </div>
+        </fieldset>
+
+      </form>
+    </div>
+  </div>
+</section>
