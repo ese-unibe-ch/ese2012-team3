@@ -5,7 +5,7 @@
   <%= erb :_sidebar %>
   <div class="span10">
     <% if @user == @current_user%>
-    <h1><%= xss @user.name %> - My account </h1>
+    <h1><%= xss @user.name %> - My profile</h1>
     <% else %>
     <h1>User: <%= xss @user.name %></h1>
     <% end %>
