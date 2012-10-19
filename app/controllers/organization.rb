@@ -58,19 +58,11 @@ post "/organization/:id/remove_member" do
   @org = Organization.organization_by_id(params[:id].to_i)
   halt erb :error, :locals => {:message => "no organization found"} unless @org
 
-  begin
-    user_to_remove = User.user_by_id(params[:user_to_remove])
-  rescue RuntimeError
-    halt erb :error, :locals => {:message => "no user found to remove"} unless user_to_remove
-  end
+  user_to_remove = User.user_by_id(params[:user_to_remove])
+  @org.remove_member(user_to_remove)
 
-  begin
-    @org.remove_member(user_to_remove)
-  rescue RuntimeError => e
-    halt erb :error, :locals => {:message => e.message}
-  end
-
-  redirect "/organization/#{params[:id]}"
+  return_to = params[:return_to] ? params[:return_to] : "/organization/#{params[:id]}"
+  redirect return_to
 end
 
 

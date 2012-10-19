@@ -7,13 +7,10 @@ end
 get "/profile/:id" do
   redirect '/login' unless session[:user_id]
 
-  begin
-    @user = Market::User.user_by_id(params[:id])
-  rescue
-    halt erb :error, :locals => {:message => "no user found to id #{params[:id]}"} unless @user
-  end
+  @user = User.user_by_id(params[:id])
 
-  @items = Market::Item.items_by_agent(@user)
+  @items = Item.items_by_agent(@user)
+  @organizations = Organization.organizations_by_user(@user)
 
   erb :userprofile
 end
