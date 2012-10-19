@@ -7,14 +7,17 @@ class ItemTest < Test::Unit::TestCase
     User.delete_all
   end
 
-  def test_has_name
-    item = Item.init(:name => "testItem")
+  def test_has_name_about_and_comments
+    item = Item.init(:name => "testItem", :about => "About item")
     assert(item.name.to_s.include?("testItem"), "item has a wrong name!")
+    assert(item.about.include?("About item"), "item has no about!")
+    assert(item.comments.length == 0, "item has no place to store comments!")
   end
 
   def test_has_price
     item = Item.init(:price => 100)
     assert(item.price == 100, "item has a wrong price!")
+    assert(item.about, "item has no default about!")
   end
 
   def test_has_owner

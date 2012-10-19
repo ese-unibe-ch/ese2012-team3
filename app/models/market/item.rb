@@ -10,13 +10,16 @@ module Market
                   :name,
                   :price, # positive number
                   :owner, # an Agent
-                  :active # Boolean
+                  :active, # Boolean
+                  :comments, # List    of Comment objects
+                  :about,    # TODO share common functionality with agent?
+                  :image_file_name
 
     @@item_id_counter = 0
     @@items = []
 
     # constructor - give a name to the item and set a specified price
-    # @param [Object] params - dictionary of symbols. Recognized: :name, :price, :active, :owner
+    # @param [Object] params - dictionary of symbols. Recognized: :name, :price, :active, :owner, :about
     def self.init(params={})
       item = self.new
       item.id = @@item_id_counter
@@ -24,6 +27,8 @@ module Market
       item.price = params[:price] || 0
       item.active = params[:active] || false
       item.owner = params[:owner]
+      item.about = params[:about] || ""
+      item.comments = []
       @@items << item
       @@item_id_counter += 1
       item

@@ -11,7 +11,8 @@ module Market
     # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
     # A user provides a method that lists his/her active items to sell.
 
-    attr_accessor :password
+    attr_accessor :password,
+                  :following # a list of agents
 
     @@user_id_counter = 1 # cannot use @@users.size as user may be deleted
     @@users = []
@@ -28,6 +29,7 @@ module Market
       user.about = params[:about] || ""
       PasswordCheck::ensure_password_strong(params[:password], params[:name], "")
       user.password = params[:password] || ""
+      user.following = []
       @@users << user
       user.id = @@user_id_counter
       @@user_id_counter = @@user_id_counter + 1

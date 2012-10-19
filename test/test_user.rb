@@ -7,9 +7,10 @@ class UserTest < Test::Unit::TestCase
     Item.delete_all
   end
 
-  def test_has_name
+  def test_has_name_and_can_be_following
     user = User.init(:name => "user1", :password => "Zz!45678")
     assert(user.name.to_s.include?("user1"), "name is not user1!")
+    assert(user.following.length == 0, "user cannot follow anybody")
   end
 
   def test_has_name_and_credit
