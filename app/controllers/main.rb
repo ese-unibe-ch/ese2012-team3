@@ -37,8 +37,6 @@
   end
 
   get "/error" do
-    redirect '/login' unless session[:user_id]
-
     erb :error
   end
 

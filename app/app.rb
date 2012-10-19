@@ -28,23 +28,28 @@ DEFAULT_PASSWORD = "Ax1301!3"
 MAXIMAGEFILESIZE = 400*1024 # in bytes
 
 
-  configure do
-    john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
-    User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
-    User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
-    ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
+configure do
+  john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
+  User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
+  User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
+  ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 
-    eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
-    eseo.add_item(Item.init(:name => "pizza", :price => 18, :active => true, :owner => eseo))
+  eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
+  eseo.add_item(Item.init(:name => "pizza", :price => 18, :active => true, :owner => eseo))
 
-    uno = Organization.init(:name => "UNO", :credit => 1000, :about => 'united nations', :admin => john)
-    uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
-    uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
+  uno = Organization.init(:name => "UNO", :credit => 1000, :about => 'united nations', :admin => john)
+  uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
+  uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 
-    User.all.each_with_index do |user, i|
-      item = Item.init(:name => "item" + i.to_s, :price => 100)
-      user.add_item(item)
-      Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
-    end
+  User.all.each_with_index do |user, i|
+    item = Item.init(:name => "item" + i.to_s, :price => 100)
+    user.add_item(item)
+    Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
   end
+end
+
+error do
+  erb :error, :locals => {:message => request.env['sinatra.error'].message }
+end
+
 
