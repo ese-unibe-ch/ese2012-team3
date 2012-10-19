@@ -1,5 +1,3 @@
-include Market
-
 class OrganizationTest < Test::Unit::TestCase
 
 

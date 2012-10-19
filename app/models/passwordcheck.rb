@@ -23,6 +23,8 @@ class PasswordCheck
   # Maybe make return error enumeration instead?
   # Though exception seems fine, can be formatted.
   def self.ensure_password_strong(pw, username, previousPassword)
+    fail "No password and according username given" unless pw and pw.length > 0 and username and username.length > 0
+
     fail "Password not strong: Is not at least eight characters long (is "+pw.length.to_s+")." if pw.length < 8
     fail "Password not strong: Contains your user name." if username.length > 0 and pw.include?(username) # Does not contain your user name, (real name, or company name).
 
@@ -36,7 +38,7 @@ class PasswordCheck
     # Does not contain a complete word.... use dictionary
 
     # Don't tell what exactly went wrong: Might give hints about current pw!
-    fail "Password not strong: Is not significantly different from previous password." unless previousPassword.length == 0 or significantly_different?(pw, previousPassword)
+    fail "Password not strong: Is not significantly different from previous password." unless previousPassword == nil or previousPassword.length == 0 or significantly_different?(pw, previousPassword)
 
     # Contains characters from each of the following four categories:
     # http://www.java2s.com/Code/Ruby/String/stringcontainsuppercasecharacters.htm

@@ -38,7 +38,15 @@ module Market
     end
 
     def self.organization_by_id(id)
-      @@organizations.detect { |org| org.id == id }
+      org = @@organizations.detect { |org| org.id == id }
+      if org == nil
+        fail "No organization with id #{id}"
+      end
+      org
+    end
+
+    def self.has_organization_with_id?(id)
+      return @@users.detect { |user| user.id == id.to_i } != nil
     end
 
     # TODO Reduce usage - use id instead
@@ -71,6 +79,8 @@ module Market
     def profile_route
       "/organization/#{self.id}"
     end
+
+    # Missing: Deletion...
 
   end
 end

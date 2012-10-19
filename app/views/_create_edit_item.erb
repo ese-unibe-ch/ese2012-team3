@@ -1,0 +1,14 @@
+<fieldset>
+
+  <%= erb :_text_control, :locals => {:name => :name, :label => "Name"}%>
+
+  <%= erb :_text_control, :locals => {:name => :price, :label => "Price"}%>
+
+  <%= erb :_image_file_control %>
+
+  <%= erb :_text_control, :locals => {:name => :about, :label => "Description"}%>
+
+  <div class="form-actions">
+    <button class="btn btn-info" type="submit">Save</button>
+  </div>
+</fieldset>

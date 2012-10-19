@@ -19,7 +19,8 @@ module Market
     @@items = []
 
     # constructor - give a name to the item and set a specified price
-    # @param [Object] params - dictionary of symbols. Recognized: :name, :price, :active, :owner, :about
+    # @param [Object] params - dictionary of symbols.
+    # Recognized: :name, :price, :active, :owner, :about
     def self.init(params={})
       item = self.new
       item.id = @@item_id_counter
@@ -76,11 +77,18 @@ module Market
     end
 
     def self.delete_all
-      @@items = []
+      while @@items.length > 0
+        @@items[0].delete
+      end
     end
 
     def delete
+      delete_image_file
       @@items.delete(self)
+    end
+
+    def delete_image_file
+      delete_public_file(self.image_file_name)
     end
 
   end

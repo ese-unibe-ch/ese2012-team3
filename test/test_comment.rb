@@ -1,5 +1,3 @@
-include Market
-
 class ItemTest < Test::Unit::TestCase
   def test_has_text_and_creator
     user = User.init(:name => "user1", :password => "Zz!45678")

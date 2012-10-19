@@ -5,4 +5,5 @@ require_relative 'models/market/user'
 require_relative 'models/market/item'
 require_relative 'models/passwordcheck'
 require_relative 'models/market/comment'
+include Market
 

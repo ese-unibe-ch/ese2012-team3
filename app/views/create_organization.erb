@@ -4,38 +4,16 @@
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h1>Registration</h1>
+      <h1>Create Organization</h1>
 
       <form class="form-horizontal" method="POST" action="/organization/create" enctype="multipart/form-data">
-        <p>Select a name for the organization</p>
         <fieldset>
 
-          <div id="cg-name" class="control-group <%= "error" if @errors[:name] %>">
-            <label class="control-label" for="nameinput">Name</label>
-            <div class="controls">
-              <input class="input-large" id="nameinput" type="text" name="name" value="<%= xss name %>" />
-              <% if @errors[:name] %>
-                  <span class="help-inline"><%= xss @errors[:name] %></span>
-              <% end %>
-            </div>
-          </div>
+          <%= erb :_text_control, :locals => {:name => :name, :label => "Name"}%>
 
-          <div id="cg-image" class="control-group <%= "error" if @errors[:image_file] %>">
-            <label class="control-label" for="image">Picture (< 400 kB)</label>
-            <div class="controls">
-              <input class="input-large" id="image" type="file" name="image_file" accept="image/*" />
-              <% if @errors[:image_file] %>
-                  <span class="help-inline"><%= xss @errors[:image_file] %></span>
-              <%end%>
-            </div>
-          </div>
+          <%= erb :_image_file_control %>
 
-          <div id="cg-about" class="control-group">
-           <label class="control-label" for="about">About</label>
-           <div class="controls">
-              <input class="input-large" id="about" type="text" name="about" value="<%= xss about %>" />
-           </div>
-          </div>
+          <%= erb :_text_control, :locals => {:name => :about, :label => "About"}%>
 
           <div class="form-actions">
             <button class="btn btn-info" type="submit">Create organization</button>

@@ -8,24 +8,10 @@
     <p>Don't have an account? <a href="/register">Click here to register</a>!</p>
     <form class="form-horizontal" method="POST" action="/login">
       <fieldset>
-        <div id="cg-username" class="control-group <%= "error" if @errors[:name] %>">
-          <label class="control-label" for="nameinput">Username</label>
-          <div class="controls">
-            <input class="input-xlarge" id="nameinput" type="text" name="username" value="<%= xss username %>" />
-            <% if @errors[:name] %>
-                <span class="help-inline"><%= xss @errors[:name] %></span>
-            <% end %>
-          </div>
-        </div>
-        <div id="cg-password" class="control-group <%= "error" if @errors[:password] %>">
-          <label class="control-label" for="pwinput">Password</label>
-          <div class="controls">
-            <input class="input-xlarge" id="pwinput" type="password" name="password" />
-            <% if @errors[:password] %>
-                <span class="help-inline"><%= xss @errors[:password] %></span>
-            <% end %>
-          </div>
-        </div>
+          <%= erb :_text_control, :locals => {:name => :name, :label => "Username"}%>
+
+          <%= erb :_text_control, :locals => {:name => :password, :label => "Password", :password => true}%>
+
         <div class="form-actions">
           <button class="btn btn-info" type="submit">Login</button>
         </div>

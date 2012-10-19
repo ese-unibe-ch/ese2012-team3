@@ -1,5 +1,3 @@
-include Market
-
 class UserTest < Test::Unit::TestCase
 
   def setup

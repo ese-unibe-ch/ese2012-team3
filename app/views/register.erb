@@ -5,57 +5,20 @@
     <%= erb :_sidebar %>
     <div class="span10">
       <h1>Registration</h1>
-
+      <p>Select a username and password</p>
       <form class="form-horizontal" method="POST" action="/register" enctype="multipart/form-data">
-        <p>Select a username and password</p>
+
         <fieldset>
+          <%= erb :_text_control, :locals => {:name => :name, :label => "Username"}%>
 
-          <div id="cg-username" class="control-group <%= "error" if @errors[:name] %>">
-            <label class="control-label" for="nameinput"><i>Username</i></label>
-            <div class="controls">
-              <input class="input-large" id="nameinput" type="text" name="username" value="<%= xss user_name %>" />
-              <% if @errors[:name] %>
-                  <span class="help-inline"><%= xss @errors[:name] %></span>
-              <% end %>
-            </div>
-          </div>
+          <%= erb :_text_control, :locals => {:name => :password, :label => "Password<sup><a href='/strongpass' title='Must be strong.'>?</a></sup>", :password => true}%>
 
-          <div id="cg-password" class="control-group <%= "error" if @errors[:pwinput] %>">
-            <label class="control-label" for="pwinput"><i>Password<sup><a href="/strongpass" title="Must be strong.">?</a></sup></i></label>
-            <div class="controls">
-              <input class="input-large" id="pwinput" type="password" name="password" />
-              <% if @errors[:pwinput] %>
-                  <span class="help-inline"><%= xss @errors[:pwinput] %></span>
-              <% end %>
-            </div>
-          </div>
+          <%= erb :_text_control, :locals => {:name => :passwordc, :label => "Re-type Password", :password => true}%>
 
-          <div id="cg-password-confirm" class="control-group <%= "error" if @errors[:pwcinput] %>">
-            <label class="control-label" for="pwcinput"><i>Re-type Password</i></label>
-            <div class="controls">
-              <input class="input-large" id="pwcinput" type="password" name="passwordc" />
-              <% if @errors[:pwcinput] %>
-                  <span class="help-inline"><%= xss @errors[:pwcinput] %></span>
-              <% end %>
-            </div>
-          </div>
+          <%= erb :_image_file_control %>
 
-          <div id="cg-image" class="control-group <%= "error" if @errors[:image_file] %>">
-          <label class="control-label" for="image">Picture (< 400 kB)</label>
-          <div class="controls">
-            <input class="input-large" id="image" type="file" name="image_file" accept="image/*" />
-            <% if @errors[:image_file] %>
-                <span class="help-inline"><%= xss @errors[:image_file] %></span>
-            <%end%>
-          </div>
-          </div>
+          <%= erb :_text_control, :locals => {:name => :about, :label => "Interests"}%>
 
-          <div id="cg-interests" class="control-group">
-           <label class="control-label" for="about">Interests</label>
-           <div class="controls">
-              <input class="input-large" id="about" type="text" name="about" value="<%= about %>" />
-           </div>
-          </div>
 
           <div class="form-actions">
             <button class="btn btn-info" type="submit">Create My Account</button>

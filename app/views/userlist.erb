@@ -17,15 +17,8 @@
       </thead>
       <tbody>
       <% for user in @users %>
-          <tr style="height:72px">
-
-               <td><% if user.image_file_name %>
-                     <div style="width:64px;height:64px;background-image: url('<%= "/userimages/"+user.image_file_name %>');
-                             background-repeat: no-repeat;
-                             background-size: contain;">
-                       <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
-                     </div>
-                <% end %></td>
+          <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
+            <td><%= erb :_image_rect, :locals => {:filename => user.image_file_name, :size => LISTIMAGESIZE} %></td>
             <td><%= erb :_user_link, :locals => {:user => user} %></td>
             <td><%= xss user.about %></td>
           </tr>

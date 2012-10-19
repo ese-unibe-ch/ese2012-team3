@@ -1,7 +1,7 @@
 
 get "/organization/create" do
   redirect '/login' unless session[:user_id]
-  erb :create_organization, :locals => {:name => '', :about => ''}
+  erb :create_organization
 end
 
 post "/organization/create" do
@@ -11,13 +11,14 @@ post "/organization/create" do
   about = params[:about]
 
   @errors[:name] = "organization must have a name!" if name.empty?
+  image_file_check()
 
   if !@errors.empty?
-    halt erb :create_organization, :locals => {:name => name || '',
-                                               :about => about || ''}
+    halt erb :create_organization
   end
 
-  Organization.init(:name => name, :about => about, :admin => @current_login)
+  org = Organization.init(:name => name, :about => about, :admin => @current_login)
+  org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id)
 
   redirect "/?orgcreated=true"
 end

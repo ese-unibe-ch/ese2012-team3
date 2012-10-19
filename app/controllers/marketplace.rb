@@ -38,15 +38,19 @@
     @errors[:name] = "item must have a name!" if params[:name].empty?
     @errors[:price] = "item must have a price!" if params[:price].empty?
     @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
+    image_file_check()
 
     #create item
     if @errors.empty?
       item_name = params[:name]
       item_price = params[:price].to_i
-      Market::Item.init(:name   => item_name,
+      item = Market::Item.init(:name   => item_name,
                         :price  => item_price,
                         :active => false,
-                        :owner  => @current_user)
+                        :owner  => @current_user,
+                        :about => params[:about]
+      )
+      item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
       #display form with errors
     else
       halt erb :create_item
@@ -58,22 +62,28 @@
   post "/item/:item_id/edit" do
     redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:item_id].to_i)
+    redirect '/login' unless @current_user == @item.owner
 
     #input validation
     @errors[:name] = "item must have a name!" if params[:item_name].empty?
     @errors[:price] = "item must have a price!" if params[:item_price].empty?
     @errors[:price] = "price must be a positive integer!" unless params[:item_price].to_i > 0
+    image_file_check()
 
     if @errors.empty?
-      if @current_user == @item.owner
-        @item.name = params[:item_name]
-        @item.price = params[:item_price].to_i
+      @item.name = params[:item_name]
+      @item.price = params[:item_price].to_i
+      @item.about = params[:about]
+      if params[:image_file]
+        @item.delete_image_file
+        @item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
       end
       redirect @current_user.profile_route
     #display form with errors
     else
       halt erb :edit_item, :locals => {:name  => params[:item_name] || '',
-                                       :price => params[:item_price] || ''}
+                                       :price => params[:item_price] || '',
+                                       :about => params[:about] || ''}
     end
   end
 

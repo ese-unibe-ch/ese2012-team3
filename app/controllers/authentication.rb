@@ -1,7 +1,7 @@
 
 
   post "/login" do
-    username = params[:username]
+    username = params[:name]
     password = params[:password]
 
     # error handling...

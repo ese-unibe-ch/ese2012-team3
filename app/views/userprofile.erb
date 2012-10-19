@@ -1,4 +1,6 @@
-<% @title = "User profile" %>
+<% @title = "User profile"
+   @items = Market::Item.items_by_agent(@user)
+%>
 
 <section id="content">
 <div class="row">
@@ -11,13 +13,7 @@
     <% end %>
 
     <h3>Profile</h3>
-    <% if @user.image_file_name %>
-    <div style="width:300px;height:300px;background-image: url('<%= "/userimages/"+@user.image_file_name %>');
-            background-repeat: no-repeat;
-            background-size: contain;">
-           <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
-    </div>
-    <% end %>
+    <%= erb :_image_rect, :locals => {:filename => @user.image_file_name, :size => LARGEIMAGESIZE} %>
 
     <% if @user.about.length > 0 %>
     <p>Interests: <%= xss @user.about %></p>

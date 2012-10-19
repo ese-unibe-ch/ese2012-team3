@@ -55,6 +55,10 @@ module Market
       @@users.detect { |user| user.name == name }
     end
 
+    def self.has_user_with_id?(id)
+      return @@users.detect { |user| user.id == id.to_i } != nil
+    end
+
     def self.user_by_id(id)
       user = @@users.detect { |user| user.id == id.to_i }
       if user == nil
@@ -64,7 +68,9 @@ module Market
     end
 
     def self.delete_all
-      @@users = []
+      while @@users.length > 0
+        @@users[0].delete
+      end
       @@user_id_counter = 0
     end
 
@@ -77,15 +83,8 @@ module Market
       for org in Organization.organizations_by_user(self)
         org.remove_member(self)
       end
-      self.delete_profile_picture
+      self.delete_image_file
       @@users.delete(self)
-    end
-
-    def delete_profile_picture
-      if self.image_file_name != nil
-        File.delete "#{App.public_folder}/userimages/#{self.image_file_name}" # Delete userpic from folder
-        self.image_file_name=nil
-      end
     end
 
     def is_member_of?(organization)
@@ -99,6 +98,10 @@ module Market
     # TODO move to a more appropriate place
     def profile_route
       "/profile/#{self.id}"
+    end
+
+    def delete_image_file
+      delete_public_file(self.image_file_name)
     end
 
   end
