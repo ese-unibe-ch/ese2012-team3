@@ -1,5 +1,6 @@
 <% @title = "User profile"
-   @items = Market::Item.items_by_agent(@user)
+   @items = Item.items_by_agent(@user)
+   @organizations = Organization.organizations_by_user(@user)
 %>
 
 <section id="content">
