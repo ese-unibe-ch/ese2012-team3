@@ -75,6 +75,53 @@
       </fieldset>
     </form>
     <% end %>
+
+    <h3 style="padding-top: 50px;">
+      <% if @user == @current_user %>
+          Your organizations
+      <% else %>
+          Organizations
+      <% end %>
+    </h3>
+
+    <% if @organizations.empty? %>
+        <p>No Organizations</p>
+    <% else %>
+        <table class="table">
+          <thead>
+          <th>Name</th>
+          <th>Credits</th>
+          <th></th>
+          </thead>
+          <tbody>
+          <% for org in @organizations %>
+              <tr>
+                <td>
+                  <% if org.image_file_name %>
+                      <div style="width:64px;height:64px;background-image: url('<%= "/organizationimages/"+user.image_file_name %>');
+                              background-repeat: no-repeat;
+                              background-size: contain;">
+                        <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
+                      </div>
+                  <% end %>
+                </td>
+                <td><%= erb :_user_link, :locals => {:user => org} %></td>
+                <td><%= org.credit %></td>
+                <td>
+                  <% if @user == @current_user && org.admin != @current_user %>
+                      <form action="/organization/<%= xss org.id %>/remove_member" method="post">
+                        <input type="hidden" name="user_to_remove" value="<%= xss @user.id %>" />
+                        <input type="hidden" name="return_to" value="<%= "/profile/#{@user.id}" %>" />
+                        <input type="submit" class="btn btn-info small" name="submit" value="Leave it!" />
+                      </form>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+    <% end %>
+
   </div>
 </div>
 </section>

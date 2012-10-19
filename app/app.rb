@@ -15,13 +15,7 @@ require_relative 'controllers/user'
 require_relative 'controllers/organization'
 require_relative 'controllers/marketplace'
 
-def  pii
-  print @testvalue
-end
-print_it = proc {|a| print a}
-@testvalue = "Hi there"
-pii()
-print_it.call ("Hello World\n") #it's always nice to start out thing like this
+include Market
 
 # ===================== Constants =====================
 def relative(path)
@@ -39,6 +33,11 @@ USERIMAGESROOT         = "userimages" # relative to public
 ITEMIMAGESROOT         = "itemimages" # relative to public
 ORGANIZATIONIMAGESROOT = "organizationimages" # relative to public
 
+enable :sessions
+set :public_folder, relative('public')
+set :views, relative('views')
+DEFAULT_PASSWORD = "Ax1301!3"
+MAXIMAGEFILESIZE = 400*1024 # in bytes
 
 # configure do
 set :public_folder, PUBLIC_FOLDER # http://www.sinatrarb.com/configuration.html
@@ -66,3 +65,6 @@ end
 # end
 
 
+error do
+  erb :error, :locals => {:message => request.env['sinatra.error'].message }
+end
