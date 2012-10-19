@@ -11,6 +11,8 @@ require_relative 'helpers'
 # Controllers
 require_relative 'controllers/main'
 require_relative 'controllers/authentication'
+require_relative 'controllers/user'
+require_relative 'controllers/organization'
 require_relative 'controllers/marketplace'
 
 include Market
@@ -19,22 +21,18 @@ def relative(path)
   File.join(File.expand_path(File.dirname(__FILE__)), path)
 end
 
-class App < Sinatra::Base
+enable :sessions
+set :public_folder, relative('public')
+set :views, relative('views')
+DEFAULT_PASSWORD = "Ax1301!3"
+MAXIMAGEFILESIZE = 400*1024 # in bytes
 
-  use Authentication
-  use Main
-  use Marketplace
 
-  enable :sessions
-  set :public_folder, relative('public')
-  set :views, relative('views')
-
-  configure :development do
-    defpw = "Ax1301!3"
-    john = User.init(:name => "John", :credit => 500, :password => defpw)
-    User.init(:name => "Jimmy", :credit => 30, :password => defpw)
-    User.init(:name => "Jack", :credit => 400, :password => defpw)
-    ese = User.init(:name => "ese", :credit => 1000, :password => defpw)
+  configure do
+    john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
+    User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
+    User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
+    ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 
     eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
     eseo.add_item(Item.init(:name => "pizza", :price => 18, :active => true, :owner => eseo))
@@ -50,6 +48,3 @@ class App < Sinatra::Base
     end
   end
 
-  # Run, Forrest, run!
-  App.run!
-end

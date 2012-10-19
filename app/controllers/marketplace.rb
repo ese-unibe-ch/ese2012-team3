@@ -1,18 +1,3 @@
-include Market
-
-class Marketplace < Sinatra::Application
-
-  before do
-    @current_login = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
-    if session[:organization_id].nil?
-      @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
-    else
-      @current_user = Organization.organization_by_id(session[:organization_id].to_i)
-    end
-    @all_items = Market::Item.active_items
-    @users = Market::User.all
-    @errors = {}
-  end
 
   post "/item/:id/buy" do
     redirect '/login' unless session[:user_id]
@@ -101,5 +86,3 @@ class Marketplace < Sinatra::Application
                                 :price => @item.price}
   end
 
-
-end

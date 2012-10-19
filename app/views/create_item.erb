@@ -5,7 +5,7 @@
   <%= erb :_sidebar %>
   <div class="span10">
     <h1>Create new item</h1>
-    <form class="form-horizontal" method="POST" action="/item/create">
+    <form class="form-horizontal" method="POST" action="/item/create" enctype="multipart/form-data">
       <fieldset>
         <div class="control-group <%= "error" if @errors[:name] %>">
           <label class="control-label" for="name">Name</label>
@@ -25,6 +25,17 @@
             <%end%>
           </div>
         </div>
+
+        <div id="cg-image" class="control-group <%= "error" if @errors[:image_file] %>">
+          <label class="control-label" for="image">Picture (< 400 kB)</label>
+          <div class="controls">
+            <input class="input-large" id="image" type="file" name="image_file" accept="image/*" />
+            <% if @errors[:image_file] %>
+                <span class="help-inline"><%= xss @errors[:image_file] %></span>
+            <%end%>
+          </div>
+        </div>
+
         <div class="form-actions">
           <button class="btn btn-info" type="submit">Save</button>
         </div>

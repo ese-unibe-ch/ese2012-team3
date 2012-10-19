@@ -5,6 +5,21 @@
 # http://windows.microsoft.com/en-US/windows-vista/Tips-for-creating-a-strong-password
 class PasswordCheck
 
+  # Reads the file containing the top 3000 US english words
+  # from http://translateitbangkokpost.blogspot.ch/2010/06/nolls-top-3000-american-english-words.html
+  # all lowercase
+  def self.read_words_from_CSV
+    file = File.new(File.dirname(__FILE__) + "/forbidden_pw_words.csv", "r")
+    filecontent = ""
+    while (line = file.gets)
+      filecontent = filecontent + line.to_s
+    end
+    file.close
+    filecontent.split(';')
+  end
+
+  PASSWORD_FORBIDDEN_WORDS = read_words_from_CSV
+
   # Maybe make return error enumeration instead?
   # Though exception seems fine, can be formatted.
   def self.ensure_password_strong(pw, username, previousPassword)
@@ -12,9 +27,9 @@ class PasswordCheck
     fail "Password not strong: Contains your user name." if username.length > 0 and pw.include?(username) # Does not contain your user name, (real name, or company name).
 
     lpw = pw.downcase
-    @PASSWORD_FORBIDDEN_WORDS = read_words_from_CSV
+
     c = nil
-    for w in @PASSWORD_FORBIDDEN_WORDS
+    for w in PASSWORD_FORBIDDEN_WORDS
       c = w if w.length > 1 and lpw.include?(w)
     end
     fail "Password not strong: Contains a known word '"+c+"' completely" if c
@@ -43,16 +58,5 @@ class PasswordCheck
     true
   end
 
-  # Reads the file containing the top 3000 US english words
-  # from http://translateitbangkokpost.blogspot.ch/2010/06/nolls-top-3000-american-english-words.html
-  # all lowercase 
-  def self.read_words_from_CSV
-    file = File.new(File.dirname(__FILE__) + "/forbidden_pw_words.csv", "r")
-    filecontent = ""
-    while (line = file.gets)
-      filecontent = filecontent + line.to_s
-    end
-    file.close
-    filecontent.split(';')
-  end
+
 end
