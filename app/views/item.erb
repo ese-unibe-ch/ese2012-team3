@@ -11,6 +11,7 @@
 
       <%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
 
+      <p>Owner: <%= erb :_user_link, :locals => {:user => @item.owner} %></p>
       <p>Price: <%= xss @item.price %></p>
       <% if !@item.about.empty? %>
           <p>About: <%= xss @item.about %></p>

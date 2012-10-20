@@ -63,7 +63,8 @@ post "/organization/:id/remove_member" do
   @org.remove_member(user_to_remove)
 
   return_to = params[:return_to] ? params[:return_to] : "/organization/#{params[:id]}"
-  redirect return_to
+  #redirect return_to
+  redirect back
 end
 
 
