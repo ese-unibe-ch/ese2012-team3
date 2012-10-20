@@ -25,7 +25,7 @@
         <i>This organization has no items.</i>
       <% end %>
 
-      <% if @user == @current_user %>
+      <% if @org == @current_user %>
           <form class="form-horizontal" method="GET" action="/item/create">
             <fieldset>
               <div class="form-actions">
