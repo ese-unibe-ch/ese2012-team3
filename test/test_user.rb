@@ -170,4 +170,11 @@ class UserTest < Test::Unit::TestCase
     end
   end
 
+  def test_follow
+    donald = User.init(:name => "donald", :password => "Zz!45678")
+    dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
+    donald.follow(dagobert)
+    assert(donald.following.detect(dagobert))
+  end
+
 end

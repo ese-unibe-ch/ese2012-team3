@@ -104,6 +104,14 @@ module Market
       delete_public_file(self.image_file_name)
     end
 
+    def follow(follow)
+      unless self.following.include?(follow)
+        self.following << follow
+      else
+        self.following.delete(follow)
+      end
+    end
+
   end
 
 end

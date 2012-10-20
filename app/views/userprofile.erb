@@ -1,6 +1,7 @@
 <% @title = "User profile"
    @items = Item.items_by_agent(@user)
    @organizations = Organization.organizations_by_user(@user)
+   @following = @user.following
 %>
 
 <section id="content">
@@ -14,6 +15,19 @@
     <% end %>
 
     <h3>Profile</h3>
+
+    <% if @user != @current_login && @current_login == @current_user%>
+      <form action="/follow" method="POST">
+      <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
+      <input type="hidden" name="agent" value="user" />
+      <% if @current_login.following.include?(@user) %>
+        <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
+      <%else%>
+        <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
+      <%end%>
+      </form>
+    <%end%>
+
     <%= erb :_image_rect, :locals => {:filename => @user.image_file_name, :size => LARGEIMAGESIZE} %>
 
     <% if @user.about.length > 0 %>
@@ -70,6 +84,18 @@
                 :user => @user
         }%>
     <% end %>
+
+    <h3>
+      Following
+    </h3>
+
+    <% if @following.empty? %>
+        <p>This user is not following anybody.</p>
+    <% else %>
+        <%=erb :_agent_list, :locals=>{:agents => @following}%>
+    <% end %>
+
+
 
   </div>
 </div>
