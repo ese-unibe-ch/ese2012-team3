@@ -4,13 +4,26 @@
       <li><a href="/"><i class="icon-home"></i>Marketplace</a></li>
       <% if @current_user %>
           <li><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
-          <li><a href= <%= @current_user.profile_route %>><i class="icon-user"></i>My profile</a></li>
+          <li>
+              <%if @current_user == @current_login %>
+            <a href= <%= @current_user.profile_route %>><i class="icon-user"></i>My profile</a>
+                <% else %>
+                <a href= <%= @current_user.profile_route %>><i class="icon-briefcase"></i>Organization</a>
+                <% end %>
+          </li>
           <li><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
+
+          <%if @current_user == @current_login %>
           <li><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
+
+
           <li><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
+                <% end %>
       <% end %>
     </ul>
   </div>
+
+
   <% if @current_user %>
   <div style="font-size:1em;">
     <p>Logged in as

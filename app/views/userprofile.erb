@@ -29,36 +29,12 @@
     </h3>
 
     <% if @items.size > 0 %>
-    <table class="table">
-      <thead>
-        <th>Name</th>
-        <th style="text-align: right; padding-right: 10em;">Price</th>
-        <th></th>
-        <th></th>
-      </thead>
-      <tbody>
-        <% for item in @items %>
-          <tr>
-            <% if item.active %>
-                <td style="color:#00CC00;"><%= xss item.name %></td>
-                <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
-                <td></td>
-            <% else %>
-                <td style="color:#FF0000;"><%= xss item.name %></td>
-                <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
-                <% if @current_user == item.owner %>
-                    <td>
-                      <form action="/item/<%= item.id %>/edit" method="link">
-                        <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
-                      </form>
-                    </td>
-                <% end %>
-            <% end %>
-            <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        <%=erb :_item_list, :locals=>{
+                :items => @items,
+                :highlight_active => true
+        }%>
+
+
     <% else %>
         <% if @user == @current_user%>
             <i>You have no items.</i>
@@ -88,39 +64,11 @@
     <% if @organizations.empty? %>
         <p>No Organizations</p>
     <% else %>
-        <table class="table">
-          <thead>
-          <th>Name</th>
-          <th>Credits</th>
-          <th></th>
-          </thead>
-          <tbody>
-          <% for org in @organizations %>
-              <tr>
-                <td>
-                  <% if org.image_file_name %>
-                      <div style="width:64px;height:64px;background-image: url('<%= "/organizationimages/"+user.image_file_name %>');
-                              background-repeat: no-repeat;
-                              background-size: contain;">
-                        <!-- only way to scale to height OR width, retaining aspect http://stackoverflow.com/a/10016640/524504-->
-                      </div>
-                  <% end %>
-                </td>
-                <td><%= erb :_user_link, :locals => {:user => org} %></td>
-                <td><%= org.credit %></td>
-                <td>
-                  <% if @user == @current_user && org.admin != @current_user %>
-                      <form action="/organization/<%= xss org.id %>/remove_member" method="post">
-                        <input type="hidden" name="user_to_remove" value="<%= xss @user.id %>" />
-                        <input type="hidden" name="return_to" value="<%= "/profile/#{@user.id}" %>" />
-                        <input type="submit" class="btn btn-info small" name="submit" value="Leave it!" />
-                      </form>
-                  <% end %>
-                </td>
-              </tr>
-          <% end %>
-          </tbody>
-        </table>
+        <%=erb :_agent_list, :locals=>{
+                :agents => @organizations,
+                :version => (@user == @current_user ? :leave_organization : nil),
+                :user => @user
+        }%>
     <% end %>
 
   </div>

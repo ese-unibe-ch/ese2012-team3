@@ -60,39 +60,50 @@
   end
 
   post "/item/:item_id/edit" do
-    redirect '/login' unless session[:user_id]
     @item = Item.by_id(params[:item_id].to_i)
-    redirect '/login' unless @current_user == @item.owner
+    redirect '/login' unless session[:user_id] and @current_user == @item.owner
 
     #input validation
-    @errors[:name] = "item must have a name!" if params[:item_name].empty?
-    @errors[:price] = "item must have a price!" if params[:item_price].empty?
-    @errors[:price] = "price must be a positive integer!" unless params[:item_price].to_i > 0
+    @errors[:name] = "item must have a name!" if params[:name].empty?
+    @errors[:price] = "item must have a price!" if params[:price].empty?
+    @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
     image_file_check()
 
     if @errors.empty?
-      @item.name = params[:item_name]
-      @item.price = params[:item_price].to_i
+      @item.name = params[:name]
+      @item.price = params[:price].to_i
       @item.about = params[:about]
       if params[:image_file]
         @item.delete_image_file
-        @item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
+        @item.image_file_name = add_image(ITEMIMAGESROOT, @item.id)
       end
       redirect @current_user.profile_route
     #display form with errors
     else
-      halt erb :edit_item, :locals => {:name  => params[:item_name] || '',
-                                       :price => params[:item_price] || '',
-                                       :about => params[:about] || ''}
+      halt erb :edit_item
     end
+    redirect @current_user.profile_route
   end
-
 
   get "/item/:id/edit" do
     redirect '/login' unless session[:user_id]
+
     @item = Item.by_id(params[:id].to_i)
 
-    erb :edit_item, :locals => {:name  => @item.name,
-                                :price => @item.price}
+    params[:name] = @item.name
+    params[:price] = @item.price
+    params[:about] = @item.about
+    erb :edit_item
   end
+
+
+  get "/item/:id" do
+    redirect '/login' unless session[:user_id]
+
+    @item = Item.by_id(params[:id].to_i)
+
+    erb :item
+  end
+
+
 

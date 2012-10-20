@@ -6,25 +6,8 @@
   <div class="span10">
     <h1>Users</h1>
 
-    <table class="table">
-      <thead>
-      <th>Picture</th>
-      <th>Name</th>
-      <th>Interests</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      </thead>
-      <tbody>
-      <% for user in @users %>
-          <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
-            <td><%= erb :_image_rect, :locals => {:filename => user.image_file_name, :size => LISTIMAGESIZE} %></td>
-            <td><%= erb :_user_link, :locals => {:user => user} %></td>
-            <td><%= xss user.about %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table>
+    <%=erb :_agent_list, :locals=>{:agents => @users}%>
+
   </div>
 </div>
 </section>

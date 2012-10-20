@@ -1,0 +1,55 @@
+<% # Parameters (to pass in :locals)
+# agents to display
+#version: Optional - any of the identifiers
+#  :leave_organization Supply when listing orgs a user has joined, must also supply user then
+# :remove_org_member Supply when listing org members, must supply org
+# or nil
+    %>
+<table class="table">
+  <thead>
+  <th>Picture</th>
+  <th>Name</th>
+  <th>About</th>
+  <th></th>
+  <th></th>
+  <th></th>
+  </thead>
+  <tbody>
+  <% for agent in agents %>
+      <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
+        <td><%= erb :_image_rect, :locals => {:filename => agent.image_file_name, :size => LISTIMAGESIZE} %></td>
+        <td><%= erb :_user_link, :locals => {:user => agent} %></td>
+        <td><%= xss agent.about %></td>
+        <td></td>
+        <td></td>
+        <td>
+          <% if defined? version%>
+            <%if version == :leave_organization %>
+
+                <%if agent.admin != @current_login # If the currently logged in person is admin of the org, he can't leave it
+          %>
+                  <form action="/organization/<%= xss agent.id %>/remove_member" method="post">
+                    <input type="hidden" name="user_to_remove" value="<%= xss user.id%>" />
+                    <input type="hidden" name="return_to" value="<%= "/profile/#{agent.id}" %>" />
+                    <input type="submit" class="btn btn-info small" name="submit" title="Leave Organization" value="Leave it!" />
+                  </form>
+            <%  end %>
+            <% end
+
+               if version == :remove_org_member%>
+               <%if agent != org.admin # the admin cannot be removed %>
+
+                      <form action="/organization/<%= xss org.id %>/remove_member" method="post" style="display: inline;">
+                        <input type="hidden" name="user_to_remove" value="<%= xss agent.id %>" />
+                        <button class="close" title="Remove member">&times;</button>
+                      </form>
+               <%end%>
+              <%end%>
+
+             <%end # if version?%>
+        </td>
+
+      </tr>
+  <% end %>
+  </tbody>
+</table>

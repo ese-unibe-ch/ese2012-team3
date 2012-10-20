@@ -46,7 +46,7 @@ module Market
     end
 
     def self.has_organization_with_id?(id)
-      return @@users.detect { |user| user.id == id.to_i } != nil
+      return @@organizations.detect { |user| user.id == id.to_i } != nil
     end
 
     # TODO Reduce usage - use id instead
