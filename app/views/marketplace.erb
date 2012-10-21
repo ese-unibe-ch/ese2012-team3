@@ -4,29 +4,6 @@
 <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
-    <div class="alert-success alert" id="loggedin">
-      <strong>Logged in!</strong><br />You've been logged in successfully!
-    </div>
-    <div class="alert-success alert" id="registered">
-      <strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
-    </div>
-    <div class="alert-success alert" id="pwchanged">
-      <strong>Password changed!</strong><br />Your password has been successfully changed.
-    </div>
-    <div class="alert-success alert" id="itembought">
-      <strong>Item bought!</strong><br />Your successfully purchased an item.
-    </div>
-    <div class="alert-success alert" id="orgcreated">
-      <strong>Organization created!</strong><br />The organization was successfully created.
-    </div>
-    <div class="alert-success alert" id="switcheduser">
-      <strong>Switched user!</strong><br />
-      <%if session[:organization_id].nil?%>
-        You are not representing an organization.
-      <%else%>
-        You are now representing <%= erb :_user_link, :locals => {:user => Organization.organization_by_id(session[:organization_id].to_i)} %>.
-      <%end%>
-    </div>
     <h1>Marketplace</h1>
 
     <%=erb :_item_list, :locals=>{
@@ -37,18 +14,3 @@
   </div>
 </div>
 </section>
-
-<script type="text/javascript">
-  if (typeof($.getUrlVar('loggedin')) == 'undefined')
-    $('#loggedin').hide();
-  if (typeof($.getUrlVar('registered')) == 'undefined')
-    $('#registered').hide();
-  if (typeof($.getUrlVar('pwchanged')) == 'undefined')
-      $('#pwchanged').hide();
-  if (typeof($.getUrlVar('itembought')) == 'undefined')
-      $('#itembought').hide();
-  if (typeof($.getUrlVar('switcheduser')) == 'undefined')
-      $('#switcheduser').hide();
-  if (typeof($.getUrlVar('orgcreated')) == 'undefined')
-      $('#orgcreated').hide();
-</script>
