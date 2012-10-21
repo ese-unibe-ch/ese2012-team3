@@ -62,8 +62,6 @@ post "/organization/:id/remove_member" do
   user_to_remove = User.user_by_id(params[:user_to_remove])
   @org.remove_member(user_to_remove)
 
-  return_to = params[:return_to] ? params[:return_to] : "/organization/#{params[:id]}"
-  #redirect return_to
   redirect back
 end
 
@@ -71,5 +69,5 @@ end
 get "/organization/:id/switch" do
   redirect '/login' unless session[:user_id]
   session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_login)
-  redirect "/?switcheduser=true"
+  redirect back + "?switcheduser=true"
 end

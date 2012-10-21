@@ -29,7 +29,7 @@ end
 get "/user/switch" do
   redirect '/login' unless session[:user_id]
   session[:organization_id] = nil
-  redirect "/?switcheduser=true"
+  redirect back + "?switcheduser=true"
 end
 
 def passwordcheck()

@@ -30,7 +30,6 @@
           %>
                   <form action="/organization/<%= xss agent.id %>/remove_member" method="post">
                     <input type="hidden" name="user_to_remove" value="<%= xss user.id%>" />
-                    <input type="hidden" name="return_to" value="<%= "/profile/#{agent.id}" %>" />
                     <input type="submit" class="btn btn-info small" name="submit" title="Leave Organization" value="Leave it!" />
                   </form>
             <%  end %>
