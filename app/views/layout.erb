@@ -17,18 +17,8 @@
 
       <script type="text/javascript">
         $(document).ready(function(){
-          if (typeof($.getUrlVar('loggedin')) == 'undefined')
-              $('#loggedin').hide();
-          if (typeof($.getUrlVar('registered')) == 'undefined')
-              $('#registered').hide();
-          if (typeof($.getUrlVar('pwchanged')) == 'undefined')
-              $('#pwchanged').hide();
-          if (typeof($.getUrlVar('itembought')) == 'undefined')
-              $('#itembought').hide();
-          if (typeof($.getUrlVar('switcheduser')) == 'undefined')
-              $('#switcheduser').hide();
-          if (typeof($.getUrlVar('orgcreated')) == 'undefined')
-              $('#orgcreated').hide();
+          $('.alert').hide();
+          $('#'+$.getUrlVar('alert')).show();
         });
       </script>
 

@@ -11,7 +11,7 @@
     end
 
     #redirect back
-    redirect "/?itembought=true"
+    redirect "/?alert=itembought"
   end
 
   post "/item/:id/status_change" do

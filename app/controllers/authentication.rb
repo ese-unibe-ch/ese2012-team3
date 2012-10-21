@@ -19,7 +19,7 @@
 
     session[:user_id] = user.id
     session[:organization_id] = nil
-    redirect "/?loggedin=true"
+    redirect "/?alert=loggedin"
   end
 
   get "/login" do

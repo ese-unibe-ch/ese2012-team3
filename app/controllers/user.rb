@@ -29,7 +29,7 @@ end
 get "/user/switch" do
   redirect '/login' unless session[:user_id]
   session[:organization_id] = nil
-  redirect back + "?switcheduser=true"
+  redirect back + "?alert=switcheduser"
 end
 
 def passwordcheck()
@@ -66,7 +66,7 @@ post "/register" do
   user.image_file_name = add_image(USERIMAGESROOT, user.id)
 
   session[:user_id] = user.id
-  redirect "/?registered=true"
+  redirect "/?alert=registered"
 end
 
 get "/register" do
@@ -87,7 +87,7 @@ post "/change_password" do
 
   @current_login.password = params[:password]
 
-  redirect "/?pwchanged=true"
+  redirect "/?alert=pwchanged"
 end
 
 post "/change_profile_picture" do
