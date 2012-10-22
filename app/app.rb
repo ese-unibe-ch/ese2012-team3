@@ -59,8 +59,9 @@ uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => tru
 
 User.all.each_with_index do |user, i|
   item = Item.init(:name => "item" + i.to_s, :price => 100)
-  comment = Comment.init(:creator => user, :text => "This is my item")
+  comment = Comment.init(:creator => user, :text => "This is my utem")
   item.add_comment(comment)
+  item.add_comment(Comment.init(:creator => user, :text => "*item"))
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
