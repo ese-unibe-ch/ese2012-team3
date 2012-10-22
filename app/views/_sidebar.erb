@@ -2,18 +2,18 @@
   <div class="well" style="padding: 8px 0;">
     <ul class="nav nav-list">
       <li><a href="/"><i class="icon-home"></i>Marketplace</a></li>
-      <% if @current_user %>
+      <% if @current_agent %>
           <li><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
           <li>
-              <%if @current_user == @current_login %>
-            <a href= <%= @current_user.profile_route %>><i class="icon-user"></i>My profile</a>
+              <%if @current_agent == @current_user %>
+                    <a href= <%= @current_agent.profile_route %>><i class="icon-user"></i>My profile</a>
                 <% else %>
-                <a href= <%= @current_user.profile_route %>><i class="icon-briefcase"></i>Organization</a>
+                    <a href= <%= @current_agent.profile_route %>><i class="icon-briefcase"></i>Organization</a>
                 <% end %>
           </li>
           <li><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
 
-          <%if @current_user == @current_login %>
+          <%if @current_agent == @current_user %>
           <li><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
 
 
@@ -24,7 +24,7 @@
   </div>
 
 
-  <% if @current_user %>
+  <% if @current_agent %>
   <div style="font-size:1em;">
     <p>Logged in as
     <div class="btn-group">
@@ -37,15 +37,15 @@
         <span class="caret"></span>
       </a>
       <ul class="dropdown-menu">
-        <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss @current_login.name %></a></li>
+        <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss @current_user.name %></a></li>
         <li class="divider"></li>
-        <%for organization in @current_login.list_organizations %>
+        <%for organization in @current_user.list_organizations %>
             <li><a href='<%= organization.profile_route %>/switch'><i class="icon-briefcase"></i><%= xss organization.name %></a></li>
         <%end%>
       </ul>
     </div>
     </p>
-    <p>Credits: <%= xss @current_user.credit %></p>
+    <p>Credits: <%= xss @current_agent.credit %></p>
   </div>
   <% end %>
 </div>

@@ -28,7 +28,7 @@
         <td><%= (defined? show_owner) ?
                 (erb :_user_link, :locals => {:user => item.owner}) : "" %></td>
 
-        <%= erb :_item_button, :locals => {:item => item, :current_user => @current_user} %>
+        <%= erb :_item_button, :locals => {:item => item, :current_user => @current_agent} %>
       </tr>
   <% end %>
   </tbody>

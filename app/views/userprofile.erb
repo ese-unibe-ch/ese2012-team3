@@ -8,7 +8,7 @@
 <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
-    <% if @user == @current_user%>
+    <% if @user == @current_agent%>
     <h1><%= xss @user.name %> - My profile</h1>
     <% else %>
     <h1>User: <%= xss @user.name %></h1>
@@ -16,11 +16,11 @@
 
     <h3>Profile</h3>
 
-    <% if @user != @current_login && @current_login == @current_user%>
+    <% if @user != @current_user && @current_user == @current_agent%>
       <form action="/follow" method="POST">
       <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
       <input type="hidden" name="agent" value="user" />
-      <% if @current_login.following.include?(@user) %>
+      <% if @current_user.following.include?(@user) %>
         <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
       <%else%>
         <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
@@ -35,7 +35,7 @@
     <% end %>
 
     <h3 style="padding-top: 50px;">
-      <% if @user == @current_user %>
+      <% if @user == @current_agent %>
         Your items
       <% else %>
         User's items
@@ -50,14 +50,14 @@
 
 
     <% else %>
-        <% if @user == @current_user%>
+        <% if @user == @current_agent%>
             <i>You have no items.</i>
         <% else %>
             <i>This user has no items.</i>
         <% end %>
     <% end %>
 
-    <% if @user == @current_user %>
+    <% if @user == @current_agent %>
     <form class="form-horizontal" method="GET" action="/item/create">
       <fieldset>
         <div class="form-actions">
@@ -68,7 +68,7 @@
     <% end %>
 
     <h3 style="padding-top: 50px;">
-      <% if @user == @current_user %>
+      <% if @user == @current_agent %>
           Your organizations
       <% else %>
           Organizations
@@ -80,7 +80,7 @@
     <% else %>
         <%=erb :_agent_list, :locals=>{
                 :agents => @organizations,
-                :version => (@user == @current_user ? :leave_organization : nil),
+                :version => (@user == @current_agent ? :leave_organization : nil),
                 :user => @user
         }%>
     <% end %>

@@ -17,7 +17,7 @@ post "/organization/create" do
     halt erb :create_organization
   end
 
-  org = Organization.init(:name => name, :about => about, :admin => @current_login)
+  org = Organization.init(:name => name, :about => about, :admin => @current_user)
   org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id)
 
   redirect "/?orgcreated=true"
@@ -70,6 +70,6 @@ end
 
 get "/organization/:id/switch" do
   redirect '/login' unless session[:user_id]
-  session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_login)
+  session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_user)
   redirect "/?switcheduser=true"
 end

@@ -32,7 +32,7 @@
       </div>
       </fieldset>
     </form>
-    <% if @current_login.image_file_name != nil %>
+    <% if @current_user.image_file_name != nil %>
     <h3>Delete my profile picture</h3>
     <form class="form-horizontal" method="POST" action="/delete_profile_picture" >
       <fieldset>
