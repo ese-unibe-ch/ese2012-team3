@@ -18,7 +18,9 @@
 <% end %>
 
       <h3>Comments</h3>
-      TODO
+      <%for comment in @item.comments%>
+          <p><%= erb :_user_link, :locals => {:user => comment.creator} %>: <%= xss comment %></p>
+      <%end%>
     </div>
   </div>
 </section>

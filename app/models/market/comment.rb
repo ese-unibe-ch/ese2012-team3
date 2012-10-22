@@ -10,6 +10,14 @@ module Market
       cmt.text = params[:text] || ""
       cmt
     end
+
+    def to_s
+      @text
+    end
+
+    def creator
+      @creator.name
+    end
   end
 
 end
