@@ -92,7 +92,7 @@ module Market
     end
 
     def add_comment new_comment
-      comments < new_comment unless comments.include(new_comment)
+      comments << new_comment unless comments.include?(new_comment)
     end
 
   end
