@@ -16,7 +16,7 @@ module Market
     end
 
     def creator
-      @creator.name
+      @creator
     end
   end
 
