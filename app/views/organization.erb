@@ -8,11 +8,11 @@
 
       <%= erb :_image_rect, :locals => {:filename => @org.image_file_name, :size => LARGEIMAGESIZE} %>
 
-      <% if @user != @current_login && @current_login == @current_user%>
+      <% if @user != @current_user && @current_user == @current_agent%>
           <form action="/follow" method="POST">
             <input type="hidden" name="follow_id" value="<%= xss @org.id%>" />
             <input type="hidden" name="agent" value="org" />
-            <% if @current_login.following.include?(@org) %>
+            <% if @current_user.following.include?(@org) %>
                 <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
             <%else%>
                 <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
@@ -37,7 +37,7 @@
         <i>This organization has no items.</i>
       <% end %>
 
-      <% if @org == @current_user %>
+      <% if @org == @current_agent %>
           <form class="form-horizontal" method="GET" action="/item/create">
             <fieldset>
               <div class="form-actions">
@@ -52,7 +52,7 @@
       <h3><%= xss @org.name %>'s Members</h3>
 
       <%=erb :_agent_list, :locals=>{:agents => @org.members,
-                                     :version => (@org.admin == @current_login ? :remove_org_member : nil) ,
+                                     :version => (@org.admin == @current_user ? :remove_org_member : nil) ,
                                      :org => @org
 
       }%>
@@ -60,7 +60,7 @@
 
       <hr />
 
-      <% if @org.admin == @current_login and @current_user == @org %>
+      <% if @org.admin == @current_user and @current_agent == @org %>
         <h3>Add member to organization</h3>
         <% if addable_users.length > 0 %>
             <form action="/organization/<%= @org.id %>/add_member" method="POST">

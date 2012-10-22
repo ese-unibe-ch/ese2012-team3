@@ -1,30 +1,7 @@
-<%  #params: item - the item to show the buttons for (output in two <td> s)
-
-   # TODO we really don't need to pass current_user to this...
-
-#Edit button %>
-
-<%if item.owner == @current_user %>
-
-<%if item.active %>
-    <td>
-  <%= @current_user == item.owner ? "<i class='muted'>Cannot edit active items</i>": ""%></td>
-<% else %>
-<td>
-      <form action="/item/<%= item.id %>/edit" method="link">
-        <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
-      </form>
-    </td>
-<% end %>
-<% else %>
-<td></td>
-<% end %>
-
-
 <% #Buy/activate/deactivate buttons
 
    if item.active %>
-    <%if item.owner == @current_user %>
+    <%if item.owner == @current_agent %>
         <td>
           <form action="/item/<%= item.id %>/status_change" method="post">
             <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
@@ -38,13 +15,13 @@
           <form action="/item/<%= item.id %>/buy" method="post">
             <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
             <input type="hidden" name="item" value="<%= xss item.id %>" />
-            <input type="submit" class="btn btn-info small" name="submit" value="Buy Item"<%if @current_user.credit < item.price%> disabled="disabled"<%end%>/>
+            <input type="submit" class="btn btn-info small" name="submit" value="Buy Item"<%if @current_agent.credit < item.price%> disabled="disabled"<%end%>/>
           </form>
         </td>
         <td></td>
     <% end %>
 <% else %>
-    <%if item.owner == @current_user %>
+    <%if item.owner == @current_agent %>
         <td>
           <form action="/item/<%= item.id %>/status_change" method="post">
             <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
@@ -56,4 +33,25 @@
     <% else %>
         <td style="color:#FF0000;">Inactive</td>
     <% end %>
+<% end %>
+
+<%  #params: item - the item to show the buttons for (output in two <td> s)
+
+    # TODO we really don't need to pass current_user to this...
+
+    #Edit button %>
+
+<%if item.owner == @current_agent %>
+
+    <%if item.active %>
+        <td><%= @current_agent == item.owner ? "<i class='muted'>Cannot edit active items</i>": ""%></td>
+    <% else %>
+        <td>
+          <form action="/item/<%= item.id %>/edit" method="link">
+            <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
+          </form>
+        </td>
+    <% end %>
+<% else %>
+    <td></td>
 <% end %>

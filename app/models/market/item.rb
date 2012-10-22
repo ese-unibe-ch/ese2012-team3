@@ -91,5 +91,9 @@ module Market
       delete_public_file(self.image_file_name)
     end
 
+    def add_comment new_comment
+      comments << new_comment unless comments.include?(new_comment)
+    end
+
   end
 end

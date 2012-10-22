@@ -5,7 +5,7 @@
     @item = Item.by_id(params[:id].to_i)
     
     begin
-      @current_user.buy_item(@item)
+      @current_agent.buy_item(@item)
     rescue Exception => e
       halt erb :error, :locals => {:message => e.message}
     end
@@ -19,7 +19,7 @@
 
     @item = Item.by_id(params[:id].to_i)
 
-    if @current_user == @item.owner
+    if @current_agent == @item.owner
       @item.inactivate if params[:new_state] == "inactive"
       @item.activate if params[:new_state] == "active"
     end
@@ -47,7 +47,7 @@
       item = Market::Item.init(:name   => item_name,
                         :price  => item_price,
                         :active => false,
-                        :owner  => @current_user,
+                        :owner  => @current_agent,
                         :about => params[:about]
       )
       item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
@@ -56,12 +56,12 @@
       halt erb :create_item
     end
 
-    redirect @current_user.profile_route
+    redirect @current_agent.profile_route
   end
 
   post "/item/:item_id/edit" do
     @item = Item.by_id(params[:item_id].to_i)
-    redirect '/login' unless session[:user_id] and @current_user == @item.owner
+    redirect '/login' unless session[:user_id] and @current_agent == @item.owner
 
     #input validation
     @errors[:name] = "item must have a name!" if params[:name].empty?
@@ -77,12 +77,12 @@
         @item.delete_image_file
         @item.image_file_name = add_image(ITEMIMAGESROOT, @item.id)
       end
-      redirect @current_user.profile_route
+      redirect @current_agent.profile_route
     #display form with errors
     else
       halt erb :edit_item
     end
-    redirect @current_user.profile_route
+    redirect @current_agent.profile_route
   end
 
   get "/item/:id/edit" do

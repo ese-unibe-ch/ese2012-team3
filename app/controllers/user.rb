@@ -78,14 +78,14 @@ end
 post "/change_password" do
   redirect '/' if !session[:user_id]
 
-  set_error :currentpassword, "Current password is wrong" unless @current_login.password == params[:currentpassword]
+  set_error :currentpassword, "Current password is wrong" unless @current_user.password == params[:currentpassword]
 
-  params[:name] = @current_login.name
+  params[:name] = @current_user.name
   passwordcheck()
 
   halt erb :settings unless @errors.empty?
 
-  @current_login.password = params[:password]
+  @current_user.password = params[:password]
 
   redirect "/?alert=pwchanged"
 end
@@ -97,7 +97,7 @@ post "/change_profile_picture" do
 
   halt erb :settings unless @errors.empty?
 
-  user = @current_login
+  user = @current_user
   if user.image_file_name != nil && params[:image_file] != nil
     user.delete_profile_picture
   end
@@ -108,12 +108,12 @@ post "/change_profile_picture" do
 end
 
 delete "/delete_profile_picture" do
-  user = @current_login
+  user = @current_user
 
   halt erb :error, :locals =>
       {:message => "You don't have a profile picture"} unless user.image_file_name
 
-  @current_login.delete_image_file
+  @current_user.delete_image_file
 
   redirect "/profile/#{user.id}"
 end
@@ -121,7 +121,7 @@ end
 
 post "/follow" do
   redirect '/login' unless session[:user_id]
-  @current_login.follow(User.user_by_id(params[:follow_id].to_i)) if params[:agent] == "user"
-  @current_login.follow(Organization.organization_by_id(params[:follow_id].to_i)) if params[:agent] == "org"
+  @current_user.follow(User.user_by_id(params[:follow_id].to_i)) if params[:agent] == "user"
+  @current_user.follow(Organization.organization_by_id(params[:follow_id].to_i)) if params[:agent] == "org"
   redirect back
 end

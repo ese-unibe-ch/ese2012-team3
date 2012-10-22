@@ -26,7 +26,7 @@
           <% if defined? version%>
             <%if version == :leave_organization %>
 
-                <%if agent.admin != @current_login # If the currently logged in person is admin of the org, he can't leave it
+                <%if agent.admin != @current_user # If the currently logged in person is admin of the org, he can't leave it
           %>
                   <form action="/organization/<%= xss agent.id %>/remove_member" method="post">
                     <input type="hidden" name="user_to_remove" value="<%= xss user.id%>" />

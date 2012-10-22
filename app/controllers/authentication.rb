@@ -33,6 +33,7 @@
     session[:user_id] = nil
     session[:organization_id] = nil
     @current_user = nil
+    @current_agent = nil
 
     redirect "/login"
   end
