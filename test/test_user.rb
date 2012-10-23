@@ -174,7 +174,9 @@ class UserTest < Test::Unit::TestCase
     donald = User.init(:name => "donald", :password => "Zz!45678")
     dagobert = User.init(:name => "dagobert", :password => "Zz!45678")
     donald.follow(dagobert)
-    assert(donald.following.detect(dagobert))
+    assert(donald.following.include?(dagobert))
+    donald.follow(dagobert)
+    assert(!donald.following.include?(dagobert))
   end
 
 end
