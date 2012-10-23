@@ -95,6 +95,12 @@ module Market
       Organization.organizations_by_user(self)
     end
 
+    def is_admin?
+      for org in self.list_organizations
+        return true if org.admin == (self)
+      end
+    end
+
     # TODO move to a more appropriate place
     def profile_route
       "/profile/#{self.id}"

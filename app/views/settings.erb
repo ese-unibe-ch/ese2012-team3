@@ -48,7 +48,8 @@
       <fieldset>
         <div class="form-actions">
           <input type="hidden" name="_method" value="delete"/>
-          <button class="btn btn-danger" type="submit">Delete account</button>
+          <button class="btn btn-danger" <%if @current_user.is_admin?%> disabled="disabled"<%end%> type="submit">Delete account</button>
+          <%if @current_user.is_admin?%> You are currently admin of an organization. Make another member admin before deleting your account. <%end%>
         </div>
       </fieldset>
     </form>
