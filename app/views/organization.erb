@@ -21,7 +21,7 @@
       <%end%>
 
       <% if !@org.about.empty? %>
-          <p>About: <%= xss @org.about %></p>
+          <p>About: <%= mdown_to_html (xss @org.about) %></p>
       <% end %>
 
       <h3 style="padding-top: 50px;"><%= xss @org.name %>'s Items</h3>

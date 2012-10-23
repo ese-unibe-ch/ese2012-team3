@@ -6,6 +6,7 @@ require_relative 'models'
 # App-only requirements
 require 'sinatra'
 require 'erb'
+require 'redcarpet'
 require_relative 'helpers'
 
 # Controllers
@@ -51,17 +52,25 @@ User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 
 eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
-eseo.add_item(Item.init(:name => "pizza", :price => 18, :active => true, :owner => eseo))
 
-uno = Organization.init(:name => "UNO", :credit => 1000, :about => 'united nations', :admin => john)
+
+pizza_about =
+"* mozarella
+* garlic
+* __bacon__"
+pizza = Item.init(:name => "pizza", :price => 18, about: pizza_about, :active => true, :owner => eseo)
+eseo.add_item(pizza)
+
+
+uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 
 User.all.each_with_index do |user, i|
   item = Item.init(:name => "item" + i.to_s, :price => 100)
-  comment = Comment.init(:creator => user, :text => "This is my utem")
+  comment = Comment.init(:creator => user, :text => "This is **my** item")
   item.add_comment(comment)
-  item.add_comment(Comment.init(:creator => user, :text => "*item"))
+  item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end

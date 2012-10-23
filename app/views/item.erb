@@ -11,11 +11,21 @@
 
       <%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
 
-      <p>Owner: <%= erb :_user_link, :locals => {:user => @item.owner} %></p>
-      <p>Price: <%= xss @item.price %></p>
-      <% if !@item.about.empty? %>
-          <p>Description: <%= xss @item.about %></p>
-      <% end %>
+      <table class="table table-bordered" style="width: 66%">
+        <tr>
+          <td>Owner:</td>
+          <td><%= erb :_user_link, :locals => {:user => @item.owner} %></td>
+        </tr>
+        <tr>
+          <td>Price</td>
+          <td><%= xss @item.price %></td>
+        </tr>
+        <tr>
+          <td>Description:</td>
+          <td><%= mdown_to_html(xss @item.about) %></td>
+        </tr>
+      </table>
+
 
       <h3>Comments</h3>
       <%if @item.comments.length == 0%>
@@ -23,7 +33,8 @@
       <%else%>
         <%for comment in @item.comments%>
           <hr />
-        <p><%= erb :_user_link, :locals => {:user => comment.creator} %>: <%= xss comment %></p>
+          <p><%= erb :_user_link, :locals => {:user => comment.creator} %></p>
+          <%= mdown_to_html (xss comment) %>
         <%end%>
       <%end%>
     </div>

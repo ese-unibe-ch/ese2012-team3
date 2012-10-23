@@ -31,7 +31,7 @@
     <%= erb :_image_rect, :locals => {:filename => @user.image_file_name, :size => LARGEIMAGESIZE} %>
 
     <% if @user.about.length > 0 %>
-    <p>Interests: <%= xss @user.about %></p>
+      <p>Interests: <%= mdown_to_html (xss @user.about) %></p>
     <% end %>
 
     <h3 style="padding-top: 50px;">
