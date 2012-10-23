@@ -7,6 +7,7 @@ class OrganizationTest < Test::Unit::TestCase
     @user = User.init(:name => "testuser", :credit => 500, :password => 'Ax1301!3')
   end
   def teardown
+    Organization.delete_all
     User.delete_all
   end
 
@@ -203,6 +204,5 @@ class OrganizationTest < Test::Unit::TestCase
 
     assert_equal(org, Organization.organization_by_id(0))
     assert_equal(org2, Organization.organization_by_id(1))
-    assert_nil(Organization.organization_by_id(2))
   end
 end

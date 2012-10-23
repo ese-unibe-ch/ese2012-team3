@@ -6,7 +6,7 @@ class TestPasswordCheck  < Test::Unit::TestCase
   end
 
   def test_strong
-    PasswordCheck::ensure_password_strong("H3ll0 2 U!", "", "")
+    PasswordCheck::ensure_password_strong("H3ll0 2 U!", "SomeUser", "")
   end
 
   def test_not_strong_similar

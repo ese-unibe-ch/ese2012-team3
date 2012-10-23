@@ -107,7 +107,7 @@ module Market
     end
 
     def delete_image_file
-      delete_public_file(self.image_file_name)
+      delete_public_file(self.image_file_name) unless self.image_file_name == nil
     end
 
     def follow(follow)
