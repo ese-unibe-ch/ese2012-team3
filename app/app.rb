@@ -58,7 +58,7 @@ pizza_about =
 "* mozarella
 * garlic
 * __bacon__"
-pizza = Item.init(:name => "pizza", :price => 18, about: pizza_about, :active => true, :owner => eseo)
+pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active => true, :owner => eseo)
 eseo.add_item(pizza)
 
 
