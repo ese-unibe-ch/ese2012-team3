@@ -1,6 +1,7 @@
 class UserTest < Test::Unit::TestCase
 
   def setup
+    Organization.delete_all
     User.delete_all
     Item.delete_all
   end
@@ -177,6 +178,13 @@ class UserTest < Test::Unit::TestCase
     assert(donald.following.include?(dagobert))
     donald.follow(dagobert)
     assert(!donald.following.include?(dagobert))
+  end
+
+  def test_is_admin?
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+
+    org = Organization.init(:name => "org15", :admin => dagobert)
+    assert(dagobert.is_admin?)
   end
 
 end

@@ -20,4 +20,10 @@ class TestPasswordCheck  < Test::Unit::TestCase
       PasswordCheck::ensure_password_strong("H3ll0 2 U!", "H3ll0", "")
     end
   end
+
+  def test_significantly_different?
+    assert(PasswordCheck::significantly_different?("H3ll0 2 U!", "Ax1301!3"))
+    assert(!PasswordCheck::significantly_different?("H3ll0 2 U!", "H3ll0 2 ME!"))
+    #maybe some more?
+  end
 end
