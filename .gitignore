@@ -31,6 +31,7 @@ Gemfile.lock
 .idea/modules.xml
 
 /app/public/userimages/*
+!/app/public/userimages/1.png
 /app/public/itemimages/*
 /app/public/organizationimages/*
 

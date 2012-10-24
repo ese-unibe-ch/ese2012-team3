@@ -50,7 +50,7 @@ john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
 User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
 User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
-
+john.image_file_name="userimages/1.png"
 eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
 
 
