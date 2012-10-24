@@ -32,7 +32,7 @@
         This item has no comments yet.
       <%else%>
           <table class="table table-striped" style="width: 66%">
-            <%for comment in @item.comments%>
+            <%for comment in @item.comments.reverse%>
                 <tr>
                   <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>
                     <%if comment.creator == @item.owner %>
