@@ -72,6 +72,7 @@ User.all.each_with_index do |user, i|
   comment = Comment.init(:creator => user, :text => "This is **my** item")
   item.add_comment(comment)
   item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))
+  item.add_comment(Comment.init(:creator => john, :text => "i'll give you **10** credits, max!"))
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
