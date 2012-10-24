@@ -47,8 +47,8 @@ enable :sessions # never forget
 
 # ===================== TEST DATA =====================
 john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
-User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
-User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
+jimmy = User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
+jack = User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 john.image_file_name="userimages/1.png"
 eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
@@ -66,7 +66,7 @@ pizza.add_comment(Comment.init(:creator => john, :text => "can i get that withou
 uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
-
+uno.image_file_name="organizationimages/2.jpg"
 User.all.each_with_index do |user, i|
   item = Item.init(:name => "item" + i.to_s, :price => 100)
   comment = Comment.init(:creator => user, :text => "This is **my** item")
