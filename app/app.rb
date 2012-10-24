@@ -60,6 +60,7 @@ pizza_about =
 * __bacon__"
 pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active => true, :owner => eseo)
 eseo.add_item(pizza)
+pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
 
 
 uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)

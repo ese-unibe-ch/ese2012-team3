@@ -19,7 +19,7 @@
       <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
         <td><%= erb :_image_rect, :locals => {:filename => agent.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td><%= erb :_user_link, :locals => {:user => agent} %></td>
-        <td><%= xss agent.about %></td>
+        <td><%= mdown_to_html (xss agent.about) %></td>
         <td></td>
         <td></td>
         <td>
