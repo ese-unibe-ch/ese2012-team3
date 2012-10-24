@@ -39,12 +39,13 @@
                 <span class="label label-success">Owner</span>
                 <%end%>
               </td>
-              <td> <%= mdown_to_html (xss comment) %> </td>
+              <td> <%= mdown_to_html(xss comment.text) %> </td>
               <td>
-                <form action="" method="post">
+                <form action="#" method="POST">
                   <input type="hidden" name="creator" value="<%= xss comment.creator %>" />
                   <input type="hidden" name="quote" value="<%= xss comment.text %>" />
-                  <input type="submit" class="btn btn-info small" name="submit" value="Reply"/>
+                  <button class="btn btn-info small" name="reply"
+                      onClick="document.getElementById('newCommentArea').value='<%= xss comment.creator.name; %> wrote:\n > <%= xss comment.text.tr("\r\n", " ") %>'; return false;">Reply</button>
                 </form>
               </td>
             </tr>
@@ -55,8 +56,9 @@
       <h2>Add comment</h2>
       <p>You can use markdown syntax to style the comment. For example: **<b>bold text</b>**</p>
       <form action="/item/<%= @item.id.to_s %>/add_comment" method="POST">
-        <input type="hidden" name="commenter" value="<%= xss comment.creator %>" />
-        <textarea class="field span7" name="comment" placeholder="Add some comment, maybe?" rows="7"></textarea><br />
+        <input type="hidden" name="commenter" value="<%= @current_agent %>" />
+        <textarea id="newCommentArea" class="field span7" name="comment"
+            placeholder="Add some comment, maybe?" rows="7"></textarea><br />
         <input type="submit" class="btn btn-info" name="submit" value="Add comment" />
       </form>
     </div>
