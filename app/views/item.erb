@@ -1,6 +1,6 @@
 <% @title = "Item: #{@item.name}" %>
 
-<section id="content">
+<section id="content" xmlns="http://www.w3.org/1999/html">
   <div class="row">
     <%= erb :_sidebar %>
 
@@ -31,12 +31,18 @@
       <%if @item.comments.length == 0%>
         This item has no comments yet.
       <%else%>
-        <%for comment in @item.comments%>
-          <hr />
-          <p><%= erb :_user_link, :locals => {:user => comment.creator} %></p>
-          <%= mdown_to_html (xss comment) %>
-        <%end%>
-      <%end%>
+          <table class="table table-striped" style="width: 66%">
+            <%for comment in @item.comments%>
+                <tr>
+                  <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>:</td>
+                  <td> <%= mdown_to_html (xss comment) %> </td>
+                  <%if comment.creator == @item.owner %>
+                    <td><span class="label label-success">Owner</span></td>
+                  <%end%>
+                </tr>
+            <%end%>
+      </table>
+    <%end%>
     </div>
   </div>
 </section>
