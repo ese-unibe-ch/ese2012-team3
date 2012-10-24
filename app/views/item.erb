@@ -33,24 +33,32 @@
       <%else%>
           <table class="table table-striped" style="width: 66%">
             <%for comment in @item.comments.reverse%>
-                <tr>
-                  <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>
-                    <%if comment.creator == @item.owner %>
-                      <span class="label label-success">Owner</span>
-                    <%end%>
-                  </td>
-                  <td> <%= mdown_to_html (xss comment) %> </td>
-                  <td>
-                    <form action="" method="post">
-                        <input type="hidden" name="creator" value="<%= xss comment.creator %>" />
-                        <input type="hidden" name="quote" value="<%= xss comment.text %>" />
-                        <input type="submit" class="btn btn-info small" name="submit" value="Reply"/>
-                    </form>
-                  </td>
-                </tr>
+            <tr>
+              <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>
+                <%if comment.creator == @item.owner %>
+                <span class="label label-success">Owner</span>
+                <%end%>
+              </td>
+              <td> <%= mdown_to_html (xss comment) %> </td>
+              <td>
+                <form action="" method="post">
+                  <input type="hidden" name="creator" value="<%= xss comment.creator %>" />
+                  <input type="hidden" name="quote" value="<%= xss comment.text %>" />
+                  <input type="submit" class="btn btn-info small" name="submit" value="Reply"/>
+                </form>
+              </td>
+            </tr>
             <%end%>
-      </table>
-    <%end%>
+          </table>
+      <%end%>
+
+      <h2>Add comment</h2>
+      <p>You can use markdown syntax to style the comment. For example: **<b>bold text</b>**</p>
+      <form action="/item/<%= @item.id.to_s %>/add_comment" method="POST">
+        <input type="hidden" name="commenter" value="<%= xss comment.creator %>" />
+        <textarea class="field span7" name="comment" placeholder="Add some comment, maybe?" rows="7"></textarea><br />
+        <input type="submit" class="btn btn-info" name="submit" value="Add comment" />
+      </form>
     </div>
   </div>
 </section>

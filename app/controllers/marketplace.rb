@@ -105,5 +105,11 @@
     erb :item
   end
 
-
-
+  post "/item/:id/add_comment" do
+    redirect '/login' unless session[:user_id]
+    # TODO add errors and redirect back to the item detail page (didn't figure out how to do that)
+    # e.g. empty comments
+    @item = Item.by_id(params[:id].to_i)
+    @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
+    redirect "/item/#{params[:id]}"
+  end
