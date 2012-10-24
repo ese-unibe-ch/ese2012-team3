@@ -30,9 +30,8 @@ get "/organization/:id" do
   halt erb :error, :locals => {:message => "no organization found to id #{params[:id]}"} unless @org
 
   @items = Item.items_by_agent(@org)
-  addable_users = User.all.select {|u| !u.is_member_of?(@org)}
 
-  erb :organization, :locals => {:addable_users   => addable_users}
+  erb :organization
 end
 
 post "/organization/:id/add_member" do
@@ -50,7 +49,7 @@ post "/organization/:id/add_member" do
     halt erb :error, :locals => {:message => e.message}
   end
 
-  redirect "/organization/#{params[:id]}"
+  redirect "/organization/#{params[:id]}/settings"
 end
 
 post "/organization/:id/remove_member" do
@@ -70,4 +69,15 @@ get "/organization/:id/switch" do
   redirect '/login' unless session[:user_id]
   session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_user)
   redirect "/?alert=switcheduser"
+end
+
+get "/organization/:id/settings" do
+  redirect '/login' unless session[:user_id]
+
+  @org = Organization.organization_by_id(params[:id].to_i) 
+  halt erb :error, :locals => {:message => "no organization found to id #{params[:id]}"} unless @org
+
+  addable_users = User.all.select {|u| !u.is_member_of?(@org)}
+
+  erb :organization_settings, :locals => {:addable_users   => addable_users}
 end

@@ -46,38 +46,6 @@
             </fieldset>
           </form>
       <% end %>
-
-      <hr />
-
-      <h3><%= xss @org.name %>'s Members</h3>
-
-      <%=erb :_agent_list, :locals=>{:agents => @org.members,
-                                     :version => (@org.admin == @current_user ? :remove_org_member : nil) ,
-                                     :org => @org
-
-      }%>
-
-
-      <hr />
-
-      <% if @org.admin == @current_user and @current_agent == @org %>
-        <h3>Add member to organization</h3>
-        <% if addable_users.length > 0 %>
-            <form action="/organization/<%= @org.id %>/add_member" method="POST">
-              <fieldset>
-                <select name="user_to_add">
-                <% for user in addable_users %>
-                  <option value="<%= user.id %>"><%= user.name %></option>
-                <% end %>
-                </select>
-                <button class="btn btn-info" type="submit">Add user</button>
-              </fieldset>
-            </form>
-        <% else %>
-          <p>No users to add available</p>
-        <% end %>
-      <% end %>
-
     </div>
   </div>
 </section>

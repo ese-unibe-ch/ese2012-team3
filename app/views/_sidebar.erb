@@ -13,12 +13,12 @@
           </li>
           <li><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
 
-          <%if @current_agent == @current_user %>
+          <% if @current_agent == @current_user %>
           <li><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
-
-
           <li><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
-                <% end %>
+          <% else %>
+          <li><a href="/organization/<%= @current_agent.id %>/settings"><i class="icon-wrench"></i>Org. Settings</a></li>
+          <% end %>
       <% end %>
     </ul>
   </div>
