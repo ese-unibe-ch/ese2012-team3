@@ -187,4 +187,36 @@ class UserTest < Test::Unit::TestCase
     assert(dagobert.is_admin?)
   end
 
+  def test_is_member_of?
+    donald = User.init(:name => "donald", :password => "Zz!45678")
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+    org = Organization.init(:name => "org", :admin => dagobert)
+    org1 = Organization.init(:name => "org1", :admin => donald)
+    assert(dagobert.is_member_of?(org))
+    assert(!dagobert.is_member_of?(org1))
+  end
+
+  def test_allNames
+    names = []
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+    names << "dagobert"
+    assert(User.allNames == names)
+    donald = User.init(:name => "donald", :password => 'Ax1301!3')
+    names << "donald"
+    assert(User.allNames == names)
+  end
+
+  def test_has_user_with_id?
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+    assert(User.has_user_with_id?(0))
+    assert(!User.has_user_with_id?(1))
+    donald = User.init(:name => "donald", :password => 'Ax1301!3')
+    assert(User.has_user_with_id?(1))
+  end
+
+  def test_profile_route
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+    assert(dagobert.profile_route == "/profile/0")
+  end
+
 end
