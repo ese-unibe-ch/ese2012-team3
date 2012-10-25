@@ -33,6 +33,26 @@
         <% else %>
           <p>No users to add available</p>
         <% end %>
+          <form class="form-horizontal" method="POST" action="/change_profile_picture_organization" enctype="multipart/form-data">
+            <h3>Change my profile picture</h3>
+            <fieldset>
+              <%= erb :_image_file_control %>
+              <div class="form-actions">
+                <button class="btn btn-info" type="submit">Change profile picture</button>
+              </div>
+            </fieldset>
+          </form>
+          <% if @org.image_file_name != nil %>
+              <h3>Delete my profile picture</h3>
+              <form class="form-horizontal" method="POST" action="/delete_profile_picture_organization" >
+                <fieldset>
+                  <div class="form-actions">
+                    <input type="hidden" name="_method" value="delete"/>
+                    <button class="btn btn-danger" type="submit">Delete profile picture</button>
+                  </div>
+                </fieldset>
+              </form>
+          <% end %>
       <% end %>
 
     </div>

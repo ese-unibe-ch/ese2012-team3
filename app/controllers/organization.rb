@@ -81,3 +81,31 @@ get "/organization/:id/settings" do
 
   erb :organization_settings, :locals => {:addable_users   => addable_users}
 end
+
+post "/change_profile_picture_organization" do
+  set_error :image_file, "You didn't choose a file" unless  params[:image_file]
+
+  image_file_check()
+
+  halt erb :settings unless @errors.empty?
+
+  org = @current_agent
+  if org.image_file_name != nil && params[:image_file] != nil
+    org.delete_profile_picture_organization
+  end
+
+  org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id)
+
+  redirect "/organization/#{org.id}"
+end
+
+delete "/delete_profile_picture_organization" do
+  org = @current_agent
+
+  halt erb :error, :locals =>
+      {:message => "You don't have a profile picture"} unless org.image_file_name
+
+  org.delete_image_file
+
+  redirect "/organization/#{org.id}"
+end
