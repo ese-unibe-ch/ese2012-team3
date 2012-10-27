@@ -11,19 +11,18 @@
     <% if @user == @current_agent%>
     <h2><%= xss @user.name %> - My profile</h2>
     <% else %>
-    <h2>Viewing profile: <%= xss @user.name %>
-      <% if @user != @current_user && @current_user == @current_agent%>
-          <form action="/follow" method="POST" style="display: inline">
-            <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
-            <input type="hidden" name="agent" value="user" />
-            <% if @current_user.following.include?(@user) %>
-                <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
-            <%else%>
-                <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
-            <%end%>
-          </form>
-      <%end%>
-    </h2>
+    <h2>Viewing profile: <%= xss @user.name %></h2>
+    <% if @user != @current_user && @current_user == @current_agent%>
+      <form action="/follow" method="POST" style="display: inline">
+        <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
+        <input type="hidden" name="agent" value="user" />
+        <% if @current_user.following.include?(@user) %>
+          <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
+        <% else %>
+          <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
+        <% end %>
+      </form>
+    <% end %>
     <% end %>
 
 

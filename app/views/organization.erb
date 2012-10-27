@@ -6,8 +6,6 @@
     <div class="span10">
       <h1>Organization: <%= xss @org.name %></h1>
 
-      <%= erb :_image_rect, :locals => {:filename => @org.image_file_name, :size => LARGEIMAGESIZE} %>
-
       <% if @user != @current_user && @current_user == @current_agent%>
           <form action="/follow" method="POST">
             <input type="hidden" name="follow_id" value="<%= xss @org.id%>" />
@@ -19,6 +17,8 @@
             <%end%>
           </form>
       <%end%>
+
+      <%= erb :_image_rect, :locals => {:filename => @org.image_file_name, :size => LARGEIMAGESIZE} %>
 
       <% if !@org.about.empty? %>
           <p>About: <%= mdown_to_html (xss @org.about) %></p>
