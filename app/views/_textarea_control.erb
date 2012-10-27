@@ -6,10 +6,7 @@
 <div class="control-group <%= "error" if @errors[name] %>">
   <label class="control-label"><%=label%></label>
   <div class="controls">
-    <input class="input-xlarge span5"
-           type="<%= (defined? password and password) ? "password" :"text" %>"
-           name="<%=name.to_s%>"
-           value="<%= xss params[name] %>" />
+    <textarea class="input-xlarge span5" name="<%=name.to_s%>" rows="7"><%= xss params[name] %></textarea>
 
     <% if @errors[name] %>
         <span class="help-inline"><%= xss @errors[name] %></span>
