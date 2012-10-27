@@ -1,6 +1,7 @@
 module SecurityHelpers
     def xss(text)
-      Rack::Utils.escape_html(text)
+      escaped = Rack::Utils.escape_html(text)
+      escaped.gsub("&gt;", ">")
     end
 end
 
