@@ -94,7 +94,12 @@
         <%=erb :_agent_list, :locals=>{:agents => @following}%>
     <% end %>
 
-
+    <h3>Wishlist</h3>
+    <% if @current_agent.wishlist.empty? %>
+       <p>This user has no items in his wishlist.</p>
+    <% else %>
+       <%= erb :_wish_list %>
+    <% end %>
 
   </div>
 </div>

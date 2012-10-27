@@ -21,6 +21,7 @@ module Market
       org.name = params[:name]
       org.credit = params[:credit] || 100
       org.about = params[:about] || ""
+      org.wishlist = []
       @@organizations << org
       org.id = @@organization_id_counter
       @@organization_id_counter = @@organization_id_counter + 1

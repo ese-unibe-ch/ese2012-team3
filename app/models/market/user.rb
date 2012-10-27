@@ -30,6 +30,7 @@ module Market
       PasswordCheck::ensure_password_strong(params[:password], params[:name], "")
       user.password = params[:password] || ""
       user.following = []
+      user.wishlist = []
       @@users << user
       user.id = @@user_id_counter
       @@user_id_counter = @@user_id_counter + 1

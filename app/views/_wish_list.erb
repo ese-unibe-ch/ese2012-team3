@@ -1,0 +1,22 @@
+<table class="table">
+  <thead>
+  <th>Picture</th>
+  <th>Name</th>
+  <th>Description</th>
+  <th></th>
+  <th></th>
+  <th></th>
+  </thead>
+  <tbody>
+      <% for wish in @current_agent.wishlist %>
+      <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
+        <td><%= erb :_image_rect, :locals => { :filename => wish.image_file_name, :size => LISTIMAGESIZE } %></td>
+        <td><%= erb :_item_link, :locals => { :item => wish, :highlight_active => true } %></td>
+        <td><%= mdown_to_html (xss wish.about) %></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>

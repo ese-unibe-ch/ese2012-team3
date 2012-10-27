@@ -1,7 +1,7 @@
 # Abstract
 module Market
   class Agent
-    attr_accessor :name, :credit, :about, :id, :image_file_name
+    attr_accessor :name, :credit, :about, :id, :image_file_name, :wishlist
 
     # increase the balance
     # @param [Numeric] amount - amount to be added
@@ -55,5 +55,17 @@ module Market
       item.owner = nil
     end
 
+    # add item to wishlist
+    # currently the button is only displayed for organizations
+    # @param [Item] item - item to be added to the wishlist
+    def add_item_to_wishlist(item)
+      wishlist << item unless wishlist.include?(item)
+    end
+
+    # remove item from wishlist
+    # @param [Item] item - item to be removed from wishlist
+    def remove_item_from_wishlist(item)
+      wishlist.delete(item)
+    end
   end
 end

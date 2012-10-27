@@ -85,8 +85,8 @@
     end
     redirect @current_agent.profile_route
   end
-
-  get "/item/:id/edit" do
+ 
+ get "/item/:id/edit" do
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -113,4 +113,17 @@
     @item = Item.by_id(params[:id].to_i)
     @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
     redirect "/item/#{params[:id]}"
+  end
+
+  post "/item/:id/watchlist" do
+    redirect '/login' unless session[:user_id]
+
+    @item = Item.by_id(params[:id].to_i)
+    if @current_agent.wishlist.include?(@item)
+      @current_agent.remove_item_from_wishlist(@item)
+    else
+      @current_agent.add_item_to_wishlist(@item)
+    end
+
+    redirect "/item/#{@item.id.to_s}"
   end
