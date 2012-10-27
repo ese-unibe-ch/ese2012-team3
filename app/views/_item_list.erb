@@ -32,7 +32,7 @@ page = params[identifier] ? params[identifier].to_i : 0
         </td>
 
 
-        <td style="text-align: right; padding-right: 10em;"><%= xss item.price %></td>
+        <td style="text-align: right; padding-right: 10em;"><%= xss ts(item.price) %></td>
         <td><%= (defined? show_owner) ?
                 (erb :_user_link, :locals => {:user => item.owner}) : "" %></td>
 

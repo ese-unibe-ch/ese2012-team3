@@ -44,6 +44,7 @@
     @errors[:name] = "item must have a name!" if params[:name].empty?
     @errors[:price] = "item must have a price!" if params[:price].empty?
     @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
+    @errors[:price] = "price has to be a number!" unless params[:price].match /^[0-9]*$/
     image_file_check()
 
     #create item

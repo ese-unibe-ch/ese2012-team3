@@ -1,7 +1,14 @@
-module Security
+module SecurityHelpers
     def xss(text)
-      Rack::Utils.escape_html(text)
+      escaped = Rack::Utils.escape_html(text)
+      escaped.gsub("&gt;", ">")
     end
+end
+
+module NumericHelpers
+  def ts(s)
+    s.to_s.gsub(/(\d)(?=(\d\d\d)+(?!\d))/, "\\1'")
+  end
 end
 
 module MarkupHelpers
@@ -12,5 +19,5 @@ module MarkupHelpers
 end
 
 
-helpers Security, MarkupHelpers
+helpers SecurityHelpers, NumericHelpers, MarkupHelpers
 
