@@ -1,7 +1,10 @@
 module Market
   class Organization < Agent
     # Very similar to user
-    attr_accessor :members, :admin  # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
+    attr_accessor :members, # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
+                  :admin,
+                  :orgactivities # a more complete list of the activities of the organization, with each activity storing the actual user that did it
+
     # TODO Store roles of members. Make sure there's always an admin.
 
     @@organizations = []
@@ -16,6 +19,8 @@ module Market
       fail "Organization needs an admin" unless params[:admin].is_a?(Market::User)
       org = self.new
       org.members = []
+      org.activities = []
+      org.orgactivities = []
       org.admin = params[:admin]
       org.add_member(params[:admin])
       org.name = params[:name]
@@ -82,6 +87,7 @@ module Market
 
     def delete_image_file
       delete_public_file(self.image_file_name) unless self.image_file_name == nil
+      self.image_file_name = nil
     end
 
     # Missing: Deletion...

@@ -6,6 +6,28 @@
   <div class="span10">
     <h1>Marketplace</h1>
 
+    <!--
+    itemlistpage:  <%=Time.now.to_s%>
+      , url: <%=request.path_info%>
+    , test: <%=3/2%>
+        -->
+    <h3>Followee's Activities</h3>
+    <% testactivities=[] # TODO: Create from list of all followed users and their activities, sort by time
+       for i in 0...2
+
+       testactivities.push(Activity.init(:creator => UNO_ORG, :message => "#{i} commented on 'pizza'", :type => :comment))
+       testactivities.push(Activity.init(:creator => UNO_ORG, :message => "#{i} started following 'ese'", :type => :follow))
+       testactivities.push(Activity.init(:creator => UNO_ORG, :message => "#{i} activated the item 'pizza'", :type => :activate))
+       testactivities.push(Activity.init(:creator => UNO_ORG, :message => "#{i} stopped following 'ese'", :type => :follow))
+       testactivities.push(Activity.init(:creator => UNO_ORG, :message => "#{i} deactivated the item 'pizza'", :type => :activate))
+         end
+       %>
+
+    <%=erb :_activity_list, :locals=>{
+            :activities => testactivities
+    }%>
+
+    <h3>Items on the Market</h3>
     <%=erb :_item_list, :locals=>{
             :items => @all_items,
             :show_owner => true

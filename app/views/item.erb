@@ -31,8 +31,16 @@
       <%if @item.comments.length == 0%>
         This item has no comments yet.
       <%else%>
+
+          <%
+          page = params[:commentspage] ? params[:commentspage].to_i : 0
+            %>
+          <%= erb :_pages_links, :locals =>
+                  {:size => @item.comments.size, :per_page => COMMENTS_PER_PAGE, :identifier => :commentspage} %>
+
           <table class="table table-striped" style="width: 66%">
-            <%for comment in @item.comments.reverse%>
+            <% @item.comments.reverse.each_with_index do |comment, index| %>
+            <% next unless index/COMMENTS_PER_PAGE == page %>
             <tr>
               <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>
                 <%if comment.creator == @item.owner %>
@@ -51,6 +59,8 @@
             </tr>
             <%end%>
           </table>
+
+
       <%end%>
 
       <h2>Add comment</h2>

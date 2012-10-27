@@ -1,7 +1,8 @@
 # Abstract
 module Market
   class Agent
-    attr_accessor :name, :credit, :about, :id, :image_file_name
+    attr_accessor :name, :credit, :about, :id, :image_file_name,
+                  :activities   # a list of Activity s
 
     # increase the balance
     # @param [Numeric] amount - amount to be added

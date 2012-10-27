@@ -24,8 +24,23 @@
           <p>About: <%= mdown_to_html (xss @org.about) %></p>
       <% end %>
 
-      <h3 style="padding-top: 50px;"><%= xss @org.name %>'s Items</h3>
+      <% if @current_agent == @org %>
+          <h3 style="padding-top: 50px;">Latest Organization Activities</h3>
 
+          <% testactivities=[]     # TODO use @org.orgactivities, sorted in reverse (that is, by time, most recent first)
+             for i in 0...2
+               testactivities.push(Activity.init(:creator => JACK_USER, :message => "#{i} bought the item 'pizza' for 123 credits", :type => :buy))
+               testactivities.push(Activity.init(:creator => JACK_USER, :message => "#{i} created the item 'pizza'", :type => :createitem))
+               testactivities.push(Activity.init(:creator => JACK_USER, :message => "#{i} commented on 'pizza'", :type => :comment))
+             end
+          %>
+
+          <%=erb :_activity_list, :locals=>{
+                  :activities => testactivities
+          }%>
+      <%end%>
+
+      <h3 style="padding-top: 50px;"><%= xss @org.name %>'s Items</h3>
       <% if @items.size > 0 %>
 
           <%=erb :_item_list, :locals=>{

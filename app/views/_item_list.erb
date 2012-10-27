@@ -4,7 +4,14 @@
 # can set in :locals hash:
 # :show_owner
 # :highlight_active
+# :identifier - identifier for this list on a page with multiple item lists, used for paging links
+
+identifier = :itemlistpage unless identifier
+page = params[identifier] ? params[identifier].to_i : 0
+
    %>
+
+<%= erb :_pages_links, :locals => {:size => items.size, :per_page => ITEMS_PER_PAGE, :identifier => identifier} %>
 
 <table class="table">
   <thead>
@@ -16,7 +23,8 @@
   <th></th>
   </thead>
   <tbody>
-  <% for item in items %>
+  <% items.each_with_index do |item, index| %>
+  <% next unless index/ITEMS_PER_PAGE == page %>
       <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
         <td><%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td>

@@ -1,0 +1,7 @@
+<%# required locals: size, per_page and identifier (must be an identifier)
+%>
+Page: <% pages = ((1.0*size)/per_page).ceil
+         pages = 1 if pages == 0
+         for i in 0...pages %>
+    <a href="<%=request.path_info+"?"+identifier.to_s+"="+i.to_s%>"><%=i+1%></a>
+<%end%>

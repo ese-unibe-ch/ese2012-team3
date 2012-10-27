@@ -1,5 +1,7 @@
 
   post "/item/:id/buy" do
+    # TODO: Create :buy activity in orgactivities if current_agent is an organization
+
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -15,6 +17,8 @@
   end
 
   post "/item/:id/status_change" do
+    # TODO: Create :activate activity, see "/item/:id/add_comment"
+
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -32,6 +36,8 @@
   end
 
   post "/item/create" do
+    # TODO: Create :createitem activity in orgactivities if current_agent is an organization
+
     redirect '/login' unless session[:user_id]
 
     #input validation
@@ -106,6 +112,9 @@
   end
 
   post "/item/:id/add_comment" do
+    # TODO create :comment ("commented on ...") activity in @current_agent. If @current_agent is an organization,
+    # also create that activity in @current_agent.orgactivities, with creator = @current_user
+
     redirect '/login' unless session[:user_id]
     # TODO add errors and redirect back to the item detail page (didn't figure out how to do that)
     # e.g. empty comments
