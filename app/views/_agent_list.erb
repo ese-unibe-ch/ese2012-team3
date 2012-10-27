@@ -1,10 +1,17 @@
 <% # Parameters (to pass in :locals)
-# agents to display
-#version: Optional - any of the identifiers
-#  :leave_organization Supply when listing orgs a user has joined, must also supply user then
-# :remove_org_member Supply when listing org members, must supply org
-# or nil
-    %>
+# * agents to display
+# * version: Optional - any of the identifiers
+#   :leave_organization Supply when listing orgs a user has joined, must also supply user then
+#   :remove_org_member Supply when listing org members, must supply org
+#   or nil
+# :identifier - identifier for this list on a page with multiple item lists, used for paging links
+identifier = :agentlistpage unless identifier
+page = params[identifier] ? params[identifier].to_i : 0
+%>
+
+<%= erb :_pages_links, :locals => {:size => agents.size, :per_page => AGENTS_PER_PAGE, :identifier => identifier} %>
+
+
 <table class="table">
   <thead>
   <th>Picture</th>
@@ -15,7 +22,8 @@
   <th></th>
   </thead>
   <tbody>
-  <% for agent in agents %>
+  <% agents.each_with_index do |agent, index| %>
+      <% next unless index/AGENTS_PER_PAGE == page %>
       <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px">
         <td><%= erb :_image_rect, :locals => {:filename => agent.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td><%= erb :_user_link, :locals => {:user => agent} %></td>

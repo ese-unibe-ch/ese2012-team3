@@ -33,12 +33,15 @@ LARGEIMAGESIZE         = 300
 USERIMAGESROOT         = "userimages" # relative to public
 ITEMIMAGESROOT         = "itemimages" # relative to public
 ORGANIZATIONIMAGESROOT = "organizationimages" # relative to public
+ITEMS_PER_PAGE         = 20
+AGENTS_PER_PAGE        = 20
+ACTIVITIES_PER_PAGE    = 5
+COMMENTS_PER_PAGE      = 20
+DUMMYTHINGSCOUNT = 40
 
 enable :sessions
 set :public_folder, relative('public')
 set :views, relative('views')
-DEFAULT_PASSWORD = "Ax1301!3"
-MAXIMAGEFILESIZE = 400*1024 # in bytes
 
 # configure do
 set :public_folder, PUBLIC_FOLDER # http://www.sinatrarb.com/configuration.html
@@ -53,6 +56,12 @@ ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 john.image_file_name="userimages/1.png"
 eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
 
+JACK_USER = jack
+
+# Some dummy users to test paging
+for i in 0...DUMMYTHINGSCOUNT
+  User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD)
+end
 
 pizza_about =
 "* mozarella
@@ -76,9 +85,24 @@ User.all.each_with_index do |user, i|
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
+
+UNO_ORG = uno
+
+# Some dummy items to test paging
+lastdummyitem = nil
+for i in 0...DUMMYTHINGSCOUNT
+  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => 10, :active => true, :owner => uno)
+  uno.add_item(lastdummyitem)
+end
+
+# Some dummy comments to test paging to LAST dummyitem
+for i in 0...DUMMYTHINGSCOUNT
+  lastdummyitem.add_comment(Comment.init(:creator => jack, :text => "very *nice* item! And **cheap** the #{i}th"))
+end
+
 # end
 
-
+# ===================== Global error handler =====================
 error do
   erb :error, :locals => {:message => request.env['sinatra.error'].message }
 end

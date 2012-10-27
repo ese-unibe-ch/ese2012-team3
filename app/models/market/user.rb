@@ -24,6 +24,7 @@ module Market
       fail "Username missing" unless params[:name] && params[:name].length > 0
       fail "User with given username already exists" if self.user_by_name(params[:name])
       user = self.new
+      user.activities = []
       user.name = params[:name]
       user.credit = params[:credit] || 100
       user.about = params[:about] || ""
@@ -109,6 +110,7 @@ module Market
 
     def delete_image_file
       delete_public_file(self.image_file_name) unless self.image_file_name == nil
+      self.image_file_name = nil
     end
 
     def follow(follow)

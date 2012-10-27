@@ -120,6 +120,8 @@ end
 
 
 post "/follow" do
+  # TODO: Create :follow activity at current_user
+
   redirect '/login' unless session[:user_id]
   @current_user.follow(User.user_by_id(params[:follow_id].to_i)) if params[:agent] == "user"
   @current_user.follow(Organization.organization_by_id(params[:follow_id].to_i)) if params[:agent] == "org"
