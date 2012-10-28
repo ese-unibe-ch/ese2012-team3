@@ -1,7 +1,23 @@
-<%# required locals: size, per_page and identifier (must be an identifier)
+<%# required locals: cur_page, size, per_page and identifier (must be an identifier)%>
+<%
+  pages = ((1.0*size)/per_page).ceil
+  pages = 1 if pages == 0
 %>
-Page: <% pages = ((1.0*size)/per_page).ceil
-         pages = 1 if pages == 0
-         for i in 0...pages %>
-    <a href="<%=request.path_info+"?"+identifier.to_s+"="+i.to_s%>"><%=i+1%></a>
-<%end%>
+
+<% if pages > 1 %>
+    <div class="pagination pagination-centered">
+      <ul>
+        <li class="<%= 'disabled' if cur_page == 0 %>">
+          <a href="<%="#{request.path_info}?#{identifier.to_s}=#{cur_page-1}"%>">Prev</a>
+        </li>
+        <% for i in 0...pages %>
+          <li class="<%= 'active' if cur_page == i %>">
+            <a href="<%="#{request.path_info}?#{identifier.to_s}=#{i}"%>"><%=i+1%></a>
+          </li>
+        <% end %>
+        <li class="<%= 'disabled' if cur_page+1 == pages %>">
+          <a href="<%="#{request.path_info}?#{identifier.to_s}=#{cur_page+1}"%>">Next</a>
+        </li>
+      </ul>
+    </div>
+<% end %>

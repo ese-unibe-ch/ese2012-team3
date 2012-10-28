@@ -13,7 +13,7 @@
     end
 
     #redirect back
-    redirect "/?alert=itembought"
+    redirect back + "?alert=itembought"
   end
 
   post "/item/:id/status_change" do
@@ -121,6 +121,7 @@
     # e.g. empty comments
     @item = Item.by_id(params[:id].to_i)
     @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
+
     redirect "/item/#{params[:id]}"
   end
 

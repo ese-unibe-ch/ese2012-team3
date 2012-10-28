@@ -9,8 +9,11 @@ identifier = :agentlistpage unless identifier
 page = params[identifier] ? params[identifier].to_i : 0
 %>
 
-<%= erb :_pages_links, :locals => {:size => agents.size, :per_page => AGENTS_PER_PAGE, :identifier => identifier} %>
-
+<%= erb :_pages_links, :locals => {:cur_page => page,
+                                   :size => agents.size,
+                                   :per_page => AGENTS_PER_PAGE,
+                                   :identifier => identifier}
+%>
 
 <table class="table">
   <thead>

@@ -5,9 +5,13 @@
    page = params[identifier] ? params[identifier].to_i : 0
 %>
 
-<%= erb :_pages_links, :locals => {:size => activities.size, :per_page => ACTIVITIES_PER_PAGE, :identifier => identifier} %>
+<%= erb :_pages_links, :locals => {:cur_page => page,
+                                   :size => activities.size,
+                                   :per_page => ACTIVITIES_PER_PAGE,
+                                   :identifier => identifier}
+%>
 
-<table class="table table-striped" style="width: 66%">
+<table class="table table-striped">
   <% activities.each_with_index do |activity, index| %>
   <% next unless index/ACTIVITIES_PER_PAGE == page %>
       <tr>

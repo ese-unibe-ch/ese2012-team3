@@ -11,7 +11,11 @@ page = params[identifier] ? params[identifier].to_i : 0
 
    %>
 
-<%= erb :_pages_links, :locals => {:size => items.size, :per_page => ITEMS_PER_PAGE, :identifier => identifier} %>
+<%= erb :_pages_links, :locals => {:cur_page => page,
+                                   :size => items.size,
+                                   :per_page => ITEMS_PER_PAGE,
+                                   :identifier => identifier}
+%>
 
 <table class="table">
   <thead>
