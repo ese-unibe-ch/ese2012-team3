@@ -68,10 +68,16 @@
 
       <h2>Add comment</h2>
       <p>You can use markdown syntax to style the comment. For example: **<b>bold text</b>**</p>
-      <form action="/item/<%= @item.id.to_s %>/add_comment" method="POST">
+      <form action="<%= "/item/#{@item.id}/add_comment" %>" method="POST">
         <input type="hidden" name="commenter" value="<%= @current_agent %>" />
-        <textarea id="newCommentArea" class="field span7" name="comment"
-            placeholder="Add some comment, maybe?" rows="7"></textarea><br />
+        <div class="control-group <%= "error" if !@errors.empty? %>">
+            <textarea id="newCommentArea" class="field span7" name="comment"
+                placeholder="Add some comment, maybe?" rows="7"></textarea>
+            <br />
+            <% if @errors[:comment] %>
+                <span class="help-inline"><%= xss @errors[:comment] %></span>
+            <% end %>
+        </div>
         <input type="submit" class="btn btn-info" name="submit" value="Add comment" />
       </form>
     </div>

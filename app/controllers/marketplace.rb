@@ -89,7 +89,7 @@
     else
       halt erb :edit_item
     end
-    redirect @current_agent.profile_route
+
   end
  
  get "/item/:id/edit" do
@@ -113,16 +113,23 @@
   end
 
   post "/item/:id/add_comment" do
+    redirect '/login' unless session[:user_id]
+
     # TODO create :comment ("commented on ...") activity in @current_agent. If @current_agent is an organization,
     # also create that activity in @current_agent.orgactivities, with creator = @current_user
 
-    redirect '/login' unless session[:user_id]
-    # TODO add errors and redirect back to the item detail page (didn't figure out how to do that)
-    # e.g. empty comments
-    @item = Item.by_id(params[:id].to_i)
-    @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
+    #input validation
+    @errors[:comment] = "comment must not be empty" if params[:comment].empty?
 
-    redirect "/item/#{params[:id]}"
+    @item = Item.by_id(params[:id].to_i)
+
+    if @errors.empty?
+      @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
+
+      redirect "/item/#{params[:id]}"
+    else
+      halt erb :item
+    end
   end
 
   post "/item/:id/watchlist" do
