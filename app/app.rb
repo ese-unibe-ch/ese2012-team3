@@ -91,7 +91,7 @@ UNO_ORG = uno
 # Some dummy items to test paging
 lastdummyitem = nil
 for i in 0...DUMMYTHINGSCOUNT
-  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => 10, :active => true, :owner => uno)
+  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100), :active => true, :owner => uno)
   uno.add_item(lastdummyitem)
 end
 
