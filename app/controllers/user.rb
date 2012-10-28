@@ -9,7 +9,6 @@ get "/profile/:id" do
 
   @user = User.user_by_id(params[:id])
 
-
   erb :userprofile
 end
 

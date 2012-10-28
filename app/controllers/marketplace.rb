@@ -17,16 +17,22 @@
   end
 
   post "/item/:id/status_change" do
-    # TODO: Create :activate activity, see "/item/:id/add_comment"
-
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
 
     if @current_agent == @item.owner
       @item.inactivate if params[:new_state] == "inactive"
-      @item.activate if params[:new_state] == "active"
+      if params[:new_state] == "active"
+        @item.activate
+
+        #add to activity list
+        @current_agent.add_activity(Activity.init({:creator => @current_agent,
+                                                   :type => :activate,
+                                                   :message => "activated #{@item.name}"}))
+      end
     end
+
     redirect back
   end
 
@@ -115,9 +121,6 @@
   post "/item/:id/add_comment" do
     redirect '/login' unless session[:user_id]
 
-    # TODO create :comment ("commented on ...") activity in @current_agent. If @current_agent is an organization,
-    # also create that activity in @current_agent.orgactivities, with creator = @current_user
-
     #input validation
     @errors[:comment] = "comment must not be empty" if params[:comment].empty?
 
@@ -125,6 +128,11 @@
 
     if @errors.empty?
       @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
+
+      #add to activity list
+      @current_agent.add_activity(Activity.init({:creator => @current_agent,
+                                                 :type => :comment,
+                                                 :message => "commented on #{@item.name}"}))
 
       redirect "/item/#{params[:id]}"
     else

@@ -66,7 +66,16 @@
 
   get "/" do
     redirect '/login' unless @current_user
-    erb :marketplace
+
+    #collect all activities
+    activities = []
+    if(@current_agent.respond_to?('following'))
+      for u in @current_agent.following do
+        activities.concat(u.activities)
+      end
+    end
+
+    erb :marketplace, :locals => {:activity_list => activities}
   end
 
   get "/strongpass" do

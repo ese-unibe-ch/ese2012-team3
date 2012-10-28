@@ -68,5 +68,10 @@ module Market
     def remove_item_from_wishlist(item)
       wishlist.delete(item)
     end
+
+    # @param [Activity] activity
+    def add_activity(activity)
+      self.activities.push(activity)
+    end
   end
 end
