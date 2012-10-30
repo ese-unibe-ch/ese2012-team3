@@ -28,16 +28,16 @@ DEFAULT_PASSWORD       = "Ax1301!3"
 DEFAULT_CREDITS        = 200
 MAXIMAGEFILESIZE       = 400*1024 # in bytes
 LISTIMAGESIZE          = 64 # in pixels
-LISTROWWITHIMAGEHEIGHT   = LISTIMAGESIZE + 8 # 72
+LISTROWWITHIMAGEHEIGHT = LISTIMAGESIZE + 8 # 72
 LARGEIMAGESIZE         = 300
 USERIMAGESROOT         = "userimages" # relative to public
 ITEMIMAGESROOT         = "itemimages" # relative to public
 ORGANIZATIONIMAGESROOT = "organizationimages" # relative to public
 ITEMS_PER_PAGE         = 20
 AGENTS_PER_PAGE        = 20
-ACTIVITIES_PER_PAGE    = 5
+ACTIVITIES_PER_PAGE    = 10
 COMMENTS_PER_PAGE      = 20
-DUMMYTHINGSCOUNT = 40
+DUMMYTHINGSCOUNT       = 30
 
 enable :sessions
 set :public_folder, relative('public')
@@ -55,8 +55,17 @@ jack = User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 john.image_file_name="userimages/1.png"
 eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
+uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
 
 JACK_USER = jack
+
+# followings
+john.follow(jack)
+john.follow(jimmy)
+john.follow(uno)
+ese.follow(john)
+ese.follow(jimmy)
+ese.follow(uno)
 
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
@@ -71,8 +80,6 @@ pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active
 eseo.add_item(pizza)
 pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
 
-
-uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 uno.image_file_name="organizationimages/2.jpg"

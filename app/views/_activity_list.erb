@@ -17,7 +17,10 @@
       <tr>
         <td> <%= erb :_user_link, :locals => {:user => activity.creator} %>
         </td>
-        <td> <%= mdown_to_html(xss activity.message+"\r\r*On #{activity.timestamp.to_s}*") %> </td>
+        <td>
+          <%= mdown_to_html(xss activity.message) %>
+          On <%= activity.timestamp.strftime('%F %T') %>
+        </td>
       </tr>
   <%end%>
 </table>

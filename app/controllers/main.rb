@@ -75,6 +75,8 @@
       end
     end
 
+    activities.sort! {|a,b| b.timestamp <=> a.timestamp}
+
     erb :marketplace, :locals => {:activity_list => activities}
   end
 
