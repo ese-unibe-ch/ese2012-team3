@@ -63,3 +63,9 @@ page = params[identifier] ? params[identifier].to_i : 0
   <% end %>
   </tbody>
 </table>
+
+<%= erb :_pages_links, :locals => {:cur_page => page,
+                                   :size => agents.size,
+                                   :per_page => AGENTS_PER_PAGE,
+                                   :identifier => identifier}
+%>
