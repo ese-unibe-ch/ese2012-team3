@@ -119,10 +119,19 @@ end
 
 
 post "/follow" do
-  # TODO: Create :follow activity at current_user
-
   redirect '/login' unless session[:user_id]
-  @current_user.follow(User.user_by_id(params[:follow_id].to_i)) if params[:agent] == "user"
-  @current_user.follow(Organization.organization_by_id(params[:follow_id].to_i)) if params[:agent] == "org"
+
+  if params[:agent] == "user"
+    follow = User.user_by_id(params[:follow_id].to_i)
+  else
+    follow = Organization.organization_by_id(params[:follow_id].to_i)
+  end
+
+  @current_user.follow(follow)
+
+  #add to activity list
+  @current_agent.add_activity(Activity.init({:creator => @current_agent,
+                                             :type => :follow,
+                                             :message => "follows #{follow.name}"}))
   redirect back
 end
