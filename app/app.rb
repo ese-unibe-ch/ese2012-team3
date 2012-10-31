@@ -54,8 +54,13 @@ jimmy = User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD
 jack = User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
 john.image_file_name="userimages/1.png"
+jimmy.image_file_name="userimages/1.png"
+jack.image_file_name="userimages/1.png"
+ese.image_file_name="userimages/1.png"
 eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :admin => ese)
 uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
+uno.image_file_name="userimages/1.png"
+eseo.image_file_name="userimages/1.png"
 
 JACK_USER = jack
 
@@ -76,7 +81,8 @@ ese.add_activity(Activity.init({:creator => ese,
                                    :message => "commented on some item - demo activity."}))
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
-  User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD)
+  dummyUser = User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD)
+  dummyUser.image_file_name="userimages/1.png"
 end
 
 pizza_about =
@@ -88,7 +94,6 @@ eseo.add_item(pizza)
 pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
-uno.image_file_name="organizationimages/2.jpg"
 User.all.each_with_index do |user, i|
   item = Item.init(:name => "item" + i.to_s, :price => 100)
   comment = Comment.init(:creator => user, :text => "This is **my** item")
@@ -96,6 +101,7 @@ User.all.each_with_index do |user, i|
   item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))
   item.add_comment(Comment.init(:creator => john, :text => "i'll give you **10** credits, max!"))
   user.add_item(item)
+  item.image_file_name="userimages/1.png"
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
 
@@ -105,6 +111,7 @@ UNO_ORG = uno
 lastdummyitem = nil
 for i in 0...DUMMYTHINGSCOUNT
   lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100), :active => true, :owner => uno)
+  lastdummyitem.image_file_name="userimages/1.png"
   uno.add_item(lastdummyitem)
 end
 
