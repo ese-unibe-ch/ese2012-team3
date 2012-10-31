@@ -7,7 +7,7 @@
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h1>Organization: <%= xss @org.name %></h1>
+      <h2>Organization: <%= xss @org.name %></h2>
 
       <% if @user != @current_user && @current_user == @current_agent%>
           <form action="/follow" method="POST">
@@ -24,16 +24,9 @@
       <%= erb :_image_rect, :locals => {:filename => @org.image_file_name, :size => LARGEIMAGESIZE} %>
 
       <% if !@org.about.empty? %>
-          <p>About: <%= mdown_to_html (xss @org.about) %></p>
+          <p><%= mdown_to_html (xss @org.about) %></p>
       <% end %>
 
-      <% if @current_agent == @org && !@org.orgactivities.empty?%>
-          <h3 style="padding-top: 50px;">Latest Organization Activities</h3>
-
-          <%=erb :_activity_list, :locals=>{
-                  :activities => @org.orgactivities
-          }%>
-      <%end%>
 
       <h3 style="padding-top: 50px;"><%= xss @org.name %>'s Items</h3>
       <% if @items.size > 0 %>
@@ -48,14 +41,21 @@
       <% end %>
 
       <% if @org == @current_agent %>
-          <form class="form-horizontal" method="GET" action="/item/create">
+          <form class="form-inline" method="GET" action="/item/create">
             <fieldset>
-              <div class="form-actions">
-                <button class="btn btn-info" type="submit">Add a new item...</button>
-              </div>
+              <button class="btn btn-info" type="submit">Add a new item...</button>
             </fieldset>
           </form>
       <% end %>
+
+      <% if @current_agent == @org && !@org.orgactivities.empty?%>
+          <h3 style="padding-top: 50px;">Latest Organization Activities</h3>
+
+          <%=erb :_activity_list, :locals=>{
+                  :activities => @org.orgactivities
+          }%>
+      <%end%>
+
     </div>
   </div>
 </section>

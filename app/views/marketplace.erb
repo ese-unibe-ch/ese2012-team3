@@ -7,14 +7,14 @@
 <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
-    <h1>Marketplace</h1>
+    <h2>Marketplace</h2>
 
     <%if !activity_list.empty? && @current_user == @current_agent%>
         <h3>Followee's Activities</h3>
         <%=erb :_activity_list, :locals=>{:activities => activity_list}%>
-    <%end%>
+        <h3>Items on the Market</h3>
+  <%end%>
 
-    <h3>Items on the Market</h3>
     <%=erb :_item_list, :locals=>{
             :items => @all_items,
             :show_owner => true

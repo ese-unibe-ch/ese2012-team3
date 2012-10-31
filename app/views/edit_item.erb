@@ -4,7 +4,7 @@
 <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
-    <h1>Edit item</h1>
+    <h2>Edit item</h2>
     <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/edit" %>" enctype="multipart/form-data">
       <%=erb :_create_edit_item %>
     </form>

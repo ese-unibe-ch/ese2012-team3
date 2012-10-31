@@ -28,12 +28,10 @@
     <% end %>
     <% end %>
 
-
-
     <%= erb :_image_rect, :locals => {:filename => @user.image_file_name, :size => LARGEIMAGESIZE} %>
 
     <% if @user.about.length > 0 %>
-      <p>Interests: <%= mdown_to_html (xss @user.about) %></p>
+      <p><%= mdown_to_html (xss @user.about) %></p>
     <% end %>
 
     <h3 style="padding-top: 50px;">
@@ -60,13 +58,11 @@
     <% end %>
 
     <% if @user == @current_agent %>
-    <form class="form-horizontal" method="GET" action="/item/create">
-      <fieldset>
-        <div class="form-actions">
-          <button class="btn btn-info" type="submit">Add a new item...</button>
-        </div>
-      </fieldset>
-    </form>
+        <form class="form-inline" method="GET" action="/item/create">
+            <fieldset>
+                <button class="btn btn-info" type="submit">Add a new item...</button>
+            </fieldset>
+        </form>
     <% end %>
 
     <h3 style="padding-top: 50px;">
