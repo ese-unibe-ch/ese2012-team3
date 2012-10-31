@@ -24,19 +24,11 @@
           <p>About: <%= mdown_to_html (xss @org.about) %></p>
       <% end %>
 
-      <% if @current_agent == @org %>
+      <% if @current_agent == @org && !@org.orgactivities.empty?%>
           <h3 style="padding-top: 50px;">Latest Organization Activities</h3>
 
-          <% testactivities=[]     # TODO use @org.orgactivities, sorted in reverse (that is, by time, most recent first)
-             for i in 0...2
-               testactivities.push(Activity.init(:creator => JACK_USER, :message => "#{i} bought the item 'pizza' for 123 credits", :type => :buy))
-               testactivities.push(Activity.init(:creator => JACK_USER, :message => "#{i} created the item 'pizza'", :type => :createitem))
-               testactivities.push(Activity.init(:creator => JACK_USER, :message => "#{i} commented on 'pizza'", :type => :comment))
-             end
-          %>
-
           <%=erb :_activity_list, :locals=>{
-                  :activities => testactivities
+                  :activities => @org.orgactivities
           }%>
       <%end%>
 

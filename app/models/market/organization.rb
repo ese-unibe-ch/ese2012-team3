@@ -91,6 +91,10 @@ module Market
       self.image_file_name = nil
     end
 
+    def add_orgactivity(orgactivity)
+      self.orgactivities << orgactivity unless self.orgactivities.include?(orgactivity)
+    end
+
     # Missing: Deletion...
 
   end

@@ -1,7 +1,5 @@
 
   post "/item/:id/buy" do
-    # TODO: Create :buy activity in orgactivities if current_agent is an organization
-
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -11,7 +9,11 @@
     rescue Exception => e
       halt erb :error, :locals => {:message => e.message}
     end
-
+    if @current_user != @current_agent
+      @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
+                                                    :type => :buy,
+                                                    :message => "bought item #{@item.name}"}))
+    end
     #redirect back
     redirect back + "?alert=itembought"
   end
@@ -30,6 +32,13 @@
         @current_agent.add_activity(Activity.init({:creator => @current_agent,
                                                    :type => :activate,
                                                    :message => "activated #{@item.name}"}))
+
+        if @current_user != @current_agent
+          @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
+                                                        :type => :activate,
+                                                        :message => "activated item #{@item.name}"}))
+        end
+
       end
     end
 
@@ -65,6 +74,11 @@
       )
       item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
       #display form with errors
+      if @current_user != @current_agent
+        @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
+                                                      :type => :createitem,
+                                                      :message => "created item #{@item.name}"}))
+      end
     else
       halt erb :create_item
     end
@@ -133,6 +147,12 @@
       @current_agent.add_activity(Activity.init({:creator => @current_agent,
                                                  :type => :comment,
                                                  :message => "commented on #{@item.name}"}))
+
+      if @current_user != @current_agent
+        @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
+                                                    :type => :comment,
+                                                    :message => "commented on #{@item.name}"}))
+      end
 
       redirect "/item/#{params[:id]}"
     else

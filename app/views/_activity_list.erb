@@ -19,7 +19,7 @@
         </td>
         <td>
           <%= mdown_to_html(xss activity.message) %>
-          On <%= activity.timestamp.strftime('%F %T') %>
+          <%= activity.timestamp.strftime('%F %T') %>
         </td>
       </tr>
   <%end%>

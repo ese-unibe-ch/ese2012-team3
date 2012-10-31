@@ -67,6 +67,13 @@ ese.follow(john)
 ese.follow(jimmy)
 ese.follow(uno)
 
+#activities
+eseo.add_orgactivity(Activity.init({:creator => ese,
+                                    :type => :comment,
+                                    :message => "commented on some item - demo activity."}))
+ese.add_activity(Activity.init({:creator => ese,
+                                   :type => :comment,
+                                   :message => "commented on some item - demo activity."}))
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
   User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD)
@@ -79,7 +86,6 @@ pizza_about =
 pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active => true, :owner => eseo)
 eseo.add_item(pizza)
 pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
-
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 uno.image_file_name="organizationimages/2.jpg"
