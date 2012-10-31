@@ -9,6 +9,7 @@
     rescue Exception => e
       halt erb :error, :locals => {:message => e.message}
     end
+    # If the user buys an item in the name of an organization, an organization activity is created.
     if @current_user != @current_agent
       @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                     :type => :buy,
@@ -22,17 +23,18 @@
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
-
+    # Check for illegal activation
     if @current_agent == @item.owner
+      # new_state is provided by the form
       @item.inactivate if params[:new_state] == "inactive"
       if params[:new_state] == "active"
         @item.activate
 
-        #add to activity list
+        #add to activity list of the agent
         @current_agent.add_activity(Activity.init({:creator => @current_agent,
                                                    :type => :activate,
                                                    :message => "activated #{@item.name}"}))
-
+        # If the user activates an item in the name of an organization, an organization activity is created.
         if @current_user != @current_agent
           @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                         :type => :activate,
@@ -51,7 +53,6 @@
   end
 
   post "/item/create" do
-    # TODO: Create :createitem activity in orgactivities if current_agent is an organization
 
     redirect '/login' unless session[:user_id]
 
@@ -73,13 +74,14 @@
                         :about => params[:about]
       )
       item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
-      #display form with errors
+      # If the user creates an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
         @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                       :type => :createitem,
                                                       :message => "created item #{@item.name}"}))
       end
     else
+      #display form with errors
       halt erb :create_item
     end
 
@@ -95,7 +97,7 @@
     @errors[:price] = "item must have a price!" if params[:price].empty?
     @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
     image_file_check()
-
+    # Change attributes of the item.
     if @errors.empty?
       @item.name = params[:name]
       @item.price = params[:price].to_i
@@ -116,7 +118,7 @@
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
-
+    # Open the editing page with the existing attributes provided.
     params[:name] = @item.name
     params[:price] = @item.price
     params[:about] = @item.about
@@ -143,11 +145,11 @@
     if @errors.empty?
       @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
 
-      #add to activity list
+      # Add to activity list of the current agent
       @current_agent.add_activity(Activity.init({:creator => @current_agent,
                                                  :type => :comment,
                                                  :message => "commented on #{@item.name}"}))
-
+      # If the user comments an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
         @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                     :type => :comment,
@@ -156,6 +158,7 @@
 
       redirect "/item/#{params[:id]}"
     else
+      #display form with errors
       halt erb :item
     end
   end
@@ -164,6 +167,7 @@
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
+    # Puts to or removes item from wishlist of the current agent
     if @current_agent.wishlist.include?(@item)
       @current_agent.remove_item_from_wishlist(@item)
     else

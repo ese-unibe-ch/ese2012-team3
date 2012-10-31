@@ -27,6 +27,7 @@ end
 
 get "/user/switch" do
   redirect '/login' unless session[:user_id]
+  # Remove the organization id from the session, the current_agent will be set back to current_user
   session[:organization_id] = nil
   redirect back + "?alert=switcheduser"
 end
@@ -121,6 +122,8 @@ end
 post "/follow" do
   redirect '/login' unless session[:user_id]
 
+  # There is a form param :agent which either says user or organization.
+  # This is necessary because they have separate IDs.
   if params[:agent] == "user"
     follow = User.user_by_id(params[:follow_id].to_i)
   else

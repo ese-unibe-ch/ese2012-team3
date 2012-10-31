@@ -18,6 +18,8 @@
     halt erb :login, :locals => {:username => params[:username] || ''}  unless @errors.empty?
 
     session[:user_id] = user.id
+
+    #on init, the user is not active for any organization
     session[:organization_id] = nil
     redirect "/?alert=loggedin"
   end

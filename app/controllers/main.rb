@@ -1,5 +1,7 @@
 
-
+  # Sets up variables for later use, most importantly current_user which stores the user that is currently logged in and current_agent which is either
+  # equal to current_user or is an organization. It represents the acting agent. Actions like buying items, editing etc. can either be done for the user
+  #himself (current_user == current_agent) or for the organization he's working for (current_user != current_agent).
   before do
     print request.path_info+"\n" # TODO Output redirect to login if not already requested right here for non auth. users so we don't have to chack later
     # Problem: We don't want to redirect ordinary files...
