@@ -2,6 +2,9 @@
    @items = Item.items_by_agent(@user)
    @organizations = Organization.organizations_by_user(@user)
    @following = @user.following
+   if @user == @current_agent
+        @current_nav_item = :my_profile
+   end
 %>
 
 <section id="content">

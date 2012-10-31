@@ -1,23 +1,61 @@
 <div class="span2">
   <div class="well" style="padding: 8px 0;">
     <ul class="nav nav-list">
-      <li><a href="/"><i class="icon-home"></i>Marketplace</a></li>
+
+      <li
+      <%if @current_nav_item == :marketplace%>
+      class="active"
+      <%end%>
+      ><a href="/"><i class="icon-home"></i>Marketplace</a></li>
+
       <% if @current_agent %>
-          <li><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
-          <li>
+
+          <li
+            <%if @current_nav_item == :sellers%>
+                class="active"
+            <%end%>
+          ><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
+
+          <li
+            <%if @current_nav_item == :my_profile%>
+                class="active"
+            <%end%>
+          >
               <%if @current_agent == @current_user %>
                     <a href= <%= @current_agent.profile_route %>><i class="icon-user"></i>My profile</a>
                 <% else %>
                     <a href= <%= @current_agent.profile_route %>><i class="icon-briefcase"></i>Organization</a>
                 <% end %>
           </li>
-          <li><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
+
+          <li
+            <%if @current_nav_item == :new_item%>
+                class="active"
+            <%end%>
+          ><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
 
           <% if @current_agent == @current_user %>
-          <li><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
-          <li><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
+
+          <li
+            <%if @current_nav_item == :new_org%>
+                class="active"
+            <%end%>
+          ><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
+
+          <li
+            <%if @current_nav_item == :settings%>
+                class="active"
+            <%end%>
+          ><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
+
           <% else %>
-          <li><a href="/organization/<%= @current_agent.id %>/settings"><i class="icon-wrench"></i>Org. Settings</a></li>
+
+          <li
+            <%if @current_nav_item == :settings%>
+                class="active"
+            <%end%>
+          ><a href="/organization/<%= @current_agent.id %>/settings"><i class="icon-wrench"></i>Org. Settings</a></li>
+
           <% end %>
       <% end %>
     </ul>
