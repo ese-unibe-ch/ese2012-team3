@@ -78,7 +78,7 @@
       if @current_user != @current_agent
         @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                       :type => :createitem,
-                                                      :message => "created item #{@item.name}"}))
+                                                      :message => "created item #{item.name}"}))
       end
     else
       #display form with errors

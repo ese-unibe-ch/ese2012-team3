@@ -81,7 +81,7 @@ ese.add_activity(Activity.init({:creator => ese,
                                    :message => "commented on some item - demo activity."}))
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
-  dummyUser = User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD)
+  dummyUser = User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "This is a dummy user. Please just leave him alone.")
   dummyUser.image_file_name="userimages/1.png"
 end
 
