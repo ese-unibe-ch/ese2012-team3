@@ -1,19 +1,28 @@
 module Market
   class Auction
-    attr_accessor :price, :end_time, :item, :increment, :winner, :bids
+    attr_accessor :price, :item, :increment, :winner, :bids, :event
 
     def self.create(item, price, increment, time)
       fail "Can't set an auction that starts in past" if time < Time.now
 
       auction = Auction.new
+      auction.event = TimedEvent.create(auction, time)
+
       auction.item = item
       auction.price = price
       auction.increment = increment
-      auction.end_time = time
       auction.winner = nil
       auction.bids = Hash.new
 
       auction
+    end
+
+    #
+    # Returns time hold by TimedEvent
+    #
+
+    def end_time
+      self.event.time
     end
 
     #

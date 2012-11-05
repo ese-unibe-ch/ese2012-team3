@@ -74,9 +74,9 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_not_possible_to_bid_when_time_is_up
     @item = MockItem.new
-    @time = Time.now() + 1
+    @time = Time.now() + 0.5
     @auction = Auction.create(@item, 100, 10, @time)
-    sleep(1)
+    sleep(0.5)
 
     assert(@auction.closed?, "Should not be possible to bit when time is up")
   end

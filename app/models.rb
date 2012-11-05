@@ -7,5 +7,6 @@ require_relative 'models/passwordcheck'
 require_relative 'models/market/comment'
 require_relative 'models/market/activity'
 require_relative 'models/market/auction'
+require_relative 'models/market/timed_event'
 include Market
 

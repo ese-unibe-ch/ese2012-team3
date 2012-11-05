@@ -5,3 +5,6 @@ gem 'require_relative'
 gem 'selenium-webdriver'
 gem 'rcov'
 gem 'redcarpet'
+
+source 'http://gemcutter.org'
+gem 'rufus_scheduler'
