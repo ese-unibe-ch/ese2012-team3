@@ -1,6 +1,6 @@
 module Market
   class Auction
-    attr_accessor :price, :item, :increment, :winner, :bids, :event
+    attr_accessor :price, :item, :increment, :winner, :bids, :event, :safe
 
     def invariant
       fail "Auction should always be closed when time is over" if self.end_time < Time.now && !self.closed?
@@ -26,6 +26,7 @@ module Market
       auction.increment = increment
       auction.winner = nil
       auction.bids = Hash.new
+      auction.safe = Safe.new
 
       auction.invariant
 
@@ -53,6 +54,7 @@ module Market
     #
 
     def offer(agent, price)
+      fail "Offer must be equal or smaller than credits owned by agent" if agent.credits < price
       fail "Offer must be equal or bigger than the actual price" if price < self.price
       fail "This offer already exists" if bids.key?(price)
       fail "This auction is closed" if closed?
@@ -87,11 +89,22 @@ module Market
 
       prices = bids.keys.sort!.reverse!
 
+      current_winner = bids[prices[0]]
+
+      #Increment price
       if (prices.size > 1)
         self.price = prices[1]+increment
       end
 
-      self.winner = bids[prices[0]]
+      #Hold back money of winner
+      unless self.winner == current_winner
+        self.safe.return unless self.winner.nil?
+
+        self.safe.fill(current_winner, self.price)
+      end
+
+      #Set winner
+      self.winner = current_winner
     end
 
     #
@@ -100,6 +113,7 @@ module Market
 
     def timed_out
       unless (winner.nil?)
+        safe.return
         winner.buy_item(self.item)
       end
     end

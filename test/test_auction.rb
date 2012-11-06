@@ -3,7 +3,12 @@ class TestAuction < Test::Unit::TestCase
   end
 
   class MockUser
-    @bought_item = nil
+    attr_accessor :credits, :bought_item
+
+    def initialize
+      self.credits = 300
+      self.bought_item = nil
+    end
 
     def id
       1
@@ -11,10 +16,6 @@ class TestAuction < Test::Unit::TestCase
 
     def buy_item(item)
       @bought_item = item
-    end
-
-    def bought_item
-      @bought_item
     end
   end
 
@@ -68,6 +69,11 @@ class TestAuction < Test::Unit::TestCase
     assert(@auction.winner == @user, "Winner should be user that bidded")
   end
 
+  def test_should_decrease_credits_of_winner
+    bid
+    assert(@user.credits == 200, "Should decrease money by 200 of bidder but was #{300 - @user.credits}")
+  end
+
   def test_should_not_increment_start_price_after_first_bid
     bid
     assert(@auction.price == 100, "Price should be incremented after bid")
@@ -92,6 +98,13 @@ class TestAuction < Test::Unit::TestCase
     @auction.timed_out
 
     assert(@user.bought_item == @item, "User should have bought item")
+  end
+
+  def test_when_timed_out_should_get_money_back_to_buy_item_afterwards
+    bid
+    @auction.timed_out
+
+    assert(@user.credits == 300, "User should have payed 200 credits but was #{@user.credits}")
   end
 
   def test_bid_should_fail_if_price_smaller_than_current_price
@@ -132,5 +145,15 @@ class TestAuction < Test::Unit::TestCase
   def test_should_set_price_an_increment_higher_than_bid_of_lower_bidder
     two_bidders
     assert(@auction.price == 210, "Should set bid to 210 but was #{@auction.price}")
+  end
+
+  def test_should_decrease_money_of_second_bidder
+    two_bidders
+    assert(@bidder_two.credits == 90, "Should decrease credits of bidder two by 210")
+  end
+
+  def test_should_return_money_to_bidder_one
+    two_bidders
+    assert(@bidder_one.credits == 300, "Should return money when bidder one is not the winner anymore")
   end
 end

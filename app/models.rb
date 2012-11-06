@@ -8,5 +8,7 @@ require_relative 'models/market/comment'
 require_relative 'models/market/activity'
 require_relative 'models/market/auction'
 require_relative 'models/market/timed_event'
+require_relative 'models/market/safe'
+
 include Market
 

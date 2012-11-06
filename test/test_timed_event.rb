@@ -26,7 +26,7 @@ class TestTimedEvent < Test::Unit::TestCase
   def test_should_call_timed_out
     create_timed_event
 
-    sleep(0.5)
+    sleep(0.8)
     assert(@mock.timed_out?, "#timed_out should have been called!")
   end
 
