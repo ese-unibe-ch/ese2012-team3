@@ -52,6 +52,12 @@ class TestAuction < Test::Unit::TestCase
     assert(@auction.winner == nil, "Item should not have a when created")
   end
 
+  def test_creation_should_fail_when_time_is_in_past
+    item = MockItem.new
+    time = Time.now() - 1
+    assert_raise(RuntimeError) { auction = Auction.create(item, 100, 10, time) }
+  end
+
   def bid
     @user = MockUser.new
     @auction.offer(@user, 200)
@@ -86,6 +92,28 @@ class TestAuction < Test::Unit::TestCase
     @auction.timed_out
 
     assert(@user.bought_item == @item, "User should have bought item")
+  end
+
+  def test_bid_should_fail_if_price_smaller_than_current_price
+    @user = MockUser.new
+    assert_raise(RuntimeError) { @auction.offer(@user, 90) }
+  end
+
+  def test_bid_should_fail_if_somebody_bid_already_same_price
+    bid
+
+    @user = MockUser.new
+    assert_raise(RuntimeError) { @auction.offer(@user, 200) }
+  end
+
+  def test_bid_should_fail_if_auction_is_already_over
+    @item = MockItem.new
+    @time = Time.now() + 0.1
+    @auction = Auction.create(@item, 100, 10, @time)
+    sleep(0.2)
+
+    @user = MockUser.new
+    assert_raise(RuntimeError) { @auction.offer(@user, 400) }
   end
 
   def two_bidders
