@@ -9,7 +9,12 @@ module Market
       fail "Increment should be greater than 0" if self.increment <= 0
       fail "Item should not be nil" if self.item.nil?
       fail "Should always hold a timed event" if self.event.nil?
-      fail "Should not be editable when there are bids" if self.bids.size > 0 && self.editable?
+
+      if (self.bids.size > 0)
+        fail "Should not be editable when there are bids" if self.editable?
+        fail "Safe should have same value as price if there are bidders" unless self.safe.savings == self.price
+        fail "Safe should always have winner as owner" unless self.safe.owner == self.winner
+      end
     end
 
     def self.create(item, price, increment, time)
