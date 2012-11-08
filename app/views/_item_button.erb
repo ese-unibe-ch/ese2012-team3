@@ -11,13 +11,23 @@
           </form>
         </td>
     <% else %>
-        <td>
-          <form action="/item/<%= item.id %>/buy" method="post">
-            <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
-            <input type="hidden" name="item" value="<%= xss item.id %>" />
-            <input type="submit" class="btn btn-info small" name="submit" value="Buy Item"<%if @current_agent.credit < item.price%> disabled="disabled"<%end%>/>
-          </form>
-        </td>
+        <%if item.auction?%>
+            <td>
+              <form action="/item/<%= item.id %>/auction" method="post">
+                <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
+                <input type="hidden" name="item" value="<%= xss item.id %>" />
+                <input type="submit" class="btn btn-info small" name="submit" value="Auction"/>
+              </form>
+            </td>
+        <%else%>
+            <td>
+              <form action="/item/<%= item.id %>/buy" method="post">
+                <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
+                <input type="hidden" name="item" value="<%= xss item.id %>" />
+                <input type="submit" class="btn btn-info small" name="submit" value="Buy Item"<%if @current_agent.credit < item.price%> disabled="disabled"<%end%>/>
+              </form>
+            </td>
+        <%end%>
         <td></td>
     <% end %>
 <% else %>
@@ -74,5 +84,9 @@
         </td>
     <% end %>
 <% else %>
-    <td></td>
+    <% if item.auction? %>
+        <td><i class='muted'><%=item.auction.end_time.to_s%></td>
+    <% else %>
+        <td></td>
+    <% end %>
 <% end %>

@@ -35,8 +35,9 @@ page = params[identifier] ? params[identifier].to_i : 0
         <%= erb :_item_link, :locals => {:item => item, :highlight_active => defined? highlight_active} %>
         </td>
 
+        <% @price = item.auction? ? item.auction.price : item.price %>
+        <td style="text-align: right; padding-right: 10em;"><%= xss ts(@price) %></td>
 
-        <td style="text-align: right; padding-right: 10em;"><%= xss ts(item.price) %></td>
         <td><%= (defined? show_owner) ?
                 (erb :_user_link, :locals => {:user => item.owner}) : "" %></td>
 
