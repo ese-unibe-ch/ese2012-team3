@@ -60,6 +60,11 @@ module Market
       @current_price.nil? ? self.minimal_price : @current_price
     end
 
+    def dismiss
+      safe.return unless @winner.nil?
+      event.unschedule
+    end
+
     def self.create(item, price, increment, time)
       fail "Can't set an auction that starts in past" if time < Time.now
       fail "Price should not be negative" if price < 0

@@ -33,7 +33,7 @@
     @item = Item.by_id(params[:id].to_i)
 
     if @current_agent == @item.owner
-      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + 3600)
+      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + 15)
     end
 
     redirect "/profile/#{session[:user_id]}"

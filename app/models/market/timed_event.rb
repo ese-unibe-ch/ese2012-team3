@@ -43,5 +43,9 @@ module Market
         self.subscribers.each { |object| object.timed_out }
       end
     end
+
+    def unschedule
+      self.job.unschedule
+    end
   end
 end
