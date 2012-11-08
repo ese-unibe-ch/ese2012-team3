@@ -40,4 +40,13 @@ class TestTimedEvent < Test::Unit::TestCase
     assert(@mock.timed_out?, "#timed_out should have been called for object one!")
     assert(mock2.timed_out?, "#timed_out should have been called for object two!")
   end
+
+  def test_should_reschedule_event
+    create_timed_event
+    @event.reschedule(@time+0.5)
+    sleep(0.5)
+    assert(! @mock.timed_out?, "Should not be timed out after 0.5sec")
+    sleep(0.5)
+    assert(@mock.timed_out?, "Should be timed out after 1sec")
+  end
 end

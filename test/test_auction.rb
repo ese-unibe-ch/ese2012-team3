@@ -29,8 +29,12 @@ class TestAuction < Test::Unit::TestCase
     assert(@item == @auction.item, "Auction should be the same")
   end
 
-  def test_should_have_price
-    assert(@auction.price == 100, "Auction should have 100 as start price")
+  def test_should_have_minimal_price
+    assert(@auction.minimal_price == 100, "Auction should have 100 as minimals price")
+  end
+
+  def test_should_not_have_current_price
+    assert(@auction.current_price == nil, "Auction should have no current price when created")
   end
 
   def test_should_have_increment
@@ -76,12 +80,27 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_not_increment_start_price_after_first_bid
     bid
-    assert(@auction.price == 100, "Price should be incremented after bid")
+    assert(@auction.current_price == 100, "Price should be incremented after bid")
   end
 
   def test_should_not_be_editable_when_bids_are_set
     bid
     assert(!@auction.editable?,"Item should not be editable when bids are set")
+  end
+
+  def test_minimal_price_should_not_be_editable_when_bids_are_set
+    bid
+    assert_raise(RuntimeError) { @auction.minimal_price = 300 }
+  end
+
+  def test_increment_should_not_be_editable_when_bids_are_set
+    bid
+    assert_raise(RuntimeError) { @auction.increment = 20 }
+  end
+
+  def test_end_time_should_not_be_editable_when_bids_are_set
+    bid
+    assert_raise(RuntimeError) { @auction.end_time = Time.now }
   end
 
   def test_should_not_possible_to_bid_when_time_is_up
@@ -144,7 +163,7 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_set_price_an_increment_higher_than_bid_of_lower_bidder
     two_bidders
-    assert(@auction.price == 210, "Should set bid to 210 but was #{@auction.price}")
+    assert(@auction.current_price == 210, "Should set bid to 210 but was #{@auction.current_price}")
   end
 
   def test_should_decrease_money_of_second_bidder

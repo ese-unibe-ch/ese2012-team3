@@ -19,6 +19,12 @@
     redirect back + "?alert=itembought"
   end
 
+  get "/item/:id/create_auction" do
+    redirect '/login' unless session[:user_id]
+
+    erb :create_auction
+  end
+
   post "/item/:id/status_change" do
     redirect '/login' unless session[:user_id]
 

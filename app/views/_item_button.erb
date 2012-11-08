@@ -55,3 +55,24 @@
 <% else %>
     <td></td>
 <% end %>
+
+<%  # The auction button   %>
+
+<%if item.owner == @current_agent %>
+
+    <%if item.active %>
+        <% if item.auction? %>
+            <td><%= @current_agent == item.owner ? "<i class='muted'>#{item.auction}</i>": ""%></td>
+        <% else %>
+            <td><%= @current_agent == item.owner ? "<i class='muted'>Currently not in auction</i>": ""%></td>
+        <% end %>
+    <% else %>
+        <td>
+          <form action="/item/<%= item.id %>/create_auction" method="link">
+            <input type="submit" class="btn btn-info small" name="submit" value="Create Auction" />
+          </form>
+        </td>
+    <% end %>
+<% else %>
+    <td></td>
+<% end %>

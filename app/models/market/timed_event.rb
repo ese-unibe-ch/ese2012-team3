@@ -3,7 +3,7 @@ require 'rufus/scheduler'
 
 module Market
   class TimedEvent
-    attr_accessor :time, :subscribers, :scheduler, :timed_out
+    attr_accessor :time, :subscribers, :scheduler, :timed_out, :job
 
     def self.create(object_to_time, time)
       fail "Object to be called should not be nil" if object_to_time.nil?
@@ -21,7 +21,7 @@ module Market
 
       time = Rufus.to_datetime time
 
-      event.scheduler.at time.to_s do
+      event.job = event.scheduler.at time.to_s do
         event.timed_out = true
         event.subscribers.each { |object| object.timed_out }
       end
@@ -31,6 +31,17 @@ module Market
 
     def subscribe(object_to_time)
       self.subscribers.push(object_to_time)
+    end
+
+    def reschedule(time)
+      time = Rufus.to_datetime time
+
+      self.job.unschedule
+
+      self.job = self.scheduler.at time.to_s do
+        self.timed_out = true
+        self.subscribers.each { |object| object.timed_out }
+      end
     end
   end
 end
