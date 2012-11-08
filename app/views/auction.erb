@@ -1,0 +1,24 @@
+<% @title = "Auction" %>
+
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10">
+      <h2>Auction for <%= "#{item.name}" %></h2>
+
+      <%= erb :_labeled_text, :locals => {:label => "Minimal price", :content => item.auction.minimal_price } %>
+      <%= erb :_labeled_text, :locals => {:label => "Current price", :content => item.auction.current_price.nil? ? "-" : item.auction.current_price } %>
+
+      <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
+        <fieldset>
+          <%= erb :_text_control, :locals => {:name => :bid, :label => "Bid"}%>
+
+          <div class="form-actions">
+            <button class="btn btn-info" type="submit">Save</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>
+

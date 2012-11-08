@@ -33,10 +33,28 @@
     @item = Item.by_id(params[:id].to_i)
 
     if @current_agent == @item.owner
-      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + 15)
+      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + params[:end_time].to_i)
     end
 
     redirect "/profile/#{session[:user_id]}"
+  end
+
+  get "/item/:id/auction" do
+    erb :auction, :locals => { :item => Item.by_id(params[:id].to_i) }
+  end
+
+  get "/item/:id/auction/edit" do
+    @item = Item.by_id(params[:id].to_i)
+
+    params[:minimal_price] = @item.auction.minimal_price
+    params[:end_time] = @item.auction.end_time
+    params[:increment] = @item.auction.increment
+    erb :edit_auction, :locals => { :item => Item.by_id(params[:id].to_i) }
+  end
+
+  post "/item/:id/auction/edit" do
+    "Not yet implemented!"
+    #TODO
   end
 
   post "/item/:id/status_change" do
@@ -139,10 +157,7 @@
 
     @item = Item.by_id(params[:id].to_i)
     # Open the editing page with the existing attributes provided.
-    params[:name] = @item.name
-    params[:price] = @item.price
-    params[:about] = @item.about
-    erb :edit_item
+    erb :edit_item, :locals => { :name => @item.name, :price => @item.price, :about => @item.about }
   end
 
 

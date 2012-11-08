@@ -13,7 +13,7 @@
     <% else %>
         <%if item.auction?%>
             <td>
-              <form action="/item/<%= item.id %>/auction" method="post">
+              <form action="/item/<%= item.id %>/auction" method="link">
                 <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
                 <input type="hidden" name="item" value="<%= xss item.id %>" />
                 <input type="submit" class="btn btn-info small" name="submit" value="Auction"/>
@@ -54,7 +54,15 @@
 <%if item.owner == @current_agent %>
 
     <%if item.active %>
-        <td><%= @current_agent == item.owner ? "<i class='muted'>Cannot edit active items</i>": ""%></td>
+        <% if item.auction? %>
+            <td>
+                <form action="/item/<%= item.id %>/auction/edit" method="link">
+                  <input type="submit" class="btn btn-info small" name="submit" value="Edit Auction" />
+                </form>
+            </td>
+        <% else %>
+            <td><%= @current_agent == item.owner ? "<i class='muted'>Cannot edit active items</i>": ""%></td>
+        <% end %>
     <% else %>
         <td>
           <form action="/item/<%= item.id %>/edit" method="link">

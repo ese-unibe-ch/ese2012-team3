@@ -1485,11 +1485,25 @@ legend + .control-group {
   content: "";
 }
 
-.form-horizontal .control-group:after {
+.form-horizontal, .text-label:after, .control-group:after {
   clear: both;
 }
 
-.form-horizontal .control-label {
+.text-container {
+    padding-top: 2px;
+}
+
+.text-content {
+  padding-left: 20px;
+}
+
+.text-label {
+    float: left;
+    width: 140px;
+    text-align: right;
+}
+
+.form-horizontal, .control-label {
   float: left;
   width: 140px;
   padding-top: 5px;

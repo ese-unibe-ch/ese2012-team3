@@ -1,0 +1,13 @@
+<% @title = "Edit Auction" %>
+
+<section id="content">
+  <div class="row">
+    <%= erb :_sidebar %>
+    <div class="span10">
+      <h2>Edit item</h2>
+      <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/auction/edit" %>" enctype="multipart/form-data">
+        <%=erb :_create_edit_auction %>
+      </form>
+    </div>
+  </div>
+</section>
