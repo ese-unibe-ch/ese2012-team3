@@ -1,5 +1,4 @@
 <%   @title = "Create auction"
-   @current_nav_item = :new_item
 %>
 
 <section id="content">
@@ -7,10 +6,10 @@
     <%= erb :_sidebar %>
     <div class="span10">
       <h2>Create auction</h2>
-      <form class="form-horizontal" method="POST" action="/not/yet/defined" enctype="text/plain">
+      <form class="form-horizontal" method="POST" <%= "action=/item/#{item.id}/create_auction"%> enctype="multipart/form-data">
         <%=erb :_create_auction %>
 
       </form>
-    </div>
-  </div>
+</div>
+</div>
 </section>

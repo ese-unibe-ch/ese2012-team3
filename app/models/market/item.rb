@@ -11,7 +11,7 @@ module Market
                   :price, # positive number
                   :owner, # an Agent
                   :active, # Boolean
-                  :auction, # Boolean
+                  :auction, # An Auction Object
                   :comments, # List    of Comment objects
                   :about,    # TODO share common functionality with agent?
                   :image_file_name
@@ -28,7 +28,7 @@ module Market
       item.name = params[:name] || "default item"
       item.price = params[:price] || 0
       item.active = params[:active] || false
-      item.auction = params[:auction] || false
+      item.auction = params[:auction] || nil
       item.owner = params[:owner]
       item.about = params[:about] || ""
       item.comments = []
@@ -52,7 +52,7 @@ module Market
     end
 
     def auction?
-      self.auction
+      ! self.auction.nil?
     end
 
     def to_s

@@ -22,7 +22,22 @@
   get "/item/:id/create_auction" do
     redirect '/login' unless session[:user_id]
 
-    erb :create_auction
+    erb :create_auction, :locals => { :item => Item.by_id(params[:id].to_i) }
+  end
+
+  #
+  # At the moment the time is just set to one minute after creation
+  #
+
+  post "/item/:id/create_auction" do
+    @item = Item.by_id(params[:id].to_i)
+
+    if @current_agent == @item.owner
+      puts (Time.now + 3660)
+      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + 60)
+    end
+
+    redirect "/profile/#{session[:user_id]}"
   end
 
   post "/item/:id/status_change" do

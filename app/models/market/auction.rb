@@ -36,6 +36,8 @@ module Market
       fail "Price should not be negative" if self.minimal_price < 0
       fail "Increment should be greater than 0" if self.increment <= 0
       fail "Item should not be nil" if self.item.nil?
+      fail "Item should be active when not closed" unless !self.item.active? || !self.closed?
+      fail "Item should be inactive when time is over" unless self.item.active? || self.closed?
       fail "Should always hold a timed event" if self.event.nil?
 
       if (self.bids.size > 0)
@@ -63,6 +65,8 @@ module Market
       auction = Auction.new
 
       auction.event = TimedEvent.create(auction, time)
+
+      item.activate
       auction.item = item
       auction.minimal_price = price
       auction.increment = increment
@@ -163,14 +167,22 @@ module Market
     end
 
     #
-    # Winner buys item after the auction timed out
+    # Winner buys item after the auction timed out and resets the
+    # the auction object to nil in item
+    #
+    # If there is no winner the item is just deactivated and
+    # the auction object is set to nil
     #
 
     def timed_out
-      unless (@winner.nil?)
+      if @winner.nil?
+        self.item.inactivate
+      else
         safe.return
         @winner.buy_item(self.item)
       end
+
+      item.auction = nil
     end
   end
 end
