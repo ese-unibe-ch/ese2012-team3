@@ -1,4 +1,4 @@
-
+ # cr: No documentation at all
 
   before do
     print request.path_info+"\n" # TODO Output redirect to login if not already requested right here for non auth. users so we don't have to chack later
@@ -36,6 +36,7 @@
   # Returns filename (relative to public) of the image added or nil if image is not present.
   # Expects image file to be in params[:image_file]
   def add_image(rootdir, id)
+    # cr: parameters should be passed via
     file = params[:image_file]
     return nil unless file
     fn = rootdir+"/#{id}"+File.extname(file[:filename])

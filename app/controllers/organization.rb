@@ -35,8 +35,10 @@ get "/organization/:id" do
 end
 
 post "/organization/:id/add_member" do
+  # cr: precondition params[:id] has to be set
   redirect '/login' unless session[:user_id]
 
+  # cr: Why using a instance variable here?
   @org = Organization.organization_by_id(params[:id].to_i)
   halt erb :error, :locals => {:message => "no organization found"} unless @org
 
@@ -53,6 +55,7 @@ post "/organization/:id/add_member" do
 end
 
 post "/organization/:id/remove_member" do
+  # cr: precondition params[:id] has to be set
   redirect '/login' unless session[:user_id]
 
   @org = Organization.organization_by_id(params[:id].to_i)
@@ -66,12 +69,14 @@ end
 
 
 get "/organization/:id/switch" do
+  # cr: precondition params[:id] has to be set
   redirect '/login' unless session[:user_id]
   session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_user)
   redirect "/?alert=switcheduser"
 end
 
 get "/organization/:id/settings" do
+  # cr: precondition params[:id] has to be set
   redirect '/login' unless session[:user_id]
 
   @org = Organization.organization_by_id(params[:id].to_i) 
@@ -83,6 +88,7 @@ get "/organization/:id/settings" do
 end
 
 post "/change_profile_picture_organization" do
+  # cr: Not consistent. in marketplace you always use: @errors[:name] = "item must have a name!"
   set_error :image_file, "You didn't choose a file" unless  params[:image_file]
 
   image_file_check()
