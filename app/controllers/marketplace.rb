@@ -1,5 +1,7 @@
+# cr: No documentation
 
   post "/item/:id/buy" do
+    # cr: This statement is repeated all the time. Is it possible to factor it out?
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -9,6 +11,8 @@
     rescue Exception => e
       halt erb :error, :locals => {:message => e.message}
     end
+
+    # cr: This should be solved in model because this is business process stuff
     if @current_user != @current_agent
       @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                     :type => :buy,
@@ -19,6 +23,7 @@
   end
 
   post "/item/:id/status_change" do
+    #cr: Precondition params[:id] must be set
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -28,6 +33,7 @@
       if params[:new_state] == "active"
         @item.activate
 
+        # cr: see post "/item/:id/buy"
         #add to activity list
         @current_agent.add_activity(Activity.init({:creator => @current_agent,
                                                    :type => :activate,
@@ -73,7 +79,10 @@
                         :about => params[:about]
       )
       item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
+
       #display form with errors
+
+      # cr: see post "/item/:id/buy"
       if @current_user != @current_agent
         @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
                                                       :type => :createitem,
@@ -87,6 +96,9 @@
   end
 
   post "/item/:item_id/edit" do
+    #cr: Precondition params[:id] must be set
+    # cr: Missing redirect '/login' unless session[:user_id]?
+
     @item = Item.by_id(params[:item_id].to_i)
     redirect '/login' unless session[:user_id] and @current_agent == @item.owner
 
@@ -113,6 +125,8 @@
   end
  
  get "/item/:id/edit" do
+   #cr: Precondition params[:id] must be set
+
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
@@ -133,6 +147,8 @@
   end
 
   post "/item/:id/add_comment" do
+    #cr: Precondition params[:id] must be set
+
     redirect '/login' unless session[:user_id]
 
     #input validation
@@ -161,6 +177,8 @@
   end
 
   post "/item/:id/watchlist" do
+    #cr: Precondition params[:id] must be set
+
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)

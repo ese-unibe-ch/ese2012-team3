@@ -1,4 +1,7 @@
 module Market
+
+# cr: Very few documentation. No invariant
+
   class Organization < Agent
     # Very similar to user
     attr_accessor :members, # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
@@ -14,6 +17,7 @@ module Market
     # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :about
     # required: :name
     def self.init(params={})
+      # cr: negative credit?
       fail "Organization name missing" unless params[:name] && params[:name].length > 0
       fail "Organization with given name already exists" if self.organization_by_name(params[:name])
       fail "Organization needs an admin" unless params[:admin].is_a?(Market::User)
@@ -45,6 +49,8 @@ module Market
 
     def self.organization_by_id(id)
       org = @@organizations.detect { |org| org.id == id }
+
+      # cr: It's only one line so you could write: fail "..." if org == nil
       if org == nil
         fail "No organization with id #{id}"
       end
@@ -70,6 +76,7 @@ module Market
     end
 
     def add_member(user)
+      # cr: user nil?
       raise "cannot add same user twice!" if self.has_member(user)
       members << user
     end
@@ -92,6 +99,7 @@ module Market
     end
 
     def add_orgactivity(orgactivity)
+      # cr: unless self.orgactivities.include?(orgactivity) This would be better a precondition?
       self.orgactivities << orgactivity unless self.orgactivities.include?(orgactivity)
     end
 
