@@ -35,7 +35,7 @@
   #
 
   post "/item/:id/auction/create" do
-    @item = Item.by_id(params[:id].to_i)
+    @item = checkAndGetItem(params[:id].to_i)
 
     #Input validation
     @errors[:increment] = "increment must be set" if params[:increment].empty?
@@ -59,14 +59,44 @@
     erb :auction, :locals => { :item => Item.by_id(params[:id].to_i) }
   end
 
-  get "/item/:id/auction/edit" do
-    @item = Item.by_id(params[:id].to_i)
+  #
+  # Checks if an item can be retrieved and if the retrieved item
+  # is owned by current agent
+  #
 
+  def checkAndGetItem(id)
+    item = Item.by_id(id)
+
+    puts("Item: #{item}")
+
+    #Checking if back path exists
+    direct_to = back.nil? ? "/" : back
+
+    #make redirect with alert
+    redirect direct_to + "?alert=itemnotexist" if item.nil?
+    redirect direct_to + "?alert=itemnotyours" if @current_agent != item.owner
+
+    item
+  end
+
+  get "/item/:id/auction/edit" do
+    @item = checkAndGetItem(params[:id].to_i)
+
+    #Passing parameters
     params[:minimal_price] = @item.auction.minimal_price
     params[:end_time] = @item.auction.end_time
     params[:increment] = @item.auction.increment
     erb :edit_auction, :locals => { :item => Item.by_id(params[:id].to_i) }
   end
+
+  #
+  # Called from edit_auction view
+  #
+  # Expects
+  # params[:minimal_price]: Minimal price for auction as a positive integer
+  # params[:increment]: Increment for auction as a positive integer
+  # params[:end_time]: Time (at the moment in seconds from now)
+  #
 
   post "/item/:id/auction/edit" do
     "Not yet implemented!"
@@ -172,8 +202,13 @@
     redirect '/login' unless session[:user_id]
 
     @item = Item.by_id(params[:id].to_i)
+
     # Open the editing page with the existing attributes provided.
-    erb :edit_item, :locals => { :name => @item.name, :price => @item.price, :about => @item.about }
+    @params[:name] = @item.name
+    @params[:price] = @item.price
+    @params[:about] = @item.about
+
+    erb :edit_item
   end
 
 

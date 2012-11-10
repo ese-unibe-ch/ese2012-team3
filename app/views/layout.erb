@@ -50,6 +50,13 @@
             <%end%>
           </div>
 
+          <div class="alert-error alert" id="itemnotyours">
+              <strong>Ooops!</strong> You tried to access an item that is not yours
+          </div>
+          <div class="alert-error alert" id="itemnotexist">
+            <strong>Ooops!</strong> You tried to access an item that does not exist
+          </div>
+
           <%= yield %>
         </div>
     </body>
