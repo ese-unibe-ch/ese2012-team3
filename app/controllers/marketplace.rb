@@ -26,14 +26,30 @@
   end
 
   #
-  # At the moment the time is just set to one minute after creation
+  # Called from create_auction view
+  #
+  # Expects
+  # params[:minimal_price]: Minimal price for auction as a positive integer
+  # params[:increment]: Increment for auction as a positive integer
+  # params[:end_time]: Time (at the moment in seconds from now)
   #
 
-  post "/item/:id/create_auction" do
+  post "/item/:id/auction/create" do
     @item = Item.by_id(params[:id].to_i)
 
-    if @current_agent == @item.owner
-      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + params[:end_time].to_i)
+    #Input validation
+    @errors[:increment] = "increment must be set" if params[:increment].empty?
+    @errors[:end_time] = "end time must be set" if params[:end_time].empty?
+    @errors[:minimal_price] = "minimal price must be set" if params[:minimal_price].empty?
+    @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
+    @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
+
+    if (@errors.empty?)
+      if @current_agent == @item.owner
+        @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + params[:end_time].to_i)
+      end
+    else
+      halt erb :create_auction, :locals => { :item => @item }
     end
 
     redirect "/profile/#{session[:user_id]}"
