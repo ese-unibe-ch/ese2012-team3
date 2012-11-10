@@ -1,0 +1,21 @@
+Code Review for the Controllers:
+
+Design aspects: There are from time to time code parts which handle business
+processes, meaning that they should belong to the model not to the controller
+according to the MVC model. The responsibilities are clear and can be mostly
+guessed from the name of the controller.
+
+Coding style: The controllers are in general consistent except the part of the
+error handling which is managed in two different ways in the controllers. The
+names of the variables are straightforward as well as the names of the views
+which are needed for the post/get statements so the intention of the code parts
+can be easily derived. Possible exceptions are being handled and nil values are
+taken into account. The handling always consists of a feedback to the user of the
+application so that the action can be redone. Preconditions are not always being
+checked for, thus there is the possibility that an error can occur which could
+have been easily avoided.
+
+Documentation: Well, there isn't a lot of documentation in the controllers
+although it is sometimes desirable. The given documentation reveals the inten-
+tions of the following code part quite well. The responsibilities are rarely
+stated, especially the responsibility of the controller itself.
