@@ -1485,7 +1485,7 @@ legend + .control-group {
   content: "";
 }
 
-.form-horizontal, .text-label:after, .control-group:after {
+.form-horizontal, .text-label:after .control-group:after {
   clear: both;
 }
 
@@ -1503,7 +1503,7 @@ legend + .control-group {
     text-align: right;
 }
 
-.form-horizontal, .control-label {
+.form-horizontal .control-label {
   float: left;
   width: 140px;
   padding-top: 5px;
