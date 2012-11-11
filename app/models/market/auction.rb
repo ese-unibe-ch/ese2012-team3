@@ -39,11 +39,12 @@ module Market
     attr_reader :winner, :current_price, :item, :event, :safe, :bids, :past_winners
 
     class PastWinner
-      attr_accessor :agent, :time
-      def self.create(agent, time)
+      attr_accessor :agent, :time, :price
+      def self.create(agent, time, price)
         past_winner = PastWinner.new
         past_winner.agent = agent
         past_winner.time = time
+        past_winner.price = price
 
         past_winner
       end
@@ -178,6 +179,7 @@ module Market
       prices = bids.keys.sort!.reverse!
 
       current_winner = bids[prices[0]]
+      previous_bid = current_price
 
       #Set current price
       if (prices.size > 1)
@@ -186,12 +188,13 @@ module Market
         @current_price = self.minimal_price.to_i
       end
 
-      #Hold back money of winner
       #Hold back money of winner and sets old winner as past winner
         self.safe.return unless self.winner.nil?
         self.safe.fill(current_winner, self.current_price)
 
-        @past_winners.push(PastWinner.create(self.winner, Time.now)) unless (self.winner.nil?)
+        unless (self.winner == current_winner)
+          @past_winners.push(PastWinner.create(self.winner, Time.now, previous_bid)) unless (self.winner.nil?)
+        end
 
       #send mail to previous winner
       SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You got outbid on #{@item.name}") unless (@winner.nil?)
@@ -213,7 +216,7 @@ module Market
         self.item.inactivate
       else
         safe.return
-        SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You won #{@item.name} in an auction") unless (@winner.nil?)
+        SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You won #{@item.name} in an auction")
         @winner.buy_item(self.item)
       end
 

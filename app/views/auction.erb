@@ -15,6 +15,62 @@
       <%= erb :_labeled_text, :locals => {:label => "Current winner", :content => item.auction.winner.nil? ? "-" : item.auction.winner.name}  %>
 
 
+
+      <style type="text/css">
+          #past-winner-title{
+              cursor:pointer;
+              margin-bottom: 5px;
+              background-color:#ECECFF;
+              color:#000000;
+              padding:2px;
+              font-weight:bold;
+              /*/*/border:1px solid #000000;/* */
+          }
+
+          .past-winner{
+              margin-bottom: 0.5em;
+          }
+
+          .past-winner-name {
+              font-weight: bold
+          }
+      </style>
+
+      <script type="text/javascript">
+          if (document.getElementById){
+              document.write('<style type="text/css">\n')
+              document.write('#past-winner-content{display: none;}\n')
+              document.write('</style>\n')
+          }
+
+          function SwitchMenu(obj){
+              if(document.getElementById){
+                  var title = document.getElementById('past-winner-title')
+                  var content = document.getElementById(obj);
+                  if(content.style.display != "block"){
+                      content.style.display = "block";
+                      title.textContent = "Past winners"
+                  }else{
+                      content.style.display = "none";
+                      title.textContent = "Past winners (click to expand)"
+                  }
+              }
+          }
+      </script>
+
+      <div id='past-winner-expandable'>
+        <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">Past Winners (click to expand)</div>
+        <div id="past-winner-content">
+          <% item.auction.past_winners.each do |past_winner| %>
+              <div class="past-winner">
+                <span class='past-winner-name'><%= "#{past_winner.agent.name} made a bit on "  %></span>
+                <span class='past-winner-time'><%= "#{past_winner.time} for" %> </span>
+                <span class='past_winner-price'><%= "#{past_winner.price} credits" %> </span>
+              </div>
+          <% end %>
+        </div>
+      </div>
+
       <form class="form-horizontal" method="POST" action="<%="/item/#{item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
         <fieldset>
           <%= erb :_text_control, :locals => {:name => :bid, :label => "Your bid" }%>
@@ -25,14 +81,7 @@
         </fieldset>
       </form>
 
-        <div class='past-winner'>
-        <% item.auction.past_winners.each do |past_winner| %>
-            <span class='past-winner-name'><%= "#{past_winner.agent.name}"  %></span>
-            <span class='past-winner-time'><%= "#{past_winner.time}" %> </span></br>
-        <% end %>
-      </div>
-
-
+    </div>
     </div>
   </div>
 </section>
