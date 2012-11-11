@@ -79,10 +79,15 @@
 
     if item.auction.bids.key?(price)
       @errors[:bid] = "This bid has been already given, choose an higher one "
-      halt erb :auction,  :locals => {:id => params[:id]}
+    end
+    @errors[:bid] = "test"
+
+    if (@errors.empty?)
+      item.auction.bid(agent, price)
+    else
+      halt erb :auction,  :locals => {:item => Item.by_id(params[:id].to_i)}
     end
 
-    item.auction.bid(agent, price)
     redirect "item/#{params[:id]}/auction"
   end
 
