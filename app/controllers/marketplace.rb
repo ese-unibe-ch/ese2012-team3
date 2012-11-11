@@ -56,8 +56,16 @@
   end
 
   get "/item/:id/auction" do
-    params[:bid] = 100
+    params[:bid] = Item.by_id(params[:id].to_i).auction.minimal_bid
     erb :auction, :locals => { :item => Item.by_id(params[:id].to_i) }
+  end
+
+  post "/item/:id/bid" do
+    item =  Item.by_id(params[:id].to_i)
+    agent = @current_agent
+    price = params[:bid]
+    item.auction.bid(agent, price)
+    redirect "item/#{params[:id]}/auction"
   end
 
   #
