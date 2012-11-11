@@ -76,6 +76,12 @@
     item =  Item.by_id(params[:id].to_i)
     agent = @current_agent
     price = params[:bid]
+
+    if item.auction.bids.key?(price)
+      @errors[:bid] = "This bid has been already given, choose an higher one "
+      halt erb :auction,  :locals => {:id => params[:id]}
+    end
+
     item.auction.bid(agent, price)
     redirect "item/#{params[:id]}/auction"
   end

@@ -145,6 +145,8 @@ module Market
       fail "This offer already exists" if bids.key?(price)
       fail "This auction is closed" if closed?
 
+      round = price.to_i % increment.to_i
+      price = price.to_i - round.to_i
       bids[price] = agent
 
       determine_winner
@@ -192,7 +194,8 @@ module Market
         @past_winners.push(PastWinner.create(self.winner, Time.now)) unless (self.winner.nil?)
 
       #send mail to previous winner
-      SimpleEmailClient.setup.sendMail(@winner.name,"You got outbid on #{@item.name}")
+      # SimpleEmailClient.setup.sendMail(@winner.name,"You got outbid on #{@item.name}")
+      # TODO
 
       #Set winner
       @winner = current_winner
@@ -211,7 +214,8 @@ module Market
         self.item.inactivate
       else
         safe.return
-        SimpleEmailClient.setup.sendMail(@winner.name,"You won #{@item.name} in an auction")
+        # SimpleEmailClient.setup.sendMail(@winner.name,"You won #{@item.name} in an auction")
+        # TODO
         @winner.buy_item(self.item)
       end
 
@@ -220,7 +224,7 @@ module Market
 
     def minimal_bid
       if current_price.nil?
-       value = minimal_price.to_i + increment.to_i
+       value = minimal_price.to_i
       else
        value = current_price.to_i + increment.to_i
       end

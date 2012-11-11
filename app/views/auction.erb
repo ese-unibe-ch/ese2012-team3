@@ -1,22 +1,19 @@
 <% @title = "Auction" %>
 
-<section id="content">
+<section id="content" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h2>Auction for <%= "#{item.name}" %></h2>
+      <h2>Auction for <%= xss item.name %></h2>
+      <%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LARGEIMAGESIZE} %>
+      </br>
+      <%= erb :_labeled_text, :locals => {:label => "Description", :content => mdown_to_html(xss item.about)} %>
 
       <%= erb :_labeled_text, :locals => {:label => "Start price", :content => item.auction.minimal_price } %>
       <%= erb :_labeled_text, :locals => {:label => "Current price", :content => item.auction.current_price.nil? ? "-" : item.auction.current_price } %>
       <%= erb :_labeled_text, :locals => {:label => "Minimal bid increment", :content => item.auction.increment}  %>
       <%= erb :_labeled_text, :locals => {:label => "Current winner", :content => item.auction.winner.nil? ? "-" : item.auction.winner.name}  %>
 
-      <div class='past-winner'>
-        <% item.auction.past_winners.each do |past_winner| %>
-            <span class='past-winner-name'><%= "#{past_winner.agent.name}"  %></span>
-            <span class='past-winner-time'><%= "#{past_winner.time}" %> </span>
-        <% end %>
-      </div>
 
       <form class="form-horizontal" method="POST" action="<%="/item/#{item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
         <fieldset>
@@ -27,6 +24,15 @@
           </div>
         </fieldset>
       </form>
+
+        <div class='past-winner'>
+        <% item.auction.past_winners.each do |past_winner| %>
+            <span class='past-winner-name'><%= "#{past_winner.agent.name}"  %></span>
+            <span class='past-winner-time'><%= "#{past_winner.time}" %> </span></br>
+        <% end %>
+      </div>
+
+
     </div>
   </div>
 </section>
