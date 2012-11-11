@@ -42,6 +42,7 @@
     @errors[:end_time] = "end time must be set" if params[:end_time].empty?
     @errors[:minimal_price] = "minimal price must be set" if params[:minimal_price].empty?
     @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
+    @errors[:increment] = "increment must be more then zero" if params[:increment] == "0"
     @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
 
     if (@errors.empty?)
