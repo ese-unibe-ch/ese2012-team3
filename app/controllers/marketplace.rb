@@ -77,8 +77,11 @@
     agent = @current_agent
     price = params[:bid]
 
-    if item.auction.bids.key?(price)
+    if item.auction.already_bid?(price.to_i)
       @errors[:bid] = "This bid has been already given, choose an higher one "
+    end
+    if !item.auction.valid_bid?(price.to_i)
+      @errors[:bid] = "The bid must be at least the current price + increment"
     end
 
     if (@errors.empty?)

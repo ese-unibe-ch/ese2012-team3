@@ -145,7 +145,7 @@ module Market
       fail "This offer already exists" if bids.key?(price)
       fail "This auction is closed" if closed?
 
-      round = price.to_i % increment.to_i
+      round = (price.to_i - minimal_price.to_i) % increment.to_i
       price = price.to_i - round.to_i
       bids[price] = agent
 
@@ -228,5 +228,19 @@ module Market
       end
       value
     end
+
+    def already_bid?(price)
+      bids.key?(price)
+    end
+
+    def valid_bid?(price)
+      if current_price.to_i + increment.to_i <= price.to_i
+        true
+      else
+        false
+     end
+
+    end
+
   end
 end
