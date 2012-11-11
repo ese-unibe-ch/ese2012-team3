@@ -1,0 +1,17 @@
+Code Review for Model
+
+Design: There could be some more invariants, especially in organization.rb.
+The distribution of responsibilities between the classes seams quiet clean and there
+is also a good reuse of code through inheritance (agents). There are however always
+the same class methods, that keep repeating. But I can think of no better solution.
+
+Coding style: Talking about class methods, what I find slightly irritating is that
+sometimes you start your id counter by 0 and other times by 1. I find it most confusing
+in user.rb where the counter is initially 0 and after .delete_all it is reset to 0.
+Naming of methods are in a way that help understand the code. There is however the issue,
+where within the method you use 'user' when you actually mean 'agent' or 'organisation',
+as far as I understand it (see organisation.rb).
+
+Documentation: The class documentation is very scarce to almost non existing. Although
+the documentation for methods are provided, it'd be very nice, if there was a description
+for each class, explaining its main responsibilities and its usage.
