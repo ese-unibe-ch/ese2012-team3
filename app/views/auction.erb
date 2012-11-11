@@ -12,7 +12,7 @@
 
       <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
         <fieldset>
-          <%= erb :_text_control, :locals => {:name => item.auction.minimal_bid, :label => "your bid" }%>
+          <%= erb :_text_control, :locals => {:name => :bid, :label => "Your bid" }%>
 
           <div class="form-actions">
             <button class="btn btn-info" type="submit">Save</button>

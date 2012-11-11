@@ -56,6 +56,7 @@
   end
 
   get "/item/:id/auction" do
+    params[:bid] = 100
     erb :auction, :locals => { :item => Item.by_id(params[:id].to_i) }
   end
 
