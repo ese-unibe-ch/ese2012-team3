@@ -1,4 +1,6 @@
 module Market
+  #cr: A class description would be very nice, that tells in a sentence what this class is for.
+
   class Activity
     @@activity_types = [:comment, :follow, :activate, :buy, :createitem]
 

@@ -54,6 +54,7 @@ module Market
     end
 
     def self.by_id id
+      #cr: use brackets for arguments
       @@items.detect{ |item| item.id.to_i == id }
     end
 

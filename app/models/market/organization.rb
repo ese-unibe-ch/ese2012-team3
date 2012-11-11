@@ -7,7 +7,7 @@ module Market
     attr_accessor :members, # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
                   :admin,
                   :orgactivities # a more complete list of the activities of the organization, with each activity storing the actual user that did it
-
+                  #cr: so an organisation has an attribute :activities and :orgactivities?
     # TODO Store roles of members. Make sure there's always an admin.
 
     @@organizations = []
@@ -59,11 +59,13 @@ module Market
 
     def self.has_organization_with_id?(id)
       return @@organizations.detect { |user| user.id == id.to_i } != nil
+      #cr: for better understanding, use "organisation" or "agent" instead of "user"
     end
 
     # TODO Reduce usage - use id instead
     def self.organization_by_name(name)
       @@organizations.detect { |user| user.name == name }
+      #cr: for better understanding, use "organisation" or "agent" instead of "user"
     end
 
     # Lists organizations the user works for

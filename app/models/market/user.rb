@@ -74,6 +74,7 @@ module Market
         @@users[0].delete
       end
       @@user_id_counter = 0
+      #cr: why is the counter set to 0? Initially it is 1...
     end
 
     # TODO "I can delete my account only if there's a second admin" (in every org I work for)
@@ -90,6 +91,7 @@ module Market
     end
 
     def is_member_of?(organization)
+      #cr: what if organization == nil?
       organization.has_member(self)
     end
 
@@ -98,7 +100,8 @@ module Market
     end
 
     def is_admin?
-      for org in self.list_organizations
+    #cr: what if organization == nil?
+    for org in self.list_organizations
         return true if org.admin == (self)
       end
     end

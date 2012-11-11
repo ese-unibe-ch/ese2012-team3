@@ -17,6 +17,7 @@ module Market
       self.credit -= amount
     end
 
+    #cr: is this for general usage, or only for testing purpose?
     # add a specified item to the selling list
     # @param [Item] item - item to be added
     def add_item(item)
@@ -24,6 +25,7 @@ module Market
       item.activate
     end
 
+    #cr: no nice way to avoid all these "if ... end"?
     # buy a specified item from another user
     # -> pay credits, change ownership, add item to user's list
     # @param [Item] item - item to be bought
@@ -50,6 +52,7 @@ module Market
       item.inactivate
     end
 
+    #cr: what happens with an item when its owner is nil?
     # remove item from user's list and set the item's owner to nil
     # @param [Item] item - item to be removed
     def remove_from_agent(item)
@@ -63,6 +66,7 @@ module Market
       wishlist << item unless wishlist.include?(item)
     end
 
+    #cr: precondition: does this item exists?
     # remove item from wishlist
     # @param [Item] item - item to be removed from wishlist
     def remove_item_from_wishlist(item)
