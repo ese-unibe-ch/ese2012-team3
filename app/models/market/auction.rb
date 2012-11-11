@@ -194,8 +194,7 @@ module Market
         @past_winners.push(PastWinner.create(self.winner, Time.now)) unless (self.winner.nil?)
 
       #send mail to previous winner
-      # SimpleEmailClient.setup.sendMail(@winner.name,"You got outbid on #{@item.name}")
-      # TODO
+      SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You got outbid on #{@item.name}") unless (@winner.nil?)
 
       #Set winner
       @winner = current_winner
@@ -214,8 +213,7 @@ module Market
         self.item.inactivate
       else
         safe.return
-        # SimpleEmailClient.setup.sendMail(@winner.name,"You won #{@item.name} in an auction")
-        # TODO
+        SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You won #{@item.name} in an auction") unless (@winner.nil?)
         @winner.buy_item(self.item)
       end
 
@@ -224,7 +222,7 @@ module Market
 
     def minimal_bid
       if current_price.nil?
-       value = minimal_price.to_i
+       value = minimal_price.to_i + increment.to_i
       else
        value = current_price.to_i + increment.to_i
       end

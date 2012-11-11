@@ -80,7 +80,6 @@
     if item.auction.bids.key?(price)
       @errors[:bid] = "This bid has been already given, choose an higher one "
     end
-    @errors[:bid] = "test"
 
     if (@errors.empty?)
       item.auction.bid(agent, price)
