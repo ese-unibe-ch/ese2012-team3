@@ -12,9 +12,7 @@ class SimpleEmailClient
   end
 
   ##
-  #
   # Sets email address that sends the mail and the password for this email address
-  #
   ##
   def initialize()
     @from = ""

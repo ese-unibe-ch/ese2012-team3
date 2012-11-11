@@ -193,6 +193,7 @@ module Market
 
       #send mail to previous winner
       SimpleEmailClient.setup.sendMail(@winner.name,"You got outbid on #{@item.name}")
+
       #Set winner
       @winner = current_winner
     end
