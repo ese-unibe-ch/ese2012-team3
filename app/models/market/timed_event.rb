@@ -1,6 +1,3 @@
-require 'rubygems'
-require 'rufus/scheduler'
-
 module Market
   class TimedEvent
     attr_accessor :time, :subscribers, :scheduler, :timed_out, :job

@@ -3,9 +3,11 @@ require 'rubygems'
 require 'require_relative'
 require_relative '../app/models.rb'
 
+# App specifique requirements
+require "rufus-scheduler"
+
 # Test requs
 require "test/unit"
-
 
 require_relative 'test_organization.rb'
 require_relative 'test_user.rb'

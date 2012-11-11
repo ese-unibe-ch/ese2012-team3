@@ -1,8 +1,16 @@
 class Module
+
+  #
+  # Defines an attribute accessor where attributes are
+  # only accessible when the given object is editable.
+  #
+  # An object using this attribute accessor has to
+  # implement a method #editable?
+  #
+
   def attr_accessor_only_if_editable(*args)
     args.each do |attr_name|
       attr_name = attr_name.to_s
-      puts "#{attr_name}"
 
       #getter
       self.class_eval %Q{

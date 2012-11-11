@@ -7,6 +7,8 @@ require_relative 'models'
 require 'sinatra'
 require 'erb'
 require 'redcarpet'
+require 'rufus/scheduler'
+
 require_relative 'helpers'
 
 # Controllers
