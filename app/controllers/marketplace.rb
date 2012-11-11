@@ -44,9 +44,19 @@
     @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
     @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
 
+    end_time_given = params[:end_time]
+    end_time_given = end_time_given.split()
+    date = end_time_given[0]
+    time = end_time_given[1]
+
+    date = date.split('.')
+    time = time.split(':')
+
+    newEndTime = Time.local(date[2], date[1], date[0], time[0], time[1])
+
     if (@errors.empty?)
       if @current_agent == @item.owner
-        @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, Time.now + params[:end_time].to_i)
+        @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, newEndTime)
       end
     else
       halt erb :create_auction, :locals => { :item => @item }
