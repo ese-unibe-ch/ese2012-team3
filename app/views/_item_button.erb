@@ -16,7 +16,7 @@
               <form action="/item/<%= item.id %>/auction" method="link">
                 <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
                 <input type="hidden" name="item" value="<%= xss item.id %>" />
-                <input type="submit" class="btn btn-info small" name="submit" value="Auction"/>
+                <input type="submit" class="btn btn-info small" name="submit" value="Bid on auction"/>
               </form>
             </td>
         <%else%>

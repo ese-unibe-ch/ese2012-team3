@@ -87,6 +87,7 @@ module Market
       auction.item = item
       auction.minimal_price = price
       auction.increment = increment
+      auction.current_price = price
 
       auction.invariant
 
