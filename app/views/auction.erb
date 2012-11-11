@@ -8,8 +8,15 @@
 
       <%= erb :_labeled_text, :locals => {:label => "Start price", :content => item.auction.minimal_price } %>
       <%= erb :_labeled_text, :locals => {:label => "Current price", :content => item.auction.current_price.nil? ? "-" : item.auction.current_price } %>
-      <%= erb :_labeled_text, :locals => {:label => "minimal bid increment", :content => item.auction.increment}  %>
-      <%= erb :_labeled_text, :locals => {:label => "current winner", :content => item.auction.winner.nil? ? "-" : item.auction.winner.name}  %>
+      <%= erb :_labeled_text, :locals => {:label => "Minimal bid increment", :content => item.auction.increment}  %>
+      <%= erb :_labeled_text, :locals => {:label => "Current winner", :content => item.auction.winner.nil? ? "-" : item.auction.winner.name}  %>
+
+      <div class='past-winner'>
+        <% item.auction.past_winners.each do |past_winner| %>
+            <span class='past-winner-name'><%= "#{past_winner.agent.name}"  %></span>
+            <span class='past-winner-time'><%= "#{past_winner.time}" %> </span>
+        <% end %>
+      </div>
 
       <form class="form-horizontal" method="POST" action="<%="/item/#{item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
         <fieldset>
