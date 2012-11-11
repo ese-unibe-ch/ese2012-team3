@@ -7,4 +7,4 @@ gem 'rcov'
 gem 'redcarpet'
 
 source 'http://gemcutter.org'
-gem 'rufus_scheduler'
+gem 'rufus-scheduler'
