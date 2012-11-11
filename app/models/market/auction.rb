@@ -87,7 +87,6 @@ module Market
       auction.item = item
       auction.minimal_price = price
       auction.increment = increment
-      auction.current_price = price
 
       auction.invariant
 
@@ -201,6 +200,15 @@ module Market
       end
 
       item.auction = nil
+    end
+
+    def minimal_bid
+      if current_price.nil?
+       value = minimal_price.to_i + increment.to_i
+      else
+       value = current_price.to_i + increment.to_i
+      end
+      value
     end
   end
 end

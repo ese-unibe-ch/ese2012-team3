@@ -7,12 +7,12 @@
       <h2>Auction for <%= "#{item.name}" %></h2>
 
       <%= erb :_labeled_text, :locals => {:label => "Start price", :content => item.auction.minimal_price } %>
-      <%= erb :_labeled_text, :locals => {:label => "Current price", :content => item.auction.current_price.nil? ? item.auction.minimal_price : item.auction.current_price } %>
+      <%= erb :_labeled_text, :locals => {:label => "Current price", :content => item.auction.current_price.nil? ? "-" : item.auction.current_price } %>
       <%= erb :_labeled_text, :locals => {:label => "minimal bid increment", :content => item.auction.increment}  %>
 
       <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
         <fieldset>
-          <%= erb :_text_control, :locals => {:name => :bid, :label => "Bid", :value => {(item.auction.current_price.to_i + item.auction.increment.to_i)}}%>
+          <%= erb :_text_control, :locals => {:name => item.auction.minimal_bid, :label => "your bid" }%>
 
           <div class="form-actions">
             <button class="btn btn-info" type="submit">Save</button>
