@@ -1,5 +1,18 @@
 class TestAuction < Test::Unit::TestCase
   class MockItem
+    attr_accessor :active, :auction
+
+    def activate
+      self.active = true
+    end
+
+    def inactivate
+      self.active = false
+    end
+
+    def active?
+      self.active
+    end
   end
 
   class MockUser
