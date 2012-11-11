@@ -17,22 +17,39 @@
 
 
       <style type="text/css">
-          #past-winner-title{
-              cursor:pointer;
-              margin-bottom: 5px;
-              background-color:#ECECFF;
-              color:#000000;
-              padding:2px;
-              font-weight:bold;
-              /*/*/border:1px solid #000000;/* */
-          }
-
-          .past-winner{
+          .past-winner {
               margin-bottom: 0.5em;
+              padding-left: 15px;
           }
 
           .past-winner-name {
               font-weight: bold
+          }
+
+          #past-winner-title {
+              padding-top: 2px;
+              padding-bottom: 2px;
+              padding-left: 10px;
+              margin-bottom: 20px;
+              margin-top: 20px;
+              background-color: #f5f5f5;
+              border: 1px solid #eee;
+              border: 1px solid rgba(0, 0, 0, 0.05);
+              -webkit-border-radius: 4px;
+              -moz-border-radius: 4px;
+              border-radius: 4px;
+              -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+              -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+          }
+
+          #past-winner-title .text {
+           padding-left: 10px;
+          }
+
+          #past-winner-content {
+              margin-top: -20px;
+              margin-bottom: 20px;
           }
       </style>
 
@@ -46,20 +63,26 @@
           function SwitchMenu(obj){
               if(document.getElementById){
                   var title = document.getElementById('past-winner-title')
+                  var icon = title.getElementsByClassName('symbol')[0]
+                  var text = title.getElementsByClassName('text')[0]
                   var content = document.getElementById(obj);
                   if(content.style.display != "block"){
                       content.style.display = "block";
-                      title.textContent = "Past winners"
+                      icon.className = "symbol icon-chevron-up"
+                      text.textContent = "Past winners"
                   }else{
                       content.style.display = "none";
-                      title.textContent = "Past winners (click to expand)"
+                      icon.className = "symbol icon-chevron-down"
+                      text.textContent = "Past winners (click to expand)"
                   }
               }
           }
       </script>
 
       <div id='past-winner-expandable'>
-        <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">Past Winners (click to expand)</div>
+        <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">
+          <i class="symbol icon-chevron-down"></i><span class="text">Past winners (click to expand)</span>
+        </div>
         <div id="past-winner-content">
           <% item.auction.past_winners.each do |past_winner| %>
               <div class="past-winner">
