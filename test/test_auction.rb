@@ -58,6 +58,10 @@ class TestAuction < Test::Unit::TestCase
     assert(@auction.end_time == @time, "Auction should have @time as start time")
   end
 
+  def test_should_have_no_past_winners
+    assert(@auction.past_winners.size == 0, "Should have no past winners when created")
+  end
+
   def test_should_be_editable_after_creation
     assert(@auction.editable?, "Auction should be editable when created")
   end
@@ -187,5 +191,20 @@ class TestAuction < Test::Unit::TestCase
   def test_should_return_money_to_bidder_one
     two_bidders
     assert(@bidder_one.credits == 300, "Should return money when bidder one is not the winner anymore")
+  end
+
+  def test_should_set_one_past_winner_when_two_bidders
+    two_bidders
+    assert(@auction.past_winners.size == 1, "Should have one past winner")
+  end
+
+  def test_should_set_bidder_one_as_past_winner_when_two_bidders
+    two_bidders
+    assert(@auction.past_winners[0].agent == @bidder_one, "Should have bidder one as past winner")
+  end
+
+  def test_time_of_past_winner_should_be_close_to_now
+    two_bidders
+    assert_in_delta(Time.now.to_f, @auction.past_winners[0].time.to_f, 0.5, "Should be just now when last winner changed")
   end
 end

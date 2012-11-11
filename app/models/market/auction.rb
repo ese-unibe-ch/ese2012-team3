@@ -36,7 +36,18 @@ module Market
   class Auction
     attr_accessor_only_if_editable :minimal_price, :increment
     attr_accessor :event, :item
-    attr_reader :winner, :current_price, :item, :event, :safe, :bids
+    attr_reader :winner, :current_price, :item, :event, :safe, :bids, :past_winners
+
+    class PastWinner
+      attr_accessor :agent, :time
+      def self.create(agent, time)
+        past_winner = PastWinner.new
+        past_winner.agent = agent
+        past_winner.time = time
+
+        past_winner
+      end
+    end
 
     def invariant
       fail "Auction should always be closed when time is over" if self.end_time < Time.now && !self.closed?
@@ -62,6 +73,7 @@ module Market
       @winner = nil
       @safe = Safe.new
       @current_price = nil
+      @past_winners = Array.new
     end
 
     def price
@@ -172,11 +184,12 @@ module Market
         @current_price = self.minimal_price
       end
 
-      #Hold back money of winner
+      #Hold back money of winner and sets old winner as past winner
       unless self.winner == current_winner
         self.safe.return unless self.winner.nil?
-
         self.safe.fill(current_winner, self.current_price)
+
+        @past_winners.push(PastWinner.create(self.winner, Time.now)) unless (self.winner.nil?)
       end
 
       #Set winner
