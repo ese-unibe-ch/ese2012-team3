@@ -192,6 +192,8 @@ module Market
         @past_winners.push(PastWinner.create(self.winner, Time.now)) unless (self.winner.nil?)
       end
 
+      #send mail to previous winner
+      SimpleEmailClient.setup.sendMail(@winner.name,"You got outbid on #{@item.name}")
       #Set winner
       @winner = current_winner
     end
@@ -209,6 +211,7 @@ module Market
         self.item.inactivate
       else
         safe.return
+        SimpleEmailClient.setup.sendMail(@winner.name,"You won #{@item.name} in an auction")
         @winner.buy_item(self.item)
       end
 

@@ -9,6 +9,7 @@ require_relative 'models/market/activity'
 require_relative 'models/market/auction'
 require_relative 'models/market/timed_event'
 require_relative 'models/market/safe'
+require_relative 'models/simple_email_client'
 
 include Market
 
