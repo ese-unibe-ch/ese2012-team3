@@ -135,12 +135,12 @@ module Market
     # Should set bid for a specific user
     #
 
-    def offer(agent, price)
-      fail "Offer must be equal or smaller than credits owned by agent" if agent.credits < price
+    def bid(agent, price)
+      fail "Offer must be equal or smaller than credits owned by agent" if agent.credit.to_i <= price.to_i
       if (self.current_price.nil?)
-        fail "Offer must be equal or bigger than the minimal price" if price < self.minimal_price
+        fail "Offer must be equal or bigger than the minimal price" if price.to_i < self.minimal_price.to_i
       else
-        fail "Offer must be equal or bigger than the current price" if price < self.current_price
+        fail "Offer must be equal or bigger than the current price" if price.to_i < self.current_price.to_i
       end
       fail "This offer already exists" if bids.key?(price)
       fail "This auction is closed" if closed?
@@ -179,18 +179,17 @@ module Market
 
       #Set current price
       if (prices.size > 1)
-        @current_price = prices[1]+increment
+        @current_price = prices[1].to_i+increment.to_i
       else
-        @current_price = self.minimal_price
+        @current_price = self.minimal_price.to_i
       end
 
+      #Hold back money of winner
       #Hold back money of winner and sets old winner as past winner
-      unless self.winner == current_winner
         self.safe.return unless self.winner.nil?
         self.safe.fill(current_winner, self.current_price)
 
         @past_winners.push(PastWinner.create(self.winner, Time.now)) unless (self.winner.nil?)
-      end
 
       #send mail to previous winner
       SimpleEmailClient.setup.sendMail(@winner.name,"You got outbid on #{@item.name}")

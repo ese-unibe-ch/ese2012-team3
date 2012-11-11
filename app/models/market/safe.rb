@@ -10,11 +10,11 @@ module Market
     def fill(owner, amount)
       fail "Owner has to be set" if owner.nil?
       fail "Amount has to be set" if amount.nil?
-      fail "Amount has to be greater than 0" if amount < 0
-      fail "Amount to fill in safe has to be greater or equal to the credits the user owns" if owner.credits < amount
+      fail "Amount has to be greater than 0" if amount.to_i < 0
+      fail "Amount to fill in safe has to be greater or equal to the credits the user owns" if owner.credit.to_i < amount.to_i
       fail "Safe already in use." unless self.owner.nil?
 
-      owner.credits -= amount
+      owner.credit -= amount
       self.savings = amount
       self.owner = owner
     end
@@ -22,7 +22,7 @@ module Market
     def return
       fail "Nobody owns this safe" if owner.nil?
 
-      owner.credits += self.savings
+      owner.credit += self.savings
       self.savings = 0
       self.owner = nil
     end
