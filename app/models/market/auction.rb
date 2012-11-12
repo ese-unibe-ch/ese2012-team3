@@ -84,6 +84,7 @@ module Market
     def dismiss
       safe.return unless @winner.nil?
       event.unschedule
+      self.item.auction = nil
     end
 
     def self.create(item, price, increment, time)
@@ -245,15 +246,16 @@ module Market
     #
 
     def timed_out
+      self.item.auction = nil
+
       if @winner.nil?
         self.item.inactivate
       else
         safe.return
+        self.item.price = current_price
         SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You won #{@item.name} in an auction")
         @winner.buy_item(self.item)
       end
-
-      item.auction = nil
     end
 
     def minimal_bid

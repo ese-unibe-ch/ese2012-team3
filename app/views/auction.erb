@@ -79,20 +79,22 @@
           }
       </script>
 
-      <div id='past-winner-expandable'>
-        <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">
-          <i class="symbol icon-chevron-down"></i><span class="text">Past winners (click to expand)</span>
-        </div>
-        <div id="past-winner-content">
-          <% item.auction.past_winners.each do |past_winner| %>
-              <div class="past-winner">
-                <span class='past-winner-name'><%= "#{past_winner.agent.name} made a bit on "  %></span>
-                <span class='past-winner-time'><%= "#{past_winner.time} for" %> </span>
-                <span class='past_winner-price'><%= "#{past_winner.price} credits" %> </span>
-              </div>
-          <% end %>
-        </div>
-      </div>
+      <% if item.auction.past_winners.size > 0 %>
+          <div id='past-winner-expandable'>
+            <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">
+              <i class="symbol icon-chevron-down"></i><span class="text">Past winners (click to expand)</span>
+            </div>
+            <div id="past-winner-content">
+              <% item.auction.past_winners.each do |past_winner| %>
+                  <div class="past-winner">
+                    <span class='past-winner-name'><%= "#{past_winner.agent.name} made a bit on "  %></span>
+                    <span class='past-winner-time'><%= "#{past_winner.time} for" %> </span>
+                    <span class='past_winner-price'><%= "#{past_winner.price} credits" %> </span>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
 
       <form class="form-horizontal" method="POST" action="<%="/item/#{item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
         <fieldset>

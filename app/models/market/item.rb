@@ -42,11 +42,12 @@ module Market
       self.active = true
     end
 
-    # deactivate the item
+    # Deactivates item and
+    # dismissed an ongoing auction
+
     def inactivate
       self.active = false
       self.auction.dismiss unless auction.nil?
-      self.auction = nil
     end
 
     def active?
