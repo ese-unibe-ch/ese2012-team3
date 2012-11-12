@@ -5,8 +5,8 @@ correspond, this makes it easier to search for a specific piece of code. Most
 names of the views are quite self-explanatory (some exceptions: setting.erb should
 be user_settings.erb and layout.erb seems to send messages to the user). There
 are 16 views with the prefix "_", which seem to be reused in various other parts
-so the code reuse is quite big. Because of the great amount of views I would
-suggest to make subfolders, but its also ok the way it is.
+so the code reuse is quite big. Because of the great amount of views I would suggest
+to make subfolders, but its also ok the way it is.
 
 Coding style: The views are quite consistent. The names of the variables are most
 of the time well chosen. At the beginning of most views is a check if the parameters

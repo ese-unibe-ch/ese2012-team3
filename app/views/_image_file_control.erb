@@ -3,9 +3,9 @@
   <div class="controls">
     <input class="input span8" type="file" name="image_file" accept="image/*" value="<%=
         xss params[:image_file] ? params[:image_file][:filename] : ""
+        #cr: make a new line if you have such a long comment
         # For security reasons, the value of a <input type=file> element can only be changed by a user. It's not possible to change the value through JavaScript or HTML. http://stackoverflow.com/questions/8323010/putting-default-value-in-input-type-file
         # so we cannot restore this
-        #cr: make a new line if you have such a long comment
     %>"/>
     <% if @errors[:image_file] %>
         <span class="help-inline"><%= xss @errors[:image_file] %></span>
