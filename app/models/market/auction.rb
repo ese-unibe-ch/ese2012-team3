@@ -135,24 +135,55 @@ module Market
     #
     # Should set bid for a specific user
     #
+    # Bids that don't fit with increment are rounded
+    # down.
+    #
 
     def bid(agent, price)
-      fail "Offer must be equal or smaller than credits owned by agent" if agent.credit.to_i <= price.to_i
+      fail "This auction is closed" if closed?
+      fail "Offer must be equal or smaller than credits owned by agent" if agent.credit.to_i < price.to_i
       if (self.current_price.nil?)
         fail "Offer must be equal or bigger than the minimal price" if price.to_i < self.minimal_price.to_i
       else
         fail "Offer must be equal or bigger than the current price" if price.to_i < self.current_price.to_i
       end
-      fail "This offer already exists" if bids.key?(price)
-      fail "This auction is closed" if closed?
 
       round = (price.to_i - minimal_price.to_i) % increment.to_i
       price = price.to_i - round.to_i
+
+      fail "This offer already exists" if bids.key?(price)
+
+      remove_previous_bids_of(agent)
       bids[price] = agent
 
       determine_winner
 
       self.invariant
+    end
+
+    #
+    # Gets current bid (in credits) of an agent
+    # Returns nil if agent didn't bid on this auction.
+    #
+    # bidder : agent looking for his bid
+    #
+
+    def get_bid_of(bidder)
+      self.bids.each do |price, agent|
+        return price if (agent == bidder)
+      end
+
+      nil
+    end
+
+    #
+    # Removes all previous bids of this agent
+    #
+
+    def remove_previous_bids_of(agent_to_remove)
+      self.bids.delete_if do |price, agent|
+        agent == agent_to_remove
+      end
     end
 
     #
@@ -188,16 +219,18 @@ module Market
         @current_price = self.minimal_price.to_i
       end
 
-      #Hold back money of winner and sets old winner as past winner
-        self.safe.return unless self.winner.nil?
-        self.safe.fill(current_winner, self.current_price)
 
-        unless (self.winner == current_winner)
-          @past_winners.push(PastWinner.create(self.winner, Time.now, previous_bid)) unless (self.winner.nil?)
-        end
+      unless (self.winner == current_winner)
+        #Sets old winner as past winner
+        @past_winners.push(PastWinner.create(self.winner, Time.now, previous_bid)) unless (self.winner.nil?)
 
-      #send mail to previous winner
-      SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You got outbid on #{@item.name}") unless (@winner.nil?)
+        #send mail to previous winner
+        SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You got outbid on #{@item.name}") unless (@winner.nil?)
+      end
+
+      #Hold back money of winner
+      self.safe.return unless self.winner.nil?
+      self.safe.fill(current_winner, self.current_price)
 
       #Set winner
       @winner = current_winner

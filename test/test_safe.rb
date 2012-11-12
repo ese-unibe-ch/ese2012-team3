@@ -2,10 +2,10 @@ require "test/unit"
 
 class TestSafe < Test::Unit::TestCase
   class MockUser
-    attr_accessor :credits
+    attr_accessor :credit
 
     def initialize
-      self.credits = 150
+      self.credit = 150
     end
   end
 
@@ -35,13 +35,13 @@ class TestSafe < Test::Unit::TestCase
 
   def test_should_decrease_money_of_user_when_filled
     fill_safe
-    assert(@user.credits == 50, "Should decrease money by 100")
+    assert(@user.credit == 50, "Should decrease money by 100")
   end
 
   def test_return_should_increase_money_of_user
     fill_safe
     @safe.return
-    assert(@user.credits == 150, "Should increase money by 100")
+    assert(@user.credit == 150, "Should increase money by 100")
   end
 
    def test_return_should_clear_user

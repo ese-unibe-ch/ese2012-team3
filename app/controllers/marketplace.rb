@@ -22,7 +22,27 @@
   get "/item/:id/create_auction" do
     redirect '/login' unless session[:user_id]
 
-    erb :create_auction, :locals => { :item => Item.by_id(params[:id].to_i) }
+    erb :create_auction, :locals => { :item => checkAndGetItem(params[:id]) }
+  end
+
+  #
+  # Creates a time object from a different time
+  # format
+  #
+  # Expected format:
+  # dd.mm.yyyy hh:mm
+  #
+
+  def paramToTime(end_time_given)
+    end_time_given = params[:end_time]
+    end_time_given = end_time_given.split()
+    date = end_time_given[0]
+    time = end_time_given[1]
+
+    date = date.split('.')
+    time = time.split(':')
+
+    Time.local(date[2], date[1], date[0], time[0], time[1])
   end
 
   #
@@ -36,30 +56,19 @@
 
   post "/item/:id/auction/create" do
     @item = checkAndGetItem(params[:id].to_i)
+    end_time = paramToTime(params[:end_time])
 
     #Input validation
     @errors[:increment] = "increment must be set" if params[:increment].empty?
     @errors[:end_time] = "end time must be set" if params[:end_time].empty?
     @errors[:minimal_price] = "minimal price must be set" if params[:minimal_price].empty?
     @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
-    @errors[:increment] = "increment must be more then zero" if params[:increment] == "0"
+    @errors[:increment] = "increment must be more than zero" if params[:increment] == "0"
     @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
+    @errors[:end_time] = "time must be in future" unless end_time > Time.now
 
     if (@errors.empty?)
-      if @current_agent == @item.owner
-
-        end_time_given = params[:end_time]
-        end_time_given = end_time_given.split()
-        date = end_time_given[0]
-        time = end_time_given[1]
-
-        date = date.split('.')
-        time = time.split(':')
-
-        newEndTime = Time.local(date[2], date[1], date[0], time[0], time[1])
-
-        @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, newEndTime)
-      end
+      @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, end_time)
     else
       halt erb :create_auction, :locals => { :item => @item }
     end
@@ -75,19 +84,16 @@
   post "/item/:id/bid" do
     item =  Item.by_id(params[:id].to_i)
     agent = @current_agent
-    price = params[:bid]
+    price = params[:bid].to_i
 
-    if item.auction.already_bid?(price.to_i)
-      @errors[:bid] = "This bid has been already given, choose an higher one "
-    end
-    if !item.auction.valid_bid?(price.to_i)
-      @errors[:bid] = "The bid must be at least the current price + increment"
-    end
+    @errors[:bid] = "This bid has been already given, choose an higher one" if item.auction.already_bid?(price.to_i)
+    @errors[:bid] = "The bid must be at least the current price + increment" if !item.auction.valid_bid?(price.to_i)
+    @errors[:bid] = "You don't have enough money!" if price > agent.credit
 
     if (@errors.empty?)
-      item.auction.bid(agent, price)
+      item.auction.bid(agent, price) unless (@current_agent == item.owner)
     else
-      halt erb :auction,  :locals => {:item => Item.by_id(params[:id].to_i)}
+      halt erb :auction,  :locals => {:item => item }
     end
 
     redirect "item/#{params[:id]}/auction"
@@ -95,13 +101,12 @@
 
   #
   # Checks if an item can be retrieved and if the retrieved item
-  # is owned by current agent
+  # is owned by current agent if not redirects to where the
+  # call was coming from or to '/' and shows an error.
   #
 
   def checkAndGetItem(id)
-    item = Item.by_id(id)
-
-    puts("Item: #{item}")
+    item = Item.by_id(id.to_i)
 
     #Checking if back path exists
     direct_to = back.nil? ? "/" : back

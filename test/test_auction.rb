@@ -1,6 +1,10 @@
 class TestAuction < Test::Unit::TestCase
   class MockItem
-    attr_accessor :active, :auction
+    attr_accessor :active, :auction, :name
+
+    def initialize
+      self.name = "Item"
+    end
 
     def activate
       self.active = true
@@ -16,11 +20,12 @@ class TestAuction < Test::Unit::TestCase
   end
 
   class MockUser
-    attr_accessor :credits, :bought_item
+    attr_accessor :credit, :bought_item, :name
 
     def initialize
-      self.credits = 300
+      self.credit = 600
       self.bought_item = nil
+      self.name = "Hans"
     end
 
     def id
@@ -82,7 +87,7 @@ class TestAuction < Test::Unit::TestCase
 
   def bid
     @user = MockUser.new
-    @auction.offer(@user, 200)
+    @auction.bid(@user, 200)
   end
 
   def test_should_have_winner_after_first_bid
@@ -92,7 +97,7 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_decrease_credits_of_winner
     bid
-    assert(@user.credits == 200, "Should decrease money by 200 of bidder but was #{300 - @user.credits}")
+    assert(@user.credit == 500, "Should decrease money by 200 of bidder but was #{600 - @user.credit}")
   end
 
   def test_should_not_increment_start_price_after_first_bid
@@ -140,19 +145,19 @@ class TestAuction < Test::Unit::TestCase
     bid
     @auction.timed_out
 
-    assert(@user.credits == 300, "User should have payed 200 credits but was #{@user.credits}")
+    assert(@user.credit == 600, "User should have 600 credits but was #{@user.credit}")
   end
 
   def test_bid_should_fail_if_price_smaller_than_current_price
     @user = MockUser.new
-    assert_raise(RuntimeError) { @auction.offer(@user, 90) }
+    assert_raise(RuntimeError) { @auction.bid(@user, 90) }
   end
 
   def test_bid_should_fail_if_somebody_bid_already_same_price
     bid
 
     @user = MockUser.new
-    assert_raise(RuntimeError) { @auction.offer(@user, 200) }
+    assert_raise(RuntimeError) { @auction.bid(@user, 200) }
   end
 
   def test_bid_should_fail_if_auction_is_already_over
@@ -162,15 +167,37 @@ class TestAuction < Test::Unit::TestCase
     sleep(0.2)
 
     @user = MockUser.new
-    assert_raise(RuntimeError) { @auction.offer(@user, 400) }
+    assert_raise(RuntimeError) { @auction.bid(@user, 400) }
+  end
+
+  def test_get_bid_of_should_return_nil_if_not_bidder
+    bid
+
+    not_bidder = MockUser.new
+    assert_nil(@auction.get_bid_of(not_bidder), "Should return nil if user haven't bid on auction")
+  end
+
+  def test_get_bid_of_should_return_bid
+    bid
+
+    retrieved_bid = @auction.get_bid_of(@user)
+
+    assert(retrieved_bid == 200, "Should return last bid of bidder (200 credits) but was #{retrieved_bid}")
+  end
+
+  def test_raising_his_own_bid_should_not_raise_current_price
+    bid
+
+    @auction.bid(@user, 300)
+    assert(@auction.current_price == 100, "Price should not be raised when bidding on own bid")
   end
 
   def two_bidders
     @bidder_one = MockUser.new
-    @auction.offer(@bidder_one, 200)
+    @auction.bid(@bidder_one, 200)
 
     @bidder_two = MockUser.new
-    @auction.offer(@bidder_two, 300)
+    @auction.bid(@bidder_two, 300)
   end
 
   def test_should_set_bidder_with_higher_bid_as_winner
@@ -185,12 +212,12 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_decrease_money_of_second_bidder
     two_bidders
-    assert(@bidder_two.credits == 90, "Should decrease credits of bidder two by 210")
+    assert(@bidder_two.credit == 390, "Should decrease credits of bidder two by 210")
   end
 
   def test_should_return_money_to_bidder_one
     two_bidders
-    assert(@bidder_one.credits == 300, "Should return money when bidder one is not the winner anymore")
+    assert(@bidder_one.credit == 600, "Should return money when bidder one is not the winner anymore")
   end
 
   def test_should_set_one_past_winner_when_two_bidders
