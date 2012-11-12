@@ -64,7 +64,7 @@ module Market
         fail "Should have current price if there are bidders" if self.current_price.nil?
         fail "Current price should be positive" if self.current_price < 0
         fail "Should not be editable when there are bids" if self.editable?
-        fail "Safe should have same value as price if there are bidders" unless self.safe.savings == self.current_price
+        fail "Safe should have same value as highest bid if there are bidders" unless self.safe.savings == self.highest_bid
         fail "Safe should always have winner as owner" unless self.safe.owner == self.winner
       end
     end
@@ -231,7 +231,7 @@ module Market
 
       #Hold back money of winner
       self.safe.return unless self.winner.nil?
-      self.safe.fill(current_winner, self.current_price)
+      self.safe.fill(current_winner, prices[0])
 
       #Set winner
       @winner = current_winner
@@ -280,5 +280,8 @@ module Market
 
     end
 
+    def highest_bid
+      bids.keys.sort!.reverse![0]
+    end
   end
 end

@@ -1,6 +1,6 @@
 class TestAuction < Test::Unit::TestCase
   class MockItem
-    attr_accessor :active, :auction, :name
+    attr_accessor :active, :auction, :name, :price
 
     def initialize
       self.name = "Item"
@@ -97,7 +97,7 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_decrease_credits_of_winner
     bid
-    assert(@user.credit == 500, "Should decrease money by 200 of bidder but was #{600 - @user.credit}")
+    assert(@user.credit == 400, "Should decrease money as high as bid(200) but was #{600 - @user.credit}")
   end
 
   def test_should_not_increment_start_price_after_first_bid
@@ -212,7 +212,7 @@ class TestAuction < Test::Unit::TestCase
 
   def test_should_decrease_money_of_second_bidder
     two_bidders
-    assert(@bidder_two.credit == 390, "Should decrease credits of bidder two by 210")
+    assert(@bidder_two.credit == 300, "Should decrease credits of bidder two as high as bid (300)")
   end
 
   def test_should_return_money_to_bidder_one
