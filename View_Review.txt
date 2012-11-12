@@ -1,0 +1,23 @@
+Code Review for the Views
+
+Design aspects: It is good that the requested URLs and the name of the views
+correspond, this makes it easier to search for a specific piece of code. Most
+names of the views are quite self-explanatory (some exceptions: setting.erb should
+be user_settings.erb and layout.erb seems to send messages to the user). There
+are 16 views with the prefix "_", which seem to be reused in various other parts
+so the code reuse is quite big. Because of the great amount of views I would
+suggest to make subfolders, but its also ok the way it is.
+
+Coding style: The views are quite consistent. The names of the variables are most
+of the time well chosen. At the beginning of most views is a check if the parameters
+are null, if they are they get a default value assigned, if not they keep their
+assigned value. This is done with a conditional operator. Generally some more empty
+lines would be good because now sometimes the code is hard to read.
+
+Documentation: It would really help if there was a short description of what a view
+should show. Some of the parts could be understood easier if you add some really
+short comments above a bit of code that performs a functionally more or less independent
+part within the file. The description of the necessary parameters of a view are very helpfull
+but why was sometimes "*" and sometimes ":" used to list the parameters? I assume * is required
+and : is optional, but I am not sure since in _agent_list.rb version seems to be a parameter
+that is both. Perhaps a explanation of these symbols is needed in the readme.
