@@ -86,6 +86,12 @@
     agent = @current_agent
     price = params[:bid].to_i
 
+    if (item.auction.nil?)
+      #make redirect with alert
+      redirect "/?alert=auctionover"
+    end
+
+
     @errors[:bid] = "This bid has been already given, choose an higher one" if item.auction.already_bid?(price.to_i)
     @errors[:bid] = "The bid must be at least the current price + increment" if !item.auction.valid_bid?(price.to_i)
     @errors[:bid] = "You don't have enough money!" if price > agent.credit
