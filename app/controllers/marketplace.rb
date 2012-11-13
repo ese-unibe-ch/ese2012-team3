@@ -77,8 +77,15 @@
   end
 
   get "/item/:id/auction" do
-    params[:bid] = Item.by_id(params[:id].to_i).auction.minimal_bid
-    erb :auction, :locals => { :item => Item.by_id(params[:id].to_i) }
+    item = Item.by_id(params[:id].to_i)
+
+    if (item.auction.nil?)
+      #make redirect with alert
+      redirect "/?alert=noauction"
+    end
+
+    params[:bid] = item.auction.minimal_bid
+    erb :auction, :locals => { :item => item }
   end
 
   post "/item/:id/bid" do
@@ -90,7 +97,6 @@
       #make redirect with alert
       redirect "/?alert=auctionover"
     end
-
 
     @errors[:bid] = "This bid has been already given, choose an higher one" if item.auction.already_bid?(price.to_i)
     @errors[:bid] = "The bid must be at least the current price + increment" if !item.auction.valid_bid?(price.to_i)
