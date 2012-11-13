@@ -65,10 +65,16 @@
           </div>
 
           <div class="alert-error alert" id="itemnotyours">
-              <strong>Ooops!</strong> You tried to access an item that is not yours
+              <strong>Ooops!</strong><br /> You tried to access an item that is not yours.
           </div>
           <div class="alert-error alert" id="itemnotexist">
-            <strong>Ooops!</strong> You tried to access an item that does not exist
+            <strong>Ooops!</strong><br /> You tried to access an item that does not exist.
+          </div>
+          <div class="alert-error alert" id="auctionover">
+            <strong>Ooops!</strong><br /> Auction already closed.
+          </div>
+          <div class="alert-error alert" id="noauction">
+            <strong>Ooops!</strong><br /> There is no auction for this item.
           </div>
 
           <%= yield %>
