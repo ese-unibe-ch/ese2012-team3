@@ -55,11 +55,15 @@
 
     <%if item.active %>
         <% if item.auction? %>
-            <td>
-                <form action="/item/<%= item.id %>/auction/edit" method="link">
-                  <input type="submit" class="btn btn-info small" name="submit" value="Edit Auction" />
-                </form>
-            </td>
+            <% if !item.auction.editable? %>
+                <td><%= @current_agent == item.owner ? "<i class='muted'>No longer editable after first bid</i>": ""%></td>
+            <% else %>
+                <td>
+                    <form action="/item/<%= item.id %>/auction/edit" method="link">
+                    <input type="submit" class="btn btn-info small" name="submit" value="Edit Auction" />
+                    </form>
+                </td>
+            <% end %>
         <% else %>
             <td><%= @current_agent == item.owner ? "<i class='muted'>Cannot edit active items</i>": ""%></td>
         <% end %>

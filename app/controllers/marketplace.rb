@@ -25,14 +25,8 @@
     erb :create_auction, :locals => { :item => checkAndGetItem(params[:id]) }
   end
 
-  #
-  # Creates a time object from a different time
-  # format
-  #
-  # Expected format:
-  # dd.mm.yyyy hh:mm
-  #
-
+=begin
+TODO: find the courage to delete this method since the new one works fine.
   def paramToTime(end_time_given)
     end_time_given = params[:end_time]
     end_time_given = end_time_given.split()
@@ -43,6 +37,23 @@
     time = time.split(':')
 
     Time.local(date[2], date[1], date[0], time[0], time[1])
+  end
+=end
+
+  # Creates a time object from a different time
+  # format
+  #
+  # replaces the method that only parsed the
+  # dd.mm.yyyy hh:mm format
+  #
+  #Expected format
+  #
+  # Thu Nov 22 17:41:00 +0100 2012
+  # dd.mm.yyyy hh:mm
+  #
+  def paramToTime(end_time)
+    date = DateTime.parse(end_time)
+    Time.local(date.year, date.month, date.day, date.hour, date.min, date.sec)
   end
 
   #
@@ -136,10 +147,28 @@
   # params[:increment]: Increment for auction as a positive integer
   # params[:end_time]: Time (at the moment in seconds from now)
   #
-
   post "/item/:id/auction/edit" do
-    "Not yet implemented!"
-    #TODO
+    @item = checkAndGetItem(params[:id].to_i)
+    end_time = paramToTime(params[:end_time])
+
+    #Input validation  (same as in create)
+    @errors[:increment] = "increment must be set" if params[:increment].empty?
+    @errors[:end_time] = "end time must be set" if params[:end_time].empty?
+    @errors[:minimal_price] = "minimal price must be set" if params[:minimal_price].empty?
+    @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
+    @errors[:increment] = "increment must be more than zero" if params[:increment] == "0"
+    @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
+    @errors[:end_time] = "time must be in future" unless end_time > Time.now
+
+    if (@errors.empty?)
+      @item.auction.minimal_price = params[:minimal_price].to_i
+      @item.auction.increment = params[:increment].to_i
+      @item.auction.end_time= end_time unless end_time == @item.auction.end_time
+    else
+      halt erb :edit_auction, :locals => { :item => @item }
+    end
+
+    redirect "/profile/#{session[:user_id]}"
   end
 
   post "/item/:id/status_change" do
