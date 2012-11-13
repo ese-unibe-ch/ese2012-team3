@@ -3,8 +3,45 @@ Code Review for the Views
 Design aspects: It is good that the requested URLs and the name of the views
 correspond, this makes it easier to search for a specific piece of code. Most
 names of the views are quite self-explanatory (some exceptions: setting.erb should
-be user_settings.erb and layout.erb seems to send messages to the user). There
-are 16 views with the prefix "_", which seem to be reused in various other parts
+be user_settings.erb and layout.erb seems to send messages to the user and sets up
+the main layout). What is not so beautiful is that those messages in layout.rb
+are hard coded. I would suggest a more flexible solution. You could do this via
+session:
+
+Create an Alert class:
+
+class Alert {
+  attr_accessor :title, :message
+
+  def self.create(title, message)
+    alert = Alter.new
+    alert.title = title
+    alert.message = message
+
+    alert
+  end
+}
+
+Pass it like this:
+
+if ( your_condition)
+    session[:alert] = Alert.create("Title", "Message")
+    redirect "/?alert"
+end
+
+Then check if an alert is set in layout.rb
+
+<% if ! session[:alert].nil?%>
+<div class="alert-error alert" id="alert"><strong><%= "#{session[:alert].title}" %></strong><br />
+<%= "#{session[:alert].message}" %></div>
+
+<% session[:alert] = nil
+ end %>
+
+With that solution you probably could leave as well that fancy java-script stuff
+to hide all those hard coded messages and you wouldn't even need the "?alert" part.
+
+There are 16 views with the prefix "_", which seem to be reused in various other parts
 so the code reuse is quite big. Because of the great amount of views I would suggest
 to make subfolders, but its also ok the way it is.
 
