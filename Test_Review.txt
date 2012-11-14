@@ -1,10 +1,18 @@
 Code Review for the Tests:
 
-- No tests for activity.rb and agent.rb (models).
+There are no tests for activity.rb and agent.rb (models). Instead there is a lot
+of duplicated code for testing user and organisation. More elegant: throughfully
+test Agent. It's clear that activity is a very small class, but there could still
+be some usefull test. It would also help to unserstand how to use the activity class.
 
+From the code of the model, it seams that it is possible to have a comment with
+no text (empty string). But when looking at the test, it seams there must always be
+a text.
 
-    Clear and distinct test cases
-    Number/coverage of test cases
-    Easy to understand the case that is tested
-    Well crafted set of test data
-    Readability
+There are only few boundary tests. Usually only the standard situation is tested.
+
+It would be nice to have some tests for the controllers.
+
+Although from the naming it is clear which file is for which test, it would improve
+navigation to organize tests in subfolders.
+
