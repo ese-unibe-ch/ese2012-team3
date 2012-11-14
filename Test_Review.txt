@@ -1,0 +1,10 @@
+Code Review for the Tests:
+
+- No tests for activity.rb and agent.rb (models).
+
+
+    Clear and distinct test cases
+    Number/coverage of test cases
+    Easy to understand the case that is tested
+    Well crafted set of test data
+    Readability

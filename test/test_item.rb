@@ -15,17 +15,22 @@ class ItemTest < Test::Unit::TestCase
   def test_has_price
     item = Item.init(:price => 100)
     assert(item.price == 100, "item has a wrong price!")
+    #cr: last statement doesn't belong here, does it?
     assert(item.about, "item has no default about!")
   end
+
+  #cr: what if item price is set to negative value?
 
   def test_has_owner
     user = User.init(:name => "John", :password => "Zz!45678")
     item = Item.init(:owner => user)
     assert_equal(user, item.owner, "item has an incorrect owner!")
+    #cr: test is with more than one user, may be make even a transfer
   end
 
   def test_changes_state
     item = Item.init()
+    #cr: test if item is inactive in the first place
     item.activate
     assert(item.active, "item is still inactive!")
   end
@@ -36,6 +41,7 @@ class ItemTest < Test::Unit::TestCase
     item = Item.init(:name => "normalItem", :price => 100, :owner => initialOwner, :active => true)
     user.buy_item(item)
     assert(!Item.sell_items_by_agent(user).include?(item), "item is still active!")
+    #cr: Funny way to check if item is inactive, why not simply assert(!item.active?)  ?
   end
 
   def test_user_has_item_without_add

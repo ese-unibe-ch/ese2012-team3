@@ -1,6 +1,6 @@
 Code Review for Model
 
-Design: There could be some more invariants, especially in organization.rb.
+Design: There should be some more invariants, especially in organization.rb and item.rb.
 The distribution of responsibilities between the classes seams quiet clean and there
 is also a good reuse of code through inheritance (agents). There are however always
 the same class methods, that keep repeating. But I can think of no better solution.
