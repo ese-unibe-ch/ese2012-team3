@@ -15,6 +15,9 @@
                                                     :type => :buy,
                                                     :message => "bought item #{@item.name}"}))
     end
+
+    session[:last_bought_item_id] = @item.id
+
     #redirect back
     redirect back + "?alert=itembought"
   end

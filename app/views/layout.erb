@@ -49,7 +49,7 @@
             <strong>Password changed!</strong><br />Your password has been successfully changed.
           </div>
           <div class="alert-success alert hidden" id="itembought">
-            <strong>Item bought!</strong><br />Your successfully purchased an item.
+            <strong>Item bought!</strong><br />Your successfully purchased the item <%= erb :_item_link, :locals => {:item => Item.by_id(session[:last_bought_item_id]), :highlight_active => false} %>.
           </div>
           <div class="alert-success alert hidden" id="orgcreated">
             <strong>Organization created!</strong><br />The organization was successfully created.

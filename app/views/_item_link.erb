@@ -1,4 +1,6 @@
 <% #params item (required), highlight_active (required, true or false)%>
-<a href="/item/<%= item.id.to_s %>" <%= (highlight_active) ?
-        (item.active ? "style='color:#00CC00;text-decoration:underline;'" : "style='color:#FF0000;text-decoration:underline;'") : "" %>;>
+<% if item %>
+<a href="/item/<%= item.id.to_s %>"><%= (highlight_active) ?
+        (item.active ? "style='color:#00CC00;text-decoration:underline;'" : "style='color:#FF0000;text-decoration:underline;'") : "" %>
 <%= xss item.name %></a>
+<% end %>
