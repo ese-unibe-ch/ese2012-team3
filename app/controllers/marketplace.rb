@@ -71,8 +71,7 @@
     else
       halt erb :create_auction, :locals => { :item => @item }
     end
-
-    redirect "/profile/#{session[:user_id]}"
+    redirect "/item/#{@item.id}"
   end
 
   get "/item/:id/auction" do
@@ -168,7 +167,7 @@
       halt erb :edit_auction, :locals => { :item => @item }
     end
 
-    redirect "/profile/#{session[:user_id]}"
+    redirect "/item/#{@item.id}"
   end
 
   post "/item/:id/status_change" do
