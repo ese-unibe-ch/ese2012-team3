@@ -3,23 +3,9 @@
     <head>
       <title><%= @title %></title>
 
-      <script src="/js/libs/jquery-1.7.2.js"></script>
-      <script src="/js/libs/getVarFromUrl.js"></script>
-      <script src="/bootstrap/js/bootstrap.js"></script>
-
       <link rel="stylesheet" href="/css/jquery-ui.css" />
       <link href="/css/jquery-ui-timepicker-addon.css" rel="stylesheet" />
-      <script src="/js/jquery-ui.js"></script>
-      <script src="/js/jquery-ui-timepicker-addon.js"></script>
-
-      <script>
-          $(function() {
-              $( "#end_time" ).datetimepicker({
-                  dateFormat: 'dd.mm.yy',  minDate: new Date()
-              });
-          });
-      </script>
-
+      
       <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" />
       <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" />
       <style type="text/css">
@@ -28,13 +14,6 @@
           padding-bottom: 40px;
         }
       </style>
-
-      <script type="text/javascript">
-        $(document).ready(function(){
-          $('#'+$.getUrlVar('alert')).removeClass("hidden");
-        });
-      </script>
-
     </head>
     <body>
         <%= erb :_nav %>
@@ -77,6 +56,27 @@
 
           <%= yield %>
         </div>
+        
+        <script src="/js/libs/jquery-1.7.2.js"></script>
+        <script src="/js/libs/getVarFromUrl.js"></script>
+        <script src="/bootstrap/js/bootstrap.js"></script>
+        
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('#'+$.getUrlVar('alert')).removeClass("hidden");
+          });
+        </script>
+        
+        <script src="/js/jquery-ui.js"></script>
+        <script src="/js/jquery-ui-timepicker-addon.js"></script>
+
+        <script>
+            $(function() {
+                $( "#end_time" ).datetimepicker({
+                    dateFormat: 'dd.mm.yy',  minDate: new Date()
+                });
+            });
+        </script>
     </body>
 </html>
 
