@@ -28,21 +28,6 @@
     erb :create_auction, :locals => { :item => checkAndGetItem(params[:id]) }
   end
 
-=begin
-TODO: find the courage to delete this method since the new one works fine.
-  def paramToTime(end_time_given)
-    end_time_given = params[:end_time]
-    end_time_given = end_time_given.split()
-    date = end_time_given[0]
-    time = end_time_given[1]
-
-    date = date.split('.')
-    time = time.split(':')
-
-    Time.local(date[2], date[1], date[0], time[0], time[1])
-  end
-=end
-
   # Creates a time object from a different time
   # format
   #
