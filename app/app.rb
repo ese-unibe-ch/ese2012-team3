@@ -41,7 +41,6 @@ ACTIVITIES_PER_PAGE    = 10
 COMMENTS_PER_PAGE      = 20
 DUMMYTHINGSCOUNT       = 30
 
-enable :sessions
 set :public_folder, relative('public')
 set :views, relative('views')
 
