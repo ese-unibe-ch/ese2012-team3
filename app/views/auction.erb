@@ -7,14 +7,30 @@
       <h2>Auction for <%= xss item.name %></h2>
       <%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LARGEIMAGESIZE} %>
       </br>
-      <%= erb :_labeled_text, :locals => {:label => "Description", :content => mdown_to_html(xss item.about)} %>
-
-      <%= erb :_labeled_text, :locals => {:label => "Start price", :content => item.auction.minimal_price } %>
-      <%= erb :_labeled_text, :locals => {:label => "Current price", :content => item.auction.current_price.nil? ? "-" : item.auction.current_price } %>
-      <%= erb :_labeled_text, :locals => {:label => "Minimal bid increment", :content => item.auction.increment}  %>
-      <%= erb :_labeled_text, :locals => {:label => "Current winner", :content => item.auction.winner.nil? ? "-" : item.auction.winner.name}  %>
-
-
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>Description</td>
+            <td><%= mdown_to_html(xss item.about) %></td>
+          </tr>
+          <tr>
+            <td>Start price:</td>
+            <td><%= item.auction.minimal_price %></td>
+          </tr>
+          <tr>
+            <td>Current price:</td>
+            <td><%= (item.auction.current_price.nil?) ? "-" : item.auction.current_price %>
+          </tr>
+          <tr>
+            <td>Minimal bid increment:</td>
+            <td><%= item.auction.increment %></td>
+          </tr>
+          <tr>
+            <td>Current winner</td>
+            <td><%= (item.auction.winner.nil?) ? "-" : item.auction.winner %></td>
+          </tr>
+        </tbody>
+      </table>
 
       <style type="text/css">
           .past-winner {
