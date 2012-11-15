@@ -31,8 +31,7 @@
 
       <script type="text/javascript">
         $(document).ready(function(){
-          $('.alert').hide();
-          $('#'+$.getUrlVar('alert')).show();
+          $('#'+$.getUrlVar('alert')).removeClass("hidden");
         });
       </script>
 
@@ -40,22 +39,22 @@
     <body>
         <%= erb :_nav %>
         <div class="container">
-          <div class="alert-success alert" id="loggedin">
+          <div class="alert-success alert hidden" id="loggedin">
             <strong>Logged in!</strong><br />You've been logged in successfully!
           </div>
-          <div class="alert-success alert" id="registered">
+          <div class="alert-success alert hidden" id="registered">
             <strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
           </div>
-          <div class="alert-success alert" id="pwchanged">
+          <div class="alert-success alert hidden" id="pwchanged">
             <strong>Password changed!</strong><br />Your password has been successfully changed.
           </div>
-          <div class="alert-success alert" id="itembought">
+          <div class="alert-success alert hidden" id="itembought">
             <strong>Item bought!</strong><br />Your successfully purchased an item.
           </div>
-          <div class="alert-success alert" id="orgcreated">
+          <div class="alert-success alert hidden" id="orgcreated">
             <strong>Organization created!</strong><br />The organization was successfully created.
           </div>
-          <div class="alert-success alert" id="switcheduser">
+          <div class="alert-success alert hidden" id="switcheduser">
             <strong>Switched user!</strong><br />
             <%if session[:organization_id].nil?%>
                 You are not representing an organization.
@@ -63,17 +62,16 @@
                 You are now representing <%= erb :_user_link, :locals => {:user => Organization.organization_by_id(session[:organization_id].to_i)} %>.
             <%end%>
           </div>
-
-          <div class="alert-error alert" id="itemnotyours">
+          <div class="alert-error alert hidden" id="itemnotyours">
               <strong>Ooops!</strong><br /> You tried to access an item that is not yours.
           </div>
-          <div class="alert-error alert" id="itemnotexist">
+          <div class="alert-error alert hidden" id="itemnotexist">
             <strong>Ooops!</strong><br /> You tried to access an item that does not exist.
           </div>
-          <div class="alert-error alert" id="auctionover">
+          <div class="alert-error alert hidden" id="auctionover">
             <strong>Ooops!</strong><br /> Auction already closed.
           </div>
-          <div class="alert-error alert" id="noauction">
+          <div class="alert-error alert hidden" id="noauction">
             <strong>Ooops!</strong><br /> There is no auction for this item.
           </div>
 
