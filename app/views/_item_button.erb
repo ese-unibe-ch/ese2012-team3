@@ -7,16 +7,16 @@
             <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
             <input type="hidden" name="item" value="<%= xss item.id %>" />
             <input type="hidden" name="new_state" value="inactive" />
-            <input type="submit" class="btn btn-info small" name="submit" value="Inactivate item" />
+            <button type="submit" class="btn btn-info small">Inactivate item</button>
           </form>
         </td>
     <% else %>
         <%if item.auction?%>
             <td>
-              <form action="/item/<%= item.id %>/auction" method="link">
+              <form action="/item/<%= item.id %>/auction" method="GET">
                 <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
                 <input type="hidden" name="item" value="<%= xss item.id %>" />
-                <input type="submit" class="btn btn-info small" name="submit" value="Bid on auction"/>
+                <button type="submit" class="btn btn-info small">Bid on auction</button>
               </form>
             </td>
         <%else%>
@@ -24,7 +24,7 @@
               <form action="/item/<%= item.id %>/buy" method="post">
                 <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
                 <input type="hidden" name="item" value="<%= xss item.id %>" />
-                <input type="submit" class="btn btn-info small" name="submit" value="Buy Item"<%if @current_agent.credit < item.price%> disabled="disabled"<%end%>/>
+                <button type="submit" class="btn btn-info small" <%if @current_agent.credit < item.price%> disabled="disabled"<%end%>>Buy Item</button>
               </form>
             </td>
         <%end%>
@@ -37,7 +37,7 @@
             <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
             <input type="hidden" name="item" value="<%= xss item.id %>" />
             <input type="hidden" name="new_state" value="active" />
-            <input type="submit" class="btn btn-info small" name="submit" value="Activate item" />
+            <button type="submit" class="btn btn-info small" name="submit">Activate item</button>
           </form>
         </td>
     <% else %>
@@ -59,8 +59,8 @@
                 <td><%= @current_agent == item.owner ? "<i class='muted'>No longer editable after first bid</i>": ""%></td>
             <% else %>
                 <td>
-                    <form action="/item/<%= item.id %>/auction/edit" method="link">
-                    <input type="submit" class="btn btn-info small" name="submit" value="Edit Auction" />
+                    <form action="/item/<%= item.id %>/auction/edit" method="GET">
+                      <button type="submit" class="btn btn-info small">Edit Auction</button>
                     </form>
                 </td>
             <% end %>
@@ -69,8 +69,8 @@
         <% end %>
     <% else %>
         <td>
-          <form action="/item/<%= item.id %>/edit" method="link">
-            <input type="submit" class="btn btn-info small" name="submit" value="Edit item" />
+          <form action="/item/<%= item.id %>/edit" method="GET">
+            <button type="submit" class="btn btn-info small">Edit item</button>
           </form>
         </td>
     <% end %>
@@ -90,8 +90,8 @@
         <% end %>
     <% else %>
         <td>
-          <form action="/item/<%= item.id %>/create_auction" method="link">
-            <input type="submit" class="btn btn-info small" name="submit" value="Create Auction" />
+          <form action="/item/<%= item.id %>/create_auction" method="GET">
+            <button type="submit" class="btn btn-info small">Create Auction</button>
           </form>
         </td>
     <% end %>
