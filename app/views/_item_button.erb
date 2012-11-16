@@ -84,7 +84,7 @@
 
     <%if item.active %>
         <% if item.auction? %>
-            <td><%= @current_agent == item.owner ? "<i class='muted'>Auction ends at #{item.auction.end_time}</i>": ""%></td>
+            <td><%= @current_agent == item.owner ? "<i class='muted'>Auction ends at #{item.auction.end_time.strftime("%d.%m.%Y %H:%M")}</i>": ""%></td>
         <% else %>
             <td><%= @current_agent == item.owner ? "<i class='muted'>Currently not in auction</i>": ""%></td>
         <% end %>
