@@ -8,6 +8,7 @@ require 'sinatra'
 require 'erb'
 require 'redcarpet'
 require 'rufus/scheduler'
+require 'sinatra/flash'
 
 require_relative 'helpers'
 
@@ -48,6 +49,7 @@ set :views, relative('views')
 set :public_folder, PUBLIC_FOLDER # http://www.sinatrarb.com/configuration.html
 set :views, VIEWS_FOLDER
 enable :sessions # never forget
+
 
 # ===================== TEST DATA =====================
 john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)

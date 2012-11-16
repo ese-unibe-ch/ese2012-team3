@@ -17,9 +17,9 @@
     end
 
     session[:last_bought_item_id] = @item.id
+    flash[:success] = 'item_bought'
 
-    #redirect back
-    redirect back + "?alert=itembought"
+    redirect back
   end
 
   get "/item/:id/create_auction" do
@@ -79,7 +79,8 @@
 
     if (item.auction.nil?)
       #make redirect with alert
-      redirect "/?alert=noauction"
+      flash['error'] = 'no_auction'
+      redirect '/'
     end
 
     params[:bid] = item.auction.minimal_bid
@@ -93,7 +94,8 @@
 
     if (item.auction.nil?)
       #make redirect with alert
-      redirect "/?alert=auctionover"
+      flash['error'] = 'auction_over'
+      redirect back
     end
 
     @errors[:bid] = "This bid has been already given, choose an higher one" if item.auction.already_bid?(price.to_i)
@@ -118,12 +120,8 @@
   def checkAndGetItem(id)
     item = Item.by_id(id.to_i)
 
-    #Checking if back path exists
-    direct_to = back.nil? ? "/" : back
-
-    #make redirect with alert
-    redirect direct_to + "?alert=itemnotexist" if item.nil?
-    redirect direct_to + "?alert=itemnotyours" if @current_agent != item.owner
+    raise "item does not exist" if item.nil?
+    raise "thats not your item!" if @current_agent != item.owner
 
     item
   end

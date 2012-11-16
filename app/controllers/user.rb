@@ -29,7 +29,8 @@ get "/user/switch" do
   redirect '/login' unless session[:user_id]
   # Remove the organization id from the session, the current_agent will be set back to current_user
   session[:organization_id] = nil
-  redirect back + "?alert=switcheduser"
+  flash[:success] = 'agent_switched'
+  redirect back
 end
 
 def passwordcheck()
@@ -66,7 +67,8 @@ post "/register" do
   user.image_file_name = add_image(USERIMAGESROOT, user.id)
 
   session[:user_id] = user.id
-  redirect "/?alert=registered"
+  flash[:success] = 'registered'
+  redirect '/'
 end
 
 get "/register" do
@@ -86,8 +88,8 @@ post "/change_password" do
   halt erb :settings unless @errors.empty?
 
   @current_user.password = params[:password]
-
-  redirect "/?alert=pwchanged"
+  flash[:success] = 'password_changed'
+  redirect back
 end
 
 post "/change_profile_picture" do

@@ -1,0 +1,8 @@
+<div class="alert-success alert">
+  <strong>Switched user!</strong><br />
+  <%if session[:organization_id].nil?%>
+    You are not representing an organization.
+  <%else%>
+    You are now representing <%= erb :_user_link, :locals => {:user => Organization.organization_by_id(session[:organization_id].to_i)} %>.
+  <%end%>
+</div>

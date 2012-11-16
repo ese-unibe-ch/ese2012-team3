@@ -1,0 +1,4 @@
+<div class="alert-success alert">
+  <strong>Item bought!</strong><br />You successfully purchased the item <%= erb :_item_link, :locals => {:item => Item.by_id(session[:last_bought_item_id]), :highlight_active => false} %>.
+  Click <a href= <%= @current_agent.profile_route %>>here</a> to see your other items.
+</div>
