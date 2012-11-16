@@ -133,7 +133,7 @@
 
     #Passing parameters
     params[:minimal_price] = @item.auction.minimal_price
-    params[:end_time] = @item.auction.end_time
+    params[:end_time] = @item.auction.end_time.strftime("%d.%m.%Y %H:%M")
     params[:increment] = @item.auction.increment
     erb :edit_auction, :locals => { :item => Item.by_id(params[:id].to_i) }
   end

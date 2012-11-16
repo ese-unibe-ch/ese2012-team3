@@ -7,7 +7,7 @@
     <div class="span10">
       <h1>Item: <%= xss @item.name %></h1>
 
-      <table style="width:400px"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %><%= erb :_item_wishlist_button %></tr></table>
+      <table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %><%= erb :_item_wishlist_button %></tr></table>
 
       <%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
 
