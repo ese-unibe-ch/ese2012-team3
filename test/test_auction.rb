@@ -1,5 +1,5 @@
 class TestAuction < Test::Unit::TestCase
-  class MockItem
+  class MockItem < Item
     attr_accessor :active, :auction, :name, :price
 
     def initialize
@@ -19,7 +19,7 @@ class TestAuction < Test::Unit::TestCase
     end
   end
 
-  class MockUser
+  class MockUser < User
     attr_accessor :credit, :bought_item, :name
 
     def initialize

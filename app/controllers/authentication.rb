@@ -5,7 +5,7 @@
     password = params[:password]
 
     # error handling...
-    @errors[:name] = "User '#{username}' does not exist"  unless Market::User.allNames.include?(username)
+    @errors[:name] = "User '#{username}' does not exist"  unless Market::User.all_names.include?(username)
     @errors[:name] = "No username given"  unless username && username.length > 0
     @username = username unless @errors[:name] # restore
     @errors[:password] = "No password given"  unless password && password.length > 0

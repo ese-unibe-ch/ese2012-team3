@@ -1,7 +1,5 @@
 class OrganizationTest < Test::Unit::TestCase
 
-
-
   def setup
     Organization.delete_all
     @user = User.init(:name => "testuser", :credit => 500, :password => 'Ax1301!3')
@@ -11,9 +9,12 @@ class OrganizationTest < Test::Unit::TestCase
     User.delete_all
   end
 
-  def test_has_admin
+  def test_has_members_and_admin
     org = Organization.init(:name => "org1", :admin => @user)
-    assert_equal(@user, org.admin)
+    assert(org.orgmembers.size == 1)
+    assert(org.admins.size == 1)
+    assert_equal(@user, org.admins[0])
+    assert_equal(@user, org.orgmembers[0].agent)
   end
 
   def test_has_name
@@ -48,15 +49,15 @@ class OrganizationTest < Test::Unit::TestCase
     # list is empty now
     org = Organization.init(:name => "org6", :admin => @user)
     assert(Item.sell_items_by_agent(org).length == 0, "sell list is not empty")
-    someitem = Item.init(:name => "someItem", :price => 300)
+    someitem = Item.init(:name => "someItem", :price => 300, :owner => @user)
     someitem.owner = Organization.init(:name => "owner1", :admin => @user)
     org.add_item(someitem)
     assert(Item.sell_items_by_agent(org).include?(someitem), "item was not added!")
   end
 
   def test_list_all_sell_items
-    otheritem = Item.init(:name => "otherItem", :price => 50)
-    someitem = Item.init(:name => "someItem", :price => 550)
+    otheritem = Item.init(:name => "otherItem", :price => 50, :owner => @user)
+    someitem = Item.init(:name => "someItem", :price => 550, :owner => @user)
     otheritem.owner = Organization.init(:name => "owner2", :admin => @user)
     org = Organization.init(:name => "org7", :admin => @user)
     org.add_item(otheritem)
@@ -68,7 +69,7 @@ class OrganizationTest < Test::Unit::TestCase
   end
 
   def test_fail_not_enough_credit
-    item = Item.init(:name => "reallyExpensiveItem", :price => 5000)
+    item = Item.init(:name => "reallyExpensiveItem", :price => 5000, :owner => @user)
     org = Organization.init(:name => "org8", :admin => @user)
     owner = Organization.init(:name => "owner3", :admin => @user)
     owner.add_item(item)
@@ -79,7 +80,7 @@ class OrganizationTest < Test::Unit::TestCase
 
   def test_become_owner_at_trade
     org = Organization.init(:name => "org9", :admin => @user)
-    item = Item.init(:credit => 100)
+    item = Item.init(:credit => 100, :owner => @user)
     owner = Organization.init(:name => "owner4", :admin => @user)
     owner.add_item(item)
     org.buy_item(item)
@@ -89,7 +90,7 @@ class OrganizationTest < Test::Unit::TestCase
 
   def test_transfer_credit_at_trade
     org = Organization.init(:name => "org10", :admin => @user)
-    item = Item.init(:name => "normalItem", :price => 100)
+    item = Item.init(:name => "normalItem", :price => 100, :owner => @user)
     owner = Organization.init(:name => "owner5", :admin => @user)
     owner.add_item(item)
     org.buy_item(item)
@@ -99,7 +100,7 @@ class OrganizationTest < Test::Unit::TestCase
 
   def test_removes_from_org
     org = Organization.init(:name => "org11", :admin => @user)
-    item = Item.init(:name => "normalItem", :price => 100)
+    item = Item.init(:name => "normalItem", :price => 100, :owner => @user)
     owner = Organization.init(:name => "owner6", :admin => @user)
     owner.add_item(item)
     org.buy_item(item)
@@ -165,8 +166,8 @@ class OrganizationTest < Test::Unit::TestCase
   end
 
   def test_remove_members
-    donald = User.init(:name => "donald", :password => 'Ax1301!3')
-    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+    donald = User.init(:name => "@donald", :password => 'Ax1301!3')
+    dagobert = User.init(:name => "@dagobert", :password => 'Ax1301!3')
 
     org = Organization.init(:name => "org15", :admin => @user)
     org.add_member(donald)
@@ -176,12 +177,12 @@ class OrganizationTest < Test::Unit::TestCase
 
     org.remove_member(donald)
     assert_equal(2, org.members.size)
-    assert(org.has_member(dagobert))
-    assert(!org.has_member(donald))
+    assert(org.has_member?(dagobert))
+    assert(!org.has_member?(donald))
 
     org.remove_member(dagobert)
     assert_equal(1, org.members.size)
-    assert(!org.has_member(dagobert))
+    assert(!org.has_member?(dagobert))
   end
 
   def test_cannot_remove_admin
@@ -189,6 +190,24 @@ class OrganizationTest < Test::Unit::TestCase
     assert_raise RuntimeError do
       org.remove_member(@user)
     end
+  end
+
+  def test_can_remove_admin_if_second
+    org = Organization.init(:name => "org15", :admin => @user)
+    dagobert = User.init(:name => "@dagobert", :password => 'Ax1301!3')
+
+    org.add_member(dagobert)
+    org.toggle_admin_rights(dagobert)
+    assert(org.is_admin?(dagobert))
+    org.toggle_admin_rights(dagobert)
+    assert(!org.is_admin?(dagobert))
+    assert(org.get_member_role(dagobert) == :normal_member, "dagobert is not an admin but also not a normal_member")
+
+    org.toggle_admin_rights(dagobert)
+    org.remove_member(@user)
+    assert(!org.is_admin?(@user))
+
+    assert(org.is_admin?(dagobert))
   end
 
   def test_cannot_add_member_twice

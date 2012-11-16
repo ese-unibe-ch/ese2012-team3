@@ -1,8 +1,14 @@
 # Abstract
 module Market
   class Agent
-    attr_accessor :name, :credit, :about, :id, :image_file_name,
-                  :activities, :wishlist
+    attr_accessor_typesafe_not_nil String, :name
+    attr_accessor_typesafe_not_nil String, :about
+
+    attr_accessor :credit,
+                  :id,
+                  :image_file_name,
+                  :activities,
+                  :wishlist
 
     # increase the balance
     # @param [Numeric] amount - amount to be added
@@ -20,6 +26,7 @@ module Market
     # add a specified item to the selling list
     # @param [Item] item - item to be added
     def add_item(item)
+      assert_kind_of(Item, item)
       item.owner = self
       item.activate
     end
@@ -28,9 +35,8 @@ module Market
     # -> pay credits, change ownership, add item to user's list
     # @param [Item] item - item to be bought
     def buy_item(item)
-      if(item == nil)
-        raise "no item to buy given"
-      end
+      assert_kind_of(Item, item)
+
       if(item.owner == nil)
         raise "item #{item} has no owner"
       end
@@ -45,32 +51,29 @@ module Market
       end
       self.decrease_credit(item.price)
       item.owner.increase_credit(item.price)
-      item.owner.remove_from_agent(item)
       item.owner = self
       item.inactivate
-    end
-
-    # remove item from user's list and set the item's owner to nil
-    # @param [Item] item - item to be removed
-    def remove_from_agent(item)
-      item.owner = nil
     end
 
     # add item to wishlist
     # currently the button is only displayed for organizations
     # @param [Item] item - item to be added to the wishlist
     def add_item_to_wishlist(item)
+      assert_kind_of(Item, item)
       wishlist << item unless wishlist.include?(item)
     end
 
     # remove item from wishlist
     # @param [Item] item - item to be removed from wishlist
     def remove_item_from_wishlist(item)
+      assert_kind_of(Item, item)
       wishlist.delete(item)
     end
 
     # @param [Activity] activity
     def add_activity(activity)
+      assert_kind_of(Activity, activity)
+      raise "cannot add same activity multiple times" if self.activities.include?(activity)
       self.activities.push(activity)
     end
   end

@@ -1,4 +1,7 @@
 module Market
+  class Auction #dummy
+
+  end
 
   class Item
     # Items have a name
@@ -6,15 +9,17 @@ module Market
     # An item can be active or inactive.
     # An item has an owner.
 
+    attr_accessor_typesafe_not_nil Agent,   :owner
+    attr_accessor_typesafe_not_nil String,  :name
+    attr_accessor_typesafe_not_nil String,  :about # TODO share common functionality with agent?
+
+    attr_accessor_typesafe         Auction, :auction # nil signifies no auction
+    attr_accessor_typesafe         String,  :image_file_name # nil signifies no image
+
     attr_accessor :id,
-                  :name,
+                  :active, # true or false
                   :price, # positive number
-                  :owner, # an Agent
-                  :active, # Boolean
-                  :auction, # An Auction Object
-                  :comments, # List    of Comment objects
-                  :about,    # TODO share common functionality with agent?
-                  :image_file_name
+                  :comments # List of Comment objects
 
     @@item_id_counter = 0
     @@items = []
@@ -22,6 +27,7 @@ module Market
     # constructor - give a name to the item and set a specified price
     # @param [Object] params - dictionary of symbols.
     # Recognized: :name, :price, :active, :owner, :about, :auction
+    # Required: owner must be an Agent
     def self.init(params={})
       item = self.new
       item.id = @@item_id_counter
@@ -31,6 +37,7 @@ module Market
       item.auction = params[:auction] || nil
       item.owner = params[:owner]
       item.about = params[:about] || ""
+      item.image_file_name = nil
       item.comments = []
       @@items << item
       @@item_id_counter += 1

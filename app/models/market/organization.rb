@@ -1,8 +1,26 @@
 module Market
+
+  class OrganizationMember
+    @@roles = [:admin, :normal_member]
+    attr_reader :agent,
+                :role # any of @@roles (default)
+
+
+    def initialize(agent)
+      assert_kind_of(Agent, agent)
+      @agent = agent
+      @role = :normal_member
+    end
+
+    def role=(r)
+      fail "invalid role '#{r}'" unless @@roles.include?(r)
+      @role = r
+    end
+  end
+
   class Organization < Agent
     # Very similar to user
-    attr_accessor :members, # for now... see https://github.com/ese-unibe-ch/ese2012-team3/wiki/Mapping-Organization---User
-                  :admin,
+    attr_accessor :orgmembers,   # an array of objects of type OrganizationMember
                   :orgactivities # a more complete list of the activities of the organization, with each activity storing the actual user that did it
 
     # TODO Store roles of members. Make sure there's always an admin.
@@ -11,18 +29,18 @@ module Market
     @@organization_id_counter = 1
 
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
-    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :about
-    # required: :name
+    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :about, :admin
+    # required: :name, :admin
     def self.init(params={})
       fail "Organization name missing" unless params[:name] && params[:name].length > 0
       fail "Organization with given name already exists" if self.organization_by_name(params[:name])
       fail "Organization needs an admin" unless params[:admin].is_a?(Market::User)
       org = self.new
-      org.members = []
+      org.orgmembers = []
       org.activities = []
       org.orgactivities = []
-      org.admin = params[:admin]
-      org.add_member(params[:admin])
+      org.add_member(params[:admin]).role = :admin
+
       org.name = params[:name]
       org.credit = params[:credit] || 100
       org.about = params[:about] || ""
@@ -42,6 +60,8 @@ module Market
       @@organizations = []
       @@organization_id_counter = 0
     end
+
+
 
     def self.organization_by_id(id)
       org = @@organizations.detect { |org| org.id == id }
@@ -65,20 +85,72 @@ module Market
       @@organizations.select { |org| org.members.include?(user) }
     end
 
-    def has_member(user)
+    def members
+      ms = []
+      for om in self.orgmembers
+        ms << om.agent
+      end
+      return ms
+    end
+
+    def admins
+      ms = []
+      for om in self.orgmembers
+        ms << om.agent if om.role == :admin
+      end
+      return ms
+    end
+
+    # returns nil if this agent is not a member, otherwise the OrganizationMember object that manifests this membership
+    def get_orgmember_by_agent(agent)
+      return self.orgmembers.find(nil) {|om| om.agent == agent}
+    end
+
+    def get_member_role(agent)
+       om =  self.get_orgmember_by_agent(agent)
+       fail "agent is not a member" unless om
+       return om.role
+    end
+
+    def is_admin?(user)
+      om =  self.get_orgmember_by_agent(user)
+      return false unless om
+      return om.role == :admin
+    end
+
+    # role any of :normal_member : :admin
+    def set_member_role(agent, role)
+      om = self.get_orgmember_by_agent(agent)
+      raise "agent is not a member" unless om
+      raise 'cannot remove single admin, set a new admin first!' if self.admins.size == 1 && self.is_admin?(agent) && role != :admin
+      om.role = role
+    end
+
+    def toggle_admin_rights(agent)
+      om = self.get_orgmember_by_agent(agent)
+      raise "agent is not a member" unless om
+      set_member_role(om.agent, om.role == :admin ? :normal_member : :admin)
+    end
+
+    def has_member?(user)
       self.members.include?(user)
     end
 
+
+    # returns the OrganizationMember object representing this membership
     def add_member(user)
-      raise "cannot add same user twice!" if self.has_member(user)
-      members << user
+      assert_kind_of(User, user)
+      raise "cannot add same user twice!" if self.has_member?(user)
+      om = OrganizationMember.new(user)
+      self.orgmembers << om
+      return om
     end
 
     def remove_member(user)
-      raise 'cannot remove admin, set a new admin first!' if user == self.admin
+      set_member_role(user, :normal_member)
       raise "cannot remove member #{user.name}, he isn't a member!" unless self.members.include?(user)
-
-      members.delete(user)
+      om = self.get_orgmember_by_agent(user)
+      self.orgmembers.delete(om)
     end
 
     # TODO move to a more appropriate place
@@ -92,7 +164,9 @@ module Market
     end
 
     def add_orgactivity(orgactivity)
-      self.orgactivities << orgactivity unless self.orgactivities.include?(orgactivity)
+      raise "cannot add non activity as activity" unless orgactivity && orgactivity.kind_of?(Activity)
+      raise "cannot add same orgactivity multiple times" if self.orgactivities.include?(orgactivity)
+      self.orgactivities << orgactivity
     end
 
     # Missing: Deletion...

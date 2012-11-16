@@ -62,7 +62,6 @@ eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :adm
 uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
 uno.image_file_name="userimages/1.png"
 eseo.image_file_name="userimages/1.png"
-
 JACK_USER = jack
 
 # followings
@@ -107,7 +106,7 @@ pizza.add_comment(Comment.init(:creator => john, :text => "can i get that withou
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 User.all.each_with_index do |user, i|
-  item = Item.init(:name => "item" + i.to_s, :price => 100)
+  item = Item.init(:name => "item" + i.to_s, :price => 100, :owner => user)
   comment = Comment.init(:creator => user, :text => "This is **my** item")
   item.add_comment(comment)
   item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))

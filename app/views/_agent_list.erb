@@ -2,7 +2,7 @@
 # * agents to display
 # * version: Optional - any of the identifiers
 #   :leave_organization Supply when listing orgs a user has joined, must also supply user then
-#   :remove_org_member Supply when listing org members, must supply org
+#   :remove_org_member Supply when listing org members, must supply :org as well
 #   or nil
 # :identifier - identifier for this list on a page with multiple item lists, used for paging links
 identifier = :agentlistpage unless identifier
@@ -37,7 +37,7 @@ page = params[identifier] ? params[identifier].to_i : 0
           <% if defined? version%>
             <%if version == :leave_organization %>
 
-                <%if agent.admin != @current_user # If the currently logged in person is admin of the org, he can't leave it
+                <%if agent.admins.size > 1 || !agent.admins.include?(@current_user) # Admins can't leave the org if there is only one
           %>
                   <form action="/organization/<%= xss agent.id %>/remove_member" method="post">
                     <input type="hidden" name="user_to_remove" value="<%= xss user.id%>" />
@@ -47,7 +47,7 @@ page = params[identifier] ? params[identifier].to_i : 0
             <% end
 
                if version == :remove_org_member%>
-               <%if agent != org.admin # the admin cannot be removed %>
+               <%if org.admins.size > 1 || !org.admins.include?(agent) # the last admin cannot be removed %>
 
                       <form action="/organization/<%= xss org.id %>/remove_member" method="post" style="display: inline;">
                         <input type="hidden" name="user_to_remove" value="<%= xss agent.id %>" />

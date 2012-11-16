@@ -1,14 +1,17 @@
 module Market
   class Comment
-    attr_accessor :creator, :text
+    attr_reader :creator, :text
+
+    def initialize(params={})
+       assert_kind_of(Agent, params[:creator])
+       assert_kind_of(String, params[:text]) if params[:text]
+       @creator = params[:creator]
+       @text = params[:text] || ""
+    end
 
     # params: hash, recognized: :creator (required), :text (empty by default)
     def self.init(params={})
-      cmt = self.new
-      fail "No Comment creator supplied" unless params[:creator]
-      cmt.creator = params[:creator]
-      cmt.text = params[:text] || ""
-      cmt
+      self.new(params)
     end
 
     def to_s

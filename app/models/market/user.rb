@@ -11,8 +11,9 @@ module Market
     # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
     # A user provides a method that lists his/her active items to sell.
 
-    attr_accessor :password,
-                  :following # a list of agents
+    attr_accessor_typesafe_not_nil String, :password
+
+    attr_accessor :following # a list of agents
 
     @@user_id_counter = 1 # cannot use @@users.size as user may be deleted
     @@users = []
@@ -21,6 +22,7 @@ module Market
     # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :password -- must be strong (see PasswordCheck), :about
     # required: :name
     def self.init(params={})
+      assert_kind_of(String, params[:name])
       fail "Username missing" unless params[:name] && params[:name].length > 0
       fail "User with given username already exists" if self.user_by_name(params[:name])
       user = self.new
@@ -44,7 +46,7 @@ module Market
     end
 
     # returns all user names
-    def self.allNames
+    def self.all_names
       names = []
       @@users.each do |user|
         names << user.name
@@ -90,17 +92,22 @@ module Market
     end
 
     def is_member_of?(organization)
-      organization.has_member(self)
+      organization.has_member?(self)
     end
 
     def list_organizations
       Organization.organizations_by_user(self)
     end
 
+    # returns true if this user is admin of any of his organizations
     def is_admin?
       for org in self.list_organizations
-        return true if org.admin == (self)
+        return true if org.is_admin?(self)
       end
+    end
+
+    def is_admin_of?(org)
+      return org.is_admin?(self)
     end
 
     # TODO move to a more appropriate place

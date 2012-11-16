@@ -39,17 +39,18 @@ class UserTest < Test::Unit::TestCase
     # list is empty now
     user = User.init(:name => "user6", :password => "Zz!45678")
     assert(Item.sell_items_by_agent(user).length == 0, "sell list is not empty")
-    someitem = Item.init(:name => "someItem", :price => 300)
+    someitem = Item.init(:name => "someItem", :price => 300, :owner => user)
     someitem.owner = User.init(:name => "owner1", :password => "Zz!45678")
     user.add_item(someitem)
     assert(Item.sell_items_by_agent(user).include?(someitem), "item was not added!")
   end
 
   def test_list_all_sell_items
-    otheritem = Item.init(:name => "otherItem", :price => 50)
-    someitem = Item.init(:name => "someItem", :price => 550)
-    otheritem.owner = User.init(:name => "owner2", :password => "Zz!45678")
+
     user = User.init(:name => "user7", :password => "Zz!45678")
+    otheritem = Item.init(:name => "otherItem", :price => 50,:owner => User.init(:name => "owner2", :password => "Zz!45678"))
+    someitem = Item.init(:name => "someItem", :price => 550,:owner => user)
+
     user.add_item(otheritem)
     user.add_item(someitem)
     # list should have 2 sell items now
@@ -59,8 +60,9 @@ class UserTest < Test::Unit::TestCase
   end
 
   def test_fail_not_enough_credit
-    item = Item.init(:name => "reallyExpensiveItem", :price => 5000)
     user = User.init(:name => "user8", :password => "Zz!45678")
+    item = Item.init(:name => "reallyExpensiveItem", :price => 5000, :owner => user)
+
     owner = User.init(:name => "owner3", :password => "Zz!45678")
     owner.add_item(item)
     assert_raise RuntimeError do
@@ -70,7 +72,7 @@ class UserTest < Test::Unit::TestCase
 
   def test_become_owner_at_trade
     user = User.init(:name => "user9", :password => "Zz!45678")
-    item = Item.init(:credit => 100)
+    item = Item.init(:credit => 100, :owner => user)
     owner = User.init(:name => "owner4", :password => "Zz!45678")
     owner.add_item(item)
     user.buy_item(item)
@@ -80,7 +82,7 @@ class UserTest < Test::Unit::TestCase
 
   def test_transfer_credit_at_trade
     user = User.init(:name => "user10", :password => "Zz!45678")
-    item = Item.init(:name => "normalItem", :price => 100)
+    item = Item.init(:name => "normalItem", :price => 100, :owner => user)
     owner = User.init(:name => "owner5", :password => "Zz!45678")
     owner.add_item(item)
     user.buy_item(item)
@@ -90,7 +92,7 @@ class UserTest < Test::Unit::TestCase
 
   def test_removes_from_user
     user = User.init(:name => "user11", :password => "Zz!45678")
-    item = Item.init(:name => "normalItem", :price => 100)
+    item = Item.init(:name => "normalItem", :price => 100,:owner => user)
     owner = User.init(:name => "owner6", :password => "Zz!45678")
     owner.add_item(item)
     user.buy_item(item)
@@ -196,14 +198,14 @@ class UserTest < Test::Unit::TestCase
     assert(!dagobert.is_member_of?(org1))
   end
 
-  def test_allNames
+  def test_all_names
     names = []
     dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
     names << "dagobert"
-    assert(User.allNames == names)
+    assert(User.all_names == names)
     donald = User.init(:name => "donald", :password => 'Ax1301!3')
     names << "donald"
-    assert(User.allNames == names)
+    assert(User.all_names == names)
   end
 
   def test_has_user_with_id?

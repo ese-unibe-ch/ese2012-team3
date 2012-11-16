@@ -1,10 +1,13 @@
 module Market
   class TimedEvent
+
     attr_accessor :time, :subscribers, :scheduler, :timed_out, :job
 
+
+    # object_to_time must implement "timed_out"
     def self.create(object_to_time, time)
+      assert_kind_of(Time, time)
       fail "Object to be called should not be nil" if object_to_time.nil?
-      fail "Time should not be nil" if time.nil?
       fail "Should have method #timed_out implemented" unless object_to_time.respond_to?(:timed_out)
       fail "Time should not be in past" if time < Time.now
 

@@ -1,5 +1,3 @@
-require "test/unit"
-
 class MyTest < Test::Unit::TestCase
 
   def setup
@@ -13,7 +11,12 @@ class MyTest < Test::Unit::TestCase
     assert (act.message == "Test message")
     assert(act.creator == user)
     assert(act.type == :comment)
-    assert(time - act.timestamp > -0.00009)
+    assert(time - act.timestamp > -0.00009) # this might fail sometimes if ruby feels like it
+
+    # assert cannot change attributes
+    assert_raise NoMethodError do
+      act.type = :test
+    end
   end
 
 end

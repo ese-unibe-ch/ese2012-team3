@@ -3,29 +3,33 @@ class ItemTest < Test::Unit::TestCase
   def setup
     Item.delete_all
     User.delete_all
+    @user = User.init(:name => "John", :password => "Zz!45678",:owner => @user)
   end
 
   def test_has_name_about_and_comments
-    item = Item.init(:name => "testItem", :about => "About item")
+    item = Item.init(:name => "testItem", :about => "About item",:owner => @user)
     assert(item.name.to_s.include?("testItem"), "item has a wrong name!")
     assert(item.about.include?("About item"), "item has no about!")
     assert(item.comments.length == 0, "item has no place to store comments!")
+
+    assert_raise RuntimeError do
+      item.name = nil
+    end
   end
 
   def test_has_price
-    item = Item.init(:price => 100)
+    item = Item.init(:price => 100,:owner => @user)
     assert(item.price == 100, "item has a wrong price!")
     assert(item.about, "item has no default about!")
   end
 
   def test_has_owner
-    user = User.init(:name => "John", :password => "Zz!45678")
-    item = Item.init(:owner => user)
-    assert_equal(user, item.owner, "item has an incorrect owner!")
+    item = Item.init(:owner => @user)
+    assert_equal(@user, item.owner, "item has an incorrect owner!")
   end
 
   def test_changes_state
-    item = Item.init()
+    item = Item.init(:owner => @user)
     item.activate
     assert(item.active, "item is still inactive!")
   end

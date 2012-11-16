@@ -1,7 +1,7 @@
 require "test/unit"
 
 class TestSafe < Test::Unit::TestCase
-  class MockUser
+  class MockUser < User
     attr_accessor :credit
 
     def initialize

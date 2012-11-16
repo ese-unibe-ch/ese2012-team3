@@ -1,42 +1,16 @@
-class Module
-
-  #
-  # Defines an attribute accessor where attributes are
-  # only accessible when the given object is editable.
-  #
-  # An object using this attribute accessor has to
-  # implement a method #editable?
-  #
-
-  def attr_accessor_only_if_editable(*args)
-    args.each do |attr_name|
-      attr_name = attr_name.to_s
-
-      #getter
-      self.class_eval %Q{
-        def #{attr_name}
-          @#{attr_name}
-        end
-      }
-
-      #setter
-      self.class_eval %Q{
-        def #{attr_name}=(val)
-          fail "Not editable!" unless self.editable?
-
-          # set the value itself
-          @#{attr_name}=val
-        end
-      }
-    end
-  end
-end
 
 module Market
   class Auction
     attr_accessor_only_if_editable :minimal_price, :increment
-    attr_accessor :event, :item
-    attr_reader :winner, :current_price, :item, :event, :safe, :bids, :past_winners
+    attr_accessor :event
+
+    attr_accessor_typesafe_not_nil Item,  :item
+    attr_accessor_typesafe         Agent, :winner
+
+    attr_reader :current_price,
+                :safe, # ?
+                :bids, # format?
+                :past_winners # contains? Agents?
 
     class PastWinner
       attr_accessor :agent, :time, :price
@@ -91,7 +65,7 @@ module Market
       fail "Can't set an auction that starts in past" if time < Time.now
       fail "Price should not be negative" if price < 0
       fail "Increment should be greater than 0" if increment <= 0
-      fail "Item should not be nil" if item.nil?
+      assert_kind_of(Item, item)
 
       auction = Auction.new
 
@@ -120,6 +94,7 @@ module Market
     #
 
     def end_time= (time)
+      assert_kind_of(Item, item)
       fail "Bids are set. Not editable anymore" unless self.editable?
 
       self.event = TimedEvent.create(self, time)

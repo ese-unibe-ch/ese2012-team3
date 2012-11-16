@@ -68,7 +68,7 @@ end
 get "/organization/:id/switch" do
   redirect '/login' unless session[:user_id]
   # If the current_user is a member of the requested organization, the current_agent is set to the organization.
-  session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member(@current_user)
+  session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member?(@current_user)
   redirect "/?alert=switcheduser"
 end
 
