@@ -37,7 +37,7 @@ ITEMIMAGESROOT         = "itemimages" # relative to public
 ORGANIZATIONIMAGESROOT = "organizationimages" # relative to public
 ITEMS_PER_PAGE         = 20
 AGENTS_PER_PAGE        = 20
-ACTIVITIES_PER_PAGE    = 10
+ACTIVITIES_PER_PAGE    = 7
 COMMENTS_PER_PAGE      = 20
 DUMMYTHINGSCOUNT       = 30
 
@@ -80,6 +80,17 @@ eseo.add_orgactivity(Activity.init({:creator => ese,
 ese.add_activity(Activity.init({:creator => ese,
                                    :type => :comment,
                                    :message => "commented on some item - demo activity."}))
+
+john.add_activity(Activity.init({:creator => john,
+                                :type => :follow,
+                                :message => "followed someone - demo activity."}))
+john.add_activity(Activity.init({:creator => john,
+                                 :type => :activate,
+                                 :message => "activated some item - demo activity."}))
+john.add_activity(Activity.init({:creator => john,
+                                 :type => :comment,
+                                 :message => "commented on something - demo activity."}))
+
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
   dummyUser = User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "This is a dummy user. Please just leave him alone.")

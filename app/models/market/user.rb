@@ -113,6 +113,7 @@ module Market
       self.image_file_name = nil
     end
 
+    # toggles following the specified agent
     def follow(follow)
       unless self.following.include?(follow)
         self.following << follow

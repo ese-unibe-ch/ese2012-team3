@@ -130,11 +130,13 @@ post "/follow" do
     follow = Organization.organization_by_id(params[:follow_id].to_i)
   end
 
-  @current_user.follow(follow)
-
   #add to activity list
   @current_agent.add_activity(Activity.init({:creator => @current_agent,
                                              :type => :follow,
-                                             :message => "follows #{follow.name}"}))
+                                             :message => "#{@current_user.following.include?(follow) ? "no longer " : ""}follows #{follow.name}"}))
+
+  # remove from/add to following list
+  @current_user.follow(follow)
+
   redirect back
 end

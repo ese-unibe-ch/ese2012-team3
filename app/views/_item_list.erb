@@ -1,10 +1,9 @@
 <%
-# Params:
-# items to list
-# can set in :locals hash:
-# :show_owner
-# :highlight_active
-# :identifier - identifier for this list on a page with multiple item lists, used for paging links
+# Params (in :locals hash):
+# :items to list (required)
+# :show_owner (optional)
+# :highlight_active (optional)
+# :identifier - identifier for this list on a page with multiple item lists, used for paging links.
 
 identifier = :itemlistpage unless identifier
 page = params[identifier] ? params[identifier].to_i : 0
@@ -23,8 +22,9 @@ page = params[identifier] ? params[identifier].to_i : 0
   <th>Name</th>
   <th style="text-align: right; padding-right: 10em;">Price</th>
   <th><%= (defined? show_owner) ? "Owner": ""%></th>
-  <th></th>
-  <th></th>
+  <th></th> <!-- Buy or bid button -->
+  <th></th> <!-- Edit button -->
+  <th></th> <!-- Auction button -->
   </thead>
   <tbody>
   <% items.each_with_index do |item, index| %>

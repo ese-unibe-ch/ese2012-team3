@@ -1,8 +1,26 @@
 <% # Parameters (to pass in :locals)
-   # * activities to display
-   # :identifier - identifier for this list on a page with multiple item lists, used for paging links
+   # :activities to display  (required)
+   # :identifier - identifier for this list on a page with multiple item lists, used for paging links (optional, default is :activitieslistpage)
+   # :orgactivities - whether this is a list of orgactivities that can also be filtered for  (optional)
    identifier = :activitieslistpage unless identifier
    page = params[identifier] ? params[identifier].to_i : 0
+%>
+
+
+<%
+   def activity_filter_enabled?(str)
+     return true unless session[:activity_filter]   # all enabled by default
+     return session[:activity_filter].include?(str)
+   end
+
+   def checked_if_activity_filter_enabled(str)
+     return activity_filter_enabled?(str) ? "checked=\"checked\"" : ""
+   end
+%>
+
+<% #filter activities (must be done before calculating paging)
+
+   activities = activities.select { |a| activity_filter_enabled?(a.type.to_s) }
 %>
 
 <%= erb :_pages_links, :locals => {:cur_page => page,
@@ -10,6 +28,21 @@
                                    :per_page => ACTIVITIES_PER_PAGE,
                                    :identifier => identifier}
 %>
+
+
+<form action="/set_activity_filter" method="POST">
+  Filter list:
+  <input type="checkbox" name="comment"    <%=checked_if_activity_filter_enabled("comment")%>>Commenting
+  <span style="display:<%=(defined? orgactivities) ? "none" : ""%>">
+  <input type="checkbox" name="follow"     <%=checked_if_activity_filter_enabled("follow")%>>Following
+  </span>
+  <input type="checkbox" name="activate"   <%=checked_if_activity_filter_enabled("activate")%>>Activating
+  <span style="display:<%=(defined? orgactivities) ? "" : "none"%>">
+  <input type="checkbox" name="buy"        <%=checked_if_activity_filter_enabled("buy")%>>Buying
+  <input type="checkbox" name="createitem" <%=checked_if_activity_filter_enabled("createitem")%>>Item creation
+  </span>
+  <button type="submit" class="btn btn-info small">Apply activity filter</button>
+</form>
 
 <table class="table table-striped">
   <% activities.each_with_index do |activity, index| %>
@@ -19,7 +52,7 @@
         </td>
         <td>
           <%= mdown_to_html(xss activity.message) %>
-          <%= activity.timestamp.strftime('%F %T') %>
+          <i class='muted'>at <%= activity.timestamp.strftime('%Y-%m-%d %H:%M:%S') %></i>
         </td>
       </tr>
   <%end%>

@@ -94,3 +94,13 @@
     erb :error
   end
 
+  post "/set_activity_filter" do
+    session[:activity_filter] = []
+    session[:activity_filter] << "comment"    if params[:comment]
+    session[:activity_filter] << "follow"     if params[:follow]
+    session[:activity_filter] << "activate"   if params[:activate]
+    session[:activity_filter] << "buy"        if params[:buy]
+    session[:activity_filter] << "createitem" if params[:createitem]
+
+    redirect back
+  end

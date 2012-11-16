@@ -50,9 +50,12 @@
 
       <% if @current_agent == @org && !@org.orgactivities.empty?%>
           <h3 style="padding-top: 50px;">Latest Organization Activities</h3>
-
+          <% orgactivities =  @org.orgactivities
+             orgactivities.sort! {|a,b| b.timestamp <=> a.timestamp}
+          %>
           <%=erb :_activity_list, :locals=>{
-                  :activities => @org.orgactivities
+                  :activities => orgactivities,
+                  :orgactivities => true
           }%>
       <%end%>
 

@@ -84,7 +84,11 @@
     <% end %>
 
     <h3>
-      Following
+      <% if @user == @current_agent %>
+          Your are following
+      <% else %>
+          Following
+      <% end %>
     </h3>
 
     <% if @following.empty? %>
