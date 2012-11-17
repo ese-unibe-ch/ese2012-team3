@@ -6,7 +6,4 @@ gem 'selenium-webdriver'
 gem 'rcov'
 gem 'redcarpet'
 gem 'rufus-scheduler'
-gem 'sinatra/flash'
-
-
-
+gem 'sinatra-flash'
