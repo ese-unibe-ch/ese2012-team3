@@ -53,6 +53,24 @@ post "/organization/:id/add_member" do
   redirect "/organization/#{params[:id]}/settings"
 end
 
+post "/organization/:id/toggle_admin_member" do
+  redirect '/login' unless session[:user_id]
+  # Check for valid IDs
+  @org = Organization.organization_by_id(params[:id].to_i)
+  halt erb :error, :locals => {:message => "no organization found"} unless @org
+
+  user_to_change = User.user_by_id(params[:user_to_change])
+  halt erb :error, :locals => {:message => "no user found to promote"} unless user_to_change
+  # promote user
+  begin
+    @org.toggle_admin_rights(user_to_change)
+  rescue RuntimeError => e
+    halt erb :error, :locals => {:message => e.message}
+  end
+
+  redirect "/organization/#{params[:id]}/settings"
+end
+
 post "/organization/:id/remove_member" do
   redirect '/login' unless session[:user_id]
   # Check for valid ID

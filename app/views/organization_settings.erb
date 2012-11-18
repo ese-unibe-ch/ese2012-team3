@@ -13,7 +13,8 @@
 
       <%=erb :_agent_list, :locals=>{:agents => @org.members,
                                      :version => (@org.admins.include?(@current_user) ? :remove_org_member : nil) ,
-                                     :org => @org
+                                     :org => @org,
+                                     :show_admin_button => (@org.admins.include?(@current_user) && @current_agent == @org)
 
       }%>
 

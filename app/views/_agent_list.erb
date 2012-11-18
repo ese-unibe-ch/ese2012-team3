@@ -20,9 +20,12 @@ page = params[identifier] ? params[identifier].to_i : 0
   <th>Picture</th>
   <th>Name</th>
   <th>About</th>
-  <th></th>
-  <th></th>
-  <th></th>
+  <% if show_admin_button %>
+    <th></th>
+  <% end %>
+  <% if version == :leave_organization || version == :remove_org_member%>
+    <th></th>
+  <% end %>
   </thead>
   <tbody>
   <% agents.each_with_index do |agent, index| %>
@@ -31,10 +34,20 @@ page = params[identifier] ? params[identifier].to_i : 0
         <td><%= erb :_image_rect, :locals => {:filename => agent.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td><%= erb :_user_link, :locals => {:user => agent} %></td>
         <td><%= mdown_to_html (xss agent.about) %></td>
-        <td></td>
-        <td></td>
-        <td>
+        <% if show_admin_button %>
+          <td>
+            <form action="/organization/<%= @org.id %>/toggle_admin_member" method="POST">
+              <input type="hidden" name="user_to_change" value="<%= agent.id %>" />
+              <% if org.is_admin?(agent) %>
+                <button type="submit" class="btn btn-warning small" <% if org.admins.size < 2 %>disabled<% end %>>Revoke admin</button>
+              <% else %>
+                <button type="submit" class="btn btn-info small">Promote admin</button>
+              <% end %>
+            </form>
+          </td>
+        <% end %>
           <% if defined? version%>
+            <td>
             <%if version == :leave_organization %>
 
                 <%if agent.admins.size > 1 || !agent.admins.include?(@current_user) # Admins can't leave the org if there is only one
@@ -56,8 +69,8 @@ page = params[identifier] ? params[identifier].to_i : 0
                <%end%>
               <%end%>
 
+             </td>
              <%end # if version?%>
-        </td>
 
       </tr>
   <% end %>
