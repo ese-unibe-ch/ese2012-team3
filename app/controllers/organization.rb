@@ -61,6 +61,9 @@ post "/organization/:id/toggle_admin_member" do
 
   user_to_change = User.user_by_id(params[:user_to_change])
   halt erb :error, :locals => {:message => "no user found to promote"} unless user_to_change
+  
+  halt erb :error, :locals => {:message => "you don't have admin priviledges"} unless @org.admins.include?(@current_user)
+
   # promote user
   begin
     @org.toggle_admin_rights(user_to_change)
