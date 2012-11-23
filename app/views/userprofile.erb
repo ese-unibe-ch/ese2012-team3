@@ -1,4 +1,4 @@
-<% @title = "User profile"
+<% @title = @LANG["USER_PROFILE"]
    @items = Item.items_by_agent(@user)
    @organizations = Organization.organizations_by_user(@user)
    @following = @user.following
@@ -12,17 +12,17 @@
   <%= erb :_sidebar %>
   <div class="span10">
     <% if @user == @current_agent%>
-    <h2><%= xss @user.name %> - My profile</h2>
+    <h2><%= xss @user.name %> - <%=@LANG["MY_PROFILE"]%></h2>
     <% else %>
-    <h2>Viewing profile: <%= xss @user.name %></h2>
+    <h2><%=@LANG["VIEWING_PROFILE"]%>: <%= xss @user.name %></h2>
     <% if @user != @current_user && @current_user == @current_agent%>
       <form action="/follow" method="POST" style="display: inline">
         <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
         <input type="hidden" name="agent" value="user" />
         <% if @current_user.following.include?(@user) %>
-          <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
+          <input type="submit" class="btn btn-danger small" name="submit" value="<%=@LANG["UNFOLLOW"]%>" />
         <% else %>
-          <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
+          <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["FOLLOW"]%>" />
         <% end %>
       </form>
     <% end %>
@@ -36,9 +36,9 @@
 
     <h3 style="padding-top: 50px;">
       <% if @user == @current_agent %>
-        Your items
+          <%=@LANG["YOUR_ITEMS"]%>
       <% else %>
-        User's items
+          <%=@LANG["USERS_ITEMS"]%>
       <% end %>
     </h3>
 
@@ -51,30 +51,30 @@
 
     <% else %>
         <% if @user == @current_agent%>
-            <i>You have no items.</i>
+            <i><%=@LANG["YOU_HAVE_NO_ITEMS"]%></i>
         <% else %>
-            <i>This user has no items.</i>
+            <i><%=@LANG["THIS_USER_HAS_NO_ITEMS"]%></i>
         <% end %>
     <% end %>
 
     <% if @user == @current_agent %>
         <form class="form-inline" method="GET" action="/item/create">
             <fieldset>
-                <button class="btn btn-info" type="submit">Add a new item...</button>
+                <button class="btn btn-info" type="submit"><%=@LANG["ADD_A_NEW_ITEM"]%></button>
             </fieldset>
         </form>
     <% end %>
 
     <h3 style="padding-top: 50px;">
       <% if @user == @current_agent %>
-          Your organizations
+          <%=@LANG["YOUR_ORGANIZATIONS"]%>
       <% else %>
-          Organizations
+          <%=@LANG["ORGANIZATIONS"]%>
       <% end %>
     </h3>
 
     <% if @organizations.empty? %>
-        <p>No Organizations</p>
+        <p><%=@LANG["NO_ORGANIZATIONS"]%></p>
     <% else %>
         <%=erb :_agent_list, :locals=>{
                 :agents => @organizations,
@@ -85,21 +85,21 @@
 
     <h3>
       <% if @user == @current_agent %>
-          You are following
+          <%=@LANG["YOU_ARE_FOLLOWING"]%>
       <% else %>
-          Following
+          <%=@LANG["FOLLOWING"]%>
       <% end %>
     </h3>
 
     <% if @following.empty? %>
-        <p>This user is not following anybody.</p>
+        <p><%=@LANG["NOT_FOLLOWING"]%></p>
     <% else %>
         <%=erb :_agent_list, :locals=>{:agents => @following}%>
     <% end %>
 
-    <h3>Wishlist</h3>
+    <h3><%=@LANG["WISHLIST"]%></h3>
     <% if @current_agent.wishlist.empty? %>
-       <p>This user has no items in his wishlist.</p>
+       <p><%=@LANG["NO_WISHLIST_ITEMS"]%></p>
     <% else %>
        <%= erb :_wish_list %>
     <% end %>

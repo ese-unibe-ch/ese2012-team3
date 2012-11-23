@@ -1,5 +1,5 @@
 <%
-   @title = "Create organization"
+   @title = @LANG["CREATE_ORGANIZATION"]
    @current_nav_item = :new_org
 %>
 
@@ -7,19 +7,19 @@
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h2>Create Organization</h2>
+      <h2><%=@LANG["CREATE_ORGANIZATION"]%></h2>
 
       <form class="form-horizontal" method="POST" action="/organization/create" enctype="multipart/form-data">
         <fieldset>
 
-          <%= erb :_text_control, :locals => {:name => :name, :label => "Name"}%>
+          <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["NAME"]}%>
 
           <%= erb :_image_file_control %>
 
-          <%= erb :_textarea_control, :locals => {:name => :about, :label => "About"}%>
+          <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["ABOUT"]}%>
 
           <div class="form-actions">
-            <button class="btn btn-info" type="submit">Create organization</button>
+            <button class="btn btn-info" type="submit"><%=@LANG["CREATE_ORGANIZATION"]%></button>
           </div>
         </fieldset>
 

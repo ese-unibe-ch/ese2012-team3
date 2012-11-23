@@ -1,14 +1,14 @@
 <fieldset>
 
-  <%= erb :_text_control, :locals => {:name => :name, :label => "Name"}%>
+  <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["NAME"]}%>
 
-  <%= erb :_text_control, :locals => {:name => :price, :label => "Price"}%>
+  <%= erb :_text_control, :locals => {:name => :price, :label => @LANG["PRICE"]}%>
 
   <%= erb :_image_file_control %>
 
-  <%= erb :_textarea_control, :locals => {:name => :about, :label => "Description"}%>
+  <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["DESCRIPTION"]}%>
 
   <div class="form-actions">
-    <button class="btn btn-info" type="submit">Save</button>
+    <button class="btn btn-info" type="submit"><%=@LANG["SAVE"]%></button>
   </div>
 </fieldset>

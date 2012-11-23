@@ -31,17 +31,17 @@
 
 
 <form action="/set_activity_filter" method="POST">
-  Filter list:
-  <input type="checkbox" name="comment"    <%=checked_if_activity_filter_enabled("comment")%>>Commenting
+  <%=@LANG["FILTER_LIST"]%>
+  <input type="checkbox" name="comment"    <%=checked_if_activity_filter_enabled("comment")%>><%=@LANG["COMMENTING"]%>
   <span style="display:<%=(defined? orgactivities) ? "none" : ""%>">
-  <input type="checkbox" name="follow"     <%=checked_if_activity_filter_enabled("follow")%>>Following
+  <input type="checkbox" name="follow"     <%=checked_if_activity_filter_enabled("follow")%>><%=@LANG["FOLLOWING"]%>
   </span>
-  <input type="checkbox" name="activate"   <%=checked_if_activity_filter_enabled("activate")%>>Activating
+  <input type="checkbox" name="activate"   <%=checked_if_activity_filter_enabled("activate")%>><%=@LANG["ACTIVATING"]%>
   <span style="display:<%=(defined? orgactivities) ? "" : "none"%>">
-  <input type="checkbox" name="buy"        <%=checked_if_activity_filter_enabled("buy")%>>Buying
-  <input type="checkbox" name="createitem" <%=checked_if_activity_filter_enabled("createitem")%>>Item creation
+  <input type="checkbox" name="buy"        <%=checked_if_activity_filter_enabled("buy")%>><%=@LANG["BUYING"]%>
+  <input type="checkbox" name="createitem" <%=checked_if_activity_filter_enabled("createitem")%>><%=@LANG["ITEM_CREATION"]%>
   </span>
-  <button type="submit" class="btn btn-info small">Apply activity filter</button>
+  <button type="submit" class="btn btn-info small"><%=@LANG["APPLY_ACTIVITY_FILTER"]%></button>
 </form>
 
 <table class="table table-striped">
@@ -52,7 +52,7 @@
         </td>
         <td>
           <%= mdown_to_html(xss activity.message) %>
-          <i class='muted'>at <%= activity.timestamp.strftime('%Y-%m-%d %H:%M:%S') %></i>
+          <i class='muted'><%=@LANG["AT_TIME"]%> <%= activity.timestamp.strftime('%Y-%m-%d %H:%M:%S') %></i>
         </td>
       </tr>
   <%end%>

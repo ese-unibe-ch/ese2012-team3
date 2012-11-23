@@ -1,17 +1,17 @@
-<% @title = "Delete Account?" %>
+<% @title = @LANG["DELETE_ACCOUNT_QUESTION"] %>
 
 <section id="content">
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h1>Do you really want to delete your Account?</h1>
+      <h1><%=@LANG["REALLY_DELETE_QUESTION"]%></h1>
 
 
       <form class="form-horizontal" method="POST" action="/profile/<%= @current_user.id %>">
         <fieldset>
           <div class="form-actions">
             <input type="hidden" name="_method" value="delete"/>
-            <button class="btn btn-danger" type="submit">Delete account</button>
+            <button class="btn btn-danger" type="submit"><%=@LANG["DELETE_ACCOUNT"]%></button>
           </div>
         </fieldset>
         </form>
@@ -20,7 +20,7 @@
 
         <fieldset>
           <div class="form-actions">
-            <button class="btn btn-success" type="submit">No, I want to keep it</button>
+            <button class="btn btn-success" type="submit"><%=@LANG["NO_KEEP_IT"]%></button>
           </div>
         </fieldset>
 

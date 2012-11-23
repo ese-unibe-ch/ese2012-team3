@@ -17,9 +17,9 @@ page = params[identifier] ? params[identifier].to_i : 0
 
 <table class="table">
   <thead>
-  <th>Picture</th>
-  <th>Name</th>
-  <th>About</th>
+  <th><%=@LANG["PICTURE"]%></th>
+  <th><%=@LANG["NAME"]%></th>
+  <th><%=@LANG["ABOUT"]%></th>
   <% if (defined? show_admin_button) && show_admin_button == true %>
     <th></th>
   <% end %>
@@ -39,9 +39,9 @@ page = params[identifier] ? params[identifier].to_i : 0
             <form action="/organization/<%= @org.id %>/toggle_admin_member" method="POST">
               <input type="hidden" name="user_to_change" value="<%= agent.id %>" />
               <% if org.is_admin?(agent) %>
-                <button type="submit" class="btn btn-warning small" <% if org.admins.size < 2 %>disabled<% end %>>Revoke admin</button>
+                <button type="submit" class="btn btn-warning small" <% if org.admins.size < 2 %>disabled<% end %>><%=@LANG["REVOKE_ADMIN"]%></button>
               <% else %>
-                <button type="submit" class="btn btn-info small">Promote admin</button>
+                <button type="submit" class="btn btn-info small"><%=@LANG["PROMOTE_ADMIN"]%></button>
               <% end %>
             </form>
           </td>
@@ -54,7 +54,7 @@ page = params[identifier] ? params[identifier].to_i : 0
           %>
                   <form action="/organization/<%= xss agent.id %>/remove_member" method="post">
                     <input type="hidden" name="user_to_remove" value="<%= xss user.id%>" />
-                    <input type="submit" class="btn btn-info small" name="submit" title="Leave Organization" value="Leave it!" />
+                    <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["LEAVE_ORGANIZATION"]%>"/>
                   </form>
             <%  end %>
             <% end
@@ -64,7 +64,7 @@ page = params[identifier] ? params[identifier].to_i : 0
 
                       <form action="/organization/<%= xss org.id %>/remove_member" method="post" style="display: inline;">
                         <input type="hidden" name="user_to_remove" value="<%= xss agent.id %>" />
-                        <button class="close" title="Remove member">&times;</button>
+                        <button class="close" title="<%=@LANG["REMOVE_MEMBER"]%>">&times;</button>
                       </form>
                <%end%>
               <%end%>

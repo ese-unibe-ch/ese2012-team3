@@ -18,10 +18,10 @@ page = params[identifier] ? params[identifier].to_i : 0
 
 <table class="table">
   <thead>
-  <th>Picture</th>
-  <th>Name</th>
-  <th style="text-align: right; padding-right: 10em;">Price</th>
-  <th><%= (defined? show_owner) ? "Owner": ""%></th>
+  <th><%=@LANG["PICTURE"]%></th>
+  <th><%=@LANG["NAME"]%></th>
+  <th style="text-align: right; padding-right: 10em;"><%=@LANG["PRICE"]%></th>
+  <th><%= (defined? show_owner) ? "#{@LANG["OWNER"]}": ""%></th>
   <th></th> <!-- Buy or bid button -->
   <th></th> <!-- Edit button -->
   <th></th> <!-- Auction button -->

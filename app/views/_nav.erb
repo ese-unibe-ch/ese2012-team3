@@ -3,14 +3,14 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="/">Marketplace</a>
+          <a class="brand" href="/"><%=@LANG["MARKETPLACE"]%></a>
           <div class=".nav-collapse">
             <ul class="nav">
               <% if @current_user %>
-                <li><a href="/logout">Logout</a></li>
+                <li><a href="/logout"><%=@LANG["LOGOUT"]%></a></li>
               <% else %>
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
+                <li><a href="/login"><%=@LANG["LOGIN"]%></a></li>
+                <li><a href="/register"><%=@LANG["REGISTER"]%></a></li>
               <% end %>
             </ul>
           </div>

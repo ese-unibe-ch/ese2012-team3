@@ -1,11 +1,11 @@
-<% @title = "Item: #{@item.name}" %>
+<% @title = "#{@LANG["ITEM"]}: #{@item.name}" %>
 
 <section id="content" xmlns="http://www.w3.org/1999/html">
   <div class="row">
     <%= erb :_sidebar %>
 
     <div class="span10">
-      <h1>Item: <%= xss @item.name %></h1>
+      <h1><%=@LANG["ITEM"]%>: <%= xss @item.name %></h1>
 
       <table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %><%= erb :_item_wishlist_button %></tr></table>
 
@@ -13,23 +13,23 @@
 
       <table class="table table-bordered" style="width: 66%">
         <tr>
-          <td>Owner:</td>
+          <td><%=@LANG["OWNER"]%></td>
           <td><%= erb :_user_link, :locals => {:user => @item.owner} %></td>
         </tr>
         <tr>
-          <td>Price</td>
+          <td><%=@LANG["PRICE"]%></td>
           <td><%= xss ts(@item.price) %></td>
         </tr>
         <tr>
-          <td>Description:</td>
+          <td><%=@LANG["DESCRIPTION"]%></td>
           <td><%= mdown_to_html(xss @item.about) %></td>
         </tr>
       </table>
 
 
-      <h3>Comments</h3>
+      <h3><%=@LANG["COMMENTS"]%></h3>
       <%if @item.comments.length == 0%>
-        This item has no comments yet.
+          <%=@LANG["NO_COMMENTS"]%>
       <%else%>
 
           <%
@@ -56,7 +56,7 @@
                   <input type="hidden" name="creator" value="<%= xss comment.creator %>" />
                   <input type="hidden" name="quote" value="<%= xss comment.text %>" />
                   <button class="btn btn-info small" name="reply"
-                      onClick="document.getElementById('newCommentArea').value='<%= xss comment.creator.name; %> wrote:\n > <%= xss comment.text.tr("\r\n", " ") %>'; return false;">Reply</button>
+                      onClick="document.getElementById('newCommentArea').value='<%= xss comment.creator.name; %> <%=@LANG["WROTE"]%>:\n > <%= xss comment.text.tr("\r\n", " ") %>'; return false;"><%=@LANG["REPLY"]%></button>
                 </form>
               </td>
             </tr>
@@ -72,8 +72,8 @@
 
       <%end%>
 
-      <h2>Add comment</h2>
-      <p>You can use markdown syntax to style the comment. For example: **<b>bold text</b>**</p>
+      <h2><%=@LANG["ADD_COMMENT"]%></h2>
+      <p><%=@LANG["CAN_USE_MARKDOWN"]%></p>
       <form action="<%= "/item/#{@item.id}/add_comment" %>" method="POST">
         <input type="hidden" name="commenter" value="<%= @current_agent %>" />
         <div class="control-group <%= "error" if !@errors.empty? %>">
@@ -84,7 +84,7 @@
                 <span class="help-inline"><%= xss @errors[:comment] %></span>
             <% end %>
         </div>
-        <input type="submit" class="btn btn-info" name="submit" value="Add comment" />
+        <input type="submit" class="btn btn-info" name="submit" value="<%=@LANG["ADD_COMMENT"]%>" />
       </form>
     </div>
   </div>

@@ -1,0 +1,244 @@
+LOGIN
+ログイン
+LOGOUT
+ログアウト
+DONT_HAVE_ACCOUNT_QUESTION
+アカウントを持っていないのですか？
+REGISTER
+登録
+CLICK_HERE_TO_REGISTER
+ここをクリックしてください！
+AT_TIME
+で
+COMMENTING
+コメントして
+YOU_ARE_FOLLOWING
+あなたは見澄ます
+FOLLOWING
+見澄ます
+REMOVE_MEMBER
+メンバーを削除する
+LEAVE_ORGANIZATION
+オーガニゼーションを残す
+YOUR_ORGANIZATIONS
+あなたのオーガニゼーション
+NO_ORGANIZATIONS
+オーガニゼーションません
+ORGANIZATIONS
+オーガニゼーション
+ACTIVATING
+活性化する
+BUYING
+買収
+ITEM_CREATION
+アイテム作成
+PROMOTE_ADMIN
+管理を推進する
+REVOKE_ADMIN
+管理を取り消す
+APPLY_ACTIVITY_FILTER
+アクティビティ·フィルタを適用
+FILTER_LIST
+リストフィルタ:
+AUCTION_FOR
+オークション for
+EDIT_AUCTION_FOR
+ オークションをエディット
+MARKETPLACE
+市場
+REGISTRATION
+登録
+SELECT_USERNAME_AND_PASSWORD
+ユーザ名 と パスワードを選択
+NAME
+お名前
+ORG_SETTINGS
+オルグ。 セッティング
+ORGANIZATION_SETTINGS
+オーガニゼーション セッティング
+ACCOUNT_SETTINGS
+アカウント セッティング
+NEW_ORGANIZATION
+新しい オーガニゼーション
+SELLERS
+セラーズ
+SEARCH_RESULT
+サーチの結果
+ACCOUNT_SETTINGS
+アカウント セッティング
+CHANGE_PASSWORD
+パスワードを移り変る
+CURRENT_PASSWORD
+現行パスワード
+USER_PROFILE
+ユーザー のプロフィール
+MY_PROFILE
+私のプロフィール
+S_MEMBERS
+の メンバー
+ADD_MEMBER_TO_ORGANIZATION
+オーガニゼーションにメンバーを加える
+ADD_USER
+ユーザーを加える
+CURRENTLY_ADMIN_NOTE
+あなたが今オーガニゼーションの管理です 。 アカウントを消すの前に管理を加えるください。
+DELETE_ACCOUNT
+アカウントを消す
+NO_USERS_TO_ADD
+加えるユーザー はありません
+CHANGE_PROFILE_PICTURE
+Change プロフィール 絵
+DELETE_PROFILE_PICTURE
+Delete プロフィール 絵を消す
+NEW_ITEM
+New アイテム
+CREDITS
+Credits
+LANGUAGE
+言語
+UNFOLLOW
+見澄ません
+S_ITEMS
+のアイテム
+LATEST_ORGANIZATION_ACTIVITIES
+Latest オーガニゼーション アクティビティ
+FOLLOW
+見澄ます
+ORGANIZATION_HAS_NO_ITEMS
+This オーガニゼーション has no アイテム。
+VIEWING_PROFILE
+Viewing プロフィール
+YOUR_ITEMS
+Your アイテム
+USERS_ITEMS
+ユーザーのアイテム
+YOU_HAVE_NO_ITEMS
+You have no アイテム。
+THIS_USER_HAS_NO_ITEMS
+This ユーザー has no アイテム。
+ADD_A_NEW_ITEM
+新いアイテム。。。
+ORGANIZATION
+オーガニゼーション
+CREATE_ORGANIZATION
+オーガニゼーションを作る
+DELETE_ACCOUNT_QUESTION
+アカウントを消す?
+DELETE_ACCOUNT
+アカウントを消す
+NO_KEEP_IT
+いいえ、私はそれを維持したい
+REALLY_DELETE_QUESTION
+本当にアカウントを消す?
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+最初の入札の後にエディットはできない
+CANNOT_EDIT_ACTIVE
+活性なアイテムをエディットはできない 
+BUY_ITEM
+アイテムを買う
+INACTIVATE_ITEM
+アイテムを解除する
+ACTIVATE_ITEM
+アイテムを活性化する
+EDIT_AUCTION
+エディット オークション
+EDIT_ITEM_AUCTION
+エディット アイテム オークション
+ERROR
+エラー
+EDIT_ITEM
+エディット アイテム
+USERS
+ユーザー
+ABOUT
+説明
+USERNAME
+ユーザ名
+PASSWORD
+パスワード
+MUST_BE_STRONG
+強くなければならない。
+RETYPE_PASSWORD
+パスワードを再入力する
+INTERESTS
+説明
+CREATE_ACCOUNT
+アカウントを作る
+PICTURE
+絵
+DESCRIPTION
+説明
+PRICE
+価格
+START_PRICE
+開始の 価格
+REMOVE_FROM_WISHLIST
+ウィッシュリストから削除
+ADD_TO_WISHLIST
+ウィッシュリストに加える
+NO_WISHLIST_ITEMS
+このユーザーのウィッシュリストにアイテム はありません。
+NOT_FOLLOWING
+このユーザーは誰を見澄ません。
+WISHLIST
+ウィッシュリスト
+OWNER
+所有者
+NEXT
+次の
+PREV
+前
+LOGGED_IN_AS
+ログイン
+CURRENT_PRICE
+現在の価格
+BID_ON_AUCTION
+オークションに入札します
+MINIMAL_BID_INCREMENT
+入札の最小増分
+INCREMENT
+増加
+SAVE
+セーブ
+END_TIME
+終了時刻
+MINIMAL_PRICE
+最低限の価格
+CURRENT_WINNER
+現在の勝者
+COMMENTS
+コメント
+WROTE
+書いた
+REPLY
+返信
+NO_COMMENTS
+このアイテムは コメントがいません。
+PAST_WINNERS
+過去の勝者
+CLICK_TO_EXPAND
+クリックで拡大します
+ITEMS_ON_THE_MARKET
+市場のアイテム 
+FOLLOWEES_ACTIVITIES
+観測の アクティビティ
+SEARCH
+サーチ
+STRONG_PASSWORD
+強い パスワード
+STRONG_PASSWORD_TEXT
+<h1>Tips for creating a strong パスワード</h1> <p>What makes a パスワード strong (or weak)? A strong パスワード: <ul> <li>Is at least eight characters long。</li> <li>Does not contain your ユーザー name, real name, or company name。</li> <li>Does not contain a complete word。</li> <li>Is significantly different from previous passwords。</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , 。 ? /</i> </li> </ul> </li> </ul>
+CURRENTLY_NOT_IN_AUCTION
+オークションはありません
+AUCTION_ENDS_AT
+オークション の終了
+CREATE_AUCTION
+オークションを作る
+CREATE_NEW_ITEM
+アイテムを作る
+ITEM
+アイテム
+ADD_COMMENT
+コメントを加える
+CAN_USE_MARKDOWN
+You can use markdown syntax to style this text。 For example: **<b>bold text</b>**

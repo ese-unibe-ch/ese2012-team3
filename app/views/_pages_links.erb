@@ -8,7 +8,7 @@
     <div class="pagination pagination-centered">
       <ul>
         <li class="<%= 'disabled' if cur_page == 0 %>">
-          <a href="<%="#{request.path_info}?#{identifier.to_s}=#{cur_page-1}"%>">Prev</a>
+          <a href="<%="#{request.path_info}?#{identifier.to_s}=#{cur_page-1}"%>"><%=@LANG["PREV"]%></a>
         </li>
         <% for i in 0...pages %>
           <li class="<%= 'active' if cur_page == i %>">
@@ -16,7 +16,7 @@
           </li>
         <% end %>
         <li class="<%= 'disabled' if cur_page+1 == pages %>">
-          <a href="<%="#{request.path_info}?#{identifier.to_s}=#{cur_page+1}"%>">Next</a>
+          <a href="<%="#{request.path_info}?#{identifier.to_s}=#{cur_page+1}"%>"><%=@LANG["NEXT"]%></a>
         </li>
       </ul>
     </div>

@@ -1,5 +1,5 @@
 <div id="cg-image" class="control-group <%= "error" if @errors[:image_file] %>">
-  <label class="control-label">Picture (<= <%=MAXIMAGEFILESIZE/1024%> kB)</label>
+  <label class="control-label"><%=@LANG["PICTURE"]%> (<= <%=MAXIMAGEFILESIZE/1024%> kB)</label>
   <div class="controls">
     <input class="input span8" type="file" name="image_file" accept="image/*" value="<%=
         xss params[:image_file] ? params[:image_file][:filename] : ""

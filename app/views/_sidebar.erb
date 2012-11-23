@@ -6,7 +6,7 @@
       <%if @current_nav_item == :marketplace%>
       class="active"
       <%end%>
-      ><a href="/"><i class="icon-home"></i>Marketplace</a></li>
+      ><a href="/"><i class="icon-home"></i><%=@LANG["MARKETPLACE"]%></a></li>
 
       <% if @current_agent %>
 
@@ -14,7 +14,7 @@
             <%if @current_nav_item == :sellers%>
                 class="active"
             <%end%>
-          ><a href="/all_users"><i class="icon-list"></i>Sellers</a></li>
+          ><a href="/all_users"><i class="icon-list"></i><%=@LANG["SELLERS"]%></a></li>
 
           <li
             <%if @current_nav_item == :my_profile%>
@@ -22,9 +22,9 @@
             <%end%>
           >
               <%if @current_agent == @current_user %>
-                    <a href= <%= @current_agent.profile_route %>><i class="icon-user"></i>My profile</a>
+                    <a href= <%= @current_agent.profile_route %>><i class="icon-user"></i><%=@LANG["MY_PROFILE"]%></a>
                 <% else %>
-                    <a href= <%= @current_agent.profile_route %>><i class="icon-briefcase"></i>Organization</a>
+                    <a href= <%= @current_agent.profile_route %>><i class="icon-briefcase"></i><%=@LANG["ORGANIZATION"]%></a>
                 <% end %>
           </li>
 
@@ -32,7 +32,7 @@
             <%if @current_nav_item == :new_item%>
                 class="active"
             <%end%>
-          ><a href="/item/create"><i class="icon-plus"></i>New item</a></li>
+          ><a href="/item/create"><i class="icon-plus"></i><%=@LANG["NEW_ITEM"]%></a></li>
 
           <% if @current_agent == @current_user %>
 
@@ -40,13 +40,13 @@
             <%if @current_nav_item == :new_org%>
                 class="active"
             <%end%>
-          ><a href="/organization/create"><i class="icon-plus"></i>New organization</a></li>
+          ><a href="/organization/create"><i class="icon-plus"></i><%=@LANG["NEW_ORGANIZATION"]%></a></li>
 
           <li
             <%if @current_nav_item == :settings%>
                 class="active"
             <%end%>
-          ><a href="/settings"><i class="icon-wrench"></i>Account Settings</a></li>
+          ><a href="/settings"><i class="icon-wrench"></i><%=@LANG["ACCOUNT_SETTINGS"]%></a></li>
 
           <% else %>
 
@@ -54,7 +54,7 @@
             <%if @current_nav_item == :settings%>
                 class="active"
             <%end%>
-          ><a href="/organization/<%= @current_agent.id %>/settings"><i class="icon-wrench"></i>Org. Settings</a></li>
+          ><a href="/organization/<%= @current_agent.id %>/settings"><i class="icon-wrench"></i><%=@LANG["ORG_SETTINGS"]%></a></li>
 
           <% end %>
       <% end %>
@@ -64,7 +64,7 @@
 
   <% if @current_agent %>
   <div style="font-size:1em;">
-    <p>Logged in as
+    <p><%=@LANG["LOGGED_IN_AS"]%>
     <div class="btn-group">
       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
         <%if session[:organization_id].nil?%>
@@ -83,7 +83,28 @@
       </ul>
     </div>
     </p>
-    <p style="font-weight: bold;">Credits: <%= xss ts(@current_agent.credit) %></p>
+    <p style="font-weight: bold;"><%=@LANG["CREDITS"]%>: <%= xss ts(@current_agent.credit) %></p>
+
+
   </div>
   <% end %>
+
+  <!--
+  <p>Set language <img src="<%= @current_language.icon%>"/> to<br/> <%
+     LANGUAGES.each{| key, value |
+       next if value == @current_language
+  %>
+        <a href='/set_language/<%= key %>'><img src="<%= value.icon%>"/></a>
+    <%
+    }
+    %></p>
+    -->
+
+  <p><%=@LANG["LANGUAGE"]%>:<%
+   LANGUAGES.each{| key, value |
+%>
+        <a href='/set_language/<%= key %>' title='<%= key %>'><img src="<%= value.icon%>"/></a>
+    <%
+   }
+%></p>
 </div>

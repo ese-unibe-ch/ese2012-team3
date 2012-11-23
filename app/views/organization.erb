@@ -1,5 +1,5 @@
 <%
-   @title = "Organization: #{@org.name}"
+   @title = "#{@LANG["ORGANIZATION"]}: #{@org.name}"
    @current_nav_item = :my_profile
 %>
 
@@ -7,16 +7,16 @@
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h2>Organization: <%= xss @org.name %></h2>
+      <h2><%=@LANG["ORGANIZATION"]%>: <%= xss @org.name %></h2>
 
       <% if @user != @current_user && @current_user == @current_agent%>
           <form action="/follow" method="POST">
             <input type="hidden" name="follow_id" value="<%= xss @org.id%>" />
             <input type="hidden" name="agent" value="org" />
             <% if @current_user.following.include?(@org) %>
-                <input type="submit" class="btn btn-danger small" name="submit" value="Unfollow" />
+                <input type="submit" class="btn btn-danger small" name="submit" value="<%=@LANG["UNFOLLOW"]%>" />
             <%else%>
-                <input type="submit" class="btn btn-info small" name="submit" value="Follow" />
+                <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["FOLLOW"]%>" />
             <%end%>
           </form>
       <%end%>
@@ -28,7 +28,7 @@
       <% end %>
 
 
-      <h3 style="padding-top: 50px;"><%= xss @org.name %>'s Items</h3>
+      <h3 style="padding-top: 50px;"><%= xss @org.name %><%=@LANG["S_ITEMS"]%></h3>
       <% if @items.size > 0 %>
 
           <%=erb :_item_list, :locals=>{
@@ -37,19 +37,19 @@
           }%>
 
       <% else %>
-        <i>This organization has no items.</i>
+        <i><%=@LANG["ORGANIZATION_HAS_NO_ITEMS"]%></i>
       <% end %>
 
       <% if @org == @current_agent %>
           <form class="form-inline" method="GET" action="/item/create">
             <fieldset>
-              <button class="btn btn-info" type="submit">Add a new item...</button>
+              <button class="btn btn-info" type="submit"><%=@LANG["ADD_A_NEW_ITEM"]%></button>
             </fieldset>
           </form>
       <% end %>
 
       <% if @current_agent == @org && !@org.orgactivities.empty?%>
-          <h3 style="padding-top: 50px;">Latest Organization Activities</h3>
+          <h3 style="padding-top: 50px;"><%=@LANG["LATEST_ORGANIZATION_ACTIVITIES"]%></h3>
           <% orgactivities =  @org.orgactivities
              orgactivities.sort! {|a,b| b.timestamp <=> a.timestamp}
           %>

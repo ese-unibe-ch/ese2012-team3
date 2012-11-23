@@ -1,32 +1,32 @@
-<% @title = "Auction" %>
+<% @title = @LANG["Auction"] %>
 
 <section id="content" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h2>Auction for <%= xss item.name %></h2>
+      <h2><%=@LANG["AUCTION_FOR"]%> <%= xss item.name %></h2>
       <%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LARGEIMAGESIZE} %>
       </br>
       <table class="table">
         <tbody>
           <tr>
-            <td>Description</td>
+            <td><%=@LANG["DESCRIPTION"]%></td>
             <td><%= mdown_to_html(xss item.about) %></td>
           </tr>
           <tr>
-            <td>Start price:</td>
+            <td><%=@LANG["START_PRICE"]%></td>
             <td><%= item.auction.minimal_price %></td>
           </tr>
           <tr>
-            <td>Current price:</td>
+            <td><%=@LANG["CURRENT_PRICE"]%></td>
             <td><%= (item.auction.current_price.nil?) ? "-" : item.auction.current_price %>
           </tr>
           <tr>
-            <td>Minimal bid increment:</td>
+            <td><%=@LANG["MINIMAL_BID_INCREMENT"]%></td>
             <td><%= item.auction.increment %></td>
           </tr>
           <tr>
-            <td>Current winner</td>
+            <td><%=@LANG["CURRENT_WINNER"]%></td>
             <td><%= (item.auction.winner.nil?) ? "-" : item.auction.winner %></td>
           </tr>
         </tbody>
@@ -98,7 +98,7 @@
       <% if item.auction.past_winners.size > 0 %>
           <div id='past-winner-expandable'>
             <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">
-              <i class="symbol icon-chevron-down"></i><span class="text">Past winners (click to expand)</span>
+              <i class="symbol icon-chevron-down"></i><span class="text"><%=@LANG["PAST_WINNERS"]%> (<%=@LANG["CLICK_TO_EXPAND"]%>)</span>
             </div>
             <div id="past-winner-content">
               <% item.auction.past_winners.each do |past_winner| %>

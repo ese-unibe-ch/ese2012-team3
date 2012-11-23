@@ -1,5 +1,5 @@
 <%
-   @title = "User profile"
+   @title = @LANG["MY_PROFILE"]
    @current_nav_item = :settings
 %>
 
@@ -8,52 +8,51 @@
   <%= erb :_sidebar %>
   <div class="span10">
 
-    <h2>Account settings</h2>
-    <h4>Change Password</h4>
+    <h2><%=@LANG["ACCOUNT_SETTINGS"]%></h2>
+    <h4><%=@LANG["CHANGE_PASSWORD"]%></h4>
     <form class="form-horizontal" method="POST" action="/change_password">
       <fieldset>
         <div id="cg-cpassword" class="control-group <%= "error" if @errors[:cpwinput] %>">
-          <%= erb :_text_control, :locals => {:name => :currentpassword, :label => "Current Password", :password => true}%>
+          <%= erb :_text_control, :locals => {:name => :currentpassword, :label => @LANG["CURRENT_PASSWORD"], :password => true}%>
 
+          <%= erb :_default_password_control%>
 
-          <%= erb :_text_control, :locals => {:name => :password, :label => "Password<sup><a href='/strongpass' title='Must be strong.'>?</a></sup>", :password => true}%>
-
-          <%= erb :_text_control, :locals => {:name => :passwordc, :label => "Re-type Password", :password => true}%>
+          <%= erb :_text_control, :locals => {:name => :passwordc, :label => @LANG["RETYPE_PASSWORD"], :password => true}%>
 
         <div class="form-actions">
-          <button class="btn btn-info" type="submit">Change my password</button>
+          <button class="btn btn-info" type="submit"><%=@LANG["CHANGE_PASSWORD"]%></button>
         </div>
        </div>
       </fieldset>
     </form>
 
     <form class="form-horizontal" method="POST" action="/change_profile_picture" enctype="multipart/form-data">
-    <h3>Change my profile picture</h3>
+    <h3><%=@LANG["CHANGE_PROFILE_PICTURE"]%></h3>
       <fieldset>
         <%= erb :_image_file_control %>
       <div class="form-actions">
-        <button class="btn btn-info" type="submit">Change my picture</button>
+        <button class="btn btn-info" type="submit"><%=@LANG["CHANGE_PROFILE_PICTURE"]%></button>
       </div>
       </fieldset>
     </form>
     <% if @current_user.image_file_name != nil %>
-    <h3>Delete my profile picture</h3>
+    <h3><%=@LANG["DELETE_PROFILE_PICTURE"]%></h3>
     <form class="form-horizontal" method="POST" action="/delete_profile_picture" >
       <fieldset>
         <div class="form-actions">
           <input type="hidden" name="_method" value="delete"/>
-          <button class="btn btn-danger" type="submit">Delete profile picture</button>
+          <button class="btn btn-danger" type="submit"><%=@LANG["DELETE_PROFILE_PICTURE"]%></button>
         </div>
       </fieldset>
     </form>
     <% end %>
-    <h3>Delete my account</h3>
+    <h3><%=@LANG["DELETE_ACCOUNT"]%></h3>
     <form class="form-horizontal" method="GET" action="/delete_confirmation">
       <fieldset>
         <div class="form-actions">
           <input type="hidden" name="_method" value="delete"/>
-          <button class="btn btn-danger" <%if @current_user.is_admin?%> disabled="disabled"<%end%> type="submit">Delete account</button>
-          <%if @current_user.is_admin?%> You are currently admin of an organization. Make another member admin before deleting your account. <%end%>
+          <button class="btn btn-danger" <%if @current_user.is_admin?%> disabled="disabled"<%end%> type="submit"><%=@LANG["DELETE_ACCOUNT"]%></button>
+          <%if @current_user.is_admin?%><%=@LANG["CURRENTLY_ADMIN_NOTE"]%> <%end%>
         </div>
       </fieldset>
     </form>

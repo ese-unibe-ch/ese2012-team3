@@ -29,6 +29,12 @@
     @all_items = Market::Item.active_items
     @users = Market::User.all + Market::Organization.all
     @errors = {}
+
+    if session[:language].nil? or !LANGUAGES.has_key?(session[:language])
+      session[:language] = DEFAULT_LANGUAGE
+    end
+    @current_language = LANGUAGES[session[:language]]
+    @LANG = @current_language # SHORTCUT
   end
 
   def set_error(at, text)
@@ -104,3 +110,9 @@
 
     redirect back
   end
+
+  get "/set_language/:lang" do
+    session[:language] = params[:lang]
+    redirect back
+  end
+

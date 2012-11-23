@@ -1,4 +1,4 @@
-<% @title = "All users"
+<% @title = @LANG["USERS"]
    @current_nav_item = :sellers
 %>
 
@@ -6,7 +6,7 @@
 <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
-    <h2>Users</h2>
+    <h2><%=@LANG["USERS"]%></h2>
 
     <%=erb :_agent_list, :locals=>{:agents => @users}%>
 

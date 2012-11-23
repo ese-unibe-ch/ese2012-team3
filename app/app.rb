@@ -18,6 +18,7 @@ require_relative 'controllers/authentication'
 require_relative 'controllers/user'
 require_relative 'controllers/organization'
 require_relative 'controllers/marketplace'
+require_relative 'controllers/language'
 
 include Market
 
@@ -27,6 +28,11 @@ def relative(path)
 end
 PUBLIC_FOLDER          = relative('public')
 VIEWS_FOLDER           = relative('views')
+
+DEFAULT_LANGUAGE       = "en"
+LANGUAGES_FOLDER       = relative('public/languages')
+LANGUAGES              = {} # a map of language prefix => Language object
+
 DEFAULT_PASSWORD       = "Ax1301!3"
 DEFAULT_CREDITS        = 200
 MAXIMAGEFILESIZE       = 400*1024 # in bytes
@@ -49,6 +55,9 @@ set :views, relative('views')
 set :public_folder, PUBLIC_FOLDER # http://www.sinatrarb.com/configuration.html
 set :views, VIEWS_FOLDER
 enable :sessions # never forget
+
+# ===================== Load languages =====================
+load_languages(LANGUAGES_FOLDER)
 
 
 # ===================== TEST DATA =====================

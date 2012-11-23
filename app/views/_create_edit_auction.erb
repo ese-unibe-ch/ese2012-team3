@@ -1,12 +1,12 @@
 <fieldset>
 
-  <%= erb :_text_control, :locals => {:name => :minimal_price, :label => "Minimal price"}%>
+  <%= erb :_text_control, :locals => {:name => :minimal_price, :label => @LANG["MINIMAL_PRICE"]}%>
 
-  <%= erb :_text_control, :locals => {:name => :increment, :label => "Increment"}%>
+  <%= erb :_text_control, :locals => {:name => :increment, :label => @LANG["INCREMENT"]}%>
 
-  <%= erb :_text_control_id, :locals => {:id => :end_time, :name => :end_time, :label => "End time"}%>
+  <%= erb :_text_control_id, :locals => {:id => :end_time, :name => :end_time, :label => @LANG["END_TIME"]}%>
 
   <div class="form-actions">
-    <button class="btn btn-info" type="submit">Save</button>
+    <button class="btn btn-info" type="submit"><%=@LANG["SAVE"]%></button>
   </div>
 </fieldset>

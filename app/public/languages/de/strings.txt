@@ -1,0 +1,8 @@
+LOGIN
+Einloggen
+DONT_HAVE_ACCOUNT_QUESTION
+Kein account?
+CLICK_HERE_TO_REGISTER
+Klicken Sie hier zum registrieren!
+MARKETPLACE
+Marktplatz

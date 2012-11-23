@@ -1,18 +1,18 @@
-<% @title = "Marketplace" %>
+<% @title = @LANG["MARKETPLACE"] %>
 <section id="content">
 <div class="row">
   <%= erb :_sidebar %>
   <div class="span10">
-    <h1>Login</h1>
-    <p>Don't have an account? <a href="/register">Click here to register</a>!</p>
+    <h1><%=@LANG["LOGIN"]%></h1>
+    <p><%=@LANG["DONT_HAVE_ACCOUNT_QUESTION"]%> <a href="/register"><%=@LANG["CLICK_HERE_TO_REGISTER"]%></a></p>
     <form class="form-horizontal" method="POST" action="/login">
       <fieldset>
-          <%= erb :_text_control, :locals => {:name => :name, :label => "Username"}%>
+          <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["USERNAME"]}%>
 
-          <%= erb :_text_control, :locals => {:name => :password, :label => "Password", :password => true}%>
+          <%= erb :_text_control, :locals => {:name => :password, :label => @LANG["PASSWORD"], :password => true}%>
 
         <div class="form-actions">
-          <button class="btn btn-info" type="submit">Login</button>
+          <button class="btn btn-info" type="submit"><%=@LANG["LOGIN"]%></button>
         </div>
       </fieldset>
     </form>

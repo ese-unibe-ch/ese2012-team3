@@ -2,9 +2,9 @@
   <td>
     <form action="/item/<%= xss @item.id %> /watchlist" method="POST">
       <% if @current_agent.wishlist.include?(@item) %>
-        <input type="submit" class="btn btn-danger small" name="submit" value="Remove from wishlist" />
+        <input type="submit" class="btn btn-danger small" name="submit" value="<%=@LANG["REMOVE_FROM_WISHLIST"]%>" />
       <% else %>
-        <input type="submit" class="btn btn-info small" name="submit" value="Add to wishlist" />
+        <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["ADD_TO_WISHLIST"]%>" />
       <% end %>
     </form>
   </td> 

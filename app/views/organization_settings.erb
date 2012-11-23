@@ -1,5 +1,5 @@
 <%
-   @title = "Organization Settings: #{@org.name}"
+   @title = "#{@LANG["ORGANIZATION_SETTINGS"]}: #{@org.name}"
    @current_nav_item = :settings
 %>
 
@@ -7,9 +7,9 @@
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h2>Organization: <%= xss @org.name %></h2>
+      <h2><%=@LANG["ORGANIZATION"]%>: <%= xss @org.name %></h2>
 
-      <h3><%= xss @org.name %>'s Members</h3>
+      <h3><%= xss @org.name %><%=@LANG["S_MEMBERS"]%></h3>
 
       <%=erb :_agent_list, :locals=>{:agents => @org.members,
                                      :version => (@org.admins.include?(@current_user) ? :remove_org_member : nil) ,
@@ -22,7 +22,7 @@
       <hr />
 
       <% if @org.admins.include?(@current_user) and @current_agent == @org %>
-        <h3>Add member to organization</h3>
+        <h3><%=@LANG["ADD_MEMBER_TO_ORGANIZATION"]%></h3>
         <% if addable_users.length > 0 %>
             <form action="/organization/<%= @org.id %>/add_member" method="POST">
               <fieldset>
@@ -31,28 +31,28 @@
                   <option value="<%= user.id %>"><%= user.name %></option>
                 <% end %>
                 </select>
-                <button class="btn btn-info" type="submit">Add user</button>
+                <button class="btn btn-info" type="submit"><%=@LANG["ADD_USER"]%></button>
               </fieldset>
             </form>
         <% else %>
-          <p>No users to add available</p>
+          <p><%=@LANG["NO_USERS_TO_ADD"]%></p>
         <% end %>
           <form class="form-horizontal" method="POST" action="/change_profile_picture_organization" enctype="multipart/form-data">
-            <h3>Change my profile picture</h3>
+            <h3><%=@LANG["CHANGE_PROFILE_PICTURE"]%></h3>
             <fieldset>
               <%= erb :_image_file_control %>
               <div class="form-actions">
-                <button class="btn btn-info" type="submit">Change profile picture</button>
+                <button class="btn btn-info" type="submit"><%=@LANG["CHANGE_PROFILE_PICTURE"]%></button>
               </div>
             </fieldset>
           </form>
           <% if @org.image_file_name != nil %>
-              <h3>Delete my profile picture</h3>
+              <h3><%=@LANG["DELETE_PROFILE_PICTURE"]%></h3>
               <form class="form-horizontal" method="POST" action="/delete_profile_picture_organization" >
                 <fieldset>
                   <div class="form-actions">
                     <input type="hidden" name="_method" value="delete"/>
-                    <button class="btn btn-danger" type="submit">Delete profile picture</button>
+                    <button class="btn btn-danger" type="submit"><%=@LANG["DELETE_PROFILE_PICTURE"]%></button>
                   </div>
                 </fieldset>
               </form>

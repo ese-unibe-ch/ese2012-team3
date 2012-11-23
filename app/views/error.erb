@@ -5,9 +5,9 @@
     <div class="row">
       <%= erb :_sidebar %>
       <div class="span10">
-        <h1>Error</h1>
+        <h1><%=@LANG["ERROR"]%></h1>
         <div class="alert-error alert">
-          <strong>Error</strong><br /><%= xss message %>
+          <strong><%=@LANG["ERROR"]%></strong><br /><%= xss message %>
         </div>
 
       </div>
