@@ -20,10 +20,10 @@ page = params[identifier] ? params[identifier].to_i : 0
   <th>Picture</th>
   <th>Name</th>
   <th>About</th>
-  <% if show_admin_button %>
+  <% if defined? show_admin_button %>
     <th></th>
   <% end %>
-  <% if version == :leave_organization || version == :remove_org_member%>
+  <% if defined? version && ( version == :leave_organization || version == :remove_org_member)%>
     <th></th>
   <% end %>
   </thead>
@@ -34,7 +34,7 @@ page = params[identifier] ? params[identifier].to_i : 0
         <td><%= erb :_image_rect, :locals => {:filename => agent.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td><%= erb :_user_link, :locals => {:user => agent} %></td>
         <td><%= mdown_to_html (xss agent.about) %></td>
-        <% if show_admin_button %>
+        <% if defined? show_admin_button %>
           <td>
             <form action="/organization/<%= @org.id %>/toggle_admin_member" method="POST">
               <input type="hidden" name="user_to_change" value="<%= agent.id %>" />
