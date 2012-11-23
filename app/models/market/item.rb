@@ -110,5 +110,9 @@ module Market
     def add_comment new_comment
       comments << new_comment unless comments.include?(new_comment)
     end
+
+    def self.find(pattern)
+      @@items.select { |item| item.active && (item.name.include?(pattern) || item.about.include?(pattern)) }
+    end
   end
 end

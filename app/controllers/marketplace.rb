@@ -327,3 +327,14 @@
 
     redirect "/item/#{@item.id.to_s}"
   end
+
+  post "/item/search" do
+    redirect '/login' unless session[:user_id]
+
+    # input validation
+    halt erb :error, :locals => { :message => "search must not be empty" } if params[:search].empty?
+
+    @found_items = Item.find(params[:search])
+
+    erb :searchresult
+  end
