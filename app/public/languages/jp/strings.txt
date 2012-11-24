@@ -87,13 +87,13 @@ DELETE_ACCOUNT
 NO_USERS_TO_ADD
 加えるユーザー はありません
 CHANGE_PROFILE_PICTURE
-Change プロフィール 絵
+プロフィール 絵を移り変る
 DELETE_PROFILE_PICTURE
-Delete プロフィール 絵を消す
+プロフィール 絵を消す
 NEW_ITEM
-New アイテム
+新しいアイテム
 CREDITS
-Credits
+クレジット
 LANGUAGE
 言語
 UNFOLLOW
