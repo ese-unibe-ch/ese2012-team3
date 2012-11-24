@@ -1,8 +1,244 @@
 LOGIN
-Einloggen
+Anmelden
+LOGOUT
+Abmelden
 DONT_HAVE_ACCOUNT_QUESTION
-Kein account?
+Noch nicht registriert?
+REGISTER
+Registrieren
 CLICK_HERE_TO_REGISTER
-Klicken Sie hier zum registrieren!
+Hier klicken, um sich zu registrieren!
+AT_TIME
+um
+COMMENTING
+Kommentiert
+YOU_ARE_FOLLOWING
+Sie folgen
+FOLLOWING
+Gefolgt
+REMOVE_MEMBER
+Mitglied entfernen
+LEAVE_ORGANIZATION
+Organisation verlassen
+YOUR_ORGANIZATIONS
+Ihre Organisationen
+NO_ORGANIZATIONS
+Keine Organisationen
+ORGANIZATIONS
+Organisationen
+ACTIVATING
+Aktiviert
+BUYING
+Gekauft
+ITEM_CREATION
+Gegenstand erstellt
+PROMOTE_ADMIN
+Administratorrechte geben
+REVOKE_ADMIN
+Administratorrechte entziehen
+APPLY_ACTIVITY_FILTER
+Aktivitätenfilter anwenden
+FILTER_LIST
+Liste filtern:
+AUCTION_FOR
+Auktion für
+EDIT_AUCTION_FOR
+Auktionseinstellungen für
 MARKETPLACE
-Marktplatz
+Martkplatz
+REGISTRATION
+Registration
+SELECT_USERNAME_AND_PASSWORD
+Wählen sie einen Benutzernamen sowie ein Passwort aus
+NAME
+Name
+ORG_SETTINGS
+Einstellungen Org.
+ORGANIZATION_SETTINGS
+Einstellungen Organisation
+ACCOUNT_SETTINGS
+Einstellungen
+NEW_ORGANIZATION
+Neue Organisation
+SELLERS
+Verkäufer
+SEARCH_RESULT
+Suchergebnis
+ACCOUNT_SETTINGS
+Einstellungen
+CHANGE_PASSWORD
+Passwort ändern
+CURRENT_PASSWORD
+Momentanes Passwort
+USER_PROFILE
+Benutzerprofil
+MY_PROFILE
+Mein Profil
+S_MEMBERS
+ - Mitglieder
+ADD_MEMBER_TO_ORGANIZATION
+Mitglied zu Organisation hinzufügen
+ADD_USER
+Benutzer hinzufügen
+CURRENTLY_ADMIN_NOTE
+Sie sind momentan Administrator einer Organisation. Bitte vergeben sie an einen anderen Benutzer Adminrechte, bevor Sie ihren Account löschen.
+DELETE_ACCOUNT
+Account löschen
+NO_USERS_TO_ADD
+Keine Benutzer verfügbar
+CHANGE_PROFILE_PICTURE
+Profilbild ändern
+DELETE_PROFILE_PICTURE
+Profilbild löschen
+NEW_ITEM
+Neuer Gegenstand
+CREDITS
+Credits
+LANGUAGE
+Sprache
+UNFOLLOW
+Nicht mehr folgen
+S_ITEMS
+s Items
+LATEST_ORGANIZATION_ACTIVITIES
+Neuste Organisationsaktivitäten
+FOLLOW
+Folgen
+ORGANIZATION_HAS_NO_ITEMS
+Diese Organisation hat keine Gegenstände
+VIEWING_PROFILE
+Profil
+YOUR_ITEMS
+Ihre Gegenstände
+USERS_ITEMS
+Gegenstände des Benutzers
+YOU_HAVE_NO_ITEMS
+Sie haben keine Gegenstände.
+THIS_USER_HAS_NO_ITEMS
+Dieser Benutzer hat keine Gegenstände.
+ADD_A_NEW_ITEM
+Neuen Gegenstand hinzufügen...
+ORGANIZATION
+Organisation
+CREATE_ORGANIZATION
+Organisation erstellen
+DELETE_ACCOUNT_QUESTION
+Account löschen?
+DELETE_ACCOUNT
+Account löschen
+NO_KEEP_IT
+Nein, ich will ihn nicht löschen
+REALLY_DELETE_QUESTION
+Wollen Sie wirklich ihren Account löschen?
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+Es ist nicht möglich, Auktionen zu bearbeiten, welche schon Gebote haben
+CANNOT_EDIT_ACTIVE
+Aktive Gegenstände können nicht bearbeitet werden.
+BUY_ITEM
+Gegenstand kaufen
+INACTIVATE_ITEM
+Gegenstand deaktivieren
+ACTIVATE_ITEM
+Gegenstand aktivieren
+EDIT_AUCTION
+Auktion bearbeiten
+EDIT_ITEM_AUCTION
+Auktion bearbeiten
+ERROR
+Fehler
+EDIT_ITEM
+Gegenstand bearbeiten
+USERS
+Benutzer
+ABOUT
+Über
+USERNAME
+Benutzername
+PASSWORD
+Passwort
+MUST_BE_STRONG
+Muss stark genug sein.
+RETYPE_PASSWORD
+Passwort erneut eingeben
+INTERESTS
+Interessen
+CREATE_ACCOUNT
+Account erstellen
+PICTURE
+Bild
+DESCRIPTION
+Beschreibung
+PRICE
+Preis
+START_PRICE
+Startpreis
+REMOVE_FROM_WISHLIST
+Von Wunschliste entfernen
+ADD_TO_WISHLIST
+Zu Wunschliste hinzufügen
+NO_WISHLIST_ITEMS
+Die Wunschliste dieses Benutzers ist leer.
+NOT_FOLLOWING
+Dieser Benutzer folgt niemandem.
+WISHLIST
+Wunschliste
+OWNER
+Eigentümer
+NEXT
+Weiter
+PREV
+Zurück
+LOGGED_IN_AS
+Angemeldet als
+CURRENT_PRICE
+Momentaner Preis
+BID_ON_AUCTION
+Gebot abgeben
+MINIMAL_BID_INCREMENT
+Kleinster Erhöhungsschritt
+INCREMENT
+Erhöhungsschritt
+SAVE
+Speichern
+END_TIME
+Endet:
+MINIMAL_PRICE
+Mindestpreis
+CURRENT_WINNER
+Momentaner Gewinner
+COMMENTS
+Kommentare
+WROTE
+schrieb
+REPLY
+Antworten
+NO_COMMENTS
+Dieser Gegenstand hat noch keine Kommentare.
+PAST_WINNERS
+Frühere Gewinner
+CLICK_TO_EXPAND
+klicken, um alles anzuzeigen
+ITEMS_ON_THE_MARKET
+Gegenstände auf dem Markt
+FOLLOWEES_ACTIVITIES
+Aktivitäten von gefolgten Benutzern
+SEARCH
+Suchen
+STRONG_PASSWORD
+Starkes Passwort
+STRONG_PASSWORD_TEXT
+<h1>Tipps für ein starkes Passwort</h1> <p>Was macht ein Passwort stark (oder schwach)? Ein starkes Passwort: <ul> <li>Ist mindestens acht Zeichen lang.</li> <li>Enthält weder Ihren Benutzernamen, Ihren richtigen Namen noch den Namen ihrer Firma.</li> <li>Enthält kein ganzes Wort.</li> <li>Ist ausreichend verschieden von früheren Passwörtern.</li> <li>Enthält Zeichen aus sämtlichen folgenden Kategorien: <ul> <li> Grosse Buchstaben: <i>A, B, C</i> </li> <li> Kleine Buchstaben: <i>a, b, c</i> </li> <li> Ziffern: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Auf der Tastatur verfügbare Symbole (sämtliche Zeichen, welche weder Buchstaben noch Ziffern sind) und Leerschläge: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
+CURRENTLY_NOT_IN_AUCTION
+Momentan nicht in einer Auktion.
+AUCTION_ENDS_AT
+Auktion endet um
+CREATE_AUCTION
+Auktion erstellen
+CREATE_NEW_ITEM
+Neuen Gegenstand erstellen
+ITEM
+Gegenstand
+ADD_COMMENT
+Kommentar hinzufügen
+CAN_USE_MARKDOWN
+Sie können markdown verwenden, z.B: **<b>fetter Text</b>**
