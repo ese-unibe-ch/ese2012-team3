@@ -117,13 +117,14 @@ pizza.add_comment(Comment.init(:creator => john, :text => "can i get that withou
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
 uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
 User.all.each_with_index do |user, i|
-  item = Item.init(:name => "item" + i.to_s, :price => 100, :owner => user)
+  about = "**dummy** about text dummy about text *dummy* about text **dummy** about text dummy about text *dummy*"
+  item = Item.init(:name => "item" + i.to_s, :price => 100, :owner => user, :about => about)
   comment = Comment.init(:creator => user, :text => "This is **my** item")
   item.add_comment(comment)
   item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))
   item.add_comment(Comment.init(:creator => john, :text => "i'll give you **10** credits, max!"))
   user.add_item(item)
-  item.image_file_name="userimages/1.png"
+  item.image_file_name="itemimages/illy.jpg"
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
 
@@ -132,8 +133,9 @@ UNO_ORG = uno
 # Some dummy items to test paging
 lastdummyitem = nil
 for i in 0...DUMMYTHINGSCOUNT
-  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100), :active => true, :owner => uno)
-  lastdummyitem.image_file_name="userimages/1.png"
+  dummyabout = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua"
+  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100), :active => true, :owner => uno, :about => dummyabout)
+  lastdummyitem.image_file_name="itemimages/quarta.jpg"
   uno.add_item(lastdummyitem)
 end
 
