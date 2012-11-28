@@ -1,8 +1,266 @@
 LOGIN
-Connecter
+Connexion
+LOGOUT
+Déconnexion
 DONT_HAVE_ACCOUNT_QUESTION
-Pas d'inscription?
+Pas de compte?
+REGISTERED_NOTIFICATION
+<strong>Registered!</strong><br />Votre compte a été créé et vous avez été connecté.
+SWITCHED_USER_NOTIFICATION
+<strong>L'utilisateur a été changé!</strong>
+NOT_REPRESENTING_ORG
+Vous n'êtes pas un représentant d'une organisation.
+NOW_REPRESENTING
+Vous êtes maintenant un représentant de l'organisation
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>Ooops!</strong><br /> Vous ne pouvez plus faire des enchères.
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>Item bought!</strong><br />Vous avez acheté l'article!
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+Cliquez içi pour voir vos autres articles.
+LOGGEDIN_NOTIFICATION
+<strong>Logged in!</strong><br />Vous avez été connecté avec succès!
+PASSWORD_CHANGED_NOTIFICATION
+<strong>Password changed!</strong><br />Votre mot de passe a été changé avec succès.
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>Organization created!</strong><br />L'organisation a été créée avec succès.
+NO_AUCTION_NOTIFICATION
+<strong>Ooops!</strong><br /> Il n'y a pas d'enchères pour cet article.
+REGISTER
+Enregister
 CLICK_HERE_TO_REGISTER
-Appuyez ici pour vous inscrire!
+Cliquez içi pour vous enregistrer!
+AT_TIME
+à
+COMMENTING
+Commentaires
+YOU_ARE_FOLLOWING
+Vous suivez
+FOLLOWING
+Suivés
+REMOVE_MEMBER
+Enlever ce membre
+LEAVE_ORGANIZATION
+Quitter cette organisation
+YOUR_ORGANIZATIONS
+Vos organisations
+NO_ORGANIZATIONS
+Pas d'organisations
+ORGANIZATIONS
+Organisations
+ACTIVATING
+Activations
+BUYING
+Achats
+ITEM_CREATION
+Créations d'articles
+PROMOTE_ADMIN
+Promouvoir administrateur
+REVOKE_ADMIN
+Révoquer administrateur
+APPLY_ACTIVITY_FILTER
+Appliquer filtre des activités
+FILTER_LIST
+Filtrer liste:
+AUCTION_FOR
+Auction for
+EDIT_AUCTION_FOR
+Edit Auction for
 MARKETPLACE
-Marché
+Marketplace
+REGISTRATION
+Registration
+SELECT_USERNAME_AND_PASSWORD
+Select a username and password
+NAME
+Name
+ORG_SETTINGS
+Org. Settings
+ORGANIZATION_SETTINGS
+Organization Settings
+ACCOUNT_SETTINGS
+Account Settings
+NEW_ORGANIZATION
+New organization
+SELLERS
+Sellers
+SEARCH_RESULT
+Search result
+ACCOUNT_SETTINGS
+Account settings
+CHANGE_PASSWORD
+Change Password
+CURRENT_PASSWORD
+Current Password
+USER_PROFILE
+User profile
+MY_PROFILE
+My profile
+S_MEMBERS
+'s Members
+ADD_MEMBER_TO_ORGANIZATION
+Add member to organization
+ADD_USER
+Add user
+CURRENTLY_ADMIN_NOTE
+You are currently admin of an organization. Make another member admin before deleting your account.
+DELETE_ACCOUNT
+Delete account
+NO_USERS_TO_ADD
+No users to add available
+CHANGE_PROFILE_PICTURE
+Change profile picture
+DELETE_PROFILE_PICTURE
+Delete profile picture
+NEW_ITEM
+New item
+CREDITS
+Credits
+LANGUAGE
+Language
+UNFOLLOW
+Unfollow
+S_ITEMS
+'s Items
+LATEST_ORGANIZATION_ACTIVITIES
+Latest Organization Activities
+FOLLOW
+Follow
+ORGANIZATION_HAS_NO_ITEMS
+This organization has no items.
+VIEWING_PROFILE
+Viewing profile
+YOUR_ITEMS
+Your items
+USERS_ITEMS
+User's items
+YOU_HAVE_NO_ITEMS
+You have no items.
+THIS_USER_HAS_NO_ITEMS
+This user has no items.
+ADD_A_NEW_ITEM
+Add a new item...
+ORGANIZATION
+Organization
+CREATE_ORGANIZATION
+Create Organization
+DELETE_ACCOUNT_QUESTION
+Delete Account?
+DELETE_ACCOUNT
+Delete account
+NO_KEEP_IT
+No, I want to keep it
+REALLY_DELETE_QUESTION
+Do you really want to delete your Account?
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+No longer editable after first bid
+CANNOT_EDIT_ACTIVE
+Cannot edit active items
+BUY_ITEM
+Buy Item
+INACTIVATE_ITEM
+Inactivate item
+ACTIVATE_ITEM
+Activate item
+EDIT_AUCTION
+Edit auction
+EDIT_ITEM_AUCTION
+Edit item auction
+ERROR
+Error
+EDIT_ITEM
+Edit item
+USERS
+Users
+ABOUT
+About
+USERNAME
+Username
+PASSWORD
+Password
+MUST_BE_STRONG
+Must be strong.
+RETYPE_PASSWORD
+Re-type Password
+INTERESTS
+Interests
+CREATE_ACCOUNT
+Create My Account
+PICTURE
+Picture
+DESCRIPTION
+Description
+PRICE
+Price
+START_PRICE
+Start price
+REMOVE_FROM_WISHLIST
+Remove from wishlist
+ADD_TO_WISHLIST
+Add to wishlist
+NO_WISHLIST_ITEMS
+This user has no items in his wishlist.
+NOT_FOLLOWING
+This user is not following anybody.
+WISHLIST
+Wishlist
+OWNER
+Owner
+NEXT
+Next
+PREV
+Prev
+LOGGED_IN_AS
+Logged in as
+CURRENT_PRICE
+Current price
+BID_ON_AUCTION
+Bid on auction
+MINIMAL_BID_INCREMENT
+Minimal bid increment
+INCREMENT
+Increment
+SAVE
+Save
+END_TIME
+End time
+MINIMAL_PRICE
+Minimal price
+CURRENT_WINNER
+Current winner
+COMMENTS
+Comments
+WROTE
+wrote
+REPLY
+Reply
+NO_COMMENTS
+This item has no comments yet.
+PAST_WINNERS
+Past winners
+CLICK_TO_EXPAND
+click to expand
+ITEMS_ON_THE_MARKET
+Items on the Market
+FOLLOWEES_ACTIVITIES
+Followee's Activities
+SEARCH
+Search
+STRONG_PASSWORD
+Strong password
+STRONG_PASSWORD_TEXT
+<h1>Tips for creating a strong password</h1> <p>What makes a password strong (or weak)? A strong password: <ul> <li>Is at least eight characters long.</li> <li>Does not contain your user name, real name, or company name.</li> <li>Does not contain a complete word.</li> <li>Is significantly different from previous passwords.</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
+CURRENTLY_NOT_IN_AUCTION
+Currently not in auction
+AUCTION_ENDS_AT
+Auction ends at
+CREATE_AUCTION
+Create auction
+CREATE_NEW_ITEM
+Create new item
+ITEM
+Item
+ADD_COMMENT
+Add comment
+CAN_USE_MARKDOWN
+You can use markdown syntax to style this text. For example: **<b>bold text</b>**
