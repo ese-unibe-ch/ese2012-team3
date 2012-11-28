@@ -4,6 +4,28 @@ LOGOUT
 Abmelden
 DONT_HAVE_ACCOUNT_QUESTION
 Noch nicht registriert?
+REGISTERED_NOTIFICATION
+<strong>Registriert!</strong><br />Ihr Account wurde erfolgreich erstellt und Sie wurden automatisch eingeloggt.
+SWITCHED_USER_NOTIFICATION
+<strong>User geändert!</strong>
+NOT_REPRESENTING_ORG
+Sie repräsentieren keine Organisation.
+NOW_REPRESENTING
+Sie repräsentieren nun
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>Fehler!</strong><br /> Die Auktion ist schon geschlossen.
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>Gegenstant gekauft</strong><br />Sie haben erfolgreich gekauft:
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+Klicken Sie hier, um ihre anderen Gegenstände zu sehen.
+LOGGEDIN_NOTIFICATION
+<strong>Angemeldet!</strong><br />Sie wurden erfolgreich angemeldet!
+PASSWORD_CHANGED_NOTIFICATION
+<strong>Passwort geändert!</strong><br />Ihr Passwort wurde erfolgreich geändert.
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>Organisation erstellt!</strong><br />Die Organisation wurde erfolgreich erstellt.
+NO_AUCTION_NOTIFICATION
+<strong>Fehler!</strong><br /> Es gibt keine Auktion für diesen Gegenstand.
 REGISTER
 Registrieren
 CLICK_HERE_TO_REGISTER

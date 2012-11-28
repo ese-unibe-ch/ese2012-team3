@@ -4,6 +4,28 @@ LOGOUT
 Logout
 DONT_HAVE_ACCOUNT_QUESTION
 Don't have an account?
+REGISTERED_NOTIFICATION
+<strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
+SWITCHED_USER_NOTIFICATION
+<strong>Switched user!</strong>
+NOT_REPRESENTING_ORG
+You are not representing an organization.
+NOW_REPRESENTING
+You are now representing
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>Ooops!</strong><br /> Auction has already closed.
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>Item bought!</strong><br />You successfully purchased the item
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+Click here to see your other items.
+LOGGEDIN_NOTIFICATION
+<strong>Logged in!</strong><br />You've been logged in successfully!
+PASSWORD_CHANGED_NOTIFICATION
+<strong>Password changed!</strong><br />Your password has been successfully changed.
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>Organization created!</strong><br />The organization was successfully created.
+NO_AUCTION_NOTIFICATION
+<strong>Ooops!</strong><br /> There is no auction for this item.
 REGISTER
 Register
 CLICK_HERE_TO_REGISTER

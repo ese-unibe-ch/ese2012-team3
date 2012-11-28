@@ -1,8 +1,8 @@
 <div class="alert-success alert">
-  <strong>Switched user!</strong><br />
+  <%=@LANG["SWITCHED_USER_NOTIFICATION"]%><br />
   <%if session[:organization_id].nil?%>
-    You are not representing an organization.
+    <%=@LANG["NOT_REPRESENTING_ORG"]%>
   <%else%>
-    You are now representing <%= erb :_user_link, :locals => {:user => Organization.organization_by_id(session[:organization_id].to_i)} %>.
+    <%=@LANG["NOW_REPRESENTING"]%> <%= erb :_user_link, :locals => {:user => Organization.organization_by_id(session[:organization_id].to_i)} %>.
   <%end%>
 </div>
