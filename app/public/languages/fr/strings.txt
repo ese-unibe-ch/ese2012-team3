@@ -37,7 +37,7 @@ Commentaires
 YOU_ARE_FOLLOWING
 Vous suivez
 FOLLOWING
-Suivés
+Suivis
 REMOVE_MEMBER
 Enlever ce membre
 LEAVE_ORGANIZATION
@@ -63,204 +63,202 @@ Appliquer filtre des activités
 FILTER_LIST
 Filtrer liste:
 AUCTION_FOR
-Auction for
+Enchères pour
 EDIT_AUCTION_FOR
-Edit Auction for
+Modifier enchères pour
 MARKETPLACE
-Marketplace
+Marché
 REGISTRATION
-Registration
+Enregistration
 SELECT_USERNAME_AND_PASSWORD
-Select a username and password
+Choisissez nom d'utilisateur et mot de passe
 NAME
-Name
+Nom
 ORG_SETTINGS
-Org. Settings
+Préferences d'organisations
 ORGANIZATION_SETTINGS
-Organization Settings
+Préferences d'organisations
 ACCOUNT_SETTINGS
-Account Settings
+Compte
 NEW_ORGANIZATION
-New organization
+Nouvelle organisation
 SELLERS
-Sellers
+Vendeurs
 SEARCH_RESULT
-Search result
-ACCOUNT_SETTINGS
-Account settings
+Résultat de la recherche
 CHANGE_PASSWORD
-Change Password
+Changer mot de passe
 CURRENT_PASSWORD
-Current Password
+Mot de passe actuel
 USER_PROFILE
-User profile
+Profil d'utilisateur
 MY_PROFILE
-My profile
+Mon profil
 S_MEMBERS
-'s Members
+ - membres
 ADD_MEMBER_TO_ORGANIZATION
-Add member to organization
+Ajouter membres à l'organisation
 ADD_USER
-Add user
+Ajouter utilisateur
 CURRENTLY_ADMIN_NOTE
-You are currently admin of an organization. Make another member admin before deleting your account.
+Au moment, vous êtes administrateur d'une organisation. Promouvez un autre membre administrateur pour effacer votre compte.
 DELETE_ACCOUNT
-Delete account
+Supprimer compte
 NO_USERS_TO_ADD
-No users to add available
+Pas d'utilisateurs disponibles
 CHANGE_PROFILE_PICTURE
-Change profile picture
+Changer photo de profil
 DELETE_PROFILE_PICTURE
-Delete profile picture
+Supprimer photo de profil
 NEW_ITEM
-New item
+Nouvel article
 CREDITS
-Credits
+Crédits
 LANGUAGE
-Language
+Langue
 UNFOLLOW
-Unfollow
+Arrêter de suivre
 S_ITEMS
-'s Items
+- articles
 LATEST_ORGANIZATION_ACTIVITIES
-Latest Organization Activities
+Dernières activités de cette Organisation
 FOLLOW
-Follow
+Suivre
 ORGANIZATION_HAS_NO_ITEMS
-This organization has no items.
+Cette organisation n'a pas d'articles.
 VIEWING_PROFILE
-Viewing profile
+Profil
 YOUR_ITEMS
-Your items
+Vos articles
 USERS_ITEMS
-User's items
+Articles de cet utilisateur
 YOU_HAVE_NO_ITEMS
-You have no items.
+Vous n'avez pas d'articles.
 THIS_USER_HAS_NO_ITEMS
-This user has no items.
+Cet utilisateur n'a pas d'articles.
 ADD_A_NEW_ITEM
-Add a new item...
+Ajouter un nouvel article...
 ORGANIZATION
-Organization
+Organisation
 CREATE_ORGANIZATION
-Create Organization
+Créer organisation
 DELETE_ACCOUNT_QUESTION
-Delete Account?
+Supprimer votre compte?
 DELETE_ACCOUNT
-Delete account
+Supprimer mon compte
 NO_KEEP_IT
-No, I want to keep it
+Non, j'aimerais le garder.
 REALLY_DELETE_QUESTION
-Do you really want to delete your Account?
+Voulez-vous le vraiment supprimer?
 NO_LONGER_EDITABLE_AFTER_FIRST_BID
-No longer editable after first bid
+Vous ne pouvez pas modifiér après la première enchère
 CANNOT_EDIT_ACTIVE
-Cannot edit active items
+Les articles actifs ne peuvent pas être modifié.
 BUY_ITEM
-Buy Item
+Acheter cet article
 INACTIVATE_ITEM
-Inactivate item
+Désactiver cet article
 ACTIVATE_ITEM
-Activate item
+Activer cet article
 EDIT_AUCTION
-Edit auction
+Modifier enchères
 EDIT_ITEM_AUCTION
-Edit item auction
+Modifier enchères de cet article
 ERROR
-Error
+Erreur
 EDIT_ITEM
-Edit item
+Modifier cet article
 USERS
-Users
+Utilisateurs
 ABOUT
-About
+Sur
 USERNAME
-Username
+Nom d'utilisateur
 PASSWORD
-Password
+Mot de passe
 MUST_BE_STRONG
-Must be strong.
+Doit être assez fort.
 RETYPE_PASSWORD
-Re-type Password
+Confirmer le mot de passe
 INTERESTS
-Interests
+Intérêts
 CREATE_ACCOUNT
-Create My Account
+Créer nouveau compte.
 PICTURE
-Picture
+Image
 DESCRIPTION
 Description
 PRICE
-Price
+Prix
 START_PRICE
-Start price
+Prix initial
 REMOVE_FROM_WISHLIST
-Remove from wishlist
+Supprimer des objets désirés
 ADD_TO_WISHLIST
-Add to wishlist
+Ajouter aux objet désirés
 NO_WISHLIST_ITEMS
-This user has no items in his wishlist.
+Cet utilisateur n'a pas d'objets désirés.
 NOT_FOLLOWING
-This user is not following anybody.
+Cet utilisateur ne suit personne.
 WISHLIST
-Wishlist
+Objet désirés
 OWNER
-Owner
+Propriétaire
 NEXT
-Next
+Suivant
 PREV
-Prev
+Précédent
 LOGGED_IN_AS
-Logged in as
+Connecté comme
 CURRENT_PRICE
-Current price
+Prix actuel
 BID_ON_AUCTION
-Bid on auction
+Faire une enchère
 MINIMAL_BID_INCREMENT
-Minimal bid increment
+Surenchère minimum
 INCREMENT
-Increment
+Surenchère
 SAVE
-Save
+Sauver
 END_TIME
-End time
+Heure de fin
 MINIMAL_PRICE
-Minimal price
+Prix minimal
 CURRENT_WINNER
-Current winner
+Gagnant actuel
 COMMENTS
-Comments
+Commentaires
 WROTE
-wrote
+a écrit:
 REPLY
-Reply
+Répondre
 NO_COMMENTS
-This item has no comments yet.
+Cet article n'a pas encore reçu de commentaires
 PAST_WINNERS
-Past winners
+Gagnants précédent
 CLICK_TO_EXPAND
-click to expand
+cliquer pour agrandir
 ITEMS_ON_THE_MARKET
-Items on the Market
+Articles sur le marché
 FOLLOWEES_ACTIVITIES
-Followee's Activities
+Activités des suivis
 SEARCH
-Search
+Chercher
 STRONG_PASSWORD
-Strong password
+Mot de passe fort
 STRONG_PASSWORD_TEXT
 <h1>Tips for creating a strong password</h1> <p>What makes a password strong (or weak)? A strong password: <ul> <li>Is at least eight characters long.</li> <li>Does not contain your user name, real name, or company name.</li> <li>Does not contain a complete word.</li> <li>Is significantly different from previous passwords.</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
 CURRENTLY_NOT_IN_AUCTION
-Currently not in auction
+Actuellement pas en vente aux enchères
 AUCTION_ENDS_AT
-Auction ends at
+Enchères se terminent
 CREATE_AUCTION
-Create auction
+Créer enchères
 CREATE_NEW_ITEM
-Create new item
+Créer nouvel article
 ITEM
-Item
+Article
 ADD_COMMENT
-Add comment
+Ajouter commentaire
 CAN_USE_MARKDOWN
-You can use markdown syntax to style this text. For example: **<b>bold text</b>**
+Vous pouvez utiliser la syntaxe "markdown" dans ce texte. Par example: **<b>texte en gras</b>**
