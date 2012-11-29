@@ -247,7 +247,7 @@ Chercher
 STRONG_PASSWORD
 Mot de passe fort
 STRONG_PASSWORD_TEXT
-<h1>Tips for creating a strong password</h1> <p>What makes a password strong (or weak)? A strong password: <ul> <li>Is at least eight characters long.</li> <li>Does not contain your user name, real name, or company name.</li> <li>Does not contain a complete word.</li> <li>Is significantly different from previous passwords.</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
+<h1>Conseils pour créer un mot de passe fort</h1> <p>Qu'est-ce qu'un mot de passe fort (ou faible)? Un mot de passe fort: <ul> <li>Est au minimum huite caractères.</li> <li>Ne contient ni votre nom d'utilisateur, ni votre nom réel, ni le nom de votre entreprise</li> <li>Ne contient pas un mot complet.</li> <li>Est significativement différent de mots de passe précédents</li> <li>Contient des caractères de chacune de ces quatre catégories: <ul> <li> Lettres majuscules: <i>A, B, C</i> </li> <li> Lettres miniscules: <i>a, b, c</i> </li> <li> Nombres: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symboles trouvés sur le clavier (Tous les caractères du clavier qui ne sont pas définie comme lettres ou chiffres) et des espaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
 CURRENTLY_NOT_IN_AUCTION
 Actuellement pas en vente aux enchères
 AUCTION_ENDS_AT
