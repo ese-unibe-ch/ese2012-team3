@@ -118,6 +118,10 @@ module Market
       @@items.select { |item| item.active && (item.name.include?(pattern) || item.about.include?(pattern)) }
     end
 
+    def is_offer?()
+      Item.offer_by_id(self.id) == self
+    end
+
     def self.find_offer(pattern)
       @@offers.select { |offer| offer.name.include?(pattern) || offer.name.include?(pattern)}
     end
