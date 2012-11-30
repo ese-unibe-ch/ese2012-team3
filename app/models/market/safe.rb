@@ -6,7 +6,7 @@ module Market
 
     attr_accessor :savings
 
-    def initialize
+    def initialize()
       self.savings = 0
       self.owner = nil
     end

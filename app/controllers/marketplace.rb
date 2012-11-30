@@ -196,6 +196,49 @@
     redirect back
   end
 
+  get "/item/offer" do
+    redirect '/login' unless session[:user_id]
+    erb :create_offer
+  end
+
+  post "/item/offer" do
+    redirect '/login' unless session[:user_id]
+
+    #input validation
+    @errors[:name] = "item must have a name!" if params[:name].empty?
+    @errors[:price] = "item must have a price!" if params[:price].empty?
+    @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
+    @errors[:price] = "item must have a price!" if params[:price].empty?
+    image_file_check()
+
+    if @errors.empty?
+      safe = Safe.new
+      safe.fill(@current_agent, params[:price].to_i)
+      offer = Market::Item.init(:name => params[:name],
+                                :price => params[:price].to_i,
+                                :owner => @current_agent,
+                                :about => params[:about],
+                                :offer => true,
+                                :safe => safe)
+      Market::Item.add_offer(offer)
+      redirect '/'
+    else
+      halt erb :create_offer
+    end
+  end
+
+  post "/item/:item_id/sell" do
+    offeritem = Market::Item.offer_by_id(params[:item_id].to_i)
+    Market::Item.transform_offer_to_item(offeritem)
+    @current_agent.credit += offeritem.safe.savings
+    redirect '/'
+  end
+
+  get "/item/create" do
+    redirect '/login' unless session[:user_id]
+    erb :create_item
+  end
+
   get "/item/create" do
     redirect '/login' unless session[:user_id]
     erb :create_item

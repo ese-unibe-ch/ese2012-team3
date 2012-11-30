@@ -27,6 +27,7 @@
       @current_agent = Organization.organization_by_id(session[:organization_id].to_i)
     end
     @all_items = Market::Item.active_items
+    @all_offers = Market::Item.all_offers
     @users = Market::User.all + Market::Organization.all
     @errors = {}
 

@@ -31,17 +31,27 @@
         <td></td>
     <% end %>
 <% else %>
-    <%if item.owner == @current_agent %>
-        <td>
-          <form action="/item/<%= item.id %>/status_change" method="post">
-            <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
-            <input type="hidden" name="item" value="<%= xss item.id %>" />
-            <input type="hidden" name="new_state" value="active" />
-            <button type="submit" class="btn btn-info small" name="submit"><%=@LANG["ACTIVATE_ITEM"]%></button>
-          </form>
-        </td>
+    <% if !(defined? offer) %>
+      <%if item.owner == @current_agent %>
+          <td>
+            <form action="/item/<%= item.id %>/status_change" method="post">
+              <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
+              <input type="hidden" name="item" value="<%= xss item.id %>" />
+              <input type="hidden" name="new_state" value="active" />
+              <button type="submit" class="btn btn-info small" name="submit"><%=@LANG["ACTIVATE_ITEM"]%></button>
+            </form>
+          </td>
+      <% else %>
+          <td style="color:#FF0000;">Inactive</td>
+      <% end %>
     <% else %>
-        <td style="color:#FF0000;">Inactive</td>
+        <td>
+          <% if item.owner != @current_agent %>
+          <form action="/item/<%= item.id %>/sell" method="POST">
+            <button type="submit" class="btn btn-info small" name="submit"><%=@LANG["SELL_ITEM"]%></button>
+          </form>
+          <% end %>
+        </td>
     <% end %>
 <% end %>
 
@@ -52,7 +62,7 @@
     #Edit button %>
 
 <%if item.owner == @current_agent %>
-
+  <% if !(defined? offer) %>
     <%if item.active %>
         <% if item.auction? %>
             <% if !item.auction.editable? %>
@@ -74,6 +84,7 @@
           </form>
         </td>
     <% end %>
+  <% end %>
 <% else %>
     <td></td>
 <% end %>
@@ -81,7 +92,7 @@
 <%  # The auction button   %>
 
 <%if item.owner == @current_agent %>
-
+  <% if !(defined? offer) %>
     <%if item.active %>
         <% if item.auction? %>
             <td><%= @current_agent == item.owner ? "<i class='muted'>#{@LANG["AUCTION_ENDS_AT"]} #{item.auction.end_time.strftime("%d.%m.%Y %H:%M")}</i>": ""%></td>
@@ -95,6 +106,7 @@
           </form>
         </td>
     <% end %>
+  <% end %>
 <% else %>
     <% if item.auction? %>
         <td><i class='muted'><%=@LANG["AUCTION_ENDS_AT"]%> <%=item.auction.end_time.to_s%></i></td>

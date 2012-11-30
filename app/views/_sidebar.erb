@@ -34,6 +34,13 @@
             <%end%>
           ><a href="/item/create"><i class="icon-plus"></i><%=@LANG["NEW_ITEM"]%></a></li>
 
+
+          <li
+            <%if @current_nav_item == :new_offer%>
+                class="active"
+            <%end%>
+          ><a href="/item/offer"><i class="icon-plus"></i><%=@LANG["NEW_OFFER"]%></a></li>
+
           <% if @current_agent == @current_user %>
 
           <li

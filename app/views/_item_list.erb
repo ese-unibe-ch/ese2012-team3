@@ -79,3 +79,36 @@ page = params[identifier] ? params[identifier].to_i : 0
                                    :per_page => ITEMS_PER_PAGE,
                                    :identifier => identifier}
 %>
+<%if (defined? offers) && (offers.length > 0) %>
+  <h2><%=@LANG["OFFERS"]%></h2>
+  <table class="table">
+    <thead>
+    <th></th>
+    <th><%=@LANG["PICTURE"]%></th>
+    <th><%=@LANG["NAME"]%></th>
+    <th style="text-align: right; padding-right: 10em;"><%=@LANG["PRICE"]%></th>
+    <th><%= (defined? show_owner) ? "#{@LANG["OWNER"]}": ""%></th>
+    <th></th> <!-- sell button -->
+  </thead>
+  <tbody>
+  <% offers.each_with_index do |offer, index| %>
+  <% next unless index/ITEMS_PER_PAGE == page %>
+      <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px" class="itemrow">
+        <td><a class="toggler" href=""><i class="icon-zoom-in"></i></a></td>
+        <td><%= erb :_image_rect, :locals => {:filename => offer.image_file_name, :size => LISTIMAGESIZE} %></td>
+        <td style="width: 25%">
+            <%= erb :_item_link, :locals => {:item => offer, :highlight_active => defined? highlight_active} %>
+            <div class="item-about"><%= mdown_to_html(xss offer.about) %></div>
+        </td>
+
+        <td style="text-align: right; padding-right: 10em;"><%= xss ts(offer.price) %></td>
+
+        <td><%= (defined? show_owner) ?
+                (erb :_user_link, :locals => {:user => offer.owner}) : "" %></td>
+
+        <%= erb :_item_button, :locals => {:item => offer, :current_user => @current_agent, :offer => true} %>
+      </tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>

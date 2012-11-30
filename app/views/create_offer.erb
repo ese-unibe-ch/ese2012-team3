@@ -1,0 +1,24 @@
+<%
+   @title = @LANG["CREATE_NEW_OFFER"]
+   @current_nav_item = :new_offer
+%>
+
+<section id="content">
+<div class="row">
+  <%= erb :_sidebar %>
+  <div class="span10">
+    <h2><%=@LANG["CREATE_NEW_OFFER"]%></h2>
+    <form class="form-horizontal" method="POST" action="/item/offer" enctype="multipart/form-data">
+      <fieldset>
+        <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["NAME"]}%>
+        <%= erb :_text_control, :locals => {:name => :price, :label => @LANG["PRICE"]}%>
+        <%= erb :_image_file_control %>
+        <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["DESCRIPTION"]}%>
+        <div class="form-actions">
+          <button class="btn btn-info" type="submit"><%=@LANG["SAVE"]%></button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+</div>
+</section>

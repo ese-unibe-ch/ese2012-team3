@@ -19,10 +19,12 @@ module Market
     attr_accessor :id,
                   :active, # true or false
                   :price, # positive number
-                  :comments # List of Comment objects
+                  :comments, # List of Comment objects
+                  :safe
 
     @@item_id_counter = 0
     @@items = []
+    @@offers = []
 
     # constructor - give a name to the item and set a specified price
     # @param [Object] params - dictionary of symbols.
@@ -39,7 +41,8 @@ module Market
       item.about = params[:about] || ""
       item.image_file_name = nil
       item.comments = []
-      @@items << item
+      item.safe = params[:safe] || nil
+      @@items << item unless params[:offer]
       @@item_id_counter += 1
       item
     end
@@ -113,6 +116,23 @@ module Market
 
     def self.find(pattern)
       @@items.select { |item| item.active && (item.name.include?(pattern) || item.about.include?(pattern)) }
+    end
+
+    def self.add_offer(offer)
+      @@offers.push(offer)
+    end
+
+    def self.all_offers
+      @@offers
+    end
+
+    def self.offer_by_id(id)
+      @@offers.detect{ |offer| offer.id.to_i == id }
+    end
+
+    def self.transform_offer_to_item(offer)
+      @@items.push(offer)
+      @@offers.delete(offer)
     end
   end
 end

@@ -262,3 +262,11 @@ ADD_COMMENT
 Ajouter commentaire
 CAN_USE_MARKDOWN
 Vous pouvez utiliser la syntaxe "markdown" dans ce texte. Par example: **<b>texte en gras</b>**
+NEW_OFFER
+Nouvel offre
+CREATE_NEW_OFFER
+Faire nouvel offre
+OFFERS
+Offres
+SELL_ITEM
+Vendre article

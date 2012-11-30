@@ -264,3 +264,11 @@ ADD_COMMENT
 Kommentar hinzufügen
 CAN_USE_MARKDOWN
 Sie können markdown verwenden, z.B: **<b>fetter Text</b>**
+NEW_OFFER
+Neues Angebot
+CREATE_NEW_OFFER
+Neues Angebot
+OFFERS
+Angebote
+SELL_ITEM
+Verkaufen
