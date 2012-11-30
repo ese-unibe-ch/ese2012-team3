@@ -67,7 +67,7 @@ Auktion für
 EDIT_AUCTION_FOR
 Auktionseinstellungen für
 MARKETPLACE
-Martkplatz
+Marktplatz
 REGISTRATION
 Registration
 SELECT_USERNAME_AND_PASSWORD
