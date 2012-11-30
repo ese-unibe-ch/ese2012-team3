@@ -377,7 +377,8 @@
     # input validation
     halt erb :error, :locals => { :message => "search must not be empty" } if params[:search].empty?
 
-    @found_items = Item.find(params[:search])
+    @found_items = Item.find_item(params[:search])
+    @found_offers = Item.find_offer(params[:search])
 
     erb :searchresult
   end

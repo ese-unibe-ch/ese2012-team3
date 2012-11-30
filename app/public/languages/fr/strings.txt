@@ -86,6 +86,10 @@ SELLERS
 Vendeurs
 SEARCH_RESULT
 Résultat de la recherche
+FOUND_ITEMS
+articles
+FOUND_OFFERS
+offres
 CHANGE_PASSWORD
 Changer mot de passe
 CURRENT_PASSWORD

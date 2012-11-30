@@ -114,8 +114,12 @@ module Market
       comments << new_comment unless comments.include?(new_comment)
     end
 
-    def self.find(pattern)
+    def self.find_item(pattern)
       @@items.select { |item| item.active && (item.name.include?(pattern) || item.about.include?(pattern)) }
+    end
+
+    def self.find_offer(pattern)
+      @@offers.select { |offer| offer.name.include?(pattern) || offer.name.include?(pattern)}
     end
 
     def self.add_offer(offer)

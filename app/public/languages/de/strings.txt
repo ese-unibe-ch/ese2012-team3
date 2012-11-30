@@ -86,6 +86,10 @@ SELLERS
 Verkäufer
 SEARCH_RESULT
 Suchergebnis
+FOUND_ITEMS
+Gegenstände
+FOUND_OFFERS
+Angebote
 ACCOUNT_SETTINGS
 Einstellungen
 CHANGE_PASSWORD
