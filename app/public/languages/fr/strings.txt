@@ -274,3 +274,5 @@ OFFERS
 Offres
 SELL_ITEM
 Vendre article
+OFFER
+Offre

@@ -276,3 +276,5 @@ OFFERS
 Offers
 SELL_ITEM
 Sell item
+OFFER
+Offer

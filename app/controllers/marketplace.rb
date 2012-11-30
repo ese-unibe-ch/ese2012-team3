@@ -328,6 +328,14 @@
     erb :item
   end
 
+  get "/item/offer/:id" do
+    redirect '/login' unless session[:user_id]
+
+    @item = Item.offer_by_id(params[:id].to_i)
+
+    erb :item, :locals => { :offer => true }
+  end
+
   post "/item/:id/add_comment" do
     redirect '/login' unless session[:user_id]
 

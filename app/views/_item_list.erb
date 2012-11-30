@@ -97,7 +97,7 @@ page = params[identifier] ? params[identifier].to_i : 0
         <td><a class="toggler" href=""><i class="icon-zoom-in"></i></a></td>
         <td><%= erb :_image_rect, :locals => {:filename => offer.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td style="width: 25%">
-            <%= erb :_item_link, :locals => {:item => offer, :highlight_active => defined? highlight_active} %>
+            <%= erb :_item_link, :locals => {:item => offer, :highlight_active => defined? highlight_active, :offer => true} %>
             <div class="item-about"><%= mdown_to_html(xss offer.about) %></div>
         </td>
 

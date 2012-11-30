@@ -5,9 +5,18 @@
     <%= erb :_sidebar %>
 
     <div class="span10">
-      <h1><%=@LANG["ITEM"]%>: <%= xss @item.name %></h1>
+      <h1>
+        <% if (defined? offer) %>
+          <%=@LANG["OFFER"]%>
+        <% else %>
+          <%=@LANG["ITEM"]%>
+        <% end %>
+        : <%= xss @item.name %>
+      </h1>
 
+      <% if !(defined? offer) %>
       <table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %><%= erb :_item_wishlist_button %></tr></table>
+      <% end %>
 
       <%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
 
