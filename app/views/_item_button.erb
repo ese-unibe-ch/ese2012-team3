@@ -1,6 +1,4 @@
-<% #Buy/activate/deactivate buttons
-
-   if item.active %>
+<%if item.active #Buy/activate/deactivate buttons %>
     <%if item.owner == @current_agent %>
         <td>
           <form action="/item/<%= item.id %>/status_change" method="post">
@@ -19,6 +17,12 @@
                 <button type="submit" class="btn btn-info small"><%=@LANG["BID_ON_AUCTION"]%></button>
               </form>
             </td>
+        <%else if !(defined? offer) %>
+            <td>
+                  <form action="/item/<%= item.id %>/sell" method="POST">
+                    <button type="submit" class="btn btn-info small" name="submit"><%=@LANG["SELL_ITEM"]%></button>
+                  </form>
+            </td>
         <%else%>
             <td>
               <form action="/item/<%= item.id %>/buy" method="post">
@@ -29,9 +33,9 @@
             </td>
         <%end%>
         <td></td>
-    <% end %>
+    <%end%>
+    <%end%>
 <% else %>
-    <% if !(defined? offer) %>
       <%if item.owner == @current_agent %>
           <td>
             <form action="/item/<%= item.id %>/status_change" method="post">
@@ -44,15 +48,6 @@
       <% else %>
           <td style="color:#FF0000;">Inactive</td>
       <% end %>
-    <% else %>
-        <td>
-          <% if item.owner != @current_agent %>
-          <form action="/item/<%= item.id %>/sell" method="POST">
-            <button type="submit" class="btn btn-info small" name="submit"><%=@LANG["SELL_ITEM"]%></button>
-          </form>
-          <% end %>
-        </td>
-    <% end %>
 <% end %>
 
 <%  #params: item - the item to show the buttons for (output in two <td> s)

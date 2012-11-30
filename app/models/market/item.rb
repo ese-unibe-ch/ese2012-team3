@@ -74,6 +74,7 @@ module Market
 
     def self.by_id id
       @@items.detect{ |item| item.id.to_i == id }
+      @@offers.detect{ |item| item.id.to_i == id }
     end
 
     def self.all
