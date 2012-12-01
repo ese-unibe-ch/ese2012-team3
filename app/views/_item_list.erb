@@ -79,6 +79,7 @@ page = params[identifier] ? params[identifier].to_i : 0
                                    :per_page => ITEMS_PER_PAGE,
                                    :identifier => identifier}
 %>
+
 <%if (defined? offers) && (offers.length > 0) %>
   <h3><%=@LANG["OFFERS"]%></h3>
   <table class="table">
@@ -106,7 +107,7 @@ page = params[identifier] ? params[identifier].to_i : 0
         <td><%= (defined? show_owner) ?
                 (erb :_user_link, :locals => {:user => offer.owner}) : "" %></td>
 
-        <%= erb :_item_button, :locals => {:item => offer, :current_user => @current_agent, :offer => true} %>
+        <%= erb :_item_button, :locals => {:item => offer, :current_user => @current_agent} %>
       </tr>
   <% end %>
   </tbody>

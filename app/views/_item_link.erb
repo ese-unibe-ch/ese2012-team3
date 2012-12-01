@@ -1,7 +1,7 @@
 <% #params item (required), highlight_active (required, true or false)%>
 <% if item %>
   <% prefix = "/item/" %>
-  <% if (defined? offer) && offer
+  <% if item.is_offer?
        prefix = "/item/offer/"
      end  %>
 <a href="<%= prefix %><%= item.id.to_s %>" <%= (highlight_active) ?
