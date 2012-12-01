@@ -1,3 +1,7 @@
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> の入札、 で <span class='past-winner-time'>%s</span> で <span class='past-winner-price'>%s</span> クレジット
+LANGUAGE_CODE
+jp
 LANGUAGE_NAME
 日本語
 INCREMENT_MUST_SET
@@ -20,6 +24,8 @@ MINPRICE_POSITIVE_INT
 最小価格は正の整数でなければなりませ
 TIME_MUST_FUTURE
 時間が未来になっている必要があり
+TIME_INVALID
+無効な時刻形式
 BID_GIVEN_CHOOSE_HIGHER
 この入札は、すでに与えられている。より高い入札を選択ください。
 BID_MUST_BE_AT_LEAST
@@ -102,6 +108,28 @@ LOGOUT
 ログアウト
 DONT_HAVE_ACCOUNT_QUESTION
 アカウントを持っていないのですか？
+REGISTERED_NOTIFICATION
+<strong>登録はできました!</strong><br />登録はできました,自動的にログインしました
+SWITCHED_USER_NOTIFICATION
+<strong>ユーザー切り替えた!</strong>
+NOT_REPRESENTING_ORG
+オーガニゼーションを代表されていません.
+NOW_REPRESENTING
+オーガニゼーションを代表している:
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>悪い!</strong><br /> オークションはすでに終了しました。
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>アイテムを買った!</strong><br />買った：
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+アイテムを見るにはここをクリックしてください。
+LOGGEDIN_NOTIFICATION
+<strong>ログインはできた</strong>
+PASSWORD_CHANGED_NOTIFICATION
+<strong>パスワードが変更された</strong>
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>オーガニゼーションは作成された</strong><br />
+NO_AUCTION_NOTIFICATION
+<strong>悪い!</strong><br />このアイテムのオークションはありません。
 REGISTER
 登録
 CLICK_HERE_TO_REGISTER

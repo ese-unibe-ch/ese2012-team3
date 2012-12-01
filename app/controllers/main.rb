@@ -31,11 +31,13 @@
     @users = Market::User.all + Market::Organization.all
     @errors = {}
 
+    # Language
     if session[:language].nil? or !LANGUAGES.has_key?(session[:language])
-      session[:language] = DEFAULT_LANGUAGE
+      session[:language] = DEFAULT_LANGUAGE # reset to default if invalid
     end
     @current_language = LANGUAGES[session[:language]]
     @LANG = @current_language # SHORTCUT
+    @LANGCODE = session[:language] # de, jp, en, fr, equivalent to @LANG["LANGUAGE_CODE"]
   end
 
   def set_error(at, text)

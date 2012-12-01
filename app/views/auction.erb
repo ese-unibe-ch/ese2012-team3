@@ -4,14 +4,14 @@
   <div class="row">
     <%= erb :_sidebar %>
     <div class="span10">
-      <h2><%=@LANG["AUCTION_FOR"]%> <%= xss item.name %></h2>
+      <h2><%=@LANG["AUCTION_FOR"]%> <%= xss item.name[@LANGCODE] %></h2>
       <%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LARGEIMAGESIZE} %>
       </br>
       <table class="table">
         <tbody>
           <tr>
             <td><%=@LANG["DESCRIPTION"]%></td>
-            <td><%= mdown_to_html(xss item.about) %></td>
+            <td><%= mdown_to_html(xss item.about[@LANGCODE]) %></td>
           </tr>
           <tr>
             <td><%=@LANG["START_PRICE"]%></td>
@@ -27,7 +27,7 @@
           </tr>
           <tr>
             <td><%=@LANG["CURRENT_WINNER"]%></td>
-            <td><%= (item.auction.winner.nil?) ? "-" : item.auction.winner %></td>
+            <td><%= (item.auction.winner.nil?) ? "-" : item.auction.winner.name %></td>
           </tr>
         </tbody>
       </table>
@@ -85,11 +85,11 @@
                   if(content.style.display != "block"){
                       content.style.display = "block";
                       icon.className = "symbol icon-chevron-up"
-                      text.textContent = "Past winners"
+                      text.textContent = "<%=@LANG["PAST_WINNERS"]%>"
                   }else{
                       content.style.display = "none";
                       icon.className = "symbol icon-chevron-down"
-                      text.textContent = "Past winners (click to expand)"
+                      text.textContent = "<%=@LANG["PAST_WINNERS"]%> (<%=@LANG["CLICK_TO_EXPAND"]%>)"
                   }
               }
           }
@@ -103,9 +103,7 @@
             <div id="past-winner-content">
               <% item.auction.past_winners.each do |past_winner| %>
                   <div class="past-winner">
-                    <span class='past-winner-name'><%= "#{past_winner.agent.name} made a bit on "  %></span>
-                    <span class='past-winner-time'><%= "#{past_winner.time} for" %> </span>
-                    <span class='past_winner-price'><%= "#{past_winner.price} credits" %> </span>
+                    <%=sprintf(@LANG["PLACED_BID_AT_FOR_CREDITS"], past_winner.agent.name.to_s, past_winner.time.to_s, past_winner.price.to_s)  %>
                   </div>
               <% end %>
             </div>

@@ -1,3 +1,7 @@
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> machte ein Gebot um <span class='past-winner-time'>%s</span> für <span class='past-winner-price'>%s</span> Credits
+LANGUAGE_CODE
+de
 LANGUAGE_NAME
 Deutsch
 INCREMENT_MUST_SET
@@ -13,11 +17,13 @@ Erhöhung muss grösser als 0 sein
 COMMENTED_ON
 kommentierte
 CREATED_ITEM
-erstellte item
+erstellte Gegenstand
 ACTIVATED_ITEM
-aktivierte item
+aktivierte Gegenstand
 MINPRICE_POSITIVE_INT
 minimaler Preis muss eine positive Ganzzahl sein
+TIME_INVALID
+Unzulässiges Zeitformat
 TIME_MUST_FUTURE
 Zeitpunkt muss in der Zukunft sein
 BID_GIVEN_CHOOSE_HIGHER

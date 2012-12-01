@@ -94,11 +94,36 @@ ese.follow(john)
 ese.follow(jimmy)
 ese.follow(uno)
 
-pizza_about =
-    "* mozarella
-* garlic
-* __bacon__"
-pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active => true, :owner => eseo)
+# Demonstrate multi language about and name
+pizza_about =  {
+  "en" =>
+  "Comes with
+
+  * mozzarella
+  * garlic
+  * __bacon__",
+  "de" =>
+  "Belegt mit
+
+  * Mozzarella
+  * Knoblauch
+  * __Speck__",
+  "fr" =>
+  "Avec:
+
+  * mozzarella
+  * ail
+  * __bacon__",
+  "jp" =>
+  "トッピング は
+
+  * モツァレラ
+  * ニンニク
+  * __ベーコン__"}
+
+pizza_name = {"de"=>"Leckere Pizza", "en"=>"Delicious Pizza", "fr" => "Pizza délicieuse", "jp" => "おいしいピザ"}
+
+pizza = Item.init(:name => pizza_name, :price => 18, :about => pizza_about, :active => true, :owner => eseo)
 
 #activities
 eseo.add_activity(new_comment_activity(eseo, pizza))

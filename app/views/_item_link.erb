@@ -5,5 +5,5 @@
        prefix = "/item/offer/"
      end  %>
 <a href="<%= prefix %><%= item.id.to_s %>" <%= (highlight_active) ?
-        (item.active ? "style='color:#00CC00;text-decoration:underline;'" : "style='color:#FF0000;text-decoration:underline;'") : "" %>><%= xss item.name %></a>
+        (item.active ? "style='color:#00CC00;text-decoration:underline;'" : "style='color:#FF0000;text-decoration:underline;'") : "" %>><%= xss item.name[@LANGCODE] %></a>
 <% end %>

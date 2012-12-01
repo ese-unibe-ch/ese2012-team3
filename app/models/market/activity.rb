@@ -36,7 +36,8 @@ module Market
                    :type => :activate,
                    :message => LocalizedMessage.new([
                                                         LocalizedMessage::LangKey.new("ACTIVATED_ITEM"),
-                                                        " #{item.name}"
+                                                        " ",
+                                                        item.name.clone # clone to ensure this history stays intact after the item is deleted
                                                     ])
         })
   end
@@ -46,7 +47,8 @@ module Market
                    :type => :buy,
                    :message => LocalizedMessage.new([
                                                         LocalizedMessage::LangKey.new("BOUGHT_ITEM"),
-                                                        " #{item.name}"
+                                                        " ",
+                                                        item.name.clone
                                                     ])
                   })
   end
@@ -56,7 +58,8 @@ module Market
                    :type => :createitem,
                    :message => LocalizedMessage.new([
                                                         LocalizedMessage::LangKey.new("CREATED_ITEM"),
-                                                        " #{item.name}"
+                                                        " ",
+                                                        item.name.clone
                                                     ])
                   })
   end
@@ -66,7 +69,8 @@ module Market
                    :type => :comment,
                    :message => LocalizedMessage.new([
                                                         LocalizedMessage::LangKey.new("COMMENTED_ON"),
-                                                        " #{item.name}"
+                                                        " ",
+                                                        item.name.clone
                                                     ])
                   })
   end

@@ -1,3 +1,7 @@
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> a fait un offre à <span class='past-winner-time'>%s</span> de <span class='past-winner-price'>%s</span> crédits
+LANGUAGE_CODE
+fr
 LANGUAGE_NAME
 Français
 INCREMENT_MUST_SET
@@ -11,7 +15,7 @@ incrément doit être un entier positif
 INCREMENT_GT_0
 incrément doit être supérieur à zéro
 COMMENTED_ON
-à commenté à
+à commenté sur
 CREATED_ITEM
 a crée l'article
 ACTIVATED_ITEM
@@ -20,6 +24,8 @@ MINPRICE_POSITIVE_INT
 prix minimal doit être un entier positif
 TIME_MUST_FUTURE
 temps doit être dans le futur
+TIME_INVALID
+format de temps invalid
 BID_GIVEN_CHOOSE_HIGHER
 ce offre a déjà été fait, offrez plus
 BID_MUST_BE_AT_LEAST

@@ -7,13 +7,13 @@ class ItemTest < Test::Unit::TestCase
   end
 
   def test_has_name_about_and_comments
-    item = Item.init(:name => "testItem", :about => "About item",:owner => @user)
-    assert(item.name.to_s.include?("testItem"), "item has a wrong name!")
-    assert(item.about.include?("About item"), "item has no about!")
+    item = Item.init(:name => {"en" =>"testItem"}, :about => {"en" => "About item"},:owner => @user)
+    assert(item.name["en"].to_s.include?("testItem"), "item has a wrong name!")
+    assert(item.about["en"].include?("About item"), "item has no about!")
     assert(item.comments.length == 0, "item has no place to store comments!")
 
     assert_raise RuntimeError do
-      item.name = nil
+      item.owner = nil
     end
   end
 

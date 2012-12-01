@@ -124,8 +124,8 @@ module Market
         fail "Offer must be equal or bigger than the current price" if price.to_i < self.current_price.to_i
       end
 
-      round = (price.to_i - minimal_price.to_i) % increment.to_i
-      price = price.to_i - round.to_i
+      #round = (price.to_i - minimal_price.to_i) % increment.to_i
+      price = price.to_i #- round.to_i     # What about this rounding? you never mention this - removed MX  (caused bug "This offer already exists"" with 234 min price, 1 bid at 238, increment 4 -> new bid 239...)
 
       fail "This offer already exists" if bids.key?(price)
 

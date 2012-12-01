@@ -10,8 +10,6 @@ module Market
     # An item has an owner.
 
     attr_accessor_typesafe_not_nil Agent,   :owner
-    attr_accessor_typesafe_not_nil String,  :name
-    attr_accessor_typesafe_not_nil String,  :about # TODO share common functionality with agent?
 
     attr_accessor_typesafe         Auction, :auction # nil signifies no auction
     attr_accessor_typesafe         String,  :image_file_name # nil signifies no image
@@ -20,6 +18,8 @@ module Market
                   :active, # true or false
                   :price, # positive number
                   :comments, # List of Comment objects
+                  :name, # Hash of Language prefix @LANGCODE (de, en, fr, jp) => String (internally converted to LocalizedLiteral)
+                  :about, # Hash of Language prefix @LANGCODE (de, en, fr, jp) => String
                   :safe
 
     @@item_id_counter = 0
@@ -30,15 +30,19 @@ module Market
     # @param [Object] params - dictionary of symbols.
     # Recognized: :name, :price, :active, :owner, :about, :auction
     # Required: owner must be an Agent
+    # if :name and :about are not hashes, we create them as "en" => string
     def self.init(params={})
+      params[:name]  = {"en"=>params[:name]} if params[:name].kind_of? String
+      params[:about] = {"en"=>params[:about]} if params[:about].kind_of? String
+
       item = self.new
       item.id = @@item_id_counter
-      item.name = params[:name] || "default item"
+      item.name = LocalizedLiteral.new(params[:name] || {"en" => "default item"})
       item.price = params[:price] || 0
       item.active = params[:active] || false
       item.auction = params[:auction] || nil
       item.owner = params[:owner]
-      item.about = params[:about] || ""
+      item.about = LocalizedLiteral.new(params[:about] || {"en" => ""})
       item.image_file_name = nil
       item.comments = []
       item.safe = params[:safe] || nil

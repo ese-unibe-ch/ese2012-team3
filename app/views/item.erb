@@ -1,4 +1,4 @@
-<% @title = "#{@LANG["ITEM"]}: #{@item.name}" %>
+<% @title = "#{@LANG["ITEM"]}: #{@item.name[@LANGCODE]}" %>
 
 <section id="content" xmlns="http://www.w3.org/1999/html">
   <div class="row">
@@ -11,7 +11,7 @@
         <% else %>
           <%=@LANG["ITEM"]%>
         <% end %>
-        : <%= xss @item.name %>
+        : <%= xss @item.name[@LANGCODE] %>
       </h1>
 
       <% if !@item.is_offer? %>
@@ -31,7 +31,7 @@
         </tr>
         <tr>
           <td><%=@LANG["DESCRIPTION"]%></td>
-          <td><%= mdown_to_html(xss @item.about) %></td>
+          <td><%= mdown_to_html(xss @item.about[@LANGCODE]) %></td>
         </tr>
       </table>
 
@@ -87,7 +87,7 @@
         <input type="hidden" name="commenter" value="<%= @current_agent %>" />
         <div class="control-group <%= "error" if !@errors.empty? %>">
             <textarea id="newCommentArea" class="field span7" name="comment"
-                placeholder="Add some comment, maybe?" rows="7"></textarea>
+                rows="7"></textarea>
             <br />
             <% if @errors[:comment] %>
                 <span class="help-inline"><%= xss @errors[:comment].to_string(@LANG) %></span>

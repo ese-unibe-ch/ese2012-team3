@@ -42,14 +42,16 @@
     Time.local(date.year, date.month, date.day, date.hour, date.min, date.sec)
   end
 
-  def check_auction_errors
+  def check_auction_errors(end_time)
     @errors[:increment] =     LocalizedMessage.new([LocalizedMessage::LangKey.new("INCREMENT_MUST_SET")]) if params[:increment].empty?
     @errors[:end_time] =      LocalizedMessage.new([LocalizedMessage::LangKey.new("END_TIME_MUST_SET")]) if params[:end_time].empty?
     @errors[:minimal_price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("MINPRICE_MUST_SET")]) if params[:minimal_price].empty?
     @errors[:increment] = LocalizedMessage.new([LocalizedMessage::LangKey.new("INCREMENT_POSITIVE_INT")]) unless params[:increment] =~ /^[0-9]+$/
     @errors[:increment] = LocalizedMessage.new([LocalizedMessage::LangKey.new("INCREMENT_GT_0")]) if params[:increment] <= "0"
     @errors[:minimal_price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("MINPRICE_POSITIVE_INT")]) unless params[:minimal_price] =~ /^[0-9]+$/
-    @errors[:end_time] = LocalizedMessage.new([LocalizedMessage::LangKey.new("TIME_MUST_FUTURE")]) unless end_time > Time.now
+    if end_time then
+      @errors[:end_time] = LocalizedMessage.new([LocalizedMessage::LangKey.new("TIME_MUST_FUTURE")]) unless end_time > Time.now
+    end
 
 
 
@@ -65,10 +67,15 @@
   #
   post "/item/:id/auction/create" do
     @item = checkAndGetItem(params[:id].to_i)
-    end_time = paramToTime(params[:end_time])
+    begin
+      end_time = paramToTime(params[:end_time])
+    rescue
+      @errors[:end_time] = LocalizedMessage.new([LocalizedMessage::LangKey.new("TIME_INVALID")])
+    end
+
 
     #Input validation
-    check_auction_errors
+    check_auction_errors(end_time)
 
     if (@errors.empty?)
       @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, end_time)
@@ -150,10 +157,14 @@
   #
   post "/item/:id/auction/edit" do
     @item = checkAndGetItem(params[:id].to_i)
-    end_time = paramToTime(params[:end_time])
+    begin
+      end_time = paramToTime(params[:end_time])
+    rescue
+      @errors[:end_time] = LocalizedMessage.new([LocalizedMessage::LangKey.new("TIME_INVALID")])
+    end
 
     #Input validation  (same as in create)
-    check_auction_errors
+    check_auction_errors(end_time)
 
 
     if (@errors.empty?)
@@ -245,6 +256,7 @@
     erb :create_item
   end
 
+  # TODO share commom code with edit
   post "/item/create" do
 
     redirect '/login' unless session[:user_id]
@@ -256,13 +268,15 @@
 
     #create item
     if @errors.empty?
-      item_name = params[:name]
+      item_name = {"en"=>params[:name]}   # TODO create hash {"LANGCODE" => name} with all langs specified
+      item_about = {"en"=>params[:about]} # TODO create hash {"LANGCODE" => name} with all langs specified
       item_price = params[:price].to_i
-      item = Market::Item.init(:name   => item_name,
+      item = Market::Item.init(
+                        :name   => item_name,
                         :price  => item_price,
                         :active => false,
                         :owner  => @current_agent,
-                        :about => params[:about]
+                        :about => item_about
       )
       item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
       # If the user creates an item in the name of an organization, an organization activity is created.
@@ -287,9 +301,9 @@
 
     # Change attributes of the item.
     if @errors.empty?
-      @item.name = params[:name]
+      @item.name = {"en"=>params[:name]}   # TODO create hash {"LANGCODE" => name} with all langs specified
       @item.price = params[:price].to_i
-      @item.about = params[:about]
+      @item.about = {"en"=>params[:about]}   # TODO create hash {"LANGCODE" => name} with all langs specified
       if params[:image_file]
         @item.delete_image_file
         @item.image_file_name = add_image(ITEMIMAGESROOT, @item.id)

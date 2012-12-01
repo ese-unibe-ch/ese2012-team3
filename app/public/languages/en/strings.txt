@@ -1,3 +1,7 @@
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> placed a bid at <span class='past-winner-time'>%s</span> for <span class='past-winner-price'>%s</span> credits
+LANGUAGE_CODE
+en
 LANGUAGE_NAME
 English
 INCREMENT_MUST_SET
@@ -20,6 +24,8 @@ MINPRICE_POSITIVE_INT
 minimal price must be positive integer
 TIME_MUST_FUTURE
 time must be in future
+TIME_INVALID
+Invalid time format
 BID_GIVEN_CHOOSE_HIGHER
 This bid has been already given, choose an higher one
 BID_MUST_BE_AT_LEAST
@@ -277,7 +283,7 @@ Users
 ABOUT
 About
 USERNAME
-Nom d'utilisateur
+Username
 PASSWORD
 Password
 MUST_BE_STRONG

@@ -5,6 +5,29 @@ String.class_eval do
   end
 end
 
+LOCALIZED_FALLBACKLANGCODE = "en"
+# Returns a localized version of the string this represents.
+# Falls back to LOCALIZED_FALLBACKLANGCODE if not present for requested key - if not even that is available, returns first available
+class LocalizedLiteral
+  attr_reader :s
+
+  # @LANGCODE => string
+  def [](langcode)
+    return @s[langcode] if @s.has_key?(langcode)
+    return @s[LOCALIZED_FALLBACKLANGCODE] if @s.has_key?(LOCALIZED_FALLBACKLANGCODE)
+    return @s.first_value
+  end
+
+  def initialize(hash_langcode_to_string)
+    @s = hash_langcode_to_string
+  end
+
+  def to_string(lang)
+    return self[lang["LANGUAGE_CODE"]]
+  end
+end
+
+
 class LocalizedMessage < RuntimeError # allows throwing localised errors
 
   class LangKey
@@ -32,7 +55,7 @@ class LocalizedMessage < RuntimeError # allows throwing localised errors
   #end
 
 
-  attr_reader :message_ary # an array of LangIdentifiers and literalstrings
+  attr_reader :message_ary # an array of LangIdentifiers, Strings and LocalizedLiterals
 
   def initialize(message_ary)
     @message_ary = message_ary
