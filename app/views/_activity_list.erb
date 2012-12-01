@@ -30,18 +30,17 @@
 %>
 
 
-<form action="/set_activity_filter" method="POST">
+<form action="/set_activity_filter" method="POST" name="activity_filters">
   <%=@LANG["FILTER_LIST"]%>
-  <input type="checkbox" name="comment"    <%=checked_if_activity_filter_enabled("comment")%>><%=@LANG["COMMENTING"]%>
+  <input type="checkbox" name="comment" onclick="this.form.submit();"    <%=checked_if_activity_filter_enabled("comment")%>> <%=@LANG["COMMENTING"]%>
   <span style="display:<%=(defined? orgactivities) ? "none" : ""%>">
-  <input type="checkbox" name="follow"     <%=checked_if_activity_filter_enabled("follow")%>><%=@LANG["FOLLOWING"]%>
+  <input type="checkbox" name="follow" onclick="this.form.submit();"     <%=checked_if_activity_filter_enabled("follow")%>> <%=@LANG["FOLLOWING"]%>
   </span>
-  <input type="checkbox" name="activate"   <%=checked_if_activity_filter_enabled("activate")%>><%=@LANG["ACTIVATING"]%>
+  <input type="checkbox" name="activate" onclick="this.form.submit();"   <%=checked_if_activity_filter_enabled("activate")%>> <%=@LANG["ACTIVATING"]%>
   <span style="display:<%=(defined? orgactivities) ? "" : "none"%>">
-  <input type="checkbox" name="buy"        <%=checked_if_activity_filter_enabled("buy")%>><%=@LANG["BUYING"]%>
-  <input type="checkbox" name="createitem" <%=checked_if_activity_filter_enabled("createitem")%>><%=@LANG["ITEM_CREATION"]%>
+  <input type="checkbox" name="buy" onclick="this.form.submit();"        <%=checked_if_activity_filter_enabled("buy")%>> <%=@LANG["BUYING"]%>
+  <input type="checkbox" name="createitem" onclick="this.form.submit();" <%=checked_if_activity_filter_enabled("createitem")%>> <%=@LANG["ITEM_CREATION"]%>
   </span>
-  <button type="submit" class="btn btn-info small"><%=@LANG["APPLY_ACTIVITY_FILTER"]%></button>
 </form>
 
 <table class="table table-striped">
