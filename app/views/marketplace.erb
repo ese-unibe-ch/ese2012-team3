@@ -8,14 +8,6 @@
   <div class="span10">
     <h2><%=@LANG["MARKETPLACE"]%></h2>
 
-    <h3><%=@LANG["SEARCH"]%></h3>
-    <form action="/item/search" method="POST">
-        <fieldset>
-            <input class="input xlarge" type="text" name="search" />
-            <button class="btn btn-info" type="submit"><%=@LANG["SEARCH"]%></button>
-        </fieldset>
-    </form>
-
     <%if !activity_list.empty? && @current_user == @current_agent%>
         <h3><%=@LANG["FOLLOWEES_ACTIVITIES"]%></h3>
         <%=erb :_activity_list, :locals=>{:activities => activity_list}%>

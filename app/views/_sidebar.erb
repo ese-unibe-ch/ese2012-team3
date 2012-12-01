@@ -110,7 +110,7 @@
   <p><%=@LANG["LANGUAGE"]%>:<%
    LANGUAGES.each{| key, value |
 %>
-        <a href='/set_language/<%= key %>' title='<%= value["LANGUAGE_NAME"] %>'><img src="<%= value.icon%>"/></a>
+        <a href='/set_language/<%= key %>' title='<%= key %>'><img src="<%= value.icon%>"/></a>
     <%
    }
 %></p>
