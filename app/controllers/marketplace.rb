@@ -11,9 +11,7 @@
     end
     # If the user buys an item in the name of an organization, an organization activity is created.
     if @current_user != @current_agent
-      @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
-                                                    :type => :buy,
-                                                    :message => "bought item #{@item.name}"}))
+      @current_agent.add_orgactivity(new_buy_activity(@current_user, @item))
     end
 
     session[:last_bought_item_id] = @item.id
@@ -44,6 +42,19 @@
     Time.local(date.year, date.month, date.day, date.hour, date.min, date.sec)
   end
 
+  def check_auction_errors
+    @errors[:increment] =     LocalizedMessage.new([LocalizedMessage::LangKey.new("INCREMENT_MUST_SET")]) if params[:increment].empty?
+    @errors[:end_time] =      LocalizedMessage.new([LocalizedMessage::LangKey.new("END_TIME_MUST_SET")]) if params[:end_time].empty?
+    @errors[:minimal_price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("MINPRICE_MUST_SET")]) if params[:minimal_price].empty?
+    @errors[:increment] = LocalizedMessage.new([LocalizedMessage::LangKey.new("INCREMENT_POSITIVE_INT")]) unless params[:increment] =~ /^[0-9]+$/
+    @errors[:increment] = LocalizedMessage.new([LocalizedMessage::LangKey.new("INCREMENT_GT_0")]) if params[:increment] <= "0"
+    @errors[:minimal_price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("MINPRICE_POSITIVE_INT")]) unless params[:minimal_price] =~ /^[0-9]+$/
+    @errors[:end_time] = LocalizedMessage.new([LocalizedMessage::LangKey.new("TIME_MUST_FUTURE")]) unless end_time > Time.now
+
+
+
+  end
+
   #
   # Called from create_auction view
   #
@@ -52,19 +63,12 @@
   # params[:increment]: Increment for auction as a positive integer
   # params[:end_time]: Time (at the moment in seconds from now)
   #
-
   post "/item/:id/auction/create" do
     @item = checkAndGetItem(params[:id].to_i)
     end_time = paramToTime(params[:end_time])
 
     #Input validation
-    @errors[:increment] = "increment must be set" if params[:increment].empty?
-    @errors[:end_time] = "end time must be set" if params[:end_time].empty?
-    @errors[:minimal_price] = "minimal price must be set" if params[:minimal_price].empty?
-    @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
-    @errors[:increment] = "increment must be more than zero" if params[:increment] == "0"
-    @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
-    @errors[:end_time] = "time must be in future" unless end_time > Time.now
+    check_auction_errors
 
     if (@errors.empty?)
       @item.auction = Auction.create(@item, params[:minimal_price].to_i, params[:increment].to_i, end_time)
@@ -98,9 +102,9 @@
       redirect back
     end
 
-    @errors[:bid] = "This bid has been already given, choose an higher one" if item.auction.already_bid?(price.to_i)
-    @errors[:bid] = "The bid must be at least the current price + increment" if !item.auction.valid_bid?(price.to_i)
-    @errors[:bid] = "You don't have enough money!" if price > agent.credit
+    @errors[:bid] = LocalizedMessage.new([LocalizedMessage::LangKey.new("BID_GIVEN_CHOOSE_HIGHER")]) if item.auction.already_bid?(price.to_i)
+    @errors[:bid] = LocalizedMessage.new([LocalizedMessage::LangKey.new("BID_MUST_BE_AT_LEAST")]) if !item.auction.valid_bid?(price.to_i)
+    @errors[:bid] = LocalizedMessage.new([LocalizedMessage::LangKey.new("NOT_ENOUGH_MONEY")]) if price > agent.credit
 
     if (@errors.empty?)
       item.auction.bid(agent, price) unless (@current_agent == item.owner)
@@ -149,13 +153,8 @@
     end_time = paramToTime(params[:end_time])
 
     #Input validation  (same as in create)
-    @errors[:increment] = "increment must be set" if params[:increment].empty?
-    @errors[:end_time] = "end time must be set" if params[:end_time].empty?
-    @errors[:minimal_price] = "minimal price must be set" if params[:minimal_price].empty?
-    @errors[:increment] = "increment must be positive integer" unless params[:increment] =~ /^[0-9]+$/
-    @errors[:increment] = "increment must be more than zero" if params[:increment] == "0"
-    @errors[:minimal_price] = "minimal price must be positive integer" unless params[:minimal_price] =~ /^[0-9]+$/
-    @errors[:end_time] = "time must be in future" unless end_time > Time.now
+    check_auction_errors
+
 
     if (@errors.empty?)
       @item.auction.minimal_price = params[:minimal_price].to_i
@@ -180,14 +179,10 @@
         @item.activate
 
         #add to activity list of the agent
-        @current_agent.add_activity(Activity.init({:creator => @current_agent,
-                                                   :type => :activate,
-                                                   :message => "activated #{@item.name}"}))
+        @current_agent.add_activity(new_activate_activity(@current_agent, @item))
         # If the user activates an item in the name of an organization, an organization activity is created.
         if @current_user != @current_agent
-          @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
-                                                        :type => :activate,
-                                                        :message => "activated item #{@item.name}"}))
+          @current_agent.add_orgactivity(new_activate_activity(@current_user, @item))
         end
 
       end
@@ -201,14 +196,20 @@
     erb :create_offer
   end
 
+
+  def check_item_params
+    @errors[:name] = LocalizedMessage.new([LocalizedMessage::LangKey.new("ITEM_MUST_HAVE_NAME")]) if params[:name].empty?
+    @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("ITEM_MUST_HAVE_PRICE")]) if params[:price].empty?
+    @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("PRICE_MUST_BE_POSITIVE")]) unless params[:price].to_i > 0
+    @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("PRICE_MUST_BE_INTEGER")]) unless params[:price].match /^[0-9]*$/
+  end
+
   post "/item/offer" do
     redirect '/login' unless session[:user_id]
 
     #input validation
-    @errors[:name] = "item must have a name!" if params[:name].empty?
-    @errors[:price] = "item must have a price!" if params[:price].empty?
-    @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
-    @errors[:price] = "item must have a price!" if params[:price].empty?
+    check_item_params
+
     image_file_check()
 
     if @errors.empty?
@@ -249,10 +250,8 @@
     redirect '/login' unless session[:user_id]
 
     #input validation
-    @errors[:name] = "item must have a name!" if params[:name].empty?
-    @errors[:price] = "item must have a price!" if params[:price].empty?
-    @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
-    @errors[:price] = "price has to be a number!" unless params[:price].match /^[0-9]*$/
+    check_item_params
+
     image_file_check()
 
     #create item
@@ -268,9 +267,7 @@
       item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
       # If the user creates an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
-        @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
-                                                      :type => :createitem,
-                                                      :message => "created item #{item.name}"}))
+        @current_agent.add_orgactivity(new_createitem_activity(@current_user, item))
       end
     else
       #display form with errors
@@ -285,10 +282,9 @@
     redirect '/login' unless session[:user_id] and @current_agent == @item.owner
 
     #input validation
-    @errors[:name] = "item must have a name!" if params[:name].empty?
-    @errors[:price] = "item must have a price!" if params[:price].empty?
-    @errors[:price] = "price must be a positive integer!" unless params[:price].to_i > 0
+    check_item_params
     image_file_check()
+
     # Change attributes of the item.
     if @errors.empty?
       @item.name = params[:name]
@@ -340,7 +336,7 @@
     redirect '/login' unless session[:user_id]
 
     #input validation
-    @errors[:comment] = "comment must not be empty" if params[:comment].empty?
+    @errors[:comment] = LocalizedMessage.new([LocalizedMessage::LangKey.new("COMMENT_MAY_NOT_BE_EMPTY")]) if params[:comment].empty?
 
     @item = Item.by_id(params[:id].to_i)
 
@@ -348,14 +344,10 @@
       @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
 
       # Add to activity list of the current agent
-      @current_agent.add_activity(Activity.init({:creator => @current_agent,
-                                                 :type => :comment,
-                                                 :message => "commented on #{@item.name}"}))
+      @current_agent.add_activity(new_comment_activity(@current_agent, @item))
       # If the user comments an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
-        @current_agent.add_orgactivity(Activity.init({:creator => @current_user,
-                                                    :type => :comment,
-                                                    :message => "commented on #{@item.name}"}))
+        @current_agent.add_orgactivity(new_comment_activity(@current_user, @item))
       end
 
       redirect "/item/#{params[:id]}"
@@ -383,7 +375,7 @@
     redirect '/login' unless session[:user_id]
 
     # input validation
-    halt erb :error, :locals => { :message => "search must not be empty" } if params[:search].empty?
+    halt erb :error, :locals => { :message => LocalizedMessage.new([LocalizedMessage::LangKey.new("SEARCH_MAY_NOT_BE_EMPTY")]) } if params[:search].empty?
 
     @found_items = Item.find_item(params[:search])
     @found_offers = Item.find_offer(params[:search])

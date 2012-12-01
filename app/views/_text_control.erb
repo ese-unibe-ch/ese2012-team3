@@ -12,7 +12,7 @@
            value="<%= xss params[name] %>" />
 
     <% if @errors[name] %>
-        <span class="help-inline"><%= xss @errors[name] %></span>
+        <span class="help-inline"><%= xss @errors[name].to_string(@LANG) %></span>
     <% end %>
   </div>
 </div>

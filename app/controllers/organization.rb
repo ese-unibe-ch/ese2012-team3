@@ -10,7 +10,7 @@ post "/organization/create" do
   name = params[:name]
   about = params[:about]
   # Input validation
-  @errors[:name] = "organization must have a name!" if name.empty?
+  @errors[:name] = LocalizedMessage.new([LocalizedMessage::LangKey.new("ORG_MUST_HAVE_NAME")]) if name.empty?
   image_file_check()
 
   if !@errors.empty?
@@ -28,7 +28,7 @@ get "/organization/:id" do
   redirect '/login' unless session[:user_id]
 
   @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => "no organization found to id #{params[:id]}"} unless @org
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
   # Provide item list of the organization
   @items = Item.items_by_agent(@org)
 
@@ -39,10 +39,10 @@ post "/organization/:id/add_member" do
   redirect '/login' unless session[:user_id]
   # Check for valid IDs
   @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => "no organization found"} unless @org
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
 
   user_to_add = User.user_by_id(params[:user_to_add])
-  halt erb :error, :locals => {:message => "no user found to add"} unless user_to_add
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USER_TO_ADD_FOUND")])} unless user_to_add
   # Add user to org
   begin
     @org.add_member(user_to_add)
@@ -57,12 +57,12 @@ post "/organization/:id/toggle_admin_member" do
   redirect '/login' unless session[:user_id]
   # Check for valid IDs
   @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => "no organization found"} unless @org
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
 
   user_to_change = User.user_by_id(params[:user_to_change])
-  halt erb :error, :locals => {:message => "no user found to promote"} unless user_to_change
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USER_TO_PROMOTE_FOUND")])} unless user_to_change
   
-  halt erb :error, :locals => {:message => "you don't have admin priviledges"} unless @org.admins.include?(@current_user)
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ADMIN_RIGHTS")])} unless @org.admins.include?(@current_user)
 
   # promote user
   begin
@@ -78,7 +78,7 @@ post "/organization/:id/remove_member" do
   redirect '/login' unless session[:user_id]
   # Check for valid ID
   @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => "no organization found"} unless @org
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
   #Remove user
   user_to_remove = User.user_by_id(params[:user_to_remove])
   @org.remove_member(user_to_remove)
@@ -99,7 +99,7 @@ get "/organization/:id/settings" do
   redirect '/login' unless session[:user_id]
 
   @org = Organization.organization_by_id(params[:id].to_i) 
-  halt erb :error, :locals => {:message => "no organization found to id #{params[:id]}"} unless @org
+  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
   # Obviously, any user that is not already in the organization is eligible for membership.
   addable_users = User.all.select {|u| !u.is_member_of?(@org)}
 
@@ -107,7 +107,7 @@ get "/organization/:id/settings" do
 end
 
 post "/change_profile_picture_organization" do
-  set_error :image_file, "You didn't choose a file" unless  params[:image_file]
+  set_error :image_file, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_FILE_CHOSEN")]) unless  params[:image_file]
 
   image_file_check()
 
@@ -128,7 +128,7 @@ delete "/delete_profile_picture_organization" do
   org = @current_agent
 
   halt erb :error, :locals =>
-      {:message => "You don't have a profile picture"} unless org.image_file_name
+      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless org.image_file_name
 
   org.delete_image_file
 

@@ -1,3 +1,101 @@
+LANGUAGE_NAME
+Français
+INCREMENT_MUST_SET
+incrément doit être réglé
+END_TIME_MUST_SET
+temps de fin doit être réglé
+MINPRICE_MUST_SET
+prix minimal doit être réglé
+INCREMENT_POSITIVE_INT
+incrément doit être un entier positif
+INCREMENT_GT_0
+incrément doit être supérieur à zéro
+COMMENTED_ON
+à commenté à
+CREATED_ITEM
+a crée l'article
+ACTIVATED_ITEM
+a activé l'article
+MINPRICE_POSITIVE_INT
+prix minimal doit être un entier positif
+TIME_MUST_FUTURE
+temps doit être dans le futur
+BID_GIVEN_CHOOSE_HIGHER
+ce offre a déjà été fait, offrez plus
+BID_MUST_BE_AT_LEAST
+L'offre dois être prix actual + incrément au moins
+BOUGHT_ITEM
+a acheté
+NOT_ENOUGH_MONEY
+Vous n'avez pas assez d'argent!
+ITEM_MUST_HAVE_NAME
+article doit avoir un nom!
+ITEM_MUST_HAVE_PRICE
+article doit avoir un prix!
+PRICE_MUST_BE_POSITIVE
+prix doit être un entier positif
+PRICE_MUST_BE_INTEGER
+prix doit être un quantité
+ORG_MUST_HAVE_NAME
+organisation doit avoir un nom!
+COMMENT_MAY_NOT_BE_EMPTY
+comment ne doit pas être vide
+SEARCH_MAY_NOT_BE_EMPTY
+recherche ne doit pas être vide
+NO_PASSWORD_CONFIRM_GIVEN
+Pas de confirmation du mot de passe donné
+USERNAME_EXISTS
+Il y a déjà un utilisateur du nom d'utilisateur donné
+NO_ORG_FOUND
+pas d'organisation trouvé
+PASS_AND_RETYPED_PASS_DONT_MATCH
+le mots de passe et la répetition ne sont pas la même
+NO_PROFILE_PICTURE
+Vous n'avez pas de photo de profil
+NO_USER_TO_PROMOTE_FOUND
+pas d'utilisateur trouvé pour promouvoir
+NO_FILE_CHOSEN
+Vous n'avez pas choisi un image
+NO_USER_TO_ADD_FOUND
+pas d'utilisateur trouvé pour en ajouter
+NO_ADMIN_RIGHTS
+vous n'avez pas de privileges administrateur 
+CURRENT_PASS_WRONG
+mots de passe actuel est faux
+NO_LONGER_FOLLOWS
+ne suit plus
+FOLLOWS
+suit
+USER
+Utilisateur
+DOES_NOT_EXIST
+n'existe pas
+NO_USERNAME_GIVEN
+Pas de nom d'utilisateur donné
+NO_PASS_AND_USER
+Pas de mot de passe et  nom d'utilisateur donné
+PNS_NOT_8
+Mot de passe non solide: N'a pas 8 caractères au moins.
+PNS_USERNAME
+Mot de passe non solide: Contient vôtre nom d'utilisateur.
+PNS_CONTAINS_WORD
+Mot de passe non solide: Contient un mot connu
+PNS_NOT_DIFF
+Mot de passe non solide: N'est pas significativement différent du mot de passe précédent.
+PNS_NOT_UPPER
+Mot de passe non solide: Ne contient pas de lettres majuscules A-Z.
+PNS_NOT_LOWER
+Mot de passe non solide: Ne contient pas de lettres minuscules a-z.
+PNS_NOT_NUMBER
+Mot de passe non solide: Ne contient pas de chiffres 0-9.
+PNS_NOT_SPECIAL
+Mot de passe non solide: Ne contient pas de caractères spéciaux ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
+NO_PASSWORD_GIVEN
+Pas de mot de passe doné
+WRONG_PASSWORD
+mot de passe est faux
+IMAGE_TOO_LARGE
+Fichier image trop grande, doit être
 LOGIN
 Connexion
 LOGOUT

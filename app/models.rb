@@ -2,6 +2,7 @@
 require_relative 'models/passwordcheck'
 require_relative 'models/simple_email_client'
 require_relative 'models/helpers'
+require_relative 'models/localized_message'
 
 require_relative 'models/market/agent'
 require_relative 'models/market/item'

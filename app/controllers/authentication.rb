@@ -5,14 +5,18 @@
     password = params[:password]
 
     # error handling...
-    @errors[:name] = "User '#{username}' does not exist"  unless Market::User.all_names.include?(username)
-    @errors[:name] = "No username given"  unless username && username.length > 0
+    @errors[:name] = LocalizedMessage.new([
+                                              LocalizedMessage::LangKey.new("USER"),
+                                              " '#{username}' ",
+                                              LocalizedMessage::LangKey.new("DOES_NOT_EXIST")])   unless Market::User.all_names.include?(username)
+    #"User '#{username}' does not exist"
+    @errors[:name] = LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USERNAME_GIVEN")]) unless username && username.length > 0
     @username = username unless @errors[:name] # restore
-    @errors[:password] = "No password given"  unless password && password.length > 0
+    @errors[:password] = LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_GIVEN")])  unless password && password.length > 0
 
     user = Market::User.user_by_name(username)
     if @errors.empty?
-      @errors[:password] = "Wrong password"  unless user.password == password
+      @errors[:password] = LocalizedMessage.new([LocalizedMessage::LangKey.new("WRONG_PASSWORD")])  unless user.password == password
     end
 
     halt erb :login, :locals => {:username => params[:username] || ''}  unless @errors.empty?

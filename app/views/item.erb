@@ -90,7 +90,7 @@
                 placeholder="Add some comment, maybe?" rows="7"></textarea>
             <br />
             <% if @errors[:comment] %>
-                <span class="help-inline"><%= xss @errors[:comment] %></span>
+                <span class="help-inline"><%= xss @errors[:comment].to_string(@LANG) %></span>
             <% end %>
         </div>
         <input type="submit" class="btn btn-info" name="submit" value="<%=@LANG["ADD_COMMENT"]%>" />

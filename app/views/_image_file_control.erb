@@ -7,7 +7,7 @@
         # so we cannot restore this
     %>"/>
     <% if @errors[:image_file] %>
-        <span class="help-inline"><%= xss @errors[:image_file] %></span>
+        <span class="help-inline"><%= xss @errors[:image_file].to_string(@LANG) %></span>
     <%end%>
   </div>
 </div>

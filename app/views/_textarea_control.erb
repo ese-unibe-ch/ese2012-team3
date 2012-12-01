@@ -9,7 +9,7 @@
     <textarea class="input-xlarge span5" name="<%=name.to_s%>" rows="7"><%= xss params[name] %></textarea>
 
     <% if @errors[name] %>
-        <span class="help-inline"><%= xss @errors[name] %></span>
+        <span class="help-inline"><%= xss @errors[name].to_string(@LANG) %></span>
     <% end %>
   </div>
 </div>

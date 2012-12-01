@@ -1,3 +1,101 @@
+LANGUAGE_NAME
+Deutsch
+INCREMENT_MUST_SET
+Erhöhung muss festgelegt sein
+END_TIME_MUST_SET
+Endzeit must festgelegt sein
+MINPRICE_MUST_SET
+minimaler Preis muss festgelegt sein
+INCREMENT_POSITIVE_INT
+Ehöhung muss eine positive Ganzzahl sein
+INCREMENT_GT_0
+Erhöhung muss grösser als 0 sein
+COMMENTED_ON
+kommentierte
+CREATED_ITEM
+erstellte item
+ACTIVATED_ITEM
+aktivierte item
+MINPRICE_POSITIVE_INT
+minimaler Preis muss eine positive Ganzzahl sein
+TIME_MUST_FUTURE
+Zeitpunkt muss in der Zukunft sein
+BID_GIVEN_CHOOSE_HIGHER
+Dieses Gebot wurde schon gemacht, geben Sie ein höheres
+BID_MUST_BE_AT_LEAST
+Das Gebot muss mindestens momentaner Preis + Erhöhung sein
+BOUGHT_ITEM
+kaufte item
+NOT_ENOUGH_MONEY
+Sie haben nicht genügend Credits.
+ITEM_MUST_HAVE_NAME
+Gegenstand muss einen Namen haben.
+ITEM_MUST_HAVE_PRICE
+Gegenstand muss einen Preis haben.
+PRICE_MUST_BE_POSITIVE
+Preis muss eine positive Gazzahl sein.
+PRICE_MUST_BE_INTEGER
+Preis muss eine Zahl sein.
+ORG_MUST_HAVE_NAME
+Organisation muss einen Namen haben.
+COMMENT_MAY_NOT_BE_EMPTY
+Kommentar darf nicht leer sein.
+SEARCH_MAY_NOT_BE_EMPTY
+Suchanfrage darf nicht leer sein.
+NO_PASSWORD_CONFIRM_GIVEN
+Keine Passwortbestätigung eingegeben
+USERNAME_EXISTS
+Benutzer mit diesem Namen existiert bereits
+NO_ORG_FOUND
+keine Organisation gefunden
+PASS_AND_RETYPED_PASS_DONT_MATCH
+Passwort und Passwortwiederholung stimmen nicht überein
+NO_PROFILE_PICTURE
+Sie haben kein Profilbild
+NO_USER_TO_PROMOTE_FOUND
+keine Benutzer zum Befördern gefunden
+NO_FILE_CHOSEN
+Sie haben keine Datei ausgewählt
+NO_USER_TO_ADD_FOUND
+keine Benutzer zum Hinzufügen gefunden
+NO_ADMIN_RIGHTS
+Sie haben keine Adimistratorrechte
+CURRENT_PASS_WRONG
+Momentanes Passwort ist falsch
+NO_LONGER_FOLLOWS
+folgt nicht mehr
+FOLLOWS
+folgt jetzt
+USER
+Benutzer
+DOES_NOT_EXIST
+existiert nicht
+NO_USERNAME_GIVEN
+Kein Benutzername angegeben
+NO_PASS_AND_USER
+No password and according username given
+PNS_NOT_8
+Passwort nicht stark: Ist nicht mindestens 8 Zeichen lang-
+PNS_USERNAME
+Passwort nicht stark: Beinhaltet ihren Nutzernamen
+PNS_CONTAINS_WORD
+Passwort nicht stark: Beinhaltet ein bekanntes Wort
+PNS_NOT_DIFF
+Passwort nicht stark: Ist nicht Signifikant verschieden vom bisherigen
+PNS_NOT_UPPER
+Passwort nicht stark: Enthält keine Grossbuchstaben A-Z.
+PNS_NOT_LOWER
+Passwort nicht stark: Enthält keine kleinen Buchstaben a-z.
+PNS_NOT_NUMBER
+Passwort nicht stark: Enthält keine Ziffern 0-9.
+PNS_NOT_SPECIAL
+Passwort nicht stark: Enthält keine Sonderzeichen ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
+NO_PASSWORD_GIVEN
+Kein Passwort angegeben
+WRONG_PASSWORD
+Falsches Passwort
+IMAGE_TOO_LARGE
+Bilddatei zu gross, muss
 LOGIN
 Anmelden
 LOGOUT
@@ -7,7 +105,7 @@ Noch nicht registriert?
 REGISTERED_NOTIFICATION
 <strong>Registriert!</strong><br />Ihr Account wurde erfolgreich erstellt und Sie wurden automatisch eingeloggt.
 SWITCHED_USER_NOTIFICATION
-<strong>User geändert!</strong>
+<strong>Benutzer geändert!</strong>
 NOT_REPRESENTING_ORG
 Sie repräsentieren keine Organisation.
 NOW_REPRESENTING

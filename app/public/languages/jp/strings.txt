@@ -1,3 +1,101 @@
+LANGUAGE_NAME
+日本語
+INCREMENT_MUST_SET
+生長設定する必要があります
+END_TIME_MUST_SET
+時設定する必要があります
+MINPRICE_MUST_SET
+最小価格設定する必要があります
+INCREMENT_POSITIVE_INT
+生長は正の整数でなければなりませ
+INCREMENT_GT_0
+生長はゼロ以上でなければなりません
+COMMENTED_ON
+ついてコメント：
+CREATED_ITEM
+アイテムを作成た：
+ACTIVATED_ITEM
+アイテムを活性化すれた：
+MINPRICE_POSITIVE_INT
+最小価格は正の整数でなければなりませ
+TIME_MUST_FUTURE
+時間が未来になっている必要があり
+BID_GIVEN_CHOOSE_HIGHER
+この入札は、すでに与えられている。より高い入札を選択ください。
+BID_MUST_BE_AT_LEAST
+入札は価格 + 生長で以上である必要があります。
+BOUGHT_ITEM
+アイテムを買った
+NOT_ENOUGH_MONEY
+足りないクレジット
+ITEM_MUST_HAVE_NAME
+アイテムは名前を付ける必要があります
+ITEM_MUST_HAVE_PRICE
+アイテムは価格を持っている必要があります
+PRICE_MUST_BE_POSITIVE
+価格は正の整数でなければなりませ
+PRICE_MUST_BE_INTEGER
+価格は正の整数でなければなりませ
+ORG_MUST_HAVE_NAME
+オーガニゼーションは名前を付ける必要があります
+COMMENT_MAY_NOT_BE_EMPTY
+コメントは空にすることはできません
+SEARCH_MAY_NOT_BE_EMPTY
+サーチは空にすることはできません
+NO_PASSWORD_CONFIRM_GIVEN
+パスワードの確認を持っていない
+USERNAME_EXISTS
+指定された名前のユーザーは既に存在します
+NO_ORG_FOUND
+オーガニゼーションが見つかりませんでした
+PASS_AND_RETYPED_PASS_DONT_MATCH
+パスワード と再入力する パスワード同じではありません
+NO_PROFILE_PICTURE
+プロフィール 絵はありません
+NO_USER_TO_PROMOTE_FOUND
+昇格ユーザ はありません
+NO_FILE_CHOSEN
+ファイルを選択しなかった
+NO_USER_TO_ADD_FOUND
+追加可能なユーザー はありません
+NO_ADMIN_RIGHTS
+管理権限を持っていない
+CURRENT_PASS_WRONG
+今のパスワード は違う
+NO_LONGER_FOLLOWS
+は見澄ません：
+FOLLOWS
+は見澄ます：
+USER
+ユーザ
+DOES_NOT_EXIST
+存在しません
+NO_USERNAME_GIVEN
+ユーザ名は与えられていない
+NO_PASS_AND_USER
+パスワードとユーザ名は与えられていない
+PNS_NOT_8
+パスワード強くない: 少なくとも8文字の長さではありません。
+PNS_USERNAME
+パスワード強くない:  ユーザ 名が含まれています.
+PNS_CONTAINS_WORD
+パスワード強くない: 既知の単語が含まれています
+PNS_NOT_DIFF
+パスワード強くない: 以前のパスワードと大幅に異なっていない.
+PNS_NOT_UPPER
+パスワード強くない: 大文字が含まれていません A-Z.
+PNS_NOT_LOWER
+パスワード強くない: 全く小文字が含まれていません a-z.
+PNS_NOT_NUMBER
+パスワード強くない: 番号0-9が含まれていません .
+PNS_NOT_SPECIAL
+パスワード強くない: 特殊文字が含まれていない ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
+NO_PASSWORD_GIVEN
+与えられたパスワードなし
+WRONG_PASSWORD
+パスワード違う
+IMAGE_TOO_LARGE
+大きすぎる画像ファイル, 選択する
 LOGIN
 ログイン
 LOGOUT
@@ -41,7 +139,7 @@ APPLY_ACTIVITY_FILTER
 FILTER_LIST
 リストフィルタ:
 AUCTION_FOR
-オークション for
+オークション で
 EDIT_AUCTION_FOR
  オークションをエディット
 MARKETPLACE
@@ -105,21 +203,21 @@ UNFOLLOW
 S_ITEMS
 のアイテム
 LATEST_ORGANIZATION_ACTIVITIES
-Latest オーガニゼーション アクティビティ
+最新のオーガニゼーション アクティビティ
 FOLLOW
 見澄ます
 ORGANIZATION_HAS_NO_ITEMS
-This オーガニゼーション has no アイテム。
+この オーガニゼーションはアイテムがありません。
 VIEWING_PROFILE
-Viewing プロフィール
+プロフィールを見る
 YOUR_ITEMS
-Your アイテム
+君のアイテム
 USERS_ITEMS
 ユーザーのアイテム
 YOU_HAVE_NO_ITEMS
-You have no アイテム。
+アイテムはありません。
 THIS_USER_HAS_NO_ITEMS
-This ユーザー has no アイテム。
+この ユーザーはアイテムがありません。
 ADD_A_NEW_ITEM
 新いアイテム。。。
 ORGANIZATION
@@ -231,7 +329,7 @@ SEARCH
 STRONG_PASSWORD
 強い パスワード
 STRONG_PASSWORD_TEXT
-<h1>Tips for creating a strong パスワード</h1> <p>What makes a パスワード strong (or weak)? A strong パスワード: <ul> <li>Is at least eight characters long。</li> <li>Does not contain your ユーザー name, real name, or company name。</li> <li>Does not contain a complete word。</li> <li>Is significantly different from previous passwords。</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , 。 ? /</i> </li> </ul> </li> </ul>
+<h1>強力なパスワード規則</h1> <p><ul> <li>少なくとも8文字の長さ。</li> <li>あなたのユーザー名、本名、会社名が含まれていません。</li> <li>完全な単語が含まれていません。</li> <li>前のパスワードと大幅に異なっている。</li> <li>カテゴリの文字に続くのは、含まれています: <ul> <li> 大文字　<i>A, B, C、。。。</i> </li> <li>小文字<i>a, b, c</i> </li> <li> 数字: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> 特殊文字: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , 。 ? /</i> </li> </ul> </li> </ul>
 CURRENTLY_NOT_IN_AUCTION
 オークションはありません
 AUCTION_ENDS_AT
@@ -245,14 +343,14 @@ ITEM
 ADD_COMMENT
 コメントを加える
 CAN_USE_MARKDOWN
-You can use markdown syntax to style this text。 For example: **<b>bold text</b>**
+このテキストをマークダウン構文を使用することができます。 例えば: **<b>太字テキスト</b>**
 NEW_OFFER
-New Offer
+新しい提供
 CREATE_NEW_OFFER
-Create new offer
+提供をつくる
 OFFERS
-Offers
+提供
 SELL_ITEM
-Sell item
+アイテムを売る
 OFFER
-Offer
+提供

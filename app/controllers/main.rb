@@ -56,9 +56,8 @@
   def image_file_check
     file = params[:image_file]
     if file
-      set_error :image_file,
-                "Image file too large, must be < #{MAXIMAGEFILESIZE/1024} kB,
-                      is #{file[:tempfile].size/1024} kB" if file[:tempfile].size > MAXIMAGEFILESIZE
+      set_error :image_file, LocalizedMessage.new([ LocalizedMessage::LangKey.new("IMAGE_TOO_LARGE"),
+                                         " < #{MAXIMAGEFILESIZE/1024} kB,  is #{file[:tempfile].size/1024} kB"]) if file[:tempfile].size > MAXIMAGEFILESIZE
     end
   end
 

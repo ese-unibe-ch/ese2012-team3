@@ -1,3 +1,101 @@
+LANGUAGE_NAME
+English
+INCREMENT_MUST_SET
+increment must be set
+END_TIME_MUST_SET
+end time must be set
+MINPRICE_MUST_SET
+minimal price must be set
+INCREMENT_POSITIVE_INT
+increment must be positive integer
+INCREMENT_GT_0
+increment must be more than zero
+COMMENTED_ON
+commented on
+CREATED_ITEM
+created item
+ACTIVATED_ITEM
+activated item
+MINPRICE_POSITIVE_INT
+minimal price must be positive integer
+TIME_MUST_FUTURE
+time must be in future
+BID_GIVEN_CHOOSE_HIGHER
+This bid has been already given, choose an higher one
+BID_MUST_BE_AT_LEAST
+The bid must be at least the current price + increment
+BOUGHT_ITEM
+bought item
+NOT_ENOUGH_MONEY
+You don't have enough money!
+ITEM_MUST_HAVE_NAME
+item must have a name!
+ITEM_MUST_HAVE_PRICE
+item must have a price!
+PRICE_MUST_BE_POSITIVE
+price must be a positive integer!
+PRICE_MUST_BE_INTEGER
+price has to be a number!
+ORG_MUST_HAVE_NAME
+organization must have a name!
+COMMENT_MAY_NOT_BE_EMPTY
+comment must not be empty
+SEARCH_MAY_NOT_BE_EMPTY
+search must not be empty
+NO_PASSWORD_CONFIRM_GIVEN
+No password confirmation given
+USERNAME_EXISTS
+User with given username already exists
+NO_ORG_FOUND
+no organization found
+PASS_AND_RETYPED_PASS_DONT_MATCH
+Password and retyped password don't match
+NO_PROFILE_PICTURE
+You don't have a profile picture
+NO_USER_TO_PROMOTE_FOUND
+no user found to promote
+NO_FILE_CHOSEN
+You didn't choose a file
+NO_USER_TO_ADD_FOUND
+no user found to add
+NO_ADMIN_RIGHTS
+you don't have admin privileges
+CURRENT_PASS_WRONG
+Current password is wrong
+NO_LONGER_FOLLOWS
+no longer follows
+FOLLOWS
+follows
+USER
+User
+DOES_NOT_EXIST
+does not exist
+NO_USERNAME_GIVEN
+No username given
+NO_PASS_AND_USER
+No password and according username given
+PNS_NOT_8
+Password not strong: Is not at least eight characters long.
+PNS_USERNAME
+Password not strong: Contains your user name.
+PNS_CONTAINS_WORD
+Password not strong: Contains a known word
+PNS_NOT_DIFF
+Password not strong: Is not significantly different from previous password.
+PNS_NOT_UPPER
+Password not strong: Contains no uppercase letters A-Z.
+PNS_NOT_LOWER
+Password not strong: Contains no lowercase letters a-z.
+PNS_NOT_NUMBER
+Password not strong: Contains no numbers 0-9.
+PNS_NOT_SPECIAL
+Password not strong: Contains no special characters ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
+NO_PASSWORD_GIVEN
+No password given
+WRONG_PASSWORD
+Wrong password
+IMAGE_TOO_LARGE
+Image file too large, must be
 LOGIN
 Login
 LOGOUT
@@ -179,7 +277,7 @@ Users
 ABOUT
 About
 USERNAME
-Username
+Nom d'utilisateur
 PASSWORD
 Password
 MUST_BE_STRONG

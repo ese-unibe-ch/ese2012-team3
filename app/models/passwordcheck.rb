@@ -23,29 +23,32 @@ class PasswordCheck
   # Maybe make return error enumeration instead?
   # Though exception seems fine, can be formatted.
   def self.ensure_password_strong(pw, username, previousPassword)
-    fail "No password and according username given" unless pw and pw.length > 0 and username and username.length > 0
+    fail localized_message_single_key("NO_PASS_AND_USER") unless pw and pw.length > 0 and username and username.length > 0
 
-    fail "Password not strong: Is not at least eight characters long (is "+pw.length.to_s+")." if pw.length < 8
-    fail "Password not strong: Contains your user name." if username.length > 0 and pw.include?(username) # Does not contain your user name, (real name, or company name).
+    fail localized_message_single_key("PNS_NOT_8") if pw.length < 8
+    fail localized_message_single_key("PNS_USERNAME") if username.length > 0 and pw.include?(username) # Does not contain your user name, (real name, or company name).
 
     lpw = pw.downcase
 
     c = nil
     for w in PASSWORD_FORBIDDEN_WORDS
-      c = w if w.length > 1 and lpw.include?(w)
+      c = w if w.length > 2 and lpw.include?(w)   # only test words long than 2 ('we', 'it' allowed)
     end
-    fail "Password not strong: Contains a known word '"+c+"' completely" if c
+    fail LocalizedMessage.new([
+                                  LocalizedMessage::LangKey.new("PNS_CONTAINS_WORD"),
+                                  " '"+c+"'."
+                              ]) if c
     # Does not contain a complete word.... use dictionary
 
     # Don't tell what exactly went wrong: Might give hints about current pw!
-    fail "Password not strong: Is not significantly different from previous password." unless previousPassword == nil or previousPassword.length == 0 or significantly_different?(pw, previousPassword)
+    fail localized_message_single_key("PNS_NOT_DIFF") unless previousPassword == nil or previousPassword.length == 0 or significantly_different?(pw, previousPassword)
 
     # Contains characters from each of the following four categories:
     # http://www.java2s.com/Code/Ruby/String/stringcontainsuppercasecharacters.htm
-    fail "Password not strong: Contains no uppercase letters A-Z." unless pw =~ /[A-Z]/
-    fail "Password not strong: Contains no lowercase letters a-z." unless pw =~ /[a-z]/
-    fail "Password not strong: Contains no numbers 0-9."   unless pw =~ /[0-9]/
-    fail "Password not strong: Contains no special characters ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /." unless pw =~ /[\`\~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\{\}\[\]\\\|\:\;\"\'\<\>\,\.\?\/\.]/
+    fail localized_message_single_key("PNS_NOT_UPPER") unless pw =~ /[A-Z]/
+    fail localized_message_single_key("PNS_NOT_LOWER") unless pw =~ /[a-z]/
+    fail localized_message_single_key("PNS_NOT_NUMBER")   unless pw =~ /[0-9]/
+    fail localized_message_single_key("PNS_NOT_SPECIAL") unless pw =~ /[\`\~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\{\}\[\]\\\|\:\;\"\'\<\>\,\.\?\/\.]/
   end
 
   # Algorithm: Make sure no block of 3 characters in a is in b

@@ -34,14 +34,14 @@ get "/user/switch" do
 end
 
 def passwordcheck()
-  set_error :password, "No password given" unless params[:password] && params[:password].size > 0
-  set_error :passwordc, "No password confirmation given" unless params[:password] && params[:password].size > 0
-  set_error :passwordc, "Password and retyped password don't match" unless params[:passwordc] == params[:password]
+  set_error :password, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_GIVEN")]) unless params[:password] && params[:password].size > 0
+  set_error :passwordc, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_CONFIRM_GIVEN")]) unless params[:password] && params[:password].size > 0
+  set_error :passwordc, LocalizedMessage.new([LocalizedMessage::LangKey.new("PASS_AND_RETYPED_PASS_DONT_MATCH")]) unless params[:passwordc] == params[:password]
 
   begin
     PasswordCheck::ensure_password_strong(params[:password], params[:name], params[:currentpassword])
   rescue => e
-    set_error :password, e.message
+    set_error :password, e #.message
   end
 end
 
@@ -54,8 +54,8 @@ post "/register" do
 
   # ======================= Error handling... basically copy of what exceptions already do, but with categorizing
   # TODO think of better way
-  set_error :name, "No username given" unless params[:name] && params[:name].size > 0
-  set_error :name, "User with given username already exists" if Market::User.user_by_name(params[:name])
+  set_error :name, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USERNAME_GIVEN")]) unless params[:name] && params[:name].size > 0
+  set_error :name, LocalizedMessage.new([LocalizedMessage::LangKey.new("USERNAME_EXISTS")]) if Market::User.user_by_name(params[:name])
 
   passwordcheck()
 
@@ -80,7 +80,7 @@ end
 post "/change_password" do
   redirect '/' if !session[:user_id]
 
-  set_error :currentpassword, "Current password is wrong" unless @current_user.password == params[:currentpassword]
+  set_error :currentpassword, LocalizedMessage.new([LocalizedMessage::LangKey.new("CURRENT_PASS_WRONG")]) unless @current_user.password == params[:currentpassword]
 
   params[:name] = @current_user.name
   passwordcheck()
@@ -93,7 +93,7 @@ post "/change_password" do
 end
 
 post "/change_profile_picture" do
-  set_error :image_file, "You didn't choose a file" unless  params[:image_file]
+  set_error :image_file, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_FILE_CHOSEN")]) unless  params[:image_file]
 
   image_file_check()
 
@@ -113,7 +113,7 @@ delete "/delete_profile_picture" do
   user = @current_user
 
   halt erb :error, :locals =>
-      {:message => "You don't have a profile picture"} unless user.image_file_name
+      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless user.image_file_name
 
   @current_user.delete_image_file
 
@@ -133,9 +133,7 @@ post "/follow" do
   end
 
   #add to activity list
-  @current_agent.add_activity(Activity.init({:creator => @current_agent,
-                                             :type => :follow,
-                                             :message => "#{@current_user.following.include?(follow) ? "no longer " : ""}follows #{follow.name}"}))
+  @current_agent.add_activity(new_follow_activity(@current_agent, follow))
 
   # remove from/add to following list
   @current_user.follow(follow)

@@ -7,7 +7,7 @@
       <div class="span10">
         <h1><%=@LANG["ERROR"]%></h1>
         <div class="alert-error alert">
-          <strong><%=@LANG["ERROR"]%></strong><br /><%= xss message %>
+          <strong><%=@LANG["ERROR"]%></strong><br /><%= xss message.to_string(@LANG) %>
         </div>
 
       </div>

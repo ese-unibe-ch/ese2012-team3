@@ -54,11 +54,22 @@ set :views, relative('views')
 # configure do
 set :public_folder, PUBLIC_FOLDER # http://www.sinatrarb.com/configuration.html
 set :views, VIEWS_FOLDER
+#set :port, 80
 enable :sessions # never forget
 
 # ===================== Load languages =====================
 load_languages(LANGUAGES_FOLDER)
 
+TEST_LANG_MSG = LocalizedMessage.new([
+                              LocalizedMessage::LangKey.new("CURRENT_WINNER"),
+                              " von MX"])
+
+
+begin
+  fail LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_GIVEN")])
+rescue => e
+   print e.to_string(LANGUAGES["en"])
+end
 
 # ===================== TEST DATA =====================
 john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
@@ -83,23 +94,19 @@ ese.follow(john)
 ese.follow(jimmy)
 ese.follow(uno)
 
-#activities
-eseo.add_orgactivity(Activity.init({:creator => ese,
-                                    :type => :comment,
-                                    :message => "commented on some item - demo activity."}))
-ese.add_activity(Activity.init({:creator => ese,
-                                   :type => :comment,
-                                   :message => "commented on some item - demo activity."}))
+pizza_about =
+    "* mozarella
+* garlic
+* __bacon__"
+pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active => true, :owner => eseo)
 
-john.add_activity(Activity.init({:creator => john,
-                                :type => :follow,
-                                :message => "followed someone - demo activity."}))
-john.add_activity(Activity.init({:creator => john,
-                                 :type => :activate,
-                                 :message => "activated some item - demo activity."}))
-john.add_activity(Activity.init({:creator => john,
-                                 :type => :comment,
-                                 :message => "commented on something - demo activity."}))
+#activities
+eseo.add_activity(new_comment_activity(eseo, pizza))
+ese.add_activity(new_comment_activity(ese, pizza))
+
+john.add_activity(new_follow_activity(john, ese))
+john.add_activity(new_activate_activity(john, pizza))
+john.add_activity(new_comment_activity(john, pizza))
 
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
@@ -107,11 +114,7 @@ for i in 0...DUMMYTHINGSCOUNT
   dummyUser.image_file_name="userimages/1.png"
 end
 
-pizza_about =
-"* mozarella
-* garlic
-* __bacon__"
-pizza = Item.init(:name => "pizza", :price => 18, :about => pizza_about, :active => true, :owner => eseo)
+
 eseo.add_item(pizza)
 pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
 uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
