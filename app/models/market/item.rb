@@ -120,7 +120,7 @@ module Market
 
     def self.find_item(pattern)
       @@items.select { |item|
-        item.active && (item.name.concat_all_langs.include?(pattern) || item.about.concat_all_langs.include?(pattern))
+        item.active && (item.name.include?(pattern) || item.about.include?(pattern))
       }
     end
 

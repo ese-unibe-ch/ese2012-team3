@@ -26,9 +26,8 @@ class LocalizedLiteral
     return self[lang["LANGUAGE_CODE"]]
   end
 
-  # concatenates all values in @s
-  def concat_all_langs
-    return @s.values.join(" ")
+  def include? string
+    return @s.values.join(" ").include? string
   end
 end
 
