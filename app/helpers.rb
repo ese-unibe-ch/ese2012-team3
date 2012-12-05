@@ -18,6 +18,18 @@ module MarkupHelpers
   end
 end
 
+def admin!
+  unless authorized?
+    response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+    throw(:halt, [401, "Not authorized\n"])
+  end
+end
+
+def authorized?
+  @auth ||=  Rack::Auth::Basic::Request.new(request.env)
+  @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'password']
+end
+
 
 helpers SecurityHelpers, NumericHelpers, MarkupHelpers
 

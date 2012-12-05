@@ -21,6 +21,7 @@ require_relative 'controllers/user'
 require_relative 'controllers/organization'
 require_relative 'controllers/marketplace'
 require_relative 'controllers/language'
+require_relative 'controllers/admin'
 
 include Market
 
