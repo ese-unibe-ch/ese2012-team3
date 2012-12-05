@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 # Common requs
 require 'rubygems'
 require 'require_relative'
