@@ -119,7 +119,9 @@ module Market
     end
 
     def self.find_item(pattern)
-      @@items.select { |item| item.active && (item.name.include?(pattern) || item.about.include?(pattern)) }
+      @@items.select { |item|
+        item.active && (item.name.concat_all_langs.include?(pattern) || item.about.concat_all_langs.include?(pattern))
+      }
     end
 
     def is_offer?()

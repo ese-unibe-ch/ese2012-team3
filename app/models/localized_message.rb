@@ -25,6 +25,11 @@ class LocalizedLiteral
   def to_string(lang)
     return self[lang["LANGUAGE_CODE"]]
   end
+
+  # concatenates all values in @s
+  def concat_all_langs
+    return @s.values.join(" ")
+  end
 end
 
 
