@@ -14,9 +14,11 @@
         : <%= xss @item.name[@LANGCODE] %>
       </h1>
 
+      <table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %>
       <% if !@item.is_offer? %>
-      <table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %><%= erb :_item_wishlist_button %></tr></table>
+        <%= erb :_item_wishlist_button %>
       <% end %>
+      </tr></table>
 
       <%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
 
