@@ -382,3 +382,5 @@ SELL_ITEM
 Verkaufen
 OFFER
 Angebot
+PRICE_MUST_BE_LESS_CREDITS
+Der offerierte Preis muss kleiner sein als das Guthaben

@@ -382,3 +382,5 @@ SELL_ITEM
 アイテムを売る
 OFFER
 提供
+PRICE_MUST_BE_LESS_CREDITS
+price needs to be less than your credits

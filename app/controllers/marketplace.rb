@@ -220,6 +220,7 @@
 
     #input validation
     check_item_params
+    @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("PRICE_MUST_BE_LESS_CREDITS")]) unless params[:price].to_i <= @current_agent.credit
 
     image_file_check()
 

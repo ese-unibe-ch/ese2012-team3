@@ -380,3 +380,5 @@ SELL_ITEM
 Vendre article
 OFFER
 Offre
+PRICE_MUST_BE_LESS_CREDITS
+prix ne soit pas être plus que les credits

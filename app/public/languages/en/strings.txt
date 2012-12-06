@@ -382,3 +382,5 @@ SELL_ITEM
 Sell item
 OFFER
 Offer
+PRICE_MUST_BE_LESS_CREDITS
+price needs to be smaller than your credits
