@@ -83,8 +83,8 @@
       </a>
       <ul class="dropdown-menu">
         <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss @current_user.name %></a></li>
-        <li class="divider"></li>
         <%for organization in @current_user.list_organizations %>
+            <li class="divider"></li>
             <li><a href='<%= organization.profile_route %>/switch'><i class="icon-briefcase"></i><%= xss organization.name %></a></li>
         <%end%>
       </ul>
