@@ -269,8 +269,18 @@
 
     #create item
     if @errors.empty?
-      item_name = {"en"=>params[:name]}   # TODO create hash {"LANGCODE" => name} with all langs specified
-      item_about = {"en"=>params[:about]} # TODO create hash {"LANGCODE" => name} with all langs specified
+      # TODO create hash {"LANGCODE" => name} with all langs specified
+      if params[:name]
+        item_name = {"en"=>params[:name]}
+        else
+        item_name = {"en"=>params[:name_en], "de"=>params[:name_de], "fr"=>params[:name_fr], "jp"=>params[:name_jp]}
+      end
+      # TODO create hash {"LANGCODE" => name} with all langs specified
+      if params[:about]
+        item_name = {"en"=>params[:about]}
+      else
+        item_name = {"en"=>params[:about_en], "de"=>params[:about_de], "fr"=>params[:about_fr], "jp"=>params[:about_jp]}
+      end
       item_price = params[:price].to_i
       item = Market::Item.init(
                         :name   => item_name,
