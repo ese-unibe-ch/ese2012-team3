@@ -155,7 +155,6 @@ User.all.each_with_index do |user, i|
   item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))
   item.add_comment(Comment.init(:creator => john, :text => "i'll give you **10** credits, max!"))
   user.add_item(item)
-  item.image_file_name="itemimages/illy.jpg"
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
 

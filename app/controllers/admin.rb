@@ -34,9 +34,15 @@ get "/admin/delete_org" do
 end
 
 post "/item/delete" do
-  #how do we check for admin?
-  redirect back unless 2>1
+  admin!
   item = Market::Item.by_id(params[:item_to_delete].to_i)
   Market::Item.delete_item(item)
+  redirect back
+end
+
+post "/user/delete" do
+  admin!
+  user = Market::User.user_by_id(params[:user_to_delete].to_i)
+  Market::User.delete_user(user)
   redirect back
 end

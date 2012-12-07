@@ -91,6 +91,16 @@ module Market
       @@users.delete(self)
     end
 
+    def self.delete_user(user)
+      for item in Item.items_by_agent(user)
+        item.delete
+      end
+      for org in Organization.organizations_by_user(user)
+        org.remove_member(user)
+      end
+      @@users.delete(user)
+    end
+
     def is_member_of?(organization)
       organization.has_member?(self)
     end
