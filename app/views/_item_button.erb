@@ -33,7 +33,7 @@
                   <button type="submit" class="btn btn-info small"><%=@LANG["BID_ON_AUCTION"]%></button>
                 </form>
               </td>
-              <td><i class='muted'><%=@LANG["AUCTION_ENDS_AT"]%> <%=item.auction.end_time.to_s%></i></td>
+              <td><i class='muted'><%=@LANG["AUCTION_ENDS_AT"]%> <%=item.auction.end_time.strftime("%d.%m.%Y %H:%M")%></i></td>
           <%else # NOT AN AUCTION %>
               <td>
                 <form action="/item/<%= item.id %>/buy" method="post">
