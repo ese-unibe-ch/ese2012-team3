@@ -108,6 +108,7 @@ module Market
     def delete
       delete_image_file
       @@items.delete(self)
+      @@offers.delete(self)
     end
 
     def delete_image_file
@@ -151,10 +152,6 @@ module Market
     
     def self.all_auctions
       @all_auctions = @@items.select{ |item| !item.auction.nil? }
-    end
-
-    def self.delete_item(item)
-      @@items.delete(item)
     end
   end
 end

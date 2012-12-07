@@ -7,7 +7,7 @@
     <% if @all_users.length > 0 %>
       <form action="/user/delete" method="POST">
         <fieldset>
-          <select name="user_to_delete">
+          <select name="id_to_delete">
             <% for user in @all_users %>
             <option value="<%= user.id %>"><%= user.name %></option>
             <% end %>

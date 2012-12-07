@@ -76,5 +76,21 @@ module Market
       raise "cannot add same activity multiple times" if self.activities.include?(activity)
       self.activities.push(activity)
     end
+
+    def delete_as_agent
+      for item in Item.items_by_agent(self)
+        item.delete
+      end
+
+      for org in Organization.organizations_by_user(self)
+        org.remove_member(self)
+      end
+      self.delete_image_file
+    end
+
+    def delete_image_file
+      delete_public_file(self.image_file_name) unless self.image_file_name == nil
+      self.image_file_name = nil
+    end
   end
 end

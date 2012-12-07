@@ -5,9 +5,9 @@
   <div class="span10">
     <h1>Delete offer</h1>
     <% if @all_offers.length > 0 %>
-      <form action="" method="POST">
+      <form action="/offer/delete" method="POST">
         <fieldset>
-          <select name="auction_to_delete">
+          <select name="id_to_delete">
             <% for offer in @all_offers %>
             <option value="<%= offer.id %>"><%= offer.name[@LANGCODE] %></option>
             <% end %>

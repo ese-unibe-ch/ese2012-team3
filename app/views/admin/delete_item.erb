@@ -7,7 +7,7 @@
     <% if @all_items.length > 0 %>
       <form action="/item/delete" value = "delete" method="POST">
         <fieldset>
-          <select name="item_to_delete">
+          <select name="id_to_delete">
             <% for item in @all_items %>
             <option value="<%= item.id %>"><%= item.name[@LANGCODE] %></option>
             <% end %>

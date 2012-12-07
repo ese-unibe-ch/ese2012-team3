@@ -158,18 +158,17 @@ module Market
       "/organization/#{self.id}"
     end
 
-    def delete_image_file
-      delete_public_file(self.image_file_name) unless self.image_file_name == nil
-      self.image_file_name = nil
+    def delete
+      self.delete_as_agent
+      @@organizations.delete(self)
     end
+
 
     def add_orgactivity(orgactivity)
       raise "cannot add non activity as activity" unless orgactivity && orgactivity.kind_of?(Activity)
       raise "cannot add same orgactivity multiple times" if self.orgactivities.include?(orgactivity)
       self.orgactivities << orgactivity
     end
-
-    # Missing: Deletion...
 
   end
 end

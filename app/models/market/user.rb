@@ -80,25 +80,8 @@ module Market
 
     # TODO "I can delete my account only if there's a second admin" (in every org I work for)
     def delete
-      for item in Item.items_by_agent(self)
-        item.delete
-      end
-
-      for org in Organization.organizations_by_user(self)
-        org.remove_member(self)
-      end
-      self.delete_image_file
+      self.delete_as_agent
       @@users.delete(self)
-    end
-
-    def self.delete_user(user)
-      for item in Item.items_by_agent(user)
-        item.delete
-      end
-      for org in Organization.organizations_by_user(user)
-        org.remove_member(user)
-      end
-      @@users.delete(user)
     end
 
     def is_member_of?(organization)
@@ -125,10 +108,7 @@ module Market
       "/profile/#{self.id}"
     end
 
-    def delete_image_file
-      delete_public_file(self.image_file_name) unless self.image_file_name == nil
-      self.image_file_name = nil
-    end
+
 
     # toggles following the specified agent
     def follow(follow)

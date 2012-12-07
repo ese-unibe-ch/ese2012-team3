@@ -35,14 +35,32 @@ end
 
 post "/item/delete" do
   admin!
-  item = Market::Item.by_id(params[:item_to_delete].to_i)
-  Market::Item.delete_item(item)
+  Market::Item.by_id(params[:id_to_delete].to_i).delete
   redirect back
 end
 
 post "/user/delete" do
   admin!
-  user = Market::User.user_by_id(params[:user_to_delete].to_i)
-  Market::User.delete_user(user)
+  Market::User.user_by_id(params[:id_to_delete].to_i).delete
+  redirect back
+end
+
+post "/organization/delete" do
+  admin!
+  Market::Organization.organization_by_id(params[:id_to_delete].to_i).delete
+  redirect back
+end
+
+post "/auction/delete" do
+  admin!
+  # auction is removed if item is inactivated
+  Market::Item.by_id(params[:id_to_delete].to_i).inactivate
+  redirect back
+end
+
+post "/offer/delete" do
+  admin!
+  # an offer is just an item in another list
+  Market::Item.offer_by_id(params[:id_to_delete].to_i).delete
   redirect back
 end
