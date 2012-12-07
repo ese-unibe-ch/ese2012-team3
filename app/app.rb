@@ -36,6 +36,7 @@ VIEWS_FOLDER           = relative('views')
 DEFAULT_LANGUAGE       = "en"
 LANGUAGES_FOLDER       = relative('public/languages')
 LANGUAGES              = {} # a map of language prefix => Language object
+KEY_CATEGORIES         = {} # a map of "cartegory name" => array of language keys
 
 DEFAULT_PASSWORD       = "Ax1301!3"
 DEFAULT_CREDITS        = 200

@@ -1,0 +1,39 @@
+<% @title = "Marketplace Admin - Edit localization" %>
+<section id="content">
+  <div class="row">
+    <%= erb :"admin/_sidebar" %>
+    <div class="span10">
+      <h1>Edit localization</h1>
+
+          <form action="/admin/edit_localization/set_language" method="POST">
+            <fieldset>
+              <select name="language" onchange="this.form.submit();">
+                <% LANGUAGES.each{| key, value | %>
+                    <option value="<%= key %>" <%= (session[:admin_loc_language] == value["LANGUAGE_CODE"]) ? "selected" : ""%>><%= value["LANGUAGE_NAME"] %></option>
+                <% } %>
+              </select>
+            </fieldset>
+          </form>
+
+      <form class="form-horizontal" action="/admin/edit_localization/submit" method="POST">
+        <button class="btn" type="submit">Apply changes</button>
+      <% KEY_CATEGORIES.each{|category, language_keys|
+
+        %>
+            <h4><%=category%></h4>
+            <hr/>
+        <%
+      for key in language_keys
+
+        params[key] = LANGUAGES[session[:admin_loc_language]][key];
+      %>
+
+        <%= erb :_text_control, :locals => {:name => key, :label => key}%>
+
+      <%end }%>
+        <button class="btn" type="submit">Apply changes</button>
+      </form>
+    </div>
+  </div>
+</section>
+

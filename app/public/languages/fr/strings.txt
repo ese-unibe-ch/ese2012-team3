@@ -1,11 +1,11 @@
+LANG_OF_DESC_AND_NAME
+Lang. du desc. & name
 I_WANT_PROVIDE_DESC_MORE_LANGS
-Je veux donne le no et description en plusierus langues.
+Je veux donne le nom et description en plusierus langues.
 LOCAL_DATE_TIME_FORMAT
 %d.%m.%Y %H:%M
 PLACED_BID_AT_FOR_CREDITS
 <span class='past-winner-name'>%s</span> a fait un offre à <span class='past-winner-time'>%s</span> de <span class='past-winner-price'>%s</span> crédits
-LANGUAGE_CODE
-fr
 LANGUAGE_NAME
 Français
 INCREMENT_MUST_SET

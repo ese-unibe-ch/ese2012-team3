@@ -1,11 +1,11 @@
+LANG_OF_DESC_AND_NAME
+Spr. von Beschr. & Name
 I_WANT_PROVIDE_DESC_MORE_LANGS
 Ich will Beschreibung und Name in mehr Sprachen angeben.
 LOCAL_DATE_TIME_FORMAT
 %d.%m.%Y %H:%M
 PLACED_BID_AT_FOR_CREDITS
 <span class='past-winner-name'>%s</span> machte ein Gebot um <span class='past-winner-time'>%s</span> für <span class='past-winner-price'>%s</span> Credits
-LANGUAGE_CODE
-de
 LANGUAGE_NAME
 Deutsch
 INCREMENT_MUST_SET
@@ -85,7 +85,7 @@ Kein Benutzername angegeben
 NO_PASS_AND_USER
 No password and according username given
 PNS_NOT_8
-Passwort nicht stark: Ist nicht mindestens 8 Zeichen lang-
+Passwort nicht stark: Ist nicht mindestens 8 Zeichen lang
 PNS_USERNAME
 Passwort nicht stark: Beinhaltet ihren Nutzernamen
 PNS_CONTAINS_WORD

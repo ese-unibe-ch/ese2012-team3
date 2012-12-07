@@ -10,7 +10,12 @@ class Language
     return "<span style='color:red'>#{k} - MISSING TRANS.!</span>"
   end
 
-  def initialize(basefolder)
+  def set k,v
+    @s[k] = v
+  end
+
+
+  def initialize(langcode,basefolder)
     @icon = basefolder[PUBLIC_FOLDER.length..-1] + "/icon.png"
     print "lang icon path: #{@icon}\n"
 
@@ -35,6 +40,8 @@ class Language
         k = ""
       end
     end
+
+    @s["LANGUAGE_CODE"] = langcode # special value
   end
 
 end
@@ -47,9 +54,11 @@ def load_languages(basefolder)
       print "found entry #{entry}\n"
       next if (entry =='.' || entry == '..')
       e = File.join(basefolder,entry)
+      next if !File.directory?(e)
+
       print "loading lang #{entry} from #{e}\n"
       begin
-      LANGUAGES[entry] = Language.new(e)
+      LANGUAGES[entry] = Language.new(entry, e)
       rescue  => e
         print "failed to load lang, error: #{e}\n"
       end
@@ -57,4 +66,29 @@ def load_languages(basefolder)
 
   print "Loaded Langs: "
   LANGUAGES.each {| key, value | print key+", " }
+
+  # Load lang key categories
+  begin
+    text=File.open(basefolder+'/key_categories.txt').read
+  rescue
+    fail "Failed to load #{basefolder+'/key_categories.txt'}"
+    return
+  end
+
+  text.gsub!(/\r\n?/, "\n")
+
+  cc = "" # current categroy
+  text.each_line do |line|
+    line = line.strip
+    if line.include?(":")
+      cc = line
+      KEY_CATEGORIES[cc] = []
+    else
+      KEY_CATEGORIES[cc].push << line
+    end
+  end
+
+  print "Loaded lang key categories: "
+  KEY_CATEGORIES.each {| key, value | print key+", " }
+
 end

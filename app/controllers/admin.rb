@@ -65,7 +65,7 @@ post "/offer/delete" do
   redirect back
 end
 
-
+# active user list
 
 get "/admin/active_users" do
   admin!
@@ -74,4 +74,28 @@ get "/admin/active_users" do
   erb :"admin/_active_users_list", :layout => false
 end
 
+# Localization
+get "/admin/edit_localization" do
+  admin!
+  if !session[:admin_loc_language]
+    session[:admin_loc_language] = DEFAULT_LANGUAGE
+  end
+  erb :"admin/edit_localization", :layout => :"admin/admin_layout"
+end
 
+post "/admin/edit_localization/set_language" do
+  admin!
+  session[:admin_loc_language] = params["language"]
+  redirect back
+end
+
+post "/admin/edit_localization/submit" do
+  admin!
+  l = session[:admin_loc_language]
+  params.each{|k,v|
+     print "KEy #{k} and val #{v}\n"
+     LANGUAGES[l].set k,v
+
+  }
+  redirect back
+end

@@ -1,11 +1,11 @@
+LANG_OF_DESC_AND_NAME
+説明と名前の言語
 I_WANT_PROVIDE_DESC_MORE_LANGS
 複数の言語で名前をつける
 LOCAL_DATE_TIME_FORMAT
 %d.%m.%Y %H:%M
 PLACED_BID_AT_FOR_CREDITS
 <span class='past-winner-name'>%s</span> の入札、 で <span class='past-winner-time'>%s</span> で <span class='past-winner-price'>%s</span> クレジット
-LANGUAGE_CODE
-jp
 LANGUAGE_NAME
 日本語
 INCREMENT_MUST_SET
