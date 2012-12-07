@@ -1,0 +1,20 @@
+
+<table class="table table-bordered" style="width: 66%">
+  <thead>
+     <th>Username</th>
+     <th>last visited url</th>
+     <th>at</th>
+  </thead>
+         <tbody>
+<% for user in User.all
+
+next unless user.logged_in && user.last_action_time > Time.now - ADMIN_USERLIST_LAST_ACTION_AT_MOST_AGO_SEC
+%>
+      <tr>
+        <td><%= erb :_user_link, :locals => {:user => user} %></td>
+        <td><a href="<%=user.last_action_url%>"><%=user.last_action_url%></a></td>
+        <td><%=user.last_action_time%></td>
+      </tr>
+<%end%>
+  </tbody>
+</table>

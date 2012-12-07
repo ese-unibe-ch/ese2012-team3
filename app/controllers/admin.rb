@@ -64,3 +64,14 @@ post "/offer/delete" do
   Market::Item.offer_by_id(params[:id_to_delete].to_i).delete
   redirect back
 end
+
+
+
+get "/admin/active_users" do
+  admin!
+   #return "Current time is "+Time.new.to_s
+
+  erb :"admin/_active_users_list", :layout => false
+end
+
+

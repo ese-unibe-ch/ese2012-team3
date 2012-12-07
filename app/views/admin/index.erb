@@ -1,10 +1,58 @@
-<% @title = "Marketplace - Admin" %>
+<% @title = "Marketplace Admin - Home" %>
 <section id="content">
 <div class="row">
   <%= erb :"admin/_sidebar" %>
   <div class="span10">
     <h1>Welcome to the admin page!</h1>
+
+
+  <h2>Statistics</h2>
+    <table class="table table-bordered" style="width: 66%">
+      <tr>
+        <td>Users:</td>
+        <td><%="some..."%></td>
+      </tr>
+    </table>
+
+  <h2>Users currently active</h2>
+  Refreshes automatically every <%=ADMIN_USERLIST_REFRESH_MS/1000%> seconds.
+  <button class="btn" onclick="updateUserlist()">Refresh now</button>
+
+
+  <div id="activeuserslist">
+
   </div>
+  <script>
+      function updateUserlist()
+      {
+          var xmlhttp;
+          if (window.XMLHttpRequest)
+          {// code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp=new XMLHttpRequest();
+          }
+          else
+          {// code for IE6, IE5
+              xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange=function()
+          {
+              if (xmlhttp.readyState==4 && xmlhttp.status==200)
+              {
+                  document.getElementById("activeuserslist").innerHTML=xmlhttp.responseText;
+              }
+          }
+          xmlhttp.open("GET","/admin/active_users",true);
+          xmlhttp.send();
+      }
+
+      updateUserlist()
+      window.setInterval("updateUserlist()",<%=ADMIN_USERLIST_REFRESH_MS%>)
+  </script>
+
+
+
+</div>
+
 </div>
 </section>
 

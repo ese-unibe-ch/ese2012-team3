@@ -25,6 +25,8 @@
     #on init, the user is not active for any organization
     session[:organization_id] = nil
     flash[:success] = 'logged_in'
+    user.logged_in = true
+
     redirect '/'
   end
 
@@ -36,10 +38,13 @@
   end
 
   get "/logout" do
+    @current_user.logged_in = false
+
     session[:user_id] = nil
     session[:organization_id] = nil
     @current_user = nil
     @current_agent = nil
+
 
     redirect "/login"
   end

@@ -1,3 +1,5 @@
+I_WANT_PROVIDE_DESC_MORE_LANGS
+Ich will Beschreibung und Name in mehr Sprachen angeben.
 LOCAL_DATE_TIME_FORMAT
 %d.%m.%Y %H:%M
 PLACED_BID_AT_FOR_CREDITS

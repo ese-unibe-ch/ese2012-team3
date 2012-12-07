@@ -112,7 +112,7 @@ module Market
     end
 
     def delete_image_file
-      delete_public_file(self.image_file_name) unless self.image_file_name == nil
+      delete_public_file(self.image_file_name)
     end
 
     def add_comment new_comment

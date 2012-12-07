@@ -13,7 +13,10 @@ module Market
 
     attr_accessor_typesafe_not_nil String, :password
 
-    attr_accessor :following # a list of agents
+    attr_accessor :following, # a list of agents
+                  :logged_in, # true/false
+                  :last_action_time, # a Time object
+                  :last_action_url # a string
 
     @@user_id_counter = 1 # cannot use @@users.size as user may be deleted
     @@users = []
@@ -27,6 +30,7 @@ module Market
       fail "User with given username already exists" if self.user_by_name(params[:name])
       user = self.new
       user.activities = []
+      user.logged_in = false
       user.name = params[:name]
       user.credit = params[:credit] || 100
       user.about = params[:about] || ""

@@ -20,14 +20,14 @@ end
 
 def admin!
   unless authorized?
-    response['WWW-Authenticate'] = %(Basic realm="Restricted Area")
+    response['WWW-Authenticate'] = %(Basic realm="#{ADMIN_AREA_LOGIN_MESSAGE}")
     throw(:halt, [401, "Not authorized\n"])
   end
 end
 
 def authorized?
   @auth ||=  Rack::Auth::Basic::Request.new(request.env)
-  @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == ['admin', 'password']
+  @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [ADMIN_USERNAME, ADMIN_PASSWORD]
 end
 
 

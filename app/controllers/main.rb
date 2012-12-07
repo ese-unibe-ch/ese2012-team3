@@ -19,6 +19,11 @@
 
     # The user that is currently logged in in this session
     @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+    if @current_user && !request.path_info.include?(".") # if the user is logged in and requested a page (not a file),
+      @current_user.logged_in = true # ensure is set
+      @current_user.last_action_time = Time.new
+      @current_user.last_action_url  = request.path_info
+    end
 
     # The user/agent we are working for (buying items)
     if session[:organization_id].nil?
@@ -65,7 +70,7 @@
 
   # Intended for images only...
   def delete_public_file(fn)
-    if fn
+    if fn && fn.length > 0 && File.exist?(fn)
       File.delete "#{PUBLIC_FOLDER}/"+fn
     end
   end

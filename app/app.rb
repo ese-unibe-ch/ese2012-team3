@@ -25,10 +25,11 @@ require_relative 'controllers/admin'
 
 include Market
 
-# ===================== Constants =====================
 def relative(path)
   File.join(File.expand_path(File.dirname(__FILE__)), path)
 end
+
+# ===================== Constants =====================
 PUBLIC_FOLDER          = relative('public')
 VIEWS_FOLDER           = relative('views')
 
@@ -38,6 +39,12 @@ LANGUAGES              = {} # a map of language prefix => Language object
 
 DEFAULT_PASSWORD       = "Ax1301!3"
 DEFAULT_CREDITS        = 200
+ADMIN_USERNAME         = 'admin'
+ADMIN_PASSWORD         = 'password'
+ADMIN_AREA_LOGIN_MESSAGE = "Restricted Area"
+ADMIN_USERLIST_REFRESH_MS = 30*1000
+ADMIN_USERLIST_LAST_ACTION_AT_MOST_AGO_SEC = 5*60
+
 MAXIMAGEFILESIZE       = 400*1024 # in bytes
 LISTIMAGESIZE          = 64 # in pixels
 LISTROWWITHIMAGEHEIGHT = LISTIMAGESIZE + 8 # 72
@@ -51,10 +58,11 @@ ACTIVITIES_PER_PAGE    = 7
 COMMENTS_PER_PAGE      = 20
 DUMMYTHINGSCOUNT       = 30
 
+# Set constans in sinatra
 set :public_folder, relative('public')
 set :views, relative('views')
 
-# configure do
+# configure do # not used
 set :public_folder, PUBLIC_FOLDER # http://www.sinatrarb.com/configuration.html
 set :views, VIEWS_FOLDER
 #set :port, 80
