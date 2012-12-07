@@ -19,7 +19,7 @@
                       </form>
                   </td>
               <% end %>
-              <td><%= @current_agent == item.owner ? "<i class='muted'>#{@LANG["AUCTION_ENDS_AT"]} #{item.auction.end_time.strftime("%d.%m.%Y %H:%M")}</i>": ""%></td>
+              <td><%= @current_agent == item.owner ? "<i class='muted'>#{@LANG["AUCTION_ENDS_AT"]} #{item.auction.end_time.strftime(@LANG["LOCAL_DATE_TIME_FORMAT"])}</i>": ""%></td>
           <% else # NOT AN AUCTION %>
               <td><%= @current_agent == item.owner ? "<i class='muted'>#{@LANG["CANNOT_EDIT_ACTIVE"]}</i>": ""%></td>
               <td><%= @current_agent == item.owner ? "<i class='muted'>#{@LANG["CURRENTLY_NOT_IN_AUCTION"]}</i>": ""%></td>
@@ -33,7 +33,7 @@
                   <button type="submit" class="btn btn-info small"><%=@LANG["BID_ON_AUCTION"]%></button>
                 </form>
               </td>
-              <td><i class='muted'><%=@LANG["AUCTION_ENDS_AT"]%> <%=item.auction.end_time.strftime("%d.%m.%Y %H:%M")%></i></td>
+              <td><i class='muted'><%=@LANG["AUCTION_ENDS_AT"]%> <%=item.auction.end_time.strftime(@LANG["LOCAL_DATE_TIME_FORMAT"])%></i></td>
           <%else # NOT AN AUCTION %>
               <td>
                 <form action="/item/<%= item.id %>/buy" method="post">

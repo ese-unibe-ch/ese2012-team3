@@ -51,7 +51,7 @@
         </td>
         <td>
           <%= mdown_to_html(xss activity.message.to_string(@LANG)) %>
-          <i class='muted'><%=@LANG["AT_TIME"]%> <%= activity.timestamp.strftime('%Y-%m-%d %H:%M:%S') %></i>
+          <i class='muted'><%=@LANG["AT_TIME"]%> <%= activity.timestamp.strftime(@LANG["LOCAL_DATE_TIME_FORMAT"]) %></i>
         </td>
       </tr>
   <%end%>

@@ -1,3 +1,5 @@
+LOCAL_DATE_TIME_FORMAT
+%d.%m.%Y %H:%M
 PLACED_BID_AT_FOR_CREDITS
 <span class='past-winner-name'>%s</span> の入札、 で <span class='past-winner-time'>%s</span> で <span class='past-winner-price'>%s</span> クレジット
 LANGUAGE_CODE

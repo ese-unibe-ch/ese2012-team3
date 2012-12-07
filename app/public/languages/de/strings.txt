@@ -1,3 +1,5 @@
+LOCAL_DATE_TIME_FORMAT
+%d.%m.%Y %H:%M
 PLACED_BID_AT_FOR_CREDITS
 <span class='past-winner-name'>%s</span> machte ein Gebot um <span class='past-winner-time'>%s</span> für <span class='past-winner-price'>%s</span> Credits
 LANGUAGE_CODE

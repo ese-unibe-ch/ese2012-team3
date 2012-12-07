@@ -103,7 +103,7 @@
             <div id="past-winner-content">
               <% item.auction.past_winners.each do |past_winner| %>
                   <div class="past-winner">
-                    <%=sprintf(@LANG["PLACED_BID_AT_FOR_CREDITS"], past_winner.agent.name.to_s, past_winner.time.strftime("%d.%m.%Y %H:%M"), past_winner.price.to_s)  %>
+                    <%=sprintf(@LANG["PLACED_BID_AT_FOR_CREDITS"], past_winner.agent.name.to_s, past_winner.time.strftime(@LANG["LOCAL_DATE_TIME_FORMAT"]), past_winner.price.to_s)  %>
                   </div>
               <% end %>
             </div>
