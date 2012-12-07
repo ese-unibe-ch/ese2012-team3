@@ -373,7 +373,7 @@ Add comment
 CAN_USE_MARKDOWN
 You can use markdown syntax to style this text. For example: **<b>bold text</b>**
 NEW_OFFER
-New Offer
+New offer
 CREATE_NEW_OFFER
 Create new offer
 OFFERS
