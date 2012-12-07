@@ -152,5 +152,9 @@ module Market
     def self.all_auctions
       @all_auctions = @@items.select{ |item| !item.auction.nil? }
     end
+
+    def self.delete_item(item)
+      @@items.delete(item)
+    end
   end
 end

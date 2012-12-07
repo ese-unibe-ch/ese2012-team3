@@ -32,3 +32,11 @@ get "/admin/delete_org" do
   @all_orgs = Market::Organization.all
   erb :"admin/delete_org", :layout => :"admin/admin_layout"
 end
+
+post "/item/delete" do
+  #how do we check for admin?
+  redirect back unless 2>1
+  item = Market::Item.by_id(params[:item_to_delete].to_i)
+  Market::Item.delete_item(item)
+  redirect back
+end
