@@ -277,9 +277,9 @@
       end
       # TODO create hash {"LANGCODE" => name} with all langs specified
       if params[:about]
-        item_name = {"en"=>params[:about]}
+        item_about = {"en"=>params[:about]}
       else
-        item_name = {"en"=>params[:about_en], "de"=>params[:about_de], "fr"=>params[:about_fr], "jp"=>params[:about_jp]}
+        item_about = {"en"=>params[:about_en], "de"=>params[:about_de], "fr"=>params[:about_fr], "jp"=>params[:about_jp]}
       end
       item_price = params[:price].to_i
       item = Market::Item.init(
