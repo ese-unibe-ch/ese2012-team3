@@ -168,6 +168,8 @@ APPLY_ACTIVITY_FILTER
 Appliquer filtre des activités
 FILTER_LIST
 Filtrer liste:
+AUCTION
+Enchère
 AUCTION_FOR
 Enchères pour
 EDIT_AUCTION_FOR

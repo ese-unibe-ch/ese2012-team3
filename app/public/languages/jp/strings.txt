@@ -168,6 +168,8 @@ APPLY_ACTIVITY_FILTER
 アクティビティ·フィルタを適用
 FILTER_LIST
 リストフィルタ:
+AUCTION
+クション
 AUCTION_FOR
 オークション で
 EDIT_AUCTION_FOR
