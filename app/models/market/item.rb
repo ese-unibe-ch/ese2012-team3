@@ -148,5 +148,9 @@ module Market
       @@items.push(offer)
       @@offers.delete(offer)
     end
+    
+    def self.all_auctions
+      @all_auctions = @@items.select{ |item| !item.auction.nil? }
+    end
   end
 end

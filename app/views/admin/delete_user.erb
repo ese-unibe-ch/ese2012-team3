@@ -1,0 +1,24 @@
+<% @title = "Marketplace - Delete user" %>
+<section id="content">
+<div class="row">
+  <%= erb :"admin/_sidebar" %>
+  <div class="span10">
+    <h1>Delete user</h1>
+    <% if @all_users.length > 0 %>
+      <form action="" method="POST">
+        <fieldset>
+          <select name="auction_to_delete">
+            <% for user in @all_users %>
+            <option value="<%= user.id %>"><%= user.name %></option>
+            <% end %>
+          </select>
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </fieldset>
+      </form>
+    <% else %>
+      <p>There is nothing to delete!</p>
+    <% end %>
+  </div>
+</div>
+</section>
+
