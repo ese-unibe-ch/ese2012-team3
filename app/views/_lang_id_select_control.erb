@@ -1,0 +1,14 @@
+<%
+     # num the additional num ppended to language_
+   %>
+
+<div class="control-group">
+  <label class="control-label">Lang. of Desc & Name</label>
+  <div class="controls">
+    <select name="language_<%= num%>">
+      <% LANGUAGES.each{| key, value | %>
+          <option value="<%= key %>" <%= (@LANGCODE == value["LANGUAGE_CODE"] && !params.has_key?("language_#{num}")) || (params.has_key?("language_#{num}") &&  params["language_#{num}"] == value["LANGUAGE_CODE"]) ? "selected" : ""%>><%= value["LANGUAGE_NAME"] %></option>
+      <% } %>
+    </select>
+  </div>
+</div>

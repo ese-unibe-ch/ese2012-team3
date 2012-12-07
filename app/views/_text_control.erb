@@ -2,13 +2,14 @@
 # name Name of the error and params label, must be an identifier (into the @error/ params hash)
 # label The text to be displayed.
 # password Optional. Whether to use password instead of text input style
+# num optional, additional _number suffix added to name
 %>
 <div class="control-group <%= "error" if @errors[name] %>">
   <label class="control-label"><%=label%></label>
   <div class="controls">
     <input class="input-xlarge span5"
            type="<%= (defined? password and password) ? "password" :"text" %>"
-           name="<%=name.to_s%>"
+           name="<%=name.to_s + ((defined? num and num) ? "_"+num.to_s : "")%>"
            value="<%= xss params[name] %>" />
 
     <% if @errors[name] %>

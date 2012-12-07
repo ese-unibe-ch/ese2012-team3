@@ -1,14 +1,68 @@
+<%
+   #showalllang          set to true to show all lang fields
+   %>
+
 <fieldset>
 
-  <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["NAME"]}%>
+  <div id="moreLangs">
+  </div>
+
+
+  <%if LANGUAGES.size > 0 %>
+      <div class="control-group" id="moreLangsBtn">
+        <div class="controls">
+          <div class="btn btn-info" onclick="addlang()"><%=@LANG["I_WANT_PROVIDE_DESC_MORE_LANGS"]%></div>
+        </div>
+      </div>
+  <%end%>
+
+  <script>
+      languagesCounter = 0
+
+      function addlang() {
+          <%
+          for i in 0...LANGUAGES.size
+          %>
+
+          if (languagesCounter == <%= i%>) {
+
+              $('#moreLangs').append('<div><%=
+              ((erb :_lang_id_select_control, :locals => {:num => i}).to_s).delete("\n").delete("\r") +
+              (erb :_text_control, :locals => {:name => "name_#{i}", :label => @LANG["NAME"]}).to_s.delete("\n").delete("\r") +
+              (erb :_textarea_control, :locals => {:name => "about_#{i}", :label => @LANG["DESCRIPTION"]}).to_s.gsub(/\r/,'').gsub(/\n/,"\\n")
+               %></div><hr/>')
+              languagesCounter++
+
+              <%if i == LANGUAGES.size-1%>$('#moreLangsBtn').remove()   <%end%>
+
+              return
+          }
+
+          <%
+          end
+          %>
+      }
+
+      <%
+      for i in 0...LANGUAGES.size
+
+      if params.has_key?("language_#{i}") ||i == 0
+      %>
+      addlang()
+     <%end end%>
+  </script>
+
+
 
   <%= erb :_text_control, :locals => {:name => :price, :label => @LANG["PRICE"]}%>
-
   <%= erb :_image_file_control %>
-
-  <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["DESCRIPTION"]}%>
 
   <div class="form-actions">
     <button class="btn btn-info" type="submit"><%=@LANG["SAVE"]%></button>
   </div>
+
+
+
+
+
 </fieldset>

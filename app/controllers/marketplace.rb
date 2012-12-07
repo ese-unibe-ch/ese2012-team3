@@ -209,8 +209,13 @@
 
 
   def check_item_params
-    @errors[:name] = LocalizedMessage.new([LocalizedMessage::LangKey.new("ITEM_MUST_HAVE_NAME")]) if params[:name].empty?
-    @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("ITEM_MUST_HAVE_PRICE")]) if params[:price].empty?
+    i = 0
+    while params.has_key?("language_#{i}")
+      @errors["name_#{i}"]  = LocalizedMessage.new([LocalizedMessage::LangKey.new("ITEM_MUST_HAVE_NAME")]) if !params["name_#{i}"] || params["name_#{i}"].empty?
+      i+=1
+    end
+
+    @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("ITEM_MUST_HAVE_PRICE")]) if !params[:price] || params[:price].empty?
     @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("PRICE_MUST_BE_POSITIVE")]) unless params[:price].to_i > 0
     @errors[:price] = LocalizedMessage.new([LocalizedMessage::LangKey.new("PRICE_MUST_BE_INTEGER")]) unless params[:price].match /^[0-9]*$/
   end
@@ -252,12 +257,25 @@
     erb :create_item
   end
 
-  get "/item/create" do
-    redirect '/login' unless session[:user_id]
-    erb :create_item
+
+  def set_item_values_from_params(item)
+    item.price = params[:price].to_i
+
+    i = 0
+    while params.has_key?("language_#{i}")
+      print "Language #{i} is set to "+params["language_#{i}"]+"\n"
+      item.name.set  params["language_#{i}"], params["name_#{i}"]
+      item.about.set params["language_#{i}"], params["about_#{i}"]
+      i+=1
+    end
+
+    if params[:image_file]
+      item.delete_image_file
+      item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
+    end
   end
 
-  # TODO share commom code with edit
+
   post "/item/create" do
 
     redirect '/login' unless session[:user_id]
@@ -269,17 +287,15 @@
 
     #create item
     if @errors.empty?
-      item_name = {"en"=>params[:name]}   # TODO create hash {"LANGCODE" => name} with all langs specified
-      item_about = {"en"=>params[:about]} # TODO create hash {"LANGCODE" => name} with all langs specified
-      item_price = params[:price].to_i
       item = Market::Item.init(
-                        :name   => item_name,
-                        :price  => item_price,
+                        :name   => "",
+                        :price  => 1,
                         :active => false,
                         :owner  => @current_agent,
-                        :about => item_about
-      )
-      item.image_file_name = add_image(ITEMIMAGESROOT, item.id)
+                        :about => "")
+
+      set_item_values_from_params(item)
+
       # If the user creates an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
         @current_agent.add_orgactivity(new_createitem_activity(@current_user, item))
@@ -302,13 +318,8 @@
 
     # Change attributes of the item.
     if @errors.empty?
-      @item.name = {"en"=>params[:name]}   # TODO create hash {"LANGCODE" => name} with all langs specified
-      @item.price = params[:price].to_i
-      @item.about = {"en"=>params[:about]}   # TODO create hash {"LANGCODE" => name} with all langs specified
-      if params[:image_file]
-        @item.delete_image_file
-        @item.image_file_name = add_image(ITEMIMAGESROOT, @item.id)
-      end
+
+      set_item_values_from_params(@item)
       redirect @current_agent.profile_route
     #display form with errors
     else
@@ -323,9 +334,22 @@
     @item = Item.by_id(params[:id].to_i)
 
     # Open the editing page with the existing attributes provided.
-    @params[:name] = @item.name
-    @params[:price] = @item.price
-    @params[:about] = @item.about
+    i = 0
+    LANGUAGES.each{| key, value |
+       if @item.name.defined_for_langcode?(key)
+         params["language_#{i}"] = key
+         params["name_#{i}"] = @item.name[key]
+         if @item.about.defined_for_langcode?(key)
+           params["about_#{i}"] = @item.about[key]
+         end
+         i+=1
+       end
+    }
+
+    params[:price] = @item.price
+
+
+    params[:about] = @item.about
 
     erb :edit_item
   end

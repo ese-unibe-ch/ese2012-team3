@@ -6,6 +6,7 @@
 <div class="control-group <%= "error" if @errors[name] %>">
   <label class="control-label"><%=label%></label>
   <div class="controls">
+    <%=@LANG["CAN_USE_MARKDOWN"]  %><br/>
     <textarea class="input-xlarge span5" name="<%=name.to_s%>" rows="7"><%= xss params[name] %></textarea>
 
     <% if @errors[name] %>

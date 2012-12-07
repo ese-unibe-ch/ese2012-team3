@@ -6,11 +6,12 @@ String.class_eval do
 end
 
 LOCALIZED_FALLBACKLANGCODE = "en"
-# Returns a localized version of the string this represents.
-# Falls back to LOCALIZED_FALLBACKLANGCODE if not present for requested key - if not even that is available, returns first available
+
 class LocalizedLiteral
   attr_reader :s
 
+  # Returns a localized version of the string this represents.
+  # Falls back to LOCALIZED_FALLBACKLANGCODE if not present for requested key - if not even that is available, returns first available
   # @LANGCODE => string
   def [](langcode)
     return @s[langcode] if @s.has_key?(langcode)
@@ -24,6 +25,14 @@ class LocalizedLiteral
 
   def to_string(lang)
     return self[lang["LANGUAGE_CODE"]]
+  end
+
+  def defined_for_langcode? langcode
+    @s.has_key?(langcode)
+  end
+
+  def set langcode,s
+    @s[langcode]=s
   end
 
   def include? string
