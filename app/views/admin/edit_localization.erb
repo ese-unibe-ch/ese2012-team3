@@ -28,7 +28,7 @@
         params[key] = LANGUAGES[session[:admin_loc_language]][key];
       %>
 
-        <%= erb :_text_control, :locals => {:name => key, :label => key}%>
+        <%= erb :_text_control_wide, :locals => {:name => key, :label => key}%>
 
       <%end }%>
         <button class="btn" type="submit">Apply changes</button>
