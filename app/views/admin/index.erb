@@ -20,6 +20,16 @@
       <dd><%= Market::Item.all_auctions.length %></dd>
       <dt>Items sold:</dt>
       <dd><%= Market::Agent.items_sold %></dd>
+      <dt>Items sold in auctions:</dt>
+      <dd><%= Market::Auction.auctions_finished %></dd>
+      <dt>Total user credits:</dt>
+      <dd><%= Market::User.total_user_credits %></dd>
+      <dt>Total organization credits:</dt>
+      <dd><%= Market::Organization.total_org_credits %></dd>
+      <dt>Total user credits:</dt>
+      <dd><%= Market::User.total_user_credits+Market::Organization.total_org_credits %></dd>
+      <dt>Organization memberships:</dt>
+      <dd><%= Market::Organization.total_members %></dd>
     </dl>
 
   <h2>Users currently active</h2>

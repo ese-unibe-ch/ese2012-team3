@@ -3,7 +3,7 @@ module Market
   class Auction
     attr_accessor_only_if_editable :minimal_price, :increment
     attr_accessor :event
-
+    @@auctions_finished = 0
     attr_accessor_typesafe_not_nil Item,  :item
     attr_accessor_typesafe         Agent, :winner
 
@@ -230,6 +230,7 @@ module Market
         self.item.price = current_price
         SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You won #{@item.name} in an auction")
         @winner.buy_item(self.item)
+        @@auctions_finished +=1
       end
     end
 
@@ -245,7 +246,9 @@ module Market
     def already_bid?(price)
       bids.key?(price)
     end
-
+    def self.auctions_finished
+      return @@auctions_finished
+    end
     def valid_bid?(price)
       if current_price.to_i + increment.to_i <= price.to_i
         true

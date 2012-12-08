@@ -163,6 +163,21 @@ module Market
       @@organizations.delete(self)
     end
 
+    def self.total_org_credits
+      sum = 0
+      for org in @@organizations
+        sum += org.credit
+      end
+      return sum
+    end
+
+    def self.total_members
+      sum = 0
+      for org in @@organizations
+        sum += org.members.length
+      end
+      return sum
+    end
 
     def add_orgactivity(orgactivity)
       raise "cannot add non activity as activity" unless orgactivity && orgactivity.kind_of?(Activity)
