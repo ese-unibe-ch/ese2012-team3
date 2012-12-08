@@ -409,7 +409,7 @@
     redirect "/item/#{@item.id.to_s}"
   end
 
-  post "/item/search" do
+  post "/search" do
     redirect '/login' unless session[:user_id]
 
     # input validation

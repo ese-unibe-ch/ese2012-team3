@@ -7,7 +7,7 @@
           <div class=".nav-collapse">
             <ul class="nav pull-right">
               <% if @current_user %>
-                <form action="/item/search" method="POST" class="navbar-search">
+                <form action="/search" method="POST" class="navbar-search">
                   <input class="search-query span2" type="text" name="search" placeholder=<%=@LANG["SEARCH"]%> />
                 </form>
                 <li><a href="/logout"><%=@LANG["LOGOUT"]%></a></li>
