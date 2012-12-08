@@ -3,8 +3,8 @@ module Market
   class Agent
     attr_accessor_typesafe_not_nil String, :name
     attr_accessor_typesafe_not_nil String, :about
-
-    attr_accessor :credit,
+    @@items_sold = 0
+        attr_accessor :credit,
                   :id,
                   :image_file_name,
                   :activities,
@@ -52,6 +52,7 @@ module Market
       self.decrease_credit(item.price)
       item.owner.increase_credit(item.price)
       item.owner = self
+      @@items_sold += 1
       item.inactivate
     end
 
@@ -91,6 +92,10 @@ module Market
     def delete_image_file
       delete_public_file(self.image_file_name)
       self.image_file_name = nil
+    end
+
+    def self.items_sold
+      return @@items_sold
     end
   end
 end

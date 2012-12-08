@@ -1,4 +1,3 @@
-
   post "/item/:id/buy" do
     redirect '/login' unless session[:user_id]
 
