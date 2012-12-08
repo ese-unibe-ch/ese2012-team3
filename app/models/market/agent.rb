@@ -4,6 +4,7 @@ module Market
     attr_accessor_typesafe_not_nil String, :name
     attr_accessor_typesafe_not_nil String, :about
     @@items_sold = 0
+    @@money_spent = 0
         attr_accessor :credit,
                   :id,
                   :image_file_name,
@@ -53,6 +54,7 @@ module Market
       item.owner.increase_credit(item.price)
       item.owner = self
       @@items_sold += 1
+      @@money_spent += item.price
       item.inactivate
     end
 
@@ -96,6 +98,10 @@ module Market
 
     def self.items_sold
       return @@items_sold
+    end
+
+    def self.money_spent
+      return @@money_spent
     end
   end
 end

@@ -1,12 +1,13 @@
 module Market
   class Comment
     attr_reader :creator, :text
-
+    @@comments = []
     def initialize(params={})
        assert_kind_of(Agent, params[:creator])
        assert_kind_of(String, params[:text]) if params[:text]
        @creator = params[:creator]
        @text = params[:text] || ""
+      @@comments << self
     end
 
     # params: hash, recognized: :creator (required), :text (empty by default)
@@ -20,6 +21,10 @@ module Market
 
     def creator
       @creator
+    end
+
+    def self.all
+      return @@comments
     end
   end
 

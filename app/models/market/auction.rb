@@ -4,6 +4,7 @@ module Market
     attr_accessor_only_if_editable :minimal_price, :increment
     attr_accessor :event
     @@auctions_finished = 0
+    @@bids_made = 0
     attr_accessor_typesafe_not_nil Item,  :item
     attr_accessor_typesafe         Agent, :winner
 
@@ -131,7 +132,7 @@ module Market
 
       remove_previous_bids_of(agent)
       bids[price] = agent
-
+      @@bids_made += 1
       determine_winner
 
       self.invariant
@@ -260,6 +261,10 @@ module Market
 
     def highest_bid
       bids.keys.sort!.reverse![0]
+    end
+
+    def self.bids_made
+       return @@bids_made
     end
   end
 end

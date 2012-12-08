@@ -20,16 +20,38 @@
       <td><%= ts(Market::Item.all_auctions.length) %></td></tr>
       <tr><td>Items sold:</td>
       <td><%= ts(Market::Agent.items_sold) %></td></tr>
+      <tr><td>Money spent:</td>
+      <td><%= ts(Market::Agent.money_spent) %></td></tr>
       <tr><td>Items sold in auctions:</td>
       <td><%= ts(Market::Auction.auctions_finished) %></td></tr>
       <tr><td>Total user credits:</td>
       <td><%= ts(Market::User.total_user_credits) %></td></tr>
+      <tr><td>Total value of items on the market:</td>
+      <td><%=
+          sum = 0
+          for item in Market::Item.active_items
+            sum += item.price
+          end
+          ts(sum)
+      %></td></tr>
+      <tr><td>Total value of all items:</td>
+      <td><%=
+          sum = 0
+          for item in Market::Item.all
+            sum += item.price
+          end
+          ts(sum)
+      %></td></tr>
       <tr><td>Total organization credits:</td>
       <td><%= ts(Market::Organization.total_org_credits) %></td></tr>
       <tr><td>Total user credits:</td>
       <td><%= ts(Market::User.total_user_credits+Market::Organization.total_org_credits) %></td></tr>
       <tr><td>Organization memberships:</td>
       <td><%= ts(Market::Organization.total_members) %></td></tr>
+      <tr><td>Bids made:</td>
+      <td><%= ts(Market::Auction.bids_made) %></td></tr>
+      <tr><td>Comments made:</td>
+      <td><%= ts(Market::Comment.all.length) %></td></tr>
     </table>
 
   <h2>Users currently active</h2>
