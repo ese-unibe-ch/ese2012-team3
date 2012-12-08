@@ -390,3 +390,7 @@ OFFER
 Offer
 PRICE_MUST_BE_LESS_CREDITS
 price needs to be smaller than your credits
+NO_OFFERS_FOUND
+No offers found.
+NO_ITEMS_FOUND
+No items found.

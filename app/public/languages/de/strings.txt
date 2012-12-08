@@ -390,3 +390,7 @@ OFFER
 Angebot
 PRICE_MUST_BE_LESS_CREDITS
 Der offerierte Preis muss kleiner sein als das Guthaben
+NO_OFFERS_FOUND
+Keine Angebote gefunden.
+NO_ITEMS_FOUND
+Keine Gegenstände gefunden.
