@@ -9,27 +9,27 @@
   <h2>Statistics</h2>
     <table class="table">
       <tr><td>Registered users:</td>
-      <td><%= Market::User.all.length %></td></tr>
+      <td><%= ts(Market::User.all.length) %></td></tr>
       <tr><td>Organizations</td>
-      <td><%= Market::Organization.all.length %></td></tr>
+      <td><%= ts(Market::Organization.all.length) %></td></tr>
       <tr><td>Active items:</td>
-      <td><%= Market::Item.active_items.length %></td></tr>
+      <td><%= ts(Market::Item.active_items.length) %></td></tr>
       <tr><td>Total items:</td>
-      <td><%= Market::Item.all.length %></td></tr>
+      <td><%= ts(Market::Item.all.length) %></td></tr>
       <tr><td>Active auctions:</td>
-      <td><%= Market::Item.all_auctions.length %></td></tr>
+      <td><%= ts(Market::Item.all_auctions.length) %></td></tr>
       <tr><td>Items sold:</td>
-      <td><%= Market::Agent.items_sold %></td></tr>
+      <td><%= ts(Market::Agent.items_sold) %></td></tr>
       <tr><td>Items sold in auctions:</td>
-      <td><%= Market::Auction.auctions_finished %></td></tr>
+      <td><%= ts(Market::Auction.auctions_finished) %></td></tr>
       <tr><td>Total user credits:</td>
-      <td><%= Market::User.total_user_credits %></td></tr>
+      <td><%= ts(Market::User.total_user_credits) %></td></tr>
       <tr><td>Total organization credits:</td>
-      <td><%= Market::Organization.total_org_credits %></td></tr>
+      <td><%= ts(Market::Organization.total_org_credits) %></td></tr>
       <tr><td>Total user credits:</td>
-      <td><%= Market::User.total_user_credits+Market::Organization.total_org_credits %></td></tr>
+      <td><%= ts(Market::User.total_user_credits+Market::Organization.total_org_credits) %></td></tr>
       <tr><td>Organization memberships:</td>
-      <td><%= Market::Organization.total_members %></td></tr>
+      <td><%= ts(Market::Organization.total_members) %></td></tr>
     </table>
 
   <h2>Users currently active</h2>
