@@ -38,6 +38,10 @@ class LocalizedLiteral
   def include? string
     return @s.values.join(" ").include? string
   end
+  
+  def include_i? string
+    return @s.values.join(" ").downcase.include? string
+  end
 end
 
 

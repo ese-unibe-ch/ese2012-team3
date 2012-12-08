@@ -121,7 +121,7 @@ module Market
 
     def self.find_item(pattern)
       @@items.select { |item|
-        item.active && (item.name.include?(pattern) || item.about.include?(pattern))
+        item.active && (item.name.include_i?(pattern) || item.about.include_i?(pattern))
       }
     end
 
@@ -130,7 +130,7 @@ module Market
     end
 
     def self.find_offer(pattern)
-      @@offers.select { |offer| offer.name.include?(pattern) || offer.name.include?(pattern)}
+      @@offers.select { |offer| offer.name.include_i?(pattern) || offer.name.include_i?(pattern)}
     end
 
     def self.add_offer(offer)

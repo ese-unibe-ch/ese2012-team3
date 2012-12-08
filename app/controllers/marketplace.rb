@@ -415,8 +415,8 @@
     # input validation
     halt erb :error, :locals => { :message => LocalizedMessage.new([LocalizedMessage::LangKey.new("SEARCH_MAY_NOT_BE_EMPTY")]) } if params[:search].empty?
 
-    @found_items = Item.find_item(params[:search])
-    @found_offers = Item.find_offer(params[:search])
+    @found_items = Item.find_item(params[:search].downcase)
+    @found_offers = Item.find_offer(params[:search].downcase)
 
     erb :searchresult
   end
