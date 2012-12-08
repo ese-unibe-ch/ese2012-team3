@@ -13,7 +13,7 @@ next unless user.logged_in && user.last_action_time > Time.now - ADMIN_USERLIST_
       <tr>
         <td><%= erb :_user_link, :locals => {:user => user} %></td>
         <td><a href="<%=user.last_action_url%>"><%=user.last_action_url%></a></td>
-        <td><%=user.last_action_time%></td>
+        <td><%=user.last_action_time.strftime("%d/%m/%Y %H:%M")%></td>
       </tr>
 <%end%>
   </tbody>
