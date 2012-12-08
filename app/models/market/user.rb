@@ -112,7 +112,13 @@ module Market
       "/profile/#{self.id}"
     end
 
-
+    def self.total_user_credits
+      sum = 0
+      for user in @@users
+         sum += user.credit
+      end
+      return sum
+    end
 
     # toggles following the specified agent
     def follow(follow)
