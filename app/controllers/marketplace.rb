@@ -19,6 +19,10 @@
     redirect back
   end
 
+  get "/search" do
+      redirect "/"
+  end
+
   get "/item/:id/create_auction" do
     redirect '/login' unless session[:user_id]
 
