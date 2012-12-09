@@ -5,32 +5,58 @@
     <div class="span10">
       <h1>Edit localization</h1>
 
-          <form action="/admin/edit_localization/set_language" method="POST">
-            <fieldset>
-              <select name="language" onchange="this.form.submit();">
-                <% LANGUAGES.each{| key, value | %>
-                    <option value="<%= key %>" <%= (session[:admin_loc_language] == value["LANGUAGE_CODE"]) ? "selected" : ""%>><%= value["LANGUAGE_NAME"] %></option>
-                <% } %>
-              </select>
-            </fieldset>
-          </form>
+      <form action="/admin/edit_localization/set_language" method="POST">
+        <fieldset>
+          <select name="language" onchange="this.form.submit();">
+            <% LANGUAGES.each{| key, value | %>
+              <option value="<%= key %>" <%= (session[:admin_loc_language] == value["LANGUAGE_CODE"]) ? "selected" : ""%>><%= value["LANGUAGE_NAME"] %></option>
+            <% } %>
+          </select>
+        </fieldset>
+      </form>
+
+      <style type="text/css">
+        .hiddencategory {
+          display: none;
+        }
+      </style>
+
+      <script type="text/javascript">
+        function switchDisplayContent(counter) {
+          var catelem = document.getElementById('categoryelement' + counter);
+          var catsymbol = $("symbol" + counter);
+          if (catelem.style.display != 'block') {
+            catsymbol.removeClass('icon-chevron-up');
+            catsymbol.addClass('icon-chevron-down');
+            catelem.style.display = 'block';
+          }
+          else {
+            catsymbol.removeClass('icon-chevron-down');
+            catsymbol.addClass('icon-chevron-up');
+            catelem.style.display = 'none';
+          }
+        }
+      </script>
 
       <form class="form-horizontal" action="/admin/edit_localization/submit" method="POST">
         <button class="btn" type="submit">Apply changes</button>
-      <% KEY_CATEGORIES.each{|category, language_keys|
+          <% i = 0 %>
+          <% KEY_CATEGORIES.each{|category, language_keys| %>
+            <div class="category">
+              <a href="#" onClick="switchDisplayContent('<%= i %>');return false;"><h4><i id="symbol<%= i %>" class="icon-chevron-up"></i> <%=category%></h4></a>
+              <div class="category-content hiddencategory" id="categoryelement<%= i %>">
+                <hr/>
+                <% for key in language_keys
+                  params[key] = LANGUAGES[session[:admin_loc_language]][key];
+                %>
 
-        %>
-            <h4><%=category%></h4>
-            <hr/>
-        <%
-      for key in language_keys
+                <%= erb :_text_control_wide, :locals => {:name => key, :label => key}%>
 
-        params[key] = LANGUAGES[session[:admin_loc_language]][key];
-      %>
-
-        <%= erb :_text_control_wide, :locals => {:name => key, :label => key}%>
-
-      <%end }%>
+                <% end %>
+              </div>
+            </div>
+            <% i = i+1 %>
+          <% } %>
         <button class="btn" type="submit">Apply changes</button>
       </form>
     </div>
