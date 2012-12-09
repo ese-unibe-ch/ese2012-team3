@@ -10,7 +10,30 @@
                 <form action="/search" method="POST" class="navbar-search">
                   <input class="search-query span2" type="text" name="search" placeholder=<%=@LANG["SEARCH"]%> />
                 </form>
-                <li><a href="/logout"><%=@LANG["LOGOUT"]%></a></li>
+                  <% if @current_user.list_organizations.length == 0 %>
+                      <li><a href="/profile/<%= @current_agent.id %>"><%= @current_agent.name %></a></li>
+                  <%else%>
+                      <li class="dropdown">
+                        <a class="dropdown-toggle"
+                           data-toggle="dropdown"
+                           href="#">
+                          <%if session[:organization_id].nil?%>
+                              <i class="icon-user icon-white"></i><%= xss @current_user.name %>
+                          <%else%>
+                              <i class="icon-briefcase icon-white"></i><%= xss Organization.organization_by_id(session[:organization_id].to_i).name %>
+                          <%end%>
+                          <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                          <li><a href='<%= "/user/switch" %>'><i class="icon-user"></i><%= xss @current_user.name %></a></li>
+                          <%for organization in @current_user.list_organizations %>
+                              <li class="divider"></li>
+                              <li><a href='<%= organization.profile_route %>/switch'><i class="icon-briefcase"></i><%= xss organization.name %></a></li>
+                          <%end%>
+                        </ul>
+                      </li>
+                  <%end%>
+                  <li><a href="/logout"><%=@LANG["LOGOUT"]%></a></li>
               <% else %>
                 <li><a href="/login"><%=@LANG["LOGIN"]%></a></li>
                 <li><a href="/register"><%=@LANG["REGISTER"]%></a></li>

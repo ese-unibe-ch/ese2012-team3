@@ -136,7 +136,7 @@ pizza_about =  {
 pizza_name = {"de"=>"Leckere Pizza", "en"=>"Delicious Pizza", "fr" => "Pizza délicieuse", "jp" => "おいしいピザ"}
 
 pizza = Item.init(:name => pizza_name, :price => 18, :about => pizza_about, :active => true, :owner => eseo)
-
+pizza.image_file_name="itemimages/pizza.png"
 #activities
 eseo.add_activity(new_comment_activity(eseo, pizza))
 ese.add_activity(new_comment_activity(ese, pizza))
@@ -154,15 +154,20 @@ end
 
 eseo.add_item(pizza)
 pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
-uno.add_item(Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno))
-uno.add_item(Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno))
+beret = Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno)
+beret.image_file_name="itemimages/beret.jpg"
+uno.add_item(beret)
+map = Item.init(:name => "map of the world", :price => 75, :active => true, :owner => uno)
+map.image_file_name="itemimages/map.jpg"
+uno.add_item(map)
 User.all.each_with_index do |user, i|
-  about = "**dummy** about text dummy about text *dummy* about text **dummy** about text dummy about text *dummy*"
-  item = Item.init(:name => "item" + i.to_s, :price => 100, :owner => user, :about => about)
-  comment = Comment.init(:creator => user, :text => "This is **my** item")
+  about = "This is a **Pet Stone**. it's very easy to keep, doesn't need any special diet; it's house-trained."
+  item = Item.init(:name => "Pet Stone", :price => 100, :owner => user, :about => about)
+  comment = Comment.init(:creator => user, :text => "This is my stone. I want to sell it")
   item.add_comment(comment)
-  item.add_comment(Comment.init(:creator => user, :text => "very *nice* item! And **cheap**"))
-  item.add_comment(Comment.init(:creator => john, :text => "i'll give you **10** credits, max!"))
+  item.add_comment(Comment.init(:creator => user, :text => "Very *nice* stone! And **cheap**"))
+  item.add_comment(Comment.init(:creator => john, :text => "I'll give you **10** credits, max!"))
+  item.image_file_name="itemimages/stone.jpg"
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end

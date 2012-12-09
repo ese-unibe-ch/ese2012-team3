@@ -33,5 +33,10 @@ Gemfile.lock
 /app/public/userimages/*
 !/app/public/userimages/1.png
 /app/public/itemimages/*
+!/app/public/itemimages/beret.jpg
+!/app/public/itemimages/map.jpg
+!/app/public/itemimages/pizza.png
+!/app/public/itemimages/stone.jpg
+!/app/public/itemimages/quarta.jpg
 /app/public/organizationimages/*
 !/app/public/organizationimages/2.jpg
