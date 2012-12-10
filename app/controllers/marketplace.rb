@@ -19,10 +19,6 @@
     redirect back
   end
 
-  get "/search" do
-      redirect "/"
-  end
-
   get "/item/:id/create_auction" do
     redirect '/login' unless session[:user_id]
 
@@ -417,9 +413,16 @@
 
     # input validation
     halt erb :error, :locals => { :message => LocalizedMessage.new([LocalizedMessage::LangKey.new("SEARCH_MAY_NOT_BE_EMPTY")]) } if params[:search].empty?
+    search_query = params[:search]
 
-    @found_items = Item.find_item(params[:search].downcase)
-    @found_offers = Item.find_offer(params[:search].downcase)
+    redirect "/search/#{search_query}"
+
+  end
+
+  get "/search/:search_query" do
+
+    @found_items = Item.find_item(params[:search_query].downcase)
+    @found_offers = Item.find_offer(params[:search_query].downcase)
 
     erb :searchresult
   end
