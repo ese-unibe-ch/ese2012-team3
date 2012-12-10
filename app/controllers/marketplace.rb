@@ -402,6 +402,8 @@ post "/item/:id/watchlist" do
   redirect "/item/#{@item.id.to_s}"
 end
 
+require "cgi"
+
 post "/search" do
   redirect '/login' unless session[:user_id]
 
@@ -409,12 +411,12 @@ post "/search" do
   halt erb :error, :locals => { :message => LocalizedMessage.new([LocalizedMessage::LangKey.new("SEARCH_MAY_NOT_BE_EMPTY")]) } if params[:search].empty?
   search_query = params[:search]
 
-  redirect "/search/#{search_query}"
+  redirect "/search/#{CGI::escape(search_query)}"
 
 end
 
 get "/search/:search_query" do
-
+  params[:search_query] = CGI::unescape(params[:search_query])
   @found_items = Item.find_item(params[:search_query].downcase)
   @found_offers = Item.find_offer(params[:search_query].downcase)
 
