@@ -35,33 +35,53 @@ end
 
 post "/item/delete" do
   admin!
-  Market::Item.by_id(params[:id_to_delete].to_i).delete
+  begin
+    Market::Item.by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+     halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/user/delete" do
   admin!
-  Market::User.user_by_id(params[:id_to_delete].to_i).delete
+  begin
+    Market::User.user_by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/organization/delete" do
   admin!
-  Market::Organization.organization_by_id(params[:id_to_delete].to_i).delete
+  begin
+    Market::Organization.organization_by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/auction/delete" do
   admin!
   # auction is removed if item is inactivated
-  Market::Item.by_id(params[:id_to_delete].to_i).inactivate
+  begin
+    Market::Item.by_id(params[:id_to_delete].to_i).inactivate
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/offer/delete" do
   admin!
   # an offer is just an item in another list
-  Market::Item.offer_by_id(params[:id_to_delete].to_i).delete
+  begin
+    Market::Item.offer_by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
