@@ -12,7 +12,7 @@ class MyTest < Test::Unit::TestCase
       return self[:name]
     end
     act = Activity::new_comment_activity(user, a)
-    assert(act.message.message_ary[1] == " #{a.name}")
+    assert(act.message.message_ary[2] == "#{a.name}") # message_ary supposed to be ["COMMENTED_ON", " ", item.name.clone]
     assert(act.creator == user)
     assert(act.type == :comment)
     assert(time - act.timestamp > -0.00009) # this might fail sometimes if ruby feels like it

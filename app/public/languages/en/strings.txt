@@ -1,3 +1,9 @@
+NOT_CURRENTLY_MEMBER
+You are not currently a member of this organization and may therefore not access this page.
+NO_USER_FOUND
+no user found
+ACCESS_DENIED
+Access denied.
 LANG_OF_DESC_AND_NAME
 Lang. of desc. & name
 I_WANT_PROVIDE_DESC_MORE_LANGS

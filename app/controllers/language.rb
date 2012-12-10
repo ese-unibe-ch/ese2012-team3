@@ -1,4 +1,3 @@
-
 # A language stores a hash mapping "language-" or "localization keys" to literal strings.
 # e.g. {'PRICE' => 'Prix'}
 class Language

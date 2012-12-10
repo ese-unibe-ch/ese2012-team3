@@ -1,4 +1,4 @@
-# Contains requirements for app and tests
+# Includes all model classes. These are requiremened for the app and the tests.
 require_relative 'models/passwordcheck'
 require_relative 'models/simple_email_client'
 require_relative 'models/helpers'

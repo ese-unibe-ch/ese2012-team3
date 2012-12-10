@@ -1,8 +1,7 @@
 # @internal_note Rubymine won't accept this as Ruby file if named password_check !?!
 
-# Ensure a password is "strong".
-# Strong as defined by
-# http://windows.microsoft.com/en-US/windows-vista/Tips-for-creating-a-strong-password
+# Ensures a password is "strong".
+# Strong as defined by http://windows.microsoft.com/en-US/windows-vista/Tips-for-creating-a-strong-password
 class PasswordCheck
 
   # Reads the file containing the top 3000 US english words

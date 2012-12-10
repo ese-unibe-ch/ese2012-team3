@@ -21,7 +21,8 @@
 
       <hr />
 
-      <% if @org.admins.include?(@current_user) and @current_agent == @org %>
+      <% # admin only options
+      if @org.admins.include?(@current_user) and @current_agent == @org %>
         <h3><%=@LANG["ADD_MEMBER_TO_ORGANIZATION"]%></h3>
         <% if addable_users.length > 0 %>
             <form action="/organization/<%= @org.id %>/add_member" method="POST">
@@ -37,7 +38,7 @@
         <% else %>
           <p><%=@LANG["NO_USERS_TO_ADD"]%></p>
         <% end %>
-          <form class="form-horizontal" method="POST" action="/change_profile_picture_organization" enctype="multipart/form-data">
+          <form class="form-horizontal" method="POST" action="/organization/#{@org.id}/change_profile_picture" enctype="multipart/form-data">
             <h3><%=@LANG["CHANGE_PROFILE_PICTURE"]%></h3>
             <fieldset>
               <%= erb :_image_file_control %>
@@ -48,7 +49,7 @@
           </form>
           <% if @org.image_file_name != nil %>
               <h3><%=@LANG["DELETE_PROFILE_PICTURE"]%></h3>
-              <form class="form-horizontal" method="POST" action="/delete_profile_picture_organization" >
+              <form class="form-horizontal" method="POST" action="/organization/#{@org.id}/delete_profile_picture" >
                 <fieldset>
                   <div class="form-actions">
                     <input type="hidden" name="_method" value="delete"/>

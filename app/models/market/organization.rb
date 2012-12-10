@@ -56,6 +56,7 @@ module Market
       org.credit = params[:credit] || 100
       org.about = params[:about] || ""
       org.wishlist = []
+      org.image_file_name = nil
       @@organizations << org
       org.id = @@organization_id_counter
       @@organization_id_counter = @@organization_id_counter + 1

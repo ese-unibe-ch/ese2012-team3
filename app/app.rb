@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+# This is the main application file. It states all includes only required for the full application (that is model and controllers).
+# If also does the setup and defines constants.
+
+
 # Common requs
 require 'rubygems'
 require 'require_relative'

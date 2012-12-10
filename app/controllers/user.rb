@@ -1,22 +1,22 @@
+# We define queries manipulating {User}s here.
 
 get "/settings" do
-  redirect '/login' unless session[:user_id]
   erb :settings
 end
 
-get "/profile/:id" do
-  redirect '/login' unless session[:user_id]
-
+before "/profile/:id" do
+  halt erb :error, :locals => {:message => localized_message_single_key("NO_USER_FOUND")} unless User.has_user_with_id?(params[:id].to_i)
   @user = User.user_by_id(params[:id])
+end
 
+get "/profile/:id" do
   erb :userprofile
 end
 
+# it would have been a better design to not include a parameter
 delete "/profile/:id" do
-  redirect '/login' unless session[:user_id]
-
-  @user = Market::User.user_by_id(params[:id]).delete
-
+  halt erb :error, :locals => {:message => localized_message_single_key("ACCESS_DENIED")} unless @user == @current_user
+  @user.delete
   redirect "/logout"
 end
 
@@ -24,9 +24,7 @@ get "/delete_confirmation" do
   erb :delete_confirmation
 end
 
-
 get "/user/switch" do
-  redirect '/login' unless session[:user_id]
   # Remove the organization id from the session, the current_agent will be set back to current_user
   session[:organization_id] = nil
   flash[:success] = 'agent_switched'
@@ -46,8 +44,8 @@ def passwordcheck()
   end
 end
 
-# Do we really want inline errors with this?
-# Losing the image one selected is annoying..
+# Losing the image selected when you did a mistake is annoying, but there's nothing we can do, you can't specify a default value for 
+# file selection controls for security reasons.
 post "/register" do
   redirect '/' if session[:user_id]
 
@@ -79,7 +77,6 @@ get "/register" do
 end
 
 post "/change_password" do
-  redirect '/' if !session[:user_id]
 
   set_error :currentpassword, LocalizedMessage.new([LocalizedMessage::LangKey.new("CURRENT_PASS_WRONG")]) unless @current_user.password == params[:currentpassword]
 
@@ -94,40 +91,37 @@ post "/change_password" do
 end
 
 post "/change_profile_picture" do
+
   set_error :image_file, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_FILE_CHOSEN")]) unless  params[:image_file]
 
   image_file_check()
 
   halt erb :settings unless @errors.empty?
 
-  user = @current_user
-  if user.image_file_name != nil && params[:image_file] != nil
-    user.delete_profile_picture
+  @current_user = @current_user
+  if @current_user.image_file_name != nil && params[:image_file] != nil
+    @current_user.delete_profile_picture
   end
 
-  user.image_file_name = add_image(USERIMAGESROOT, user.id)
+  @current_user.image_file_name = add_image(USERIMAGESROOT, @current_user.id)
 
-  redirect "/profile/#{user.id}"
+  redirect back
 end
 
 delete "/delete_profile_picture" do
-  user = @current_user
-
   halt erb :error, :locals =>
-      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless user.image_file_name
+      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless @current_user.image_file_name
 
   @current_user.delete_image_file
 
-  redirect "/profile/#{user.id}"
+  redirect back
 end
 
-
 post "/follow" do
-  redirect '/login' unless session[:user_id]
 
-  # There is a form param :agent which either says user or organization.
+  # There is a form param :agent which either says @current_user or organization.
   # This is necessary because they have separate IDs.
-  if params[:agent] == "user"
+  if params[:agent] == "@current_user"
     follow = User.user_by_id(params[:follow_id].to_i)
   else
     follow = Organization.organization_by_id(params[:follow_id].to_i)

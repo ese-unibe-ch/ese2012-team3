@@ -5,7 +5,7 @@
   <div class="span10">
     <h1>Delete auction</h1>
     <% if @all_auctions.length > 0 %>
-      <form action="/auction/delete" method="POST">
+      <form action="/admin/auction/delete" method="POST">
         <fieldset>
           <select name="id_to_delete">
             <% for auction in @all_auctions %>

@@ -1,5 +1,4 @@
- # This
-
+# This Module defines some cusom ruby "language extensions" if you will to make our lives easier.
 module ModelHelpers
 
   # raises an exception if v is nil or not kind of class (that is , has class as one of its superclasses)
@@ -40,8 +39,10 @@ module ModelHelpers
     end
   end
 
-  # supply: Class, varname, Class, varname,...
-  # values set for varname can only be kind_of Class or nil
+  # An attribute definition helper.
+  # Parameters: supply in the order Class, varname, Class, varname,...
+  # This ensures that values set for varname can only be kind_of Class or nil.
+  # e.g. <tt>attr_accessor_typesafe String, :text</tt> creates the attribute text and enfores that it is only assigned string values or nil.
   def attr_accessor_typesafe(*classes_args)
     classes_args.each_with_index do |attr_name, i|
       next if i%2 == 0
@@ -69,7 +70,7 @@ module ModelHelpers
     end
   end
 
-  # ensures assigned values are not nil
+  # Same as {attr_accessor_typesafe} but additionally ensures assigned values are not nil
   def attr_accessor_typesafe_not_nil(*classes_args)
     classes_args.each_with_index do |attr_name, i|
       next if i%2 == 0
@@ -99,8 +100,9 @@ module ModelHelpers
 
  end
 
-#Test::Unit::Assertions::assert_kind_of does the same, but the stacktrace gets longer (5 levels of unrelated code versus 1 level...)
-#require "test/unit"
-#include Test::Unit::Assertions
+# @internal_note Test::Unit::Assertions::assert_kind_of does the same as ModelHelpers::assert_kind_of, but the stacktrace gets longer (5 levels of unrelated code versus 1 level...)
+#   use the following code to use it instead: 
+#   require "test/unit"
+#   include Test::Unit::Assertions
 
- include ModelHelpers
+include ModelHelpers

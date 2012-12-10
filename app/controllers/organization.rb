@@ -1,11 +1,36 @@
+# We define queries manipulating {Organization}s here.
 
+# Some stuff we use often.
+def before_get_org_by_id 
+  @org = nil 
+  
+  if params.has_key?("id") && params[:id]
+    halt erb :error, :locals => {:message => localized_message_single_key("NO_ORG_FOUND")} unless Organization.has_organization_with_id?(params[:id].to_i)
+    @org = Organization.organization_by_id(params[:id].to_i)
+  end
+end
+
+before "/organization/:id*" do
+  before_get_org_by_id
+end
+
+ACCESSIBLE_ORG_OPTIONS = ["settings", "switch"] # Options accessible for normal members
+# @current_user must be member and admin of that org to access any organization option pages
+before "/organization/:id/:optn" do 
+  before_get_org_by_id
+  
+  halt erb :error, :locals => {:message => localized_message_single_key("NOT_CURRENTLY_MEMBER")} unless @org.members.include?(@current_user)
+  
+  return if ACCESSIBLE_ORG_OPTIONS.include?(params[:optn])
+  halt erb :error, :locals => {:message => localized_message_single_key("NO_ADMIN_RIGHTS")} unless @org.admins.include?(@current_user)
+end
+
+# ============ Accessible, public
 get "/organization/create" do
-  redirect '/login' unless session[:user_id]
   erb :create_organization
 end
 
 post "/organization/create" do
-  redirect '/login' unless session[:user_id]
 
   name = params[:name]
   about = params[:about]
@@ -25,22 +50,32 @@ post "/organization/create" do
 end
 
 get "/organization/:id" do
-  redirect '/login' unless session[:user_id]
-
-  @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
   # Provide item list of the organization
   @items = Item.items_by_agent(@org)
 
   erb :organization
 end
 
-post "/organization/:id/add_member" do
-  redirect '/login' unless session[:user_id]
-  # Check for valid IDs
-  @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
+# ============ Private for members only 
+get "/organization/:id/switch" do
+  # If the current_user is a member of the requested organization, the current_agent is set to the organization.
+  session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member?(@current_user)
+  flash[:success] = 'agent_switched'
+  redirect back
+end
 
+# it would have been a better design to not include a parameter in all of the following:
+
+get "/organization/:id/settings" do
+  # Obviously, any user that is not already in the organization is eligible for membership.
+  addable_users = User.all.select {|u| !u.is_member_of?(@org)}
+
+  erb :organization_settings, :locals => {:addable_users   => addable_users}
+end
+
+
+# ============ Private for admins only
+post "/organization/:id/add_member" do
   user_to_add = User.user_by_id(params[:user_to_add])
   halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USER_TO_ADD_FOUND")])} unless user_to_add
   # Add user to org
@@ -54,16 +89,9 @@ post "/organization/:id/add_member" do
 end
 
 post "/organization/:id/toggle_admin_member" do
-  redirect '/login' unless session[:user_id]
-  # Check for valid IDs
-  @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
-
   user_to_change = User.user_by_id(params[:user_to_change])
   halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USER_TO_PROMOTE_FOUND")])} unless user_to_change
   
-  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ADMIN_RIGHTS")])} unless @org.admins.include?(@current_user)
-
   # promote user
   begin
     @org.toggle_admin_rights(user_to_change)
@@ -75,10 +103,6 @@ post "/organization/:id/toggle_admin_member" do
 end
 
 post "/organization/:id/remove_member" do
-  redirect '/login' unless session[:user_id]
-  # Check for valid ID
-  @org = Organization.organization_by_id(params[:id].to_i)
-  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
   #Remove user
   user_to_remove = User.user_by_id(params[:user_to_remove])
   @org.remove_member(user_to_remove)
@@ -86,51 +110,28 @@ post "/organization/:id/remove_member" do
   redirect back
 end
 
-
-get "/organization/:id/switch" do
-  redirect '/login' unless session[:user_id]
-  # If the current_user is a member of the requested organization, the current_agent is set to the organization.
-  session[:organization_id] = params[:id].to_i if Organization.organization_by_id(params[:id].to_i).has_member?(@current_user)
-  flash[:success] = 'agent_switched'
-  redirect back
-end
-
-get "/organization/:id/settings" do
-  redirect '/login' unless session[:user_id]
-
-  @org = Organization.organization_by_id(params[:id].to_i) 
-  halt erb :error, :locals => {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_ORG_FOUND")])} unless @org
-  # Obviously, any user that is not already in the organization is eligible for membership.
-  addable_users = User.all.select {|u| !u.is_member_of?(@org)}
-
-  erb :organization_settings, :locals => {:addable_users   => addable_users}
-end
-
-post "/change_profile_picture_organization" do
+post "/organization/:id/change_profile_picture" do
   set_error :image_file, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_FILE_CHOSEN")]) unless  params[:image_file]
 
   image_file_check()
 
   halt erb :settings unless @errors.empty?
 
-  org = @current_agent
   # Delete old picture if there is a new one
-  if org.image_file_name != nil && params[:image_file] != nil
-    org.delete_profile_picture_organization
+  if params[:image_file] != nil
+    @org.delete_image_file
   end
 
-  org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id)
+  @org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, @org.id)
 
-  redirect "/organization/#{org.id}"
+  redirect "/organization/#{@org.id}"
 end
 
-delete "/delete_profile_picture_organization" do
-  org = @current_agent
-
+delete "/organization/:id/delete_profile_picture" do
   halt erb :error, :locals =>
-      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless org.image_file_name
+      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless @org.image_file_name
 
-  org.delete_image_file
+  @org.delete_image_file
 
-  redirect "/organization/#{org.id}"
+  redirect "/organization/#{@org.id}"
 end

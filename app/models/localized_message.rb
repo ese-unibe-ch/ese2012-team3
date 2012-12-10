@@ -1,7 +1,5 @@
 
-
-
-LOCALIZED_FALLBACKLANGCODE = "en"
+LOCALIZED_FALLBACKLANGCODE = "en" # This is defined here instead of in app.rb because it is also required in the tests.
 
 # A string literal given in several different languages.
 # @see LocalizedLiteral.[]

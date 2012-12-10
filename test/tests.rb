@@ -1,3 +1,5 @@
+# Run this to run the model tests. Defines all required includes plus some commonly required mock methods.
+
 # Common requs
 require 'rubygems'
 require 'require_relative'
@@ -9,6 +11,13 @@ require "rufus-scheduler"
 # Test requs
 require "test/unit"
 
+# Mock method
+def delete_public_file(fn)
+  # do nothing
+end
+
+
+# Include (= run) tests
 require_relative 'test_organization.rb'
 require_relative 'test_user.rb'
 require_relative 'test_item.rb'

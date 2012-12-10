@@ -1,3 +1,5 @@
+# This defines helpers used by the controllers and views.
+
 module SecurityHelpers
     def xss(text)
       escaped = Rack::Utils.escape_html(text)
@@ -18,6 +20,7 @@ module MarkupHelpers
   end
 end
 
+# Shows the admin login if not authenticated
 def admin!
   unless authorized?
     response['WWW-Authenticate'] = %(Basic realm="#{ADMIN_AREA_LOGIN_MESSAGE}")

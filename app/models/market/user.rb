@@ -1,11 +1,11 @@
 module Market
 
-  # A User is the only type of {Agent} that can follow other agents. It can also join {Organization Organizations}.
+  # A User is the only type of {Agent} that can follow other agents. It can also join {Organization Organizations} and have a wishlist.
   #
-  # Users have a name.
-  # Users have an amount of credits.
-  # A new user has originally 100 credit.
-  # A user can add a new item to the system with a name and a price; the item is originally inactive.
+  # * Users have a name.
+  # * Users have an amount of credits.
+  # * A new user has 100 credits unless specified otherwise.
+  # * A user can add a new item to the system with a name and a price; the item is originally inactive.
   # A user can buy active items of another user (inactive items can't be bought).
   # When a user buys an item, it becomes the owner; credit are transferred accordingly;
   # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
@@ -42,6 +42,7 @@ module Market
       user.password = params[:password] || ""
       user.following = []
       user.wishlist = []
+      user.image_file_name = nil
       @@users << user
       user.id = @@user_id_counter
       @@user_id_counter = @@user_id_counter + 1

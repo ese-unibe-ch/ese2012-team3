@@ -1,125 +1,145 @@
+# This file defines queries accessible to all visitors, whether logged in or not.
+# We also define some controller-level global functionality here, such as the preparation for all queries.
 
-  # Sets up variables for later use, most importantly current_user which stores the user that is currently logged in and current_agent which is either
-  # equal to current_user or is an organization. It represents the acting agent. Actions like buying items, editing etc. can either be done for the user
-  #himself (current_user == current_agent) or for the organization he's working for (current_user != current_agent).
-  before do
-    print request.path_info+"\n" # TODO Output redirect to login if not already requested right here for non auth. users so we don't have to chack later
-    # Problem: We don't want to redirect ordinary files...
+# Global before handler
+# Sets up variables for later use, most importantly current_user which stores the user that is currently logged in and current_agent which is either
+# equal to current_user or is an organization. It represents the acting agent. Actions like buying items, editing etc. can either be done for the user
+#himself (current_user == current_agent) or for the organization he's working for (current_user != current_agent).
+# @internal_note Reference for before: http://stackoverflow.com/questions/7703962/in-sinatra-how-do-you-make-a-before-filter-that-match-all-routes-except-some
+before do
 
-    # Clear if invalid
-    if session[:user_id] and !User.has_user_with_id?(session[:user_id])
-      session[:user_id] = nil
+  print request.path_info+"\n" # TODO Output redirect to login if not already requested right here for non auth. users so we don't have to chack later
+  # Problem: We don't want to redirect ordinary files...
+
+  # Clear if invalid
+  if session[:user_id] and !User.has_user_with_id?(session[:user_id])
+    session[:user_id] = nil
+  end
+
+  if session[:organization_id] and !Organization.has_organization_with_id?(session[:organization_id].to_i)
+    session[:organization_id] = nil
+  end
+
+  @current_id = session[:user_id]
+
+  # The user that is currently logged in in this session
+  @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+  if @current_user && !request.path_info.include?(".") # if the user is logged in and requested a page (not a file),
+    @current_user.logged_in = true # ensure is set
+    @current_user.last_action_time = Time.new
+    @current_user.last_action_url  = request.path_info
+  end
+
+  # The user/agent we are working for (buying items)
+  if session[:organization_id].nil?
+    @current_agent = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
+  else
+    @current_agent = Organization.organization_by_id(session[:organization_id].to_i)
+  end
+  @all_items = Market::Item.active_items
+  @all_offers = Market::Item.all_offers
+  @users = Market::User.all + Market::Organization.all
+  @errors = {}
+
+  # Language
+  if session[:language].nil? or !LANGUAGES.has_key?(session[:language])
+    session[:language] = DEFAULT_LANGUAGE # reset to default if invalid
+  end
+  @current_language = LANGUAGES[session[:language]]
+  @LANG = @current_language # SHORTCUT
+  @LANGCODE = session[:language] # de, jp, en, fr, equivalent to @LANG["LANGUAGE_CODE"]
+end
+
+PUBLIC_ROUTES = ["/strongpass", "/login", "/error", "/register"]
+
+# ensure login
+before do
+  return if request.path_info.include?(".") # files are ok
+  return if PUBLIC_ROUTES.include?(request.path_info)
+  return if request.path_info.include?("/set_language/")
+  ensure_logged_in!
+end
+
+
+
+# Redirects to login if not logged in.
+def ensure_logged_in!
+  redirect '/login' unless session[:user_id]
+end
+
+def set_error(at, text)
+  @errors[at] = text
+end
+
+# Returns filename (relative to public) of the image added or nil if image is not present.
+# Expects image file to be in params[:image_file]
+def add_image(rootdir, id)
+  file = params[:image_file]
+  return nil unless file
+  fn = rootdir+"/#{id}"+File.extname(file[:filename])
+  FileUtils::cp(file[:tempfile].path, "#{PUBLIC_FOLDER}/"+fn)
+  return fn
+end
+
+# sets the :image_file error if there's something wrong with the image provided
+def image_file_check
+  file = params[:image_file]
+  if file
+    set_error :image_file, LocalizedMessage.new([ LocalizedMessage::LangKey.new("IMAGE_TOO_LARGE"),
+                                       " < #{MAXIMAGEFILESIZE/1024} kB,  is #{file[:tempfile].size/1024} kB"]) if file[:tempfile].size > MAXIMAGEFILESIZE
+  end
+end
+
+# Intended for images only...
+def delete_public_file(fn)
+  if fn && fn.length > 0 && File.exist?(fn)
+    File.delete "#{PUBLIC_FOLDER}/"+fn
+  end
+end
+
+#get "public/:fname" do # see _image_rect.erb
+ # send_file("#{PUBLIC_FOLDER}/"+params[:fname])
+#end
+
+get "/strongpass" do
+  erb :strongpass
+end
+
+get "/all_users" do
+  erb :userlist
+end
+
+get "/error" do
+  erb :error
+end
+
+post "/set_activity_filter" do
+  session[:activity_filter] = []
+  session[:activity_filter] << "comment"    if params[:comment]
+  session[:activity_filter] << "follow"     if params[:follow]
+  session[:activity_filter] << "activate"   if params[:activate]
+  session[:activity_filter] << "buy"        if params[:buy]
+  session[:activity_filter] << "createitem" if params[:createitem]
+
+  redirect back
+end
+
+get "/set_language/:lang" do
+  session[:language] = params[:lang]
+  redirect back
+end
+
+# Marketplace main page
+get "/" do
+  #collect all activities
+  activities = []
+  if(@current_agent.respond_to?('following'))
+    for u in @current_agent.following do
+      activities.concat(u.activities)
     end
-
-    if session[:organization_id] and !Organization.has_organization_with_id?(session[:organization_id].to_i)
-      session[:organization_id] = nil
-    end
-
-    @current_id = session[:user_id]
-
-    # The user that is currently logged in in this session
-    @current_user = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
-    if @current_user && !request.path_info.include?(".") # if the user is logged in and requested a page (not a file),
-      @current_user.logged_in = true # ensure is set
-      @current_user.last_action_time = Time.new
-      @current_user.last_action_url  = request.path_info
-    end
-
-    # The user/agent we are working for (buying items)
-    if session[:organization_id].nil?
-      @current_agent = session[:user_id] ? Market::User.user_by_id(session[:user_id]) : nil
-    else
-      @current_agent = Organization.organization_by_id(session[:organization_id].to_i)
-    end
-    @all_items = Market::Item.active_items
-    @all_offers = Market::Item.all_offers
-    @users = Market::User.all + Market::Organization.all
-    @errors = {}
-
-    # Language
-    if session[:language].nil? or !LANGUAGES.has_key?(session[:language])
-      session[:language] = DEFAULT_LANGUAGE # reset to default if invalid
-    end
-    @current_language = LANGUAGES[session[:language]]
-    @LANG = @current_language # SHORTCUT
-    @LANGCODE = session[:language] # de, jp, en, fr, equivalent to @LANG["LANGUAGE_CODE"]
   end
 
-  def set_error(at, text)
-    @errors[at] = text
-  end
-
-  # Returns filename (relative to public) of the image added or nil if image is not present.
-  # Expects image file to be in params[:image_file]
-  def add_image(rootdir, id)
-    file = params[:image_file]
-    return nil unless file
-    fn = rootdir+"/#{id}"+File.extname(file[:filename])
-    FileUtils::cp(file[:tempfile].path, "#{PUBLIC_FOLDER}/"+fn)
-    return fn
-  end
-
-  # sets the :image_file error if there's something wrong with the image provided
-  def image_file_check
-    file = params[:image_file]
-    if file
-      set_error :image_file, LocalizedMessage.new([ LocalizedMessage::LangKey.new("IMAGE_TOO_LARGE"),
-                                         " < #{MAXIMAGEFILESIZE/1024} kB,  is #{file[:tempfile].size/1024} kB"]) if file[:tempfile].size > MAXIMAGEFILESIZE
-    end
-  end
-
-  # Intended for images only...
-  def delete_public_file(fn)
-    if fn && fn.length > 0 && File.exist?(fn)
-      File.delete "#{PUBLIC_FOLDER}/"+fn
-    end
-  end
-
-  #get "public/:fname" do # see _image_rect.erb
-   # send_file("#{PUBLIC_FOLDER}/"+params[:fname])
-  #end
-
-  get "/" do
-    redirect '/login' unless @current_user
-
-    #collect all activities
-    activities = []
-    if(@current_agent.respond_to?('following'))
-      for u in @current_agent.following do
-        activities.concat(u.activities)
-      end
-    end
-
-    activities.sort! {|a,b| b.timestamp <=> a.timestamp}
-    erb :marketplace, :locals => {:activity_list => activities}
-  end
-
-  get "/strongpass" do
-    erb :strongpass
-  end
-
-  get "/all_users" do
-    redirect '/login' unless session[:user_id]
-    erb :userlist
-  end
-
-  get "/error" do
-    erb :error
-  end
-
-  post "/set_activity_filter" do
-    session[:activity_filter] = []
-    session[:activity_filter] << "comment"    if params[:comment]
-    session[:activity_filter] << "follow"     if params[:follow]
-    session[:activity_filter] << "activate"   if params[:activate]
-    session[:activity_filter] << "buy"        if params[:buy]
-    session[:activity_filter] << "createitem" if params[:createitem]
-
-    redirect back
-  end
-
-  get "/set_language/:lang" do
-    session[:language] = params[:lang]
-    redirect back
-  end
+  activities.sort! {|a,b| b.timestamp <=> a.timestamp}
+  erb :marketplace, :locals => {:activity_list => activities}
+end
 
