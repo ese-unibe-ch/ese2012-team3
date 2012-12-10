@@ -19,3 +19,6 @@ require_relative 'test_auction.rb'
 require_relative 'test_timed_event.rb'
 require_relative 'test_safe.rb'
 
+def delete_public_file fn
+end
+

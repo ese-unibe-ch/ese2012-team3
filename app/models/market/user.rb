@@ -42,6 +42,7 @@ module Market
       user.password = params[:password] || ""
       user.following = []
       user.wishlist = []
+      user.image_file_name = nil
       @@users << user
       user.id = @@user_id_counter
       @@user_id_counter = @@user_id_counter + 1
