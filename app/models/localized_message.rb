@@ -15,7 +15,7 @@ class LocalizedLiteral
   def [](langcode)
     return @s[langcode] if @s.has_key?(langcode)
     return @s[LOCALIZED_FALLBACKLANGCODE] if @s.has_key?(LOCALIZED_FALLBACKLANGCODE)
-    return @s.first_value
+    return @s.values.first
   end
 
   def initialize(hash_langcode_to_string)

@@ -291,12 +291,11 @@
     #create item
     if @errors.empty?
       item = Market::Item.init(
-                        :name   => "",
                         :price  => 1,
                         :active => false,
-                        :owner  => @current_agent,
-                        :about => "")
-
+                        :owner  => @current_agent)
+      item.name = LocalizedLiteral.new({})   
+      item.about = LocalizedLiteral.new({})         
       set_item_values_from_params(item)
 
       # If the user creates an item in the name of an organization, an organization activity is created.
