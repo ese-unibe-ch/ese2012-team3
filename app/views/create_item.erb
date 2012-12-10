@@ -9,7 +9,7 @@
   <div class="span10">
     <h2><%=@LANG["CREATE_NEW_ITEM"]%></h2>
     <form class="form-horizontal" method="POST" action="/item/create" enctype="multipart/form-data">
-      <%=erb :_create_edit_item %>
+      <%=erb :_create_edit_item_offer, :locals => {:offer => true} %>
 
     </form>
   </div>

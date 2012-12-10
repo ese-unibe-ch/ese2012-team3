@@ -1,9 +1,5 @@
 <% #params item (required), highlight_active (required, true or false)%>
 <% if item %>
-  <% prefix = "/item/" %>
-  <% if item.is_offer?
-       prefix = "/item/offer/"
-     end  %>
-<a href="<%= prefix %><%= item.id.to_s %>" <%= (highlight_active) ?
+<a href="<%="/item/#{item.id}"%>" <%= (highlight_active) ?
         (item.active ? "style='color:#00CC00;text-decoration:underline;'" : "style='color:#FF0000;text-decoration:underline;'") : "" %>><%= xss item.name[@LANGCODE] %></a>
 <% end %>

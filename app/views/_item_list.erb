@@ -4,19 +4,15 @@
 # :show_owner (optional)
 # :highlight_active (optional)
 # :identifier - identifier for this list on a page with multiple item lists, used for paging links.
+# :hide_not_found
 
 identifier = :itemlistpage unless identifier
+identifier_offers = :"#{identifier.to_s}_offers" 
 page = params[identifier] ? params[identifier].to_i : 0
-
+page_offers = params[identifier_offers] ? params[identifier_offers].to_i : 0
    %>
 
-<%= erb :_pages_links, :locals => {:cur_page => page,
-                                   :size => items.size,
-                                   :per_page => ITEMS_PER_PAGE,
-                                   :identifier => identifier}
-%>
-
-<script type="text/javascript">
+   <script type="text/javascript">
   $(document).ready(function(){
     $(".item-about").hide();
     $(".toggler").toggle(
@@ -39,6 +35,14 @@ page = params[identifier] ? params[identifier].to_i : 0
     );
   });
 </script>
+
+<h3><%= @LANG["FOUND_ITEMS"] %></h3>
+<%= erb :_pages_links, :locals => {:cur_page => page,
+                                   :size => items.size,
+                                   :per_page => ITEMS_PER_PAGE,
+                                   :identifier => identifier}
+%>
+
 
 <% if items.length > 0 %>
 <table class="table">
@@ -78,14 +82,16 @@ page = params[identifier] ? params[identifier].to_i : 0
   <p><%= @LANG["NO_ITEMS_FOUND"] %></p>
 <% end %>
 
-<%= erb :_pages_links, :locals => {:cur_page => page,
-                                   :size => items.size,
+
+<h3><%=@LANG["OFFERS"]%></h3>
+<%= erb :_pages_links, :locals => {:cur_page => page_offers,
+                                   :size => offers.size,
                                    :per_page => ITEMS_PER_PAGE,
-                                   :identifier => identifier}
+                                   :identifier => identifier_offers}
 %>
 
+
 <%if (defined? offers) && (offers.length > 0) %>
-  <h3><%=@LANG["OFFERS"]%></h3>
   <table class="table">
     <thead>
     <th></th>
@@ -97,12 +103,12 @@ page = params[identifier] ? params[identifier].to_i : 0
   </thead>
   <tbody>
   <% offers.each_with_index do |offer, index| %>
-  <% next unless index/ITEMS_PER_PAGE == page %>
+  <% next unless index/ITEMS_PER_PAGE == page_offers %>
       <tr style="height:<%= LISTROWWITHIMAGEHEIGHT%>px" class="itemrow">
         <td><a class="toggler" href=""><i class="icon-zoom-in"></i></a></td>
         <td><%= erb :_image_rect, :locals => {:filename => offer.image_file_name, :size => LISTIMAGESIZE} %></td>
         <td style="width: 25%">
-            <%= erb :_item_link, :locals => {:item => offer, :highlight_active => defined? highlight_active, :offer => true} %>
+            <%= erb :_item_link, :locals => {:item => offer, :highlight_active => false, :offer => true} %>
             <div class="item-about"><%= mdown_to_html(xss offer.about[@LANGCODE]) %></div>
         </td>
 

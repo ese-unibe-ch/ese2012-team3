@@ -7,7 +7,7 @@
   <%= erb :_sidebar %>
   <div class="span10">
     <h2><%=@LANG["SEARCH_RESULT"]%></h2>
-    <h3><%= @LANG["FOUND_ITEMS"] %></h3>
+    
     <%=erb :_item_list, :locals=>{
             :items => @found_items,
             :offers => @found_offers,

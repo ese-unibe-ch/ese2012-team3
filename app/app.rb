@@ -179,14 +179,29 @@ User.all.each_with_index do |user, i|
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
 
+# Some dummy offers to test paging
+lastdummyitem = nil
+for i in 0...DUMMYTHINGSCOUNT
+  dummyabout = "**this** *is* a\n\n* dummy\n\n1. offer"
+  safe = Safe.new
+  price = rand(10)+1
+  safe.fill(uno, price)
+  lastdummyitem = Item.init(:name => "dummyoffer"+i.to_s, :price => price, :active => true, :owner => uno, :about => dummyabout, :offer => true, :safe => safe)
+  
+  lastdummyitem.image_file_name="itemimages/quarta.jpg"
+  Market::Item.add_offer(lastdummyitem)
+end
+
 # Some dummy items to test paging
 lastdummyitem = nil
 for i in 0...DUMMYTHINGSCOUNT
   dummyabout = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua"
-  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100), :active => true, :owner => uno, :about => dummyabout)
+  lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100)+1, :active => true, :owner => uno, :about => dummyabout)
   lastdummyitem.image_file_name="itemimages/quarta.jpg"
   uno.add_item(lastdummyitem)
 end
+
+
 
 # Some dummy comments to test paging to LAST dummyitem
 for i in 0...DUMMYTHINGSCOUNT

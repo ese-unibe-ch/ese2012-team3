@@ -1,3 +1,5 @@
+EDIT_OFFER
+Edit Offer
 NOT_CURRENTLY_MEMBER
 You are not currently a member of this organization and may therefore not access this page.
 NO_USER_FOUND

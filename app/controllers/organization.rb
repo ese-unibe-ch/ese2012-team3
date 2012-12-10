@@ -50,9 +50,6 @@ post "/organization/create" do
 end
 
 get "/organization/:id" do
-  # Provide item list of the organization
-  @items = Item.items_by_agent(@org)
-
   erb :organization
 end
 

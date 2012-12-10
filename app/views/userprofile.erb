@@ -1,5 +1,6 @@
 <% @title = @LANG["USER_PROFILE"]
    @items = Item.items_by_agent(@user)
+   @offers = Item.offers_by_agent(@user)
    @organizations = Organization.organizations_by_user(@user)
    @following = @user.following
    if @user == @current_agent
@@ -34,35 +35,25 @@
       <p><%= mdown_to_html (xss @user.about) %></p>
     <% end %>
 
-    <h3 style="padding-top: 50px;">
-      <% if @user == @current_agent %>
-          <%=@LANG["YOUR_ITEMS"]%>
-      <% else %>
-          <%=@LANG["USERS_ITEMS"]%>
-      <% end %>
-    </h3>
-
-    <% if @items.size > 0 %>
+    <!-- Items -->
         <%=erb :_item_list, :locals=>{
                 :items => @items,
+                :offers => @offers,
                 :highlight_active => true
         }%>
 
 
-    <% else %>
-        <% if @user == @current_agent%>
-            <i><%=@LANG["YOU_HAVE_NO_ITEMS"]%></i>
-        <% else %>
-            <i><%=@LANG["THIS_USER_HAS_NO_ITEMS"]%></i>
-        <% end %>
-    <% end %>
-
     <% if @user == @current_agent %>
         <form class="form-inline" method="GET" action="/item/create">
             <fieldset>
-                <button class="btn btn-info" type="submit"><%=@LANG["ADD_A_NEW_ITEM"]%></button>
+              <button class="btn btn-info" type="submit"><%=@LANG["NEW_ITEM"]%></button>
             </fieldset>
-        </form>
+          </form>
+          <form class="form-inline" method="GET" action="/item/offer">
+            <fieldset>
+              <button class="btn btn-info" type="submit"><%=@LANG["NEW_OFFER"]%></button>
+            </fieldset>
+          </form>
     <% end %>
 
     <h3 style="padding-top: 50px;">

@@ -31,8 +31,15 @@ module Market
 
     # constructor - give a name to the item and set a specified price
     # @param [Object] params - dictionary of symbols.
-    # Recognized: <tt>:name, :price, :active, :owner, :about, :auction</tt>
-    # Required: owner must be an Agent
+    #   Recognized: 
+    #   * :name
+    #   * :price
+    #   * :active
+    #   * :owner, an {Agent}, required
+    #   * :about
+    #   * :auction
+    #   * :offer
+    # 
     # if :name and :about are not hashes, we create them as "en" => string
     def self.init(params={})
       params[:name]  = {"en"=>params[:name]} if params[:name].kind_of? String
@@ -97,9 +104,13 @@ module Market
       @@items.select { |item| item.active && item.owner == user }
     end
 
-    # list of user's items
+    # @return list of user's items
     def self.items_by_agent(user)
       @@items.select { |item| item.owner == user }
+    end
+    
+    def self.offers_by_agent(user)
+      @@offers.select { |item| item.owner == user }
     end
 
     def self.delete_all
@@ -129,7 +140,7 @@ module Market
     end
 
     def is_offer?()
-      Item.offer_by_id(self.id) == self
+      Item.offer_by_id(self.id) == self # what about @@offers.include?(self)
     end
 
     # same as {find_item} but for offers.
@@ -150,6 +161,7 @@ module Market
     end
 
     def self.transform_offer_to_item(offer)
+      offer.safe = nil
       @@items.push(offer)
       @@offers.delete(offer)
     end
