@@ -9,7 +9,7 @@ get "/admin" do
   erb :"admin/index", :layout => :"admin/admin_layout"
 end
 
-get "/admin/delete_auction" do
+get "/admin/delete_auction" do  
   @all_auctions = Market::Item.all_auctions
   erb :"admin/delete_auction", :layout => :"admin/admin_layout"
 end
@@ -35,29 +35,52 @@ get "/admin/delete_org" do
 end
 
 post "/admin/item/delete" do
-  Market::Item.by_id(params[:id_to_delete].to_i).delete
+  admin!
+  begin
+    Market::Item.by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+     halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/admin/user/delete" do
-  Market::User.user_by_id(params[:id_to_delete].to_i).delete
+  admin!
+  begin
+    Market::User.user_by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/admin/organization/delete" do
-  Market::Organization.organization_by_id(params[:id_to_delete].to_i).delete
+  admin!
+  begin
+    Market::Organization.organization_by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/admin/auction/delete" do
   # auction is removed if item is inactivated
-  Market::Item.by_id(params[:id_to_delete].to_i).inactivate
+  begin
+    Market::Item.by_id(params[:id_to_delete].to_i).inactivate
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 
 post "/admin/offer/delete" do
   # an offer is just an item in another list
-  Market::Item.offer_by_id(params[:id_to_delete].to_i).delete
+  begin
+    Market::Item.offer_by_id(params[:id_to_delete].to_i).delete
+  rescue Exception => e
+    halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
+  end
   redirect back
 end
 

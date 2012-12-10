@@ -1,0 +1,13 @@
+<% @title = "Marketplace Admin - Ooops" %>
+
+<section id="content">
+    <div class="row">
+      <%= erb :"admin/_sidebar" %>
+      <div class="span10">
+        <h1><%=@LANG["ERROR"]%></h1>
+        <div class="alert-error alert">
+          <strong><%=@LANG["ERROR"]%></strong><br /><%= xss message.to_string(@LANG) %>
+        </div>
+      </div>
+    </div>
+</section>
