@@ -30,6 +30,5 @@ def authorized?
   @auth.provided? && @auth.basic? && @auth.credentials && @auth.credentials == [ADMIN_USERNAME, ADMIN_PASSWORD]
 end
 
-
 helpers SecurityHelpers, NumericHelpers, MarkupHelpers
 

@@ -1,10 +1,16 @@
 module Market
+
+  # Implements the timeout of an {Auction}. Can have subscribers that must implement <tt>timed_out</tt> which will be called when the time sepcified is reached.
   class TimedEvent
 
-    attr_accessor :time, :subscribers, :scheduler, :timed_out, :job
+    attr_accessor :time # a <tt>Time</tt> object specifing the time when this ends
+    attr_accessor :subscribers # an <tt>Array</tt> of objects. Must implement timed_out, which will be called when the time is over
+    attr_accessor :scheduler  # the <tt>Rufus::Scheduler</tt> used to create and handle timed events
+    attr_accessor :timed_out # whether this event is timed out <tt>Boolean</tt>
+    attr_accessor :job # the internal job (a function) to be executed when the timer runs out.
 
-
-    # object_to_time must implement "timed_out"
+    # @param object_to_time must implement "timed_out"
+    # @param time [Time]
     def self.create(object_to_time, time)
       assert_kind_of(Time, time)
       fail "Object to be called should not be nil" if object_to_time.nil?

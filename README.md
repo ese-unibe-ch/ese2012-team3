@@ -12,3 +12,8 @@ To test: Simply run test/tests.rb (current directory doesn't matter).
 * [Devkit](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit) (only when developing using this source code, not for production)
 * `gem install bundler`
 * `bundle install`
+
+## License
+
+* Uses [Bootstrap](http://twitter.github.com/bootstrap/)
+* Source of the language flag icons: http://blogosys.com/2009/01/mini-flag-icons-for-language-translation-widget-247-countries.html

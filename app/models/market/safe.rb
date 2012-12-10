@@ -1,10 +1,11 @@
 module Market
-  # Purpose? This implements the credit locking?
+
+  # This implements the credit locking used by an {Auction}: An agent may not use the money hid bid if he is the winner the given auction.
   class Safe
 
     attr_accessor_typesafe Agent,  :owner
 
-    attr_accessor :savings
+    attr_accessor :savings # <tt>Numeric</tt>, the amount of credits in the safe.
 
     def initialize()
       self.savings = 0
@@ -23,7 +24,7 @@ module Market
       self.savings = amount
     end
 
-    # this does what?
+    # Give the owner back his credits.
     def return
       fail "Nobody owns this safe" if owner.nil?
 

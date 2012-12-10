@@ -11,7 +11,7 @@ class MyTest < Test::Unit::TestCase
     def a.name
       return self[:name]
     end
-    act = new_comment_activity(user, a)
+    act = Activity::new_comment_activity(user, a)
     assert(act.message.message_ary[1] == " #{a.name}")
     assert(act.creator == user)
     assert(act.type == :comment)

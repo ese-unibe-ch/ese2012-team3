@@ -1,6 +1,6 @@
-# Rubymine won't accept this as Ruby file if named password_check !?!
+# @internal_note Rubymine won't accept this as Ruby file if named password_check !?!
 
-# ensure password is strong
+# Ensure a password is "strong".
 # Strong as defined by
 # http://windows.microsoft.com/en-US/windows-vista/Tips-for-creating-a-strong-password
 class PasswordCheck

@@ -1,29 +1,33 @@
 module Market
 
+  # A User is the only type of {Agent} that can follow other agents. It can also join {Organization Organizations}.
+  #
+  # Users have a name.
+  # Users have an amount of credits.
+  # A new user has originally 100 credit.
+  # A user can add a new item to the system with a name and a price; the item is originally inactive.
+  # A user can buy active items of another user (inactive items can't be bought).
+  # When a user buys an item, it becomes the owner; credit are transferred accordingly;
+  # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
+  # A user provides a method that lists his/her active items to sell.
   class User < Agent
-    # Users have a name.
-    # Users have an amount of credits.
-    # A new user has originally 100 credit.
-
-    # A user can add a new item to the system with a name and a price; the item is originally inactive.
-    # A user can buy active items of another user (inactive items can't be bought).
-    # When a user buys an item, it becomes the owner; credit are transferred accordingly;
-    # immediately after the trade, the item is inactive. The transaction fails if the buyer has not enough credits.
-    # A user provides a method that lists his/her active items to sell.
 
     attr_accessor_typesafe_not_nil String, :password
 
-    attr_accessor :following, # a list of agents
-                  :logged_in, # true/false
-                  :last_action_time, # a Time object
-                  :last_action_url # a string
+    attr_accessor :following # an <tt>Array</tt> of {Agent}s
+    attr_accessor :logged_in # true/false
+    attr_accessor :last_action_time # a <tt>Time</tt> object
+    attr_accessor :last_action_url # a <tt>String</tt>
 
-    @@user_id_counter = 1 # cannot use @@users.size as user may be deleted
+    @@user_id_counter = 1 # @internal_note cannot use @@users.size as user may be deleted
     @@users = []
 
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
-    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :password -- must be strong (see PasswordCheck), :about
-    # required: :name
+    # @param [Hash] params dictionary of symbols (required), recognized keys:
+    #   * <tt>:name => String</tt> (required)
+    #   * <tt>:credit => Numeric</tt> defaults to 100
+    #   * <tt>:password => String</tt> (required) -- must be strong (see PasswordCheck)
+    #   * <tt>:about => String</tt>, supports markdown
     def self.init(params={})
       assert_kind_of(String, params[:name])
       fail "Username missing" unless params[:name] && params[:name].length > 0
@@ -44,12 +48,12 @@ module Market
       user
     end
 
-    # returns the global user list
+    # @return the global user list
     def self.all
       @@users
     end
 
-    # returns all user names
+    # @return all user names
     def self.all_names
       names = []
       @@users.each do |user|
@@ -58,7 +62,6 @@ module Market
       names
     end
 
-    # returns a user with the given name
     def self.user_by_name(name)
       @@users.detect { |user| user.name == name }
     end
@@ -82,7 +85,6 @@ module Market
       @@user_id_counter = 0
     end
 
-    # TODO "I can delete my account only if there's a second admin" (in every org I work for)
     def delete
       self.delete_as_agent
       @@users.delete(self)
@@ -92,11 +94,13 @@ module Market
       organization.has_member?(self)
     end
 
+    # list organizations this user is member of
+    # @see Market::Organization.organizations_by_user
     def list_organizations
       Organization.organizations_by_user(self)
     end
 
-    # returns true if this user is admin of any of his organizations
+    # @return true if this user is admin of <i>any</i> of his organizations (that is, of any in {User#list_organizations})
     def is_admin?
       for org in self.list_organizations
         return true if org.is_admin?(self)
@@ -107,7 +111,8 @@ module Market
       return org.is_admin?(self)
     end
 
-    # TODO move to a more appropriate place
+    # @internal_note TODO move to a more appropriate place
+    # @return the server route the the users profile page
     def profile_route
       "/profile/#{self.id}"
     end
@@ -121,6 +126,7 @@ module Market
     end
 
     # toggles following the specified agent
+    # @param follow [Agent]
     def follow(follow)
       unless self.following.include?(follow)
         self.following << follow

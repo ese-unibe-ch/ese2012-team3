@@ -389,6 +389,6 @@ Offre
 PRICE_MUST_BE_LESS_CREDITS
 prix ne soit pas être plus que les credits
 NO_OFFERS_FOUND
-No offers found.
+Pas d'offres ont été trouvé.
 NO_ITEMS_FOUND
-No items found.
+Pas d'articles ont été trouvé.

@@ -1,4 +1,7 @@
 module Market
+
+  # Comments can be made on items. They can be markdown formatted. They are not localised.
+  # They store their creator and text only.
   class Comment
     attr_reader :creator, :text
     @@comments = []

@@ -1,18 +1,34 @@
 
 module Market
+
+  # An auction is the handling object for the special item state "auction", it which it cannot be bought directly but is
+  # sold to the highest bidder after the timeout.
   class Auction
+
+    @@auctions_finished = 0 # for statistics
+    @@bids_made = 0         # for statistics
+
+    # statistics
+    def self.bids_made
+      return @@bids_made
+    end
+    # statistics
+    def self.auctions_finished
+      return @@auctions_finished
+    end
+
     attr_accessor_only_if_editable :minimal_price, :increment
-    attr_accessor :event
-    @@auctions_finished = 0
-    @@bids_made = 0
+    attr_accessor :event # the {TimedEvent} that causes the auction to end
+
     attr_accessor_typesafe_not_nil Item,  :item
     attr_accessor_typesafe         Agent, :winner
 
-    attr_reader :current_price,
-                :safe, # ?
-                :bids, # format?
-                :past_winners # contains? Agents?
+    attr_reader :current_price # <tt>Numeric</tt>, positive
+    attr_reader :safe # the {Safe} locking the currently winning (winner) {Agent}'s credits he bid
+    attr_reader :bids # A hase bid value (<tt>Numeric</tt>) to {Agent}
+    attr_reader :past_winners # an <tt>Array</tt> of {PastWinner}s
 
+    # stores an agent and his bid and the time of the bid
     class PastWinner
       attr_accessor :agent, :time, :price
       def self.create(agent, time, price)
@@ -247,9 +263,7 @@ module Market
     def already_bid?(price)
       bids.key?(price)
     end
-    def self.auctions_finished
-      return @@auctions_finished
-    end
+
     def valid_bid?(price)
       if current_price.to_i + increment.to_i <= price.to_i
         true
@@ -261,10 +275,6 @@ module Market
 
     def highest_bid
       bids.keys.sort!.reverse![0]
-    end
-
-    def self.bids_made
-       return @@bids_made
     end
   end
 end

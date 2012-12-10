@@ -33,6 +33,7 @@ get "/user/switch" do
   redirect back
 end
 
+# sets the error codes if the password and confirmation given in params (<tt>params[:passwordc], params[:passwordc]</tt>) are invalid
 def passwordcheck()
   set_error :password, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_GIVEN")]) unless params[:password] && params[:password].size > 0
   set_error :passwordc, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_CONFIRM_GIVEN")]) unless params[:password] && params[:password].size > 0
@@ -133,7 +134,7 @@ post "/follow" do
   end
 
   #add to activity list
-  @current_agent.add_activity(new_follow_activity(@current_agent, follow))
+  @current_agent.add_activity(Activity::new_follow_activity(@current_agent, follow))
 
   # remove from/add to following list
   @current_user.follow(follow)

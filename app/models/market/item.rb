@@ -1,13 +1,16 @@
 module Market
-  class Auction #dummy
+  class Auction #:nodoc: all #dummy
 
   end
 
+  # Items are the goods traded in this system.
+  # Offers are special items that are promoted to real items when someone accepts the offer.
+  # * Items have a name
+  # * Items have a price.
+  # * An item can be active or inactive.
+  # * An item has an owner.
   class Item
-    # Items have a name
-    # Items have a price.
-    # An item can be active or inactive.
-    # An item has an owner.
+
 
     attr_accessor_typesafe_not_nil Agent,   :owner
     attr_accessor_typesafe_not_nil LocalizedLiteral,   :name    # Hash of Language prefix @LANGCODE (de, en, fr, jp) => String (internally converted to LocalizedLiteral)
@@ -24,11 +27,11 @@ module Market
 
     @@item_id_counter = 0
     @@items = []
-    @@offers = []
+    @@offers = [] # Offers are special items that are stored here instead of in @@items
 
     # constructor - give a name to the item and set a specified price
     # @param [Object] params - dictionary of symbols.
-    # Recognized: :name, :price, :active, :owner, :about, :auction
+    # Recognized: <tt>:name, :price, :active, :owner, :about, :auction</tt>
     # Required: owner must be an Agent
     # if :name and :about are not hashes, we create them as "en" => string
     def self.init(params={})
@@ -129,6 +132,7 @@ module Market
       Item.offer_by_id(self.id) == self
     end
 
+    # same as {find_item} but for offers.
     def self.find_offer(pattern)
       @@offers.select { |offer| offer.name.include_i?(pattern) || offer.name.include_i?(pattern)}
     end

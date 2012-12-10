@@ -1,36 +1,47 @@
 module Market
 
-  class OrganizationMember
-    @@roles = [:admin, :normal_member]
-    attr_reader :agent,
-                :role # any of @@roles (default)
-
-
-    def initialize(agent)
-      assert_kind_of(Agent, agent)
-      @agent = agent
-      @role = :normal_member
-    end
-
-    def role=(r)
-      fail "invalid role '#{r}'" unless @@roles.include?(r)
-      @role = r
-    end
-  end
-
+  # An organization is an agent whose actions are controlled by one to many {User}s.
+  # These members have different rights concerning the ability to modify the organization (e.g. add members).
+  # There are administrators and members.
+  # Otherwise Organizations beave mostly like {User}s.
   class Organization < Agent
-    # Very similar to user
-    attr_accessor :orgmembers,   # an array of objects of type OrganizationMember
-                  :orgactivities # a more complete list of the activities of the organization, with each activity storing the actual user that did it
 
-    # TODO Store roles of members. Make sure there's always an admin.
+    # A wrapper for an Agent additionally storing its role in the organization.
+    class OrganizationMember
+      @@roles = [:admin, :normal_member]
+      attr_reader :agent # an {Agent}
+      attr_reader :role # any of {@@roles}, by default :normal_member but can be changed at any time.
+
+
+      def initialize(agent)
+        assert_kind_of(Agent, agent)
+        @agent = agent
+        @role = :normal_member
+      end
+
+      # @param role any of {@@roles}
+      def role=(r)
+        fail "invalid role '#{r}'" unless @@roles.include?(r)
+        @role = r
+      end
+    end
 
     @@organizations = []
     @@organization_id_counter = 1
 
+    attr_accessor :orgmembers   # an <tt>Array</tt> of objects of type {OrganizationMember}
+
+    # A more detailed <tt>Array</tt> of the {Activity Activities} of the organization, with each activity storing the actual {User} that did it.
+    # This list also contains activities such as buying and creating items which are not added to the {activities} list of agent.
+    # These activites are to be seen only organization internally, not by followers.
+    attr_accessor :orgactivities
+
     # constructor - initializes the user and gives a credit of 100 if nothing else is specified
-    # @param [Object] params - dictionary of symbols, recognized: :name, :credit, :about, :admin
-    # required: :name, :admin
+    # @param [Hash] params required. dictionary of symbols, recognized:
+    #   * :name => String (required)
+    #   * :credit => Numeric
+    #   * :about => String. Markdown allowed.
+    #   * :admin => admin, an {Agent} (required)
     def self.init(params={})
       fail "Organization name missing" unless params[:name] && params[:name].length > 0
       fail "Organization with given name already exists" if self.organization_by_name(params[:name])
@@ -51,7 +62,7 @@ module Market
       org
     end
 
-    # returns the global organization list
+    # @return the global organization list
     def self.all
       @@organizations
     end
@@ -60,8 +71,6 @@ module Market
       @@organizations = []
       @@organization_id_counter = 0
     end
-
-
 
     def self.organization_by_id(id)
       org = @@organizations.detect { |org| org.id == id }
@@ -75,7 +84,7 @@ module Market
       return @@organizations.detect { |user| user.id == id.to_i } != nil
     end
 
-    # TODO Reduce usage - use id instead
+    # @internal_note TODO Reduce usage - use id instead
     def self.organization_by_name(name)
       @@organizations.detect { |user| user.name == name }
     end
@@ -101,7 +110,7 @@ module Market
       return ms
     end
 
-    # returns nil if this agent is not a member, otherwise the OrganizationMember object that manifests this membership
+    # returns nil if this agent is not a member, otherwise the {OrganizationMember} object that manifests this membership
     def get_orgmember_by_agent(agent)
       return self.orgmembers.find(nil) {|om| om.agent == agent}
     end
@@ -118,7 +127,7 @@ module Market
       return om.role == :admin
     end
 
-    # role any of :normal_member : :admin
+    # role any of {Market::Organization::OrganizationMember#@@roles}
     def set_member_role(agent, role)
       om = self.get_orgmember_by_agent(agent)
       raise "agent is not a member" unless om
@@ -135,7 +144,6 @@ module Market
     def has_member?(user)
       self.members.include?(user)
     end
-
 
     # returns the OrganizationMember object representing this membership
     def add_member(user)

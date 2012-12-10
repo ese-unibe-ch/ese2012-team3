@@ -10,7 +10,7 @@
     end
     # If the user buys an item in the name of an organization, an organization activity is created.
     if @current_user != @current_agent
-      @current_agent.add_orgactivity(new_buy_activity(@current_user, @item))
+      @current_agent.add_orgactivity(Activity::new_buy_activity(@current_user, @item))
     end
 
     session[:last_bought_item_id] = @item.id
@@ -193,10 +193,10 @@
         @item.activate
 
         #add to activity list of the agent
-        @current_agent.add_activity(new_activate_activity(@current_agent, @item))
+        @current_agent.add_activity(Activity::new_activate_activity(@current_agent, @item))
         # If the user activates an item in the name of an organization, an organization activity is created.
         if @current_user != @current_agent
-          @current_agent.add_orgactivity(new_activate_activity(@current_user, @item))
+          @current_agent.add_orgactivity(Activity::new_activate_activity(@current_user, @item))
         end
 
       end
@@ -301,7 +301,7 @@
 
       # If the user creates an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
-        @current_agent.add_orgactivity(new_createitem_activity(@current_user, item))
+        @current_agent.add_orgactivity(Activity::new_createitem_activity(@current_user, item))
       end
     else
       #display form with errors
@@ -386,10 +386,10 @@
       @item.add_comment(Comment.init(:creator => @current_agent, :text => params[:comment]))
 
       # Add to activity list of the current agent
-      @current_agent.add_activity(new_comment_activity(@current_agent, @item))
+      @current_agent.add_activity(Activity::new_comment_activity(@current_agent, @item))
       # If the user comments an item in the name of an organization, an organization activity is created.
       if @current_user != @current_agent
-        @current_agent.add_orgactivity(new_comment_activity(@current_user, @item))
+        @current_agent.add_orgactivity(Activity::new_comment_activity(@current_user, @item))
       end
 
       redirect "/item/#{params[:id]}"

@@ -25,17 +25,20 @@ require_relative 'controllers/admin'
 
 include Market
 
+# @return a full path
+# @param path [String] a path relative to this source code file
 def relative(path)
   File.join(File.expand_path(File.dirname(__FILE__)), path)
 end
 
 # ===================== Constants =====================
+
 PUBLIC_FOLDER          = relative('public')
 VIEWS_FOLDER           = relative('views')
 
 DEFAULT_LANGUAGE       = "en"
 LANGUAGES_FOLDER       = relative('public/languages')
-LANGUAGES              = {} # a map of language prefix => Language object
+LANGUAGES              = {} # a map of language prefix => {Language} object
 KEY_CATEGORIES         = {} # a map of "cartegory name" => array of language keys
 
 DEFAULT_PASSWORD       = "Ax1301!3"
@@ -50,9 +53,9 @@ MAXIMAGEFILESIZE       = 400*1024 # in bytes
 LISTIMAGESIZE          = 64 # in pixels
 LISTROWWITHIMAGEHEIGHT = LISTIMAGESIZE + 8 # 72
 LARGEIMAGESIZE         = 300
-USERIMAGESROOT         = "userimages" # relative to public
-ITEMIMAGESROOT         = "itemimages" # relative to public
-ORGANIZATIONIMAGESROOT = "organizationimages" # relative to public
+USERIMAGESROOT         = "userimages" # relative to {PUBLIC_FOLDER}
+ITEMIMAGESROOT         = "itemimages" # relative to {PUBLIC_FOLDER}
+ORGANIZATIONIMAGESROOT = "organizationimages" # relative to {PUBLIC_FOLDER}
 ITEMS_PER_PAGE         = 20
 AGENTS_PER_PAGE        = 20
 ACTIVITIES_PER_PAGE    = 7
@@ -96,7 +99,7 @@ eseo = Organization.init(:name => "The ESE Organization", :credit => 10000, :adm
 uno = Organization.init(:name => "UNO", :credit => 1000, :about => '**the** united nations', :admin => john)
 uno.image_file_name="userimages/1.png"
 eseo.image_file_name="userimages/1.png"
-JACK_USER = jack
+
 
 # followings
 john.follow(jack)
@@ -138,12 +141,12 @@ pizza_name = {"de"=>"Leckere Pizza", "en"=>"Delicious Pizza", "fr" => "Pizza dé
 pizza = Item.init(:name => pizza_name, :price => 18, :about => pizza_about, :active => true, :owner => eseo)
 pizza.image_file_name="itemimages/pizza.png"
 #activities
-eseo.add_activity(new_comment_activity(eseo, pizza))
-ese.add_activity(new_comment_activity(ese, pizza))
+eseo.add_activity(Activity::new_comment_activity(eseo, pizza))
+ese.add_activity(Activity::new_comment_activity(ese, pizza))
 
-john.add_activity(new_follow_activity(john, ese))
-john.add_activity(new_activate_activity(john, pizza))
-john.add_activity(new_comment_activity(john, pizza))
+john.add_activity(Activity::new_follow_activity(john, ese))
+john.add_activity(Activity::new_activate_activity(john, pizza))
+john.add_activity(Activity::new_comment_activity(john, pizza))
 
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
@@ -171,8 +174,6 @@ User.all.each_with_index do |user, i|
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
-
-UNO_ORG = uno
 
 # Some dummy items to test paging
 lastdummyitem = nil

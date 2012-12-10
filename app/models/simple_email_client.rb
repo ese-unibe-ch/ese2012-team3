@@ -2,7 +2,7 @@
 ##
 #
 # Sending E-mail via ruby
-#
+# Not implemented because not required to be functional.
 ##
 
 class SimpleEmailClient

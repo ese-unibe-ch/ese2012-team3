@@ -1,4 +1,6 @@
 
+# A language stores a hash mapping "language-" or "localization keys" to literal strings.
+# e.g. {'PRICE' => 'Prix'}
 class Language
   #attr_reader :s # the strings
   attr_reader :icon # path to the icon, relative to the PUBLIC_FOLDER, including initial slash/
@@ -14,8 +16,11 @@ class Language
     @s[k] = v
   end
 
-
+  # Loads the language langcode.
+  # @param langcode [String] e.g. "en", "de",...
+  # @param basefolder [String] a path to a folder containing a subfolder langcode which by itself must contain a file strings.txt
   def initialize(langcode,basefolder)
+    basefolder = File.join(basefolder,langcode)
     @icon = basefolder[PUBLIC_FOLDER.length..-1] + "/icon.png"
     print "lang icon path: #{@icon}\n"
 
@@ -46,7 +51,9 @@ class Language
 
 end
 
-# @param [String] basefolder
+# @param basefolder [String] must contain only subfolders which can used to initialize a {Language}
+# Loads all LANGUAGES and stores them in the LANGUAGES hash via langcode => Language
+# Also loads the categorisations for the language keys used on the admin panel.
 def load_languages(basefolder)
   print "loading langs from #{basefolder}\n"
   Dir.entries(basefolder).each {
@@ -58,7 +65,7 @@ def load_languages(basefolder)
 
       print "loading lang #{entry} from #{e}\n"
       begin
-      LANGUAGES[entry] = Language.new(entry, e)
+      LANGUAGES[entry] = Language.new(entry, basefolder)
       rescue  => e
         print "failed to load lang, error: #{e}\n"
       end

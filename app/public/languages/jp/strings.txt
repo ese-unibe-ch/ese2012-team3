@@ -389,8 +389,8 @@ SELL_ITEM
 OFFER
 提供
 PRICE_MUST_BE_LESS_CREDITS
-price needs to be less than your credits
+価格は、あなたのクレジット未満である必要があります
 NO_OFFERS_FOUND
-No offers found.
+提供見つかりません
 NO_ITEMS_FOUND
-No items found.
+イテム見つかりません
