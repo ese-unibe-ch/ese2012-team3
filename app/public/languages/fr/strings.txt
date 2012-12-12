@@ -264,8 +264,6 @@ ORGANIZATION
 Organisation
 ORGANIZATION_CREATED_NOTIFICATION
 <strong>Organization created!</strong><br />L'organisation a été créée avec succès.
-ORGANIZATION_HAS_NO_ITEMS
-Cette organisation n'a pas d'articles.
 ORGANIZATION_SETTINGS
 Préferences d'organisations
 ORGANIZATIONS
@@ -330,8 +328,6 @@ RETYPE_PASSWORD
 Confirmer le mot de passe
 REVOKE_ADMIN
 Révoquer administrateur
-S_ITEMS
-- articles
 S_MEMBERS
  - membres
 SAVE
