@@ -166,8 +166,6 @@ PROMOTE_ADMIN
 管理を推進する
 REVOKE_ADMIN
 管理を取り消す
-APPLY_ACTIVITY_FILTER
-アクティビティ·フィルタを適用
 FILTER_LIST
 リストフィルタ:
 AUCTION
@@ -198,8 +196,6 @@ SEARCH_RESULT
 サーチの結果
 FOUND_ITEMS
 Items
-FOUND_OFFERS
-Offers
 ACCOUNT_SETTINGS
 アカウント セッティング
 CHANGE_PASSWORD
@@ -234,26 +230,12 @@ LANGUAGE
 言語
 UNFOLLOW
 見澄ません
-S_ITEMS
-のアイテム
 LATEST_ORGANIZATION_ACTIVITIES
 最新のオーガニゼーション アクティビティ
 FOLLOW
 見澄ます
-ORGANIZATION_HAS_NO_ITEMS
-この オーガニゼーションはアイテムがありません。
 VIEWING_PROFILE
 プロフィールを見る
-YOUR_ITEMS
-君のアイテム
-USERS_ITEMS
-ユーザーのアイテム
-YOU_HAVE_NO_ITEMS
-アイテムはありません。
-THIS_USER_HAS_NO_ITEMS
-この ユーザーはアイテムがありません。
-ADD_A_NEW_ITEM
-新いアイテム。。。
 ORGANIZATION
 オーガニゼーション
 CREATE_ORGANIZATION

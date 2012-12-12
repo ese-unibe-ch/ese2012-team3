@@ -174,8 +174,6 @@ PROMOTE_ADMIN
 Promote admin
 REVOKE_ADMIN
 Revoke admin
-APPLY_ACTIVITY_FILTER
-Apply activity filter
 FILTER_LIST
 Filter list:
 AUCTION
@@ -206,8 +204,6 @@ SEARCH_RESULT
 Search result
 FOUND_ITEMS
 Items
-FOUND_OFFERS
-Offers
 ACCOUNT_SETTINGS
 Account settings
 CHANGE_PASSWORD
@@ -242,26 +238,12 @@ LANGUAGE
 Language
 UNFOLLOW
 Unfollow
-S_ITEMS
-'s Items
 LATEST_ORGANIZATION_ACTIVITIES
 Latest Organization Activities
 FOLLOW
 Follow
-ORGANIZATION_HAS_NO_ITEMS
-This organization has no items.
 VIEWING_PROFILE
 Viewing profile
-YOUR_ITEMS
-Your items
-USERS_ITEMS
-User's items
-YOU_HAVE_NO_ITEMS
-You have no items.
-THIS_USER_HAS_NO_ITEMS
-This user has no items.
-ADD_A_NEW_ITEM
-Add a new item...
 ORGANIZATION
 Organization
 CREATE_ORGANIZATION

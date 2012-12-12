@@ -166,8 +166,6 @@ PROMOTE_ADMIN
 Promouvoir administrateur
 REVOKE_ADMIN
 Révoquer administrateur
-APPLY_ACTIVITY_FILTER
-Appliquer filtre des activités
 FILTER_LIST
 Filtrer liste:
 AUCTION
@@ -198,8 +196,6 @@ SEARCH_RESULT
 Résultat de la recherche
 FOUND_ITEMS
 articles
-FOUND_OFFERS
-offres
 CHANGE_PASSWORD
 Changer mot de passe
 CURRENT_PASSWORD
@@ -242,16 +238,6 @@ ORGANIZATION_HAS_NO_ITEMS
 Cette organisation n'a pas d'articles.
 VIEWING_PROFILE
 Profil
-YOUR_ITEMS
-Vos articles
-USERS_ITEMS
-Articles de cet utilisateur
-YOU_HAVE_NO_ITEMS
-Vous n'avez pas d'articles.
-THIS_USER_HAS_NO_ITEMS
-Cet utilisateur n'a pas d'articles.
-ADD_A_NEW_ITEM
-Ajouter un nouvel article...
 ORGANIZATION
 Organisation
 CREATE_ORGANIZATION
