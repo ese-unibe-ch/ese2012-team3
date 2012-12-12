@@ -244,8 +244,6 @@ CREATE_ORGANIZATION
 Créer organisation
 DELETE_ACCOUNT_QUESTION
 Supprimer votre compte?
-DELETE_ACCOUNT
-Supprimer mon compte
 NO_KEEP_IT
 Non, j'aimerais le garder.
 REALLY_DELETE_QUESTION

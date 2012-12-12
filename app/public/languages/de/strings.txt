@@ -196,8 +196,6 @@ SEARCH_RESULT
 Suchergebnis
 FOUND_ITEMS
 Gegenstände
-ACCOUNT_SETTINGS
-Einstellungen
 CHANGE_PASSWORD
 Passwort ändern
 CURRENT_PASSWORD
@@ -242,8 +240,6 @@ CREATE_ORGANIZATION
 Organisation erstellen
 DELETE_ACCOUNT_QUESTION
 Account löschen?
-DELETE_ACCOUNT
-Account löschen
 NO_KEEP_IT
 Nein, ich will ihn nicht löschen
 REALLY_DELETE_QUESTION

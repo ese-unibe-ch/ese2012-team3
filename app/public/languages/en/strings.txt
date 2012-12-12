@@ -204,8 +204,6 @@ SEARCH_RESULT
 Search result
 FOUND_ITEMS
 Items
-ACCOUNT_SETTINGS
-Account settings
 CHANGE_PASSWORD
 Change Password
 CURRENT_PASSWORD
@@ -250,8 +248,6 @@ CREATE_ORGANIZATION
 Create Organization
 DELETE_ACCOUNT_QUESTION
 Delete Account?
-DELETE_ACCOUNT
-Delete account
 NO_KEEP_IT
 No, I want to keep it
 REALLY_DELETE_QUESTION
