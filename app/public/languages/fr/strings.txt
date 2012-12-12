@@ -270,6 +270,8 @@ ORGANIZATIONS
 Organisations
 OWNER
 Propriétaire
+PAGE_NOT_FOUND
+La page désirée n'était pas trouvé.
 PASS_AND_RETYPED_PASS_DONT_MATCH
 le mots de passe et la répetition ne sont pas la même
 PASSWORD

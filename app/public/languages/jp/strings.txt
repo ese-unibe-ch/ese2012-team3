@@ -270,6 +270,8 @@ ORGANIZATIONS
 オーガニゼーション
 OWNER
 所有者
+PAGE_NOT_FOUND
+要求されたページは見つかりませんでした
 PASS_AND_RETYPED_PASS_DONT_MATCH
 パスワード と再入力する パスワード同じではありません
 PASSWORD

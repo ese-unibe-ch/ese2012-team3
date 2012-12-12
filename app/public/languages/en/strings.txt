@@ -270,6 +270,8 @@ ORGANIZATIONS
 Organizations
 OWNER
 Owner
+PAGE_NOT_FOUND
+The requested page was not found.
 PASS_AND_RETYPED_PASS_DONT_MATCH
 Password and retyped password don't match
 PASSWORD

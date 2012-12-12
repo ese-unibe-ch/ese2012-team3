@@ -270,6 +270,8 @@ ORGANIZATIONS
 Organisationen
 OWNER
 Eigentümer
+PAGE_NOT_FOUND
+Die gewünschte Seite konnte nicht gefunden werden.
 PASS_AND_RETYPED_PASS_DONT_MATCH
 Passwort und Passwortwiederholung stimmen nicht überein
 PASSWORD

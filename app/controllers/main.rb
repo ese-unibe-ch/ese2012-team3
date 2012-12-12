@@ -101,6 +101,10 @@ end
  # send_file("#{PUBLIC_FOLDER}/"+params[:fname])
 #end
 
+not_found do
+  halt erb :error, :locals => {:message => localized_message_single_key("PAGE_NOT_FOUND")}
+end
+
 get "/strongpass" do
   erb :strongpass
 end
