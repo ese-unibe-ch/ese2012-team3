@@ -1,374 +1,374 @@
-LANG_OF_DESC_AND_NAME
-説明と名前の言語
-I_WANT_PROVIDE_DESC_MORE_LANGS
-複数の言語で名前をつける
-LOCAL_DATE_TIME_FORMAT
-%d.%m.%Y %H:%M
-PLACED_BID_AT_FOR_CREDITS
-<span class='past-winner-name'>%s</span> の入札、 で <span class='past-winner-time'>%s</span> で <span class='past-winner-price'>%s</span> クレジット
-LANGUAGE_NAME
-日本語
-INCREMENT_MUST_SET
-生長設定する必要があります
-END_TIME_MUST_SET
-時設定する必要があります
-MINPRICE_MUST_SET
-最小価格設定する必要があります
-INCREMENT_POSITIVE_INT
-生長は正の整数でなければなりませ
-INCREMENT_GT_0
-生長はゼロ以上でなければなりません
-COMMENTED_ON
-ついてコメント：
-CREATED_ITEM
-アイテムを作成た：
+ABOUT
+説明
+ACCOUNT_SETTINGS
+アカウント セッティング
+ACTIVATE_ITEM
+アイテムを活性化する
 ACTIVATED_ITEM
 アイテムを活性化すれた：
-MINPRICE_POSITIVE_INT
-最小価格は正の整数でなければなりませ
-TIME_MUST_FUTURE
-時間が未来になっている必要があり
-TIME_INVALID
-無効な時刻形式
+ACTIVATING
+活性化する
+ADD_COMMENT
+コメントを加える
+ADD_MEMBER_TO_ORGANIZATION
+オーガニゼーションにメンバーを加える
+ADD_TO_WISHLIST
+ウィッシュリストに加える
+ADD_USER
+ユーザーを加える
+AT_TIME
+で
+AUCTION
+クション
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>悪い!</strong><br /> オークションはすでに終了しました。
+AUCTION_ENDS_AT
+オークション の終了
+AUCTION_FOR
+オークション で
 BID_GIVEN_CHOOSE_HIGHER
 この入札は、すでに与えられている。より高い入札を選択ください。
 BID_MUST_BE_AT_LEAST
 入札は価格 + 生長で以上である必要があります。
+BID_ON_AUCTION
+オークションに入札します
 BOUGHT_ITEM
 アイテムを買った
-NOT_ENOUGH_MONEY
-足りないクレジット
+BUY_ITEM
+アイテムを買う
+BUYING
+買収
+CAN_USE_MARKDOWN
+このテキストをマークダウン構文を使用することができます。 例えば: **<b>太字テキスト</b>**
+CANNOT_EDIT_ACTIVE
+活性なアイテムをエディットはできない 
+CHANGE_PASSWORD
+パスワードを移り変る
+CHANGE_PROFILE_PICTURE
+プロフィール 絵を移り変る
+CLICK_HERE_TO_REGISTER
+ここをクリックしてください！
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+アイテムを見るにはここをクリックしてください。
+CLICK_TO_EXPAND
+クリックで拡大します
+COMMENT_MAY_NOT_BE_EMPTY
+コメントは空にすることはできません
+COMMENTED_ON
+ついてコメント：
+COMMENTING
+コメントして
+COMMENTS
+コメント
+CREATE_ACCOUNT
+アカウントを作る
+CREATE_AUCTION
+オークションを作る
+CREATE_NEW_ITEM
+アイテムを作る
+CREATE_NEW_OFFER
+提供をつくる
+CREATE_ORGANIZATION
+オーガニゼーションを作る
+CREATED_ITEM
+アイテムを作成た：
+CREDITS
+クレジット
+CURRENT_PASS_WRONG
+今のパスワード は違う
+CURRENT_PASSWORD
+現行パスワード
+CURRENT_PRICE
+現在の価格
+CURRENT_WINNER
+現在の勝者
+CURRENTLY_ADMIN_NOTE
+あなたが今オーガニゼーションの管理です 。 アカウントを消すの前に管理を加えるください。
+CURRENTLY_NOT_IN_AUCTION
+オークションはありません
+DELETE_ACCOUNT
+アカウントを消す
+DELETE_ACCOUNT_QUESTION
+アカウントを消す?
+DELETE_PROFILE_PICTURE
+プロフィール 絵を消す
+DESCRIPTION
+説明
+DOES_NOT_EXIST
+存在しません
+DONT_HAVE_ACCOUNT_QUESTION
+アカウントを持っていないのですか？
+EDIT_AUCTION
+エディット オークション
+EDIT_AUCTION_FOR
+ オークションをエディット
+EDIT_ITEM
+エディット アイテム
+EDIT_ITEM_AUCTION
+エディット アイテム オークション
+END_TIME
+終了時刻
+END_TIME_MUST_SET
+時設定する必要があります
+ERROR
+エラー
+FILTER_LIST
+リストフィルタ:
+FOLLOW
+見澄ます
+FOLLOWEES_ACTIVITIES
+観測の アクティビティ
+FOLLOWING
+見澄ます
+FOLLOWS
+は見澄ます：
+FOUND_ITEMS
+Items
+I_WANT_PROVIDE_DESC_MORE_LANGS
+複数の言語で名前をつける
+IMAGE_TOO_LARGE
+大きすぎる画像ファイル, 選択する
+INACTIVATE_ITEM
+アイテムを解除する
+INCREMENT
+増加
+INCREMENT_GT_0
+生長はゼロ以上でなければなりません
+INCREMENT_MUST_SET
+生長設定する必要があります
+INCREMENT_POSITIVE_INT
+生長は正の整数でなければなりませ
+INTERESTS
+説明
+ITEM
+アイテム
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>アイテムを買った!</strong><br />買った：
+ITEM_CREATION
+アイテム作成
 ITEM_MUST_HAVE_NAME
 アイテムは名前を付ける必要があります
 ITEM_MUST_HAVE_PRICE
 アイテムは価格を持っている必要があります
-PRICE_MUST_BE_POSITIVE
-価格は正の整数でなければなりませ
-PRICE_MUST_BE_INTEGER
-価格は正の整数でなければなりませ
-ORG_MUST_HAVE_NAME
-オーガニゼーションは名前を付ける必要があります
-COMMENT_MAY_NOT_BE_EMPTY
-コメントは空にすることはできません
-SEARCH_MAY_NOT_BE_EMPTY
-サーチは空にすることはできません
-NO_PASSWORD_CONFIRM_GIVEN
-パスワードの確認を持っていない
-USERNAME_EXISTS
-指定された名前のユーザーは既に存在します
-NO_ORG_FOUND
-オーガニゼーションが見つかりませんでした
-PASS_AND_RETYPED_PASS_DONT_MATCH
-パスワード と再入力する パスワード同じではありません
-NO_PROFILE_PICTURE
-プロフィール 絵はありません
-NO_USER_TO_PROMOTE_FOUND
-昇格ユーザ はありません
-NO_FILE_CHOSEN
-ファイルを選択しなかった
-NO_USER_TO_ADD_FOUND
-追加可能なユーザー はありません
+ITEMS_ON_THE_MARKET
+市場のアイテム 
+LANG_OF_DESC_AND_NAME
+説明と名前の言語
+LANGUAGE
+言語
+LANGUAGE_NAME
+日本語
+LATEST_ORGANIZATION_ACTIVITIES
+最新のオーガニゼーション アクティビティ
+LEAVE_ORGANIZATION
+オーガニゼーションを残す
+LOCAL_DATE_TIME_FORMAT
+%d.%m.%Y %H:%M
+LOGGED_IN_AS
+ログイン
+LOGGEDIN_NOTIFICATION
+<strong>ログインはできた</strong>
+LOGIN
+ログイン
+LOGOUT
+ログアウト
+MARKETPLACE
+市場
+MINIMAL_BID_INCREMENT
+入札の最小増分
+MINIMAL_PRICE
+最低限の価格
+MINPRICE_MUST_SET
+最小価格設定する必要があります
+MINPRICE_POSITIVE_INT
+最小価格は正の整数でなければなりませ
+MUST_BE_STRONG
+強くなければならない。
+MY_PROFILE
+私のプロフィール
+NAME
+お名前
+NEW_ITEM
+新しいアイテム
+NEW_OFFER
+新しい提供
+NEW_ORGANIZATION
+新しい オーガニゼーション
+NEXT
+次の
 NO_ADMIN_RIGHTS
 管理権限を持っていない
-CURRENT_PASS_WRONG
-今のパスワード は違う
+NO_AUCTION_NOTIFICATION
+<strong>悪い!</strong><br />このアイテムのオークションはありません。
+NO_COMMENTS
+このアイテムは コメントがいません。
+NO_FILE_CHOSEN
+ファイルを選択しなかった
+NO_ITEMS_FOUND
+イテム見つかりません
+NO_KEEP_IT
+いいえ、私はそれを維持したい
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+最初の入札の後にエディットはできない
 NO_LONGER_FOLLOWS
 は見澄ません：
-FOLLOWS
-は見澄ます：
-USER
-ユーザ
-DOES_NOT_EXIST
-存在しません
-NO_USERNAME_GIVEN
-ユーザ名は与えられていない
+NO_OFFERS_FOUND
+提供見つかりません
+NO_ORG_FOUND
+オーガニゼーションが見つかりませんでした
+NO_ORGANIZATIONS
+オーガニゼーションません
 NO_PASS_AND_USER
 パスワードとユーザ名は与えられていない
-PNS_NOT_8
-パスワード強くない: 少なくとも8文字の長さではありません。
-PNS_USERNAME
-パスワード強くない:  ユーザ 名が含まれています.
+NO_PASSWORD_CONFIRM_GIVEN
+パスワードの確認を持っていない
+NO_PASSWORD_GIVEN
+与えられたパスワードなし
+NO_PROFILE_PICTURE
+プロフィール 絵はありません
+NO_USER_TO_ADD_FOUND
+追加可能なユーザー はありません
+NO_USER_TO_PROMOTE_FOUND
+昇格ユーザ はありません
+NO_USERNAME_GIVEN
+ユーザ名は与えられていない
+NO_USERS_TO_ADD
+加えるユーザー はありません
+NO_WISHLIST_ITEMS
+このユーザーのウィッシュリストにアイテム はありません。
+NOT_ENOUGH_MONEY
+足りないクレジット
+NOT_FOLLOWING
+このユーザーは誰を見澄ません。
+NOT_REPRESENTING_ORG
+オーガニゼーションを代表されていません.
+NOW_REPRESENTING
+オーガニゼーションを代表している:
+OFFER
+提供
+OFFERS
+提供
+ORG_MUST_HAVE_NAME
+オーガニゼーションは名前を付ける必要があります
+ORG_SETTINGS
+オルグ。 セッティング
+ORGANIZATION
+オーガニゼーション
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>オーガニゼーションは作成された</strong><br />
+ORGANIZATION_SETTINGS
+オーガニゼーション セッティング
+ORGANIZATIONS
+オーガニゼーション
+OWNER
+所有者
+PASS_AND_RETYPED_PASS_DONT_MATCH
+パスワード と再入力する パスワード同じではありません
+PASSWORD
+パスワード
+PASSWORD_CHANGED_NOTIFICATION
+<strong>パスワードが変更された</strong>
+PAST_WINNERS
+過去の勝者
+PICTURE
+絵
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> の入札、 で <span class='past-winner-time'>%s</span> で <span class='past-winner-price'>%s</span> クレジット
 PNS_CONTAINS_WORD
 パスワード強くない: 既知の単語が含まれています
+PNS_NOT_8
+パスワード強くない: 少なくとも8文字の長さではありません。
 PNS_NOT_DIFF
 パスワード強くない: 以前のパスワードと大幅に異なっていない.
-PNS_NOT_UPPER
-パスワード強くない: 大文字が含まれていません A-Z.
 PNS_NOT_LOWER
 パスワード強くない: 全く小文字が含まれていません a-z.
 PNS_NOT_NUMBER
 パスワード強くない: 番号0-9が含まれていません .
 PNS_NOT_SPECIAL
 パスワード強くない: 特殊文字が含まれていない ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
-NO_PASSWORD_GIVEN
-与えられたパスワードなし
-WRONG_PASSWORD
-パスワード違う
-IMAGE_TOO_LARGE
-大きすぎる画像ファイル, 選択する
-LOGIN
-ログイン
-LOGOUT
-ログアウト
-DONT_HAVE_ACCOUNT_QUESTION
-アカウントを持っていないのですか？
-REGISTERED_NOTIFICATION
-<strong>登録はできました!</strong><br />登録はできました,自動的にログインしました
-SWITCHED_USER_NOTIFICATION
-<strong>ユーザー切り替えた!</strong>
-NOT_REPRESENTING_ORG
-オーガニゼーションを代表されていません.
-NOW_REPRESENTING
-オーガニゼーションを代表している:
-AUCTION_ALREADY_CLOSED_NOTIFICATION
-<strong>悪い!</strong><br /> オークションはすでに終了しました。
-ITEM_BOUGHT_YOU_PURCHASED
-<strong>アイテムを買った!</strong><br />買った：
-CLICK_HERE_TO_SEE_OTHER_ITEMS
-アイテムを見るにはここをクリックしてください。
-LOGGEDIN_NOTIFICATION
-<strong>ログインはできた</strong>
-PASSWORD_CHANGED_NOTIFICATION
-<strong>パスワードが変更された</strong>
-ORGANIZATION_CREATED_NOTIFICATION
-<strong>オーガニゼーションは作成された</strong><br />
-NO_AUCTION_NOTIFICATION
-<strong>悪い!</strong><br />このアイテムのオークションはありません。
-REGISTER
-登録
-CLICK_HERE_TO_REGISTER
-ここをクリックしてください！
-AT_TIME
-で
-COMMENTING
-コメントして
-YOU_ARE_FOLLOWING
-あなたは見澄ます
-FOLLOWING
-見澄ます
-REMOVE_MEMBER
-メンバーを削除する
-LEAVE_ORGANIZATION
-オーガニゼーションを残す
-YOUR_ORGANIZATIONS
-あなたのオーガニゼーション
-NO_ORGANIZATIONS
-オーガニゼーションません
-ORGANIZATIONS
-オーガニゼーション
-ACTIVATING
-活性化する
-BUYING
-買収
-ITEM_CREATION
-アイテム作成
-PROMOTE_ADMIN
-管理を推進する
-REVOKE_ADMIN
-管理を取り消す
-FILTER_LIST
-リストフィルタ:
-AUCTION
-クション
-AUCTION_FOR
-オークション で
-EDIT_AUCTION_FOR
- オークションをエディット
-MARKETPLACE
-市場
-REGISTRATION
-登録
-SELECT_USERNAME_AND_PASSWORD
-ユーザ名 と パスワードを選択
-NAME
-お名前
-ORG_SETTINGS
-オルグ。 セッティング
-ORGANIZATION_SETTINGS
-オーガニゼーション セッティング
-ACCOUNT_SETTINGS
-アカウント セッティング
-NEW_ORGANIZATION
-新しい オーガニゼーション
-SELLERS
-セラーズ
-SEARCH_RESULT
-サーチの結果
-FOUND_ITEMS
-Items
-CHANGE_PASSWORD
-パスワードを移り変る
-CURRENT_PASSWORD
-現行パスワード
-USER_PROFILE
-ユーザー のプロフィール
-MY_PROFILE
-私のプロフィール
-S_MEMBERS
-の メンバー
-ADD_MEMBER_TO_ORGANIZATION
-オーガニゼーションにメンバーを加える
-ADD_USER
-ユーザーを加える
-CURRENTLY_ADMIN_NOTE
-あなたが今オーガニゼーションの管理です 。 アカウントを消すの前に管理を加えるください。
-DELETE_ACCOUNT
-アカウントを消す
-NO_USERS_TO_ADD
-加えるユーザー はありません
-CHANGE_PROFILE_PICTURE
-プロフィール 絵を移り変る
-DELETE_PROFILE_PICTURE
-プロフィール 絵を消す
-NEW_ITEM
-新しいアイテム
-CREDITS
-クレジット
-LANGUAGE
-言語
-UNFOLLOW
-見澄ません
-LATEST_ORGANIZATION_ACTIVITIES
-最新のオーガニゼーション アクティビティ
-FOLLOW
-見澄ます
-VIEWING_PROFILE
-プロフィールを見る
-ORGANIZATION
-オーガニゼーション
-CREATE_ORGANIZATION
-オーガニゼーションを作る
-DELETE_ACCOUNT_QUESTION
-アカウントを消す?
-NO_KEEP_IT
-いいえ、私はそれを維持したい
-REALLY_DELETE_QUESTION
-本当にアカウントを消す?
-NO_LONGER_EDITABLE_AFTER_FIRST_BID
-最初の入札の後にエディットはできない
-CANNOT_EDIT_ACTIVE
-活性なアイテムをエディットはできない 
-BUY_ITEM
-アイテムを買う
-INACTIVATE_ITEM
-アイテムを解除する
-ACTIVATE_ITEM
-アイテムを活性化する
-EDIT_AUCTION
-エディット オークション
-EDIT_ITEM_AUCTION
-エディット アイテム オークション
-ERROR
-エラー
-EDIT_ITEM
-エディット アイテム
-USERS
-ユーザー
-ABOUT
-説明
-USERNAME
-ユーザ名
-PASSWORD
-パスワード
-MUST_BE_STRONG
-強くなければならない。
-RETYPE_PASSWORD
-パスワードを再入力する
-INTERESTS
-説明
-CREATE_ACCOUNT
-アカウントを作る
-PICTURE
-絵
-DESCRIPTION
-説明
-PRICE
-価格
-START_PRICE
-開始の 価格
-REMOVE_FROM_WISHLIST
-ウィッシュリストから削除
-ADD_TO_WISHLIST
-ウィッシュリストに加える
-NO_WISHLIST_ITEMS
-このユーザーのウィッシュリストにアイテム はありません。
-NOT_FOLLOWING
-このユーザーは誰を見澄ません。
-WISHLIST
-ウィッシュリスト
-OWNER
-所有者
-NEXT
-次の
+PNS_NOT_UPPER
+パスワード強くない: 大文字が含まれていません A-Z.
+PNS_USERNAME
+パスワード強くない:  ユーザ 名が含まれています.
 PREV
 前
-LOGGED_IN_AS
-ログイン
-CURRENT_PRICE
-現在の価格
-BID_ON_AUCTION
-オークションに入札します
-MINIMAL_BID_INCREMENT
-入札の最小増分
-INCREMENT
-増加
-SAVE
-セーブ
-END_TIME
-終了時刻
-MINIMAL_PRICE
-最低限の価格
-CURRENT_WINNER
-現在の勝者
-COMMENTS
-コメント
-WROTE
-書いた
+PRICE
+価格
+PRICE_MUST_BE_INTEGER
+価格は正の整数でなければなりませ
+PRICE_MUST_BE_LESS_CREDITS
+価格は、あなたのクレジット未満である必要があります
+PRICE_MUST_BE_POSITIVE
+価格は正の整数でなければなりませ
+PROMOTE_ADMIN
+管理を推進する
+REALLY_DELETE_QUESTION
+本当にアカウントを消す?
+REGISTER
+登録
+REGISTERED_NOTIFICATION
+<strong>登録はできました!</strong><br />登録はできました,自動的にログインしました
+REGISTRATION
+登録
+REMOVE_FROM_WISHLIST
+ウィッシュリストから削除
+REMOVE_MEMBER
+メンバーを削除する
 REPLY
 返信
-NO_COMMENTS
-このアイテムは コメントがいません。
-PAST_WINNERS
-過去の勝者
-CLICK_TO_EXPAND
-クリックで拡大します
-ITEMS_ON_THE_MARKET
-市場のアイテム 
-FOLLOWEES_ACTIVITIES
-観測の アクティビティ
+RETYPE_PASSWORD
+パスワードを再入力する
+REVOKE_ADMIN
+管理を取り消す
+S_MEMBERS
+の メンバー
+SAVE
+セーブ
 SEARCH
 サーチ
+SEARCH_MAY_NOT_BE_EMPTY
+サーチは空にすることはできません
+SEARCH_RESULT
+サーチの結果
+SELECT_USERNAME_AND_PASSWORD
+ユーザ名 と パスワードを選択
+SELL_ITEM
+アイテムを売る
+SELLERS
+セラーズ
+START_PRICE
+開始の 価格
 STRONG_PASSWORD
 強い パスワード
 STRONG_PASSWORD_TEXT
-<h1>強力なパスワード規則</h1> <p><ul> <li>少なくとも8文字の長さ。</li> <li>あなたのユーザー名、本名、会社名が含まれていません。</li> <li>完全な単語が含まれていません。</li> <li>前のパスワードと大幅に異なっている。</li> <li>カテゴリの文字に続くのは、含まれています: <ul> <li> 大文字　<i>A, B, C、。。。</i> </li> <li>小文字<i>a, b, c</i> </li> <li> 数字: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> 特殊文字: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , 。 ? /</i> </li> </ul> </li> </ul>
-CURRENTLY_NOT_IN_AUCTION
-オークションはありません
-AUCTION_ENDS_AT
-オークション の終了
-CREATE_AUCTION
-オークションを作る
-CREATE_NEW_ITEM
-アイテムを作る
-ITEM
-アイテム
-ADD_COMMENT
-コメントを加える
-CAN_USE_MARKDOWN
-このテキストをマークダウン構文を使用することができます。 例えば: **<b>太字テキスト</b>**
-NEW_OFFER
-新しい提供
-CREATE_NEW_OFFER
-提供をつくる
-OFFERS
-提供
-SELL_ITEM
-アイテムを売る
-OFFER
-提供
-PRICE_MUST_BE_LESS_CREDITS
-価格は、あなたのクレジット未満である必要があります
-NO_OFFERS_FOUND
-提供見つかりません
-NO_ITEMS_FOUND
-イテム見つかりません
+<h1>強力なパスワード規則</h1> <p><ul> <li>少なくとも8文字の長さ。</li> <li>あなたのユーザー名、本名、会社名が含まれていません。</li> <li>完全な単語が含まれていません。</li> <li>前のパスワードと大幅に異なっている。</li> <li>カテゴリの文字に続くのは、含まれています: <ul> <li> 大文字　<i>A, B, C、。。。</i> </li> <li>小文字<i>a, b, c</i> </li> <li> 数字: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> 特殊文字: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , 。 ? /</i> </li> </ul> </li> </ul>
+SWITCHED_USER_NOTIFICATION
+<strong>ユーザー切り替えた!</strong>
+TIME_INVALID
+無効な時刻形式
+TIME_MUST_FUTURE
+時間が未来になっている必要があり
+UNFOLLOW
+見澄ません
+USER
+ユーザ
+USER_PROFILE
+ユーザー のプロフィール
+USERNAME
+ユーザ名
+USERNAME_EXISTS
+指定された名前のユーザーは既に存在します
+USERS
+ユーザー
+VIEWING_PROFILE
+プロフィールを見る
+WISHLIST
+ウィッシュリスト
+WRONG_PASSWORD
+パスワード違う
+WROTE
+書いた
+YOU_ARE_FOLLOWING
+あなたは見澄ます
+YOUR_ORGANIZATIONS
+あなたのオーガニゼーション
