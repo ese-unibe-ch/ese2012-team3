@@ -83,6 +83,10 @@ module Market
       self.activities.push(activity)
     end
 
+    def get_followees_activities
+      []
+    end
+
     # Removes all items of this agent and all arganizations he joined plus deletes his picture.
     def delete_as_agent
       for item in Item.items_by_agent(self)

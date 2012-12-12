@@ -136,6 +136,15 @@ module Market
       end
     end
 
+    #collect all activities of followees
+    def get_followees_activities
+      activities = []
+      for user in self.following do
+        activities.concat(user.activities)
+      end
+      activities.sort! {|a,b| b.timestamp <=> a.timestamp}
+    end
+
   end
 
 end

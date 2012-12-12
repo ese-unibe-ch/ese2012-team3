@@ -131,15 +131,7 @@ end
 
 # Marketplace main page
 get "/" do
-  #collect all activities
-  activities = []
-  if(@current_agent.respond_to?('following'))
-    for u in @current_agent.following do
-      activities.concat(u.activities)
-    end
-  end
-
-  activities.sort! {|a,b| b.timestamp <=> a.timestamp}
+  activities = @current_agent.get_followees_activities;
   erb :marketplace, :locals => {:activity_list => activities}
 end
 
