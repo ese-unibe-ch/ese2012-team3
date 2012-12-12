@@ -1,5 +1,7 @@
 ABOUT
-√úber
+Über
+ACCESS_DENIED
+Zugriff verweigert.
 ACCOUNT_SETTINGS
 Einstellungen
 ACTIVATE_ITEM
@@ -106,6 +108,8 @@ EDIT_ITEM
 Gegenstand bearbeiten
 EDIT_ITEM_AUCTION
 Auktion bearbeiten
+EDIT_OFFER
+Angebot bearbeiten.
 END_TIME
 Endet:
 END_TIME_MUST_SET
@@ -226,6 +230,10 @@ NO_PASSWORD_GIVEN
 Kein Passwort angegeben
 NO_PROFILE_PICTURE
 Sie haben kein Profilbild
+NOT_CURRENTLY_MEMBER
+Sie sind kein Mitglied dieser Organisation und können somit diese Seite nicht einsehen.
+NO_USER_FOUND
+es wurde kein Benutzer gefunden
 NO_USER_TO_ADD_FOUND
 keine Benutzer zum Hinzufügen gefunden
 NO_USER_TO_PROMOTE_FOUND
