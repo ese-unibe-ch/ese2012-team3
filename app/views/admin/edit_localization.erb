@@ -19,22 +19,51 @@
         .hiddencategory {
           display: none;
         }
+        .symbol {
+            margin-right: 5px;
+        }
       </style>
 
       <script type="text/javascript">
-        function switchDisplayContent(counter) {
-          var catelem = document.getElementById('categoryelement' + counter);
-          var catsymbol = $("symbol" + counter);
-          if (catelem.style.display != 'block') {
-            catsymbol.removeClass('icon-chevron-up');
-            catsymbol.addClass('icon-chevron-down');
-            catelem.style.display = 'block';
+        $(document).ready(function(){
+          //restore toggle states from cookie
+          toggleStates = JSON.parse($.cookie('adminLocalizationToggleStates'));
+          //loop through
+          for(element in toggleStates) {
+            if(toggleStates[element] == 'visible') {
+                //set icon
+                $("#"+element).parent().find("i.symbol").removeClass("icon-chevron-up").addClass("icon-chevron-down");
+                //display this block
+                $("#"+element).removeClass("hiddencategory");
+            }
           }
-          else {
-            catsymbol.removeClass('icon-chevron-down');
-            catsymbol.addClass('icon-chevron-up');
-            catelem.style.display = 'none';
-          }
+
+          //toggle element and icon
+          $(".toggler").click(function() {
+              toggleElement($(this).next('.category-content'));
+              //toggle icon;
+              $(this).find("i.symbol").toggleClass("icon-chevron-down icon-chevron-up");
+              //save new state in cookie
+              $.cookie('adminLocalizationToggleStates', serializeToggleStates());
+          });
+        });
+
+        function toggleElement(element) {
+            element.toggle();
+        }
+
+        /**
+         * return a json representation of current toggle state for all elements
+         * elementId: [visible|hidden]
+         */
+        function serializeToggleStates() {
+            states = new Object();
+            $(".category-content").each(function(){
+                state = $(this).is(":visible") ? 'visible': 'hidden';
+                states[$(this).attr('id')] =  state;
+            })
+
+            return JSON.stringify(states);
         }
       </script>
 
@@ -43,7 +72,7 @@
           <% i = 0 %>
           <% KEY_CATEGORIES.each{|category, language_keys| %>
             <div class="category">
-              <a href="#" onClick="switchDisplayContent('<%= i %>');return false;"><h4><i id="symbol<%= i %>" class="icon-chevron-up"></i> <%=category%></h4></a>
+              <a href="#" class="toggler"><h4><i id="symbol<%= i %>" class="symbol icon-chevron-up"></i><%=category%></h4></a>
               <div class="category-content hiddencategory" id="categoryelement<%= i %>">
                 <hr/>
                 <% for key in language_keys
