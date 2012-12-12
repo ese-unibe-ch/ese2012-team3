@@ -2,7 +2,9 @@
   @items = Item.items_by_agent(@org)
   @offers = Item.offers_by_agent(@org)
    @title = "#{@LANG["ORGANIZATION"]}: #{@org.name}"
-   @current_nav_item = :my_profile
+   if @current_agent == @org
+     @current_nav_item = :own_organization
+   end
 %>
 
 <section id="content">

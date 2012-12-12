@@ -17,7 +17,7 @@
           ><a href="/all_users"><i class="icon-list"></i><%=@LANG["SELLERS"]%></a></li>
 
           <li
-            <%if @current_nav_item == :my_profile%>
+            <%if @current_nav_item == :my_profile or @current_nav_item == :own_organization%>
                 class="active"
             <%end%>
           >
