@@ -1,374 +1,374 @@
-LANG_OF_DESC_AND_NAME
-Spr. von Beschr. & Name
-I_WANT_PROVIDE_DESC_MORE_LANGS
-Ich will Beschreibung und Name in mehr Sprachen angeben.
-LOCAL_DATE_TIME_FORMAT
-%d.%m.%Y %H:%M
-PLACED_BID_AT_FOR_CREDITS
-<span class='past-winner-name'>%s</span> machte ein Gebot um <span class='past-winner-time'>%s</span> für <span class='past-winner-price'>%s</span> Credits
-LANGUAGE_NAME
-Deutsch
-INCREMENT_MUST_SET
-Erhöhung muss festgelegt sein
-END_TIME_MUST_SET
-Endzeit must festgelegt sein
-MINPRICE_MUST_SET
-minimaler Preis muss festgelegt sein
-INCREMENT_POSITIVE_INT
-Ehöhung muss eine positive Ganzzahl sein
-INCREMENT_GT_0
-Erhöhung muss grösser als 0 sein
-COMMENTED_ON
-kommentierte
-CREATED_ITEM
-erstellte Gegenstand
+ABOUT
+√úber
+ACCOUNT_SETTINGS
+Einstellungen
+ACTIVATE_ITEM
+Gegenstand aktivieren
 ACTIVATED_ITEM
 aktivierte Gegenstand
-MINPRICE_POSITIVE_INT
-minimaler Preis muss eine positive Ganzzahl sein
-TIME_INVALID
-Unzulässiges Zeitformat
-TIME_MUST_FUTURE
-Zeitpunkt muss in der Zukunft sein
+ACTIVATING
+Aktiviert
+ADD_COMMENT
+Kommentar hinzufügen
+ADD_MEMBER_TO_ORGANIZATION
+Mitglied zu Organisation hinzufügen
+ADD_TO_WISHLIST
+Zu Wunschliste hinzufügen
+ADD_USER
+Benutzer hinzufügen
+AT_TIME
+um
+AUCTION
+Auktion
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>Fehler!</strong><br /> Die Auktion ist schon geschlossen.
+AUCTION_ENDS_AT
+Auktion endet um
+AUCTION_FOR
+Auktion für
 BID_GIVEN_CHOOSE_HIGHER
 Dieses Gebot wurde schon gemacht, geben Sie ein höheres
 BID_MUST_BE_AT_LEAST
 Das Gebot muss mindestens momentaner Preis + Erhöhung sein
+BID_ON_AUCTION
+Gebot abgeben
 BOUGHT_ITEM
 kaufte item
-NOT_ENOUGH_MONEY
-Sie haben nicht genügend Credits.
+BUY_ITEM
+Gegenstand kaufen
+BUYING
+Gekauft
+CAN_USE_MARKDOWN
+Sie können markdown verwenden, z.B: **<b>fetter Text</b>**
+CANNOT_EDIT_ACTIVE
+Aktive Gegenstände können nicht bearbeitet werden.
+CHANGE_PASSWORD
+Passwort ändern
+CHANGE_PROFILE_PICTURE
+Profilbild ändern
+CLICK_HERE_TO_REGISTER
+Hier klicken, um sich zu registrieren!
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+Klicken Sie hier, um ihre anderen Gegenstände zu sehen.
+CLICK_TO_EXPAND
+klicken, um alles anzuzeigen
+COMMENT_MAY_NOT_BE_EMPTY
+Kommentar darf nicht leer sein.
+COMMENTED_ON
+kommentierte
+COMMENTING
+Kommentiert
+COMMENTS
+Kommentare
+CREATE_ACCOUNT
+Account erstellen
+CREATE_AUCTION
+Auktion erstellen
+CREATE_NEW_ITEM
+Neuen Gegenstand erstellen
+CREATE_NEW_OFFER
+Neues Angebot
+CREATE_ORGANIZATION
+Organisation erstellen
+CREATED_ITEM
+erstellte Gegenstand
+CREDITS
+Credits
+CURRENT_PASS_WRONG
+Momentanes Passwort ist falsch
+CURRENT_PASSWORD
+Momentanes Passwort
+CURRENT_PRICE
+Momentaner Preis
+CURRENT_WINNER
+Momentaner Gewinner
+CURRENTLY_ADMIN_NOTE
+Sie sind momentan Administrator einer Organisation. Bitte vergeben sie an einen anderen Benutzer Adminrechte, bevor Sie ihren Account löschen.
+CURRENTLY_NOT_IN_AUCTION
+Momentan nicht in einer Auktion.
+DELETE_ACCOUNT
+Account löschen
+DELETE_ACCOUNT_QUESTION
+Account löschen?
+DELETE_PROFILE_PICTURE
+Profilbild löschen
+DESCRIPTION
+Beschreibung
+DOES_NOT_EXIST
+existiert nicht
+DONT_HAVE_ACCOUNT_QUESTION
+Noch nicht registriert?
+EDIT_AUCTION
+Auktion bearbeiten
+EDIT_AUCTION_FOR
+Auktionseinstellungen für
+EDIT_ITEM
+Gegenstand bearbeiten
+EDIT_ITEM_AUCTION
+Auktion bearbeiten
+END_TIME
+Endet:
+END_TIME_MUST_SET
+Endzeit must festgelegt sein
+ERROR
+Fehler
+FILTER_LIST
+Liste filtern:
+FOLLOW
+Folgen
+FOLLOWEES_ACTIVITIES
+Aktivitäten von gefolgten Benutzern
+FOLLOWING
+Gefolgt
+FOLLOWS
+folgt jetzt
+FOUND_ITEMS
+Gegenstände
+I_WANT_PROVIDE_DESC_MORE_LANGS
+Ich will Beschreibung und Name in mehr Sprachen angeben.
+IMAGE_TOO_LARGE
+Bilddatei zu gross, muss
+INACTIVATE_ITEM
+Gegenstand deaktivieren
+INCREMENT
+Erhöhungsschritt
+INCREMENT_GT_0
+Erhöhung muss grösser als 0 sein
+INCREMENT_MUST_SET
+Erhöhung muss festgelegt sein
+INCREMENT_POSITIVE_INT
+Ehöhung muss eine positive Ganzzahl sein
+INTERESTS
+Interessen
+ITEM
+Gegenstand
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>Gegenstant gekauft</strong><br />Sie haben erfolgreich gekauft:
+ITEM_CREATION
+Gegenstand erstellt
 ITEM_MUST_HAVE_NAME
 Gegenstand muss einen Namen haben.
 ITEM_MUST_HAVE_PRICE
 Gegenstand muss einen Preis haben.
-PRICE_MUST_BE_POSITIVE
-Preis muss eine positive Gazzahl sein.
-PRICE_MUST_BE_INTEGER
-Preis muss eine Zahl sein.
-ORG_MUST_HAVE_NAME
-Organisation muss einen Namen haben.
-COMMENT_MAY_NOT_BE_EMPTY
-Kommentar darf nicht leer sein.
-SEARCH_MAY_NOT_BE_EMPTY
-Suchanfrage darf nicht leer sein.
-NO_PASSWORD_CONFIRM_GIVEN
-Keine Passwortbestätigung eingegeben
-USERNAME_EXISTS
-Benutzer mit diesem Namen existiert bereits
-NO_ORG_FOUND
-keine Organisation gefunden
-PASS_AND_RETYPED_PASS_DONT_MATCH
-Passwort und Passwortwiederholung stimmen nicht überein
-NO_PROFILE_PICTURE
-Sie haben kein Profilbild
-NO_USER_TO_PROMOTE_FOUND
-keine Benutzer zum Befördern gefunden
-NO_FILE_CHOSEN
-Sie haben keine Datei ausgewählt
-NO_USER_TO_ADD_FOUND
-keine Benutzer zum Hinzufügen gefunden
+ITEMS_ON_THE_MARKET
+Gegenstände auf dem Markt
+LANG_OF_DESC_AND_NAME
+Spr. von Beschr. & Name
+LANGUAGE
+Sprache
+LANGUAGE_NAME
+Deutsch
+LATEST_ORGANIZATION_ACTIVITIES
+Neuste Organisationsaktivitäten
+LEAVE_ORGANIZATION
+Organisation verlassen
+LOCAL_DATE_TIME_FORMAT
+%d.%m.%Y %H:%M
+LOGGED_IN_AS
+Angemeldet als
+LOGGEDIN_NOTIFICATION
+<strong>Angemeldet!</strong><br />Sie wurden erfolgreich angemeldet!
+LOGIN
+Anmelden
+LOGOUT
+Abmelden
+MARKETPLACE
+Marktplatz
+MINIMAL_BID_INCREMENT
+Kleinster Erhöhungsschritt
+MINIMAL_PRICE
+Mindestpreis
+MINPRICE_MUST_SET
+minimaler Preis muss festgelegt sein
+MINPRICE_POSITIVE_INT
+minimaler Preis muss eine positive Ganzzahl sein
+MUST_BE_STRONG
+Muss stark genug sein.
+MY_PROFILE
+Mein Profil
+NAME
+Name
+NEW_ITEM
+Neuer Gegenstand
+NEW_OFFER
+Neues Angebot
+NEW_ORGANIZATION
+Neue Organisation
+NEXT
+Weiter
 NO_ADMIN_RIGHTS
 Sie haben keine Adimistratorrechte
-CURRENT_PASS_WRONG
-Momentanes Passwort ist falsch
+NO_AUCTION_NOTIFICATION
+<strong>Fehler!</strong><br /> Es gibt keine Auktion für diesen Gegenstand.
+NO_COMMENTS
+Dieser Gegenstand hat noch keine Kommentare.
+NO_FILE_CHOSEN
+Sie haben keine Datei ausgewählt
+NO_ITEMS_FOUND
+Keine Gegenstände gefunden.
+NO_KEEP_IT
+Nein, ich will ihn nicht löschen
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+Es ist nicht möglich, Auktionen zu bearbeiten, welche schon Gebote haben
 NO_LONGER_FOLLOWS
 folgt nicht mehr
-FOLLOWS
-folgt jetzt
-USER
-Benutzer
-DOES_NOT_EXIST
-existiert nicht
-NO_USERNAME_GIVEN
-Kein Benutzername angegeben
+NO_OFFERS_FOUND
+Keine Angebote gefunden.
+NO_ORG_FOUND
+keine Organisation gefunden
+NO_ORGANIZATIONS
+Keine Organisationen
 NO_PASS_AND_USER
 No password and according username given
-PNS_NOT_8
-Passwort nicht stark: Ist nicht mindestens 8 Zeichen lang
-PNS_USERNAME
-Passwort nicht stark: Beinhaltet ihren Nutzernamen
+NO_PASSWORD_CONFIRM_GIVEN
+Keine Passwortbestätigung eingegeben
+NO_PASSWORD_GIVEN
+Kein Passwort angegeben
+NO_PROFILE_PICTURE
+Sie haben kein Profilbild
+NO_USER_TO_ADD_FOUND
+keine Benutzer zum Hinzufügen gefunden
+NO_USER_TO_PROMOTE_FOUND
+keine Benutzer zum Befördern gefunden
+NO_USERNAME_GIVEN
+Kein Benutzername angegeben
+NO_USERS_TO_ADD
+Keine Benutzer verfügbar
+NO_WISHLIST_ITEMS
+Die Wunschliste dieses Benutzers ist leer.
+NOT_ENOUGH_MONEY
+Sie haben nicht genügend Credits.
+NOT_FOLLOWING
+Dieser Benutzer folgt niemandem.
+NOT_REPRESENTING_ORG
+Sie repräsentieren keine Organisation.
+NOW_REPRESENTING
+Sie repräsentieren nun
+OFFER
+Angebot
+OFFERS
+Angebote
+ORG_MUST_HAVE_NAME
+Organisation muss einen Namen haben.
+ORG_SETTINGS
+Einstellungen Org.
+ORGANIZATION
+Organisation
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>Organisation erstellt!</strong><br />Die Organisation wurde erfolgreich erstellt.
+ORGANIZATION_SETTINGS
+Einstellungen Organisation
+ORGANIZATIONS
+Organisationen
+OWNER
+Eigentümer
+PASS_AND_RETYPED_PASS_DONT_MATCH
+Passwort und Passwortwiederholung stimmen nicht überein
+PASSWORD
+Passwort
+PASSWORD_CHANGED_NOTIFICATION
+<strong>Passwort geändert!</strong><br />Ihr Passwort wurde erfolgreich geändert.
+PAST_WINNERS
+Frühere Gewinner
+PICTURE
+Bild
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> machte ein Gebot um <span class='past-winner-time'>%s</span> für <span class='past-winner-price'>%s</span> Credits
 PNS_CONTAINS_WORD
 Passwort nicht stark: Beinhaltet ein bekanntes Wort
+PNS_NOT_8
+Passwort nicht stark: Ist nicht mindestens 8 Zeichen lang
 PNS_NOT_DIFF
 Passwort nicht stark: Ist nicht Signifikant verschieden vom bisherigen
-PNS_NOT_UPPER
-Passwort nicht stark: Enthält keine Grossbuchstaben A-Z.
 PNS_NOT_LOWER
 Passwort nicht stark: Enthält keine kleinen Buchstaben a-z.
 PNS_NOT_NUMBER
 Passwort nicht stark: Enthält keine Ziffern 0-9.
 PNS_NOT_SPECIAL
 Passwort nicht stark: Enthält keine Sonderzeichen ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
-NO_PASSWORD_GIVEN
-Kein Passwort angegeben
-WRONG_PASSWORD
-Falsches Passwort
-IMAGE_TOO_LARGE
-Bilddatei zu gross, muss
-LOGIN
-Anmelden
-LOGOUT
-Abmelden
-DONT_HAVE_ACCOUNT_QUESTION
-Noch nicht registriert?
-REGISTERED_NOTIFICATION
-<strong>Registriert!</strong><br />Ihr Account wurde erfolgreich erstellt und Sie wurden automatisch eingeloggt.
-SWITCHED_USER_NOTIFICATION
-<strong>Benutzer geändert!</strong>
-NOT_REPRESENTING_ORG
-Sie repräsentieren keine Organisation.
-NOW_REPRESENTING
-Sie repräsentieren nun
-AUCTION_ALREADY_CLOSED_NOTIFICATION
-<strong>Fehler!</strong><br /> Die Auktion ist schon geschlossen.
-ITEM_BOUGHT_YOU_PURCHASED
-<strong>Gegenstant gekauft</strong><br />Sie haben erfolgreich gekauft:
-CLICK_HERE_TO_SEE_OTHER_ITEMS
-Klicken Sie hier, um ihre anderen Gegenstände zu sehen.
-LOGGEDIN_NOTIFICATION
-<strong>Angemeldet!</strong><br />Sie wurden erfolgreich angemeldet!
-PASSWORD_CHANGED_NOTIFICATION
-<strong>Passwort geändert!</strong><br />Ihr Passwort wurde erfolgreich geändert.
-ORGANIZATION_CREATED_NOTIFICATION
-<strong>Organisation erstellt!</strong><br />Die Organisation wurde erfolgreich erstellt.
-NO_AUCTION_NOTIFICATION
-<strong>Fehler!</strong><br /> Es gibt keine Auktion für diesen Gegenstand.
-REGISTER
-Registrieren
-CLICK_HERE_TO_REGISTER
-Hier klicken, um sich zu registrieren!
-AT_TIME
-um
-COMMENTING
-Kommentiert
-YOU_ARE_FOLLOWING
-Sie folgen
-FOLLOWING
-Gefolgt
-REMOVE_MEMBER
-Mitglied entfernen
-LEAVE_ORGANIZATION
-Organisation verlassen
-YOUR_ORGANIZATIONS
-Ihre Organisationen
-NO_ORGANIZATIONS
-Keine Organisationen
-ORGANIZATIONS
-Organisationen
-ACTIVATING
-Aktiviert
-BUYING
-Gekauft
-ITEM_CREATION
-Gegenstand erstellt
-PROMOTE_ADMIN
-Administratorrechte geben
-REVOKE_ADMIN
-Administratorrechte entziehen
-FILTER_LIST
-Liste filtern:
-AUCTION
-Auktion
-AUCTION_FOR
-Auktion für
-EDIT_AUCTION_FOR
-Auktionseinstellungen für
-MARKETPLACE
-Marktplatz
-REGISTRATION
-Registration
-SELECT_USERNAME_AND_PASSWORD
-Wählen sie einen Benutzernamen sowie ein Passwort aus
-NAME
-Name
-ORG_SETTINGS
-Einstellungen Org.
-ORGANIZATION_SETTINGS
-Einstellungen Organisation
-ACCOUNT_SETTINGS
-Einstellungen
-NEW_ORGANIZATION
-Neue Organisation
-SELLERS
-Verkäufer
-SEARCH_RESULT
-Suchergebnis
-FOUND_ITEMS
-Gegenstände
-CHANGE_PASSWORD
-Passwort ändern
-CURRENT_PASSWORD
-Momentanes Passwort
-USER_PROFILE
-Benutzerprofil
-MY_PROFILE
-Mein Profil
-S_MEMBERS
- - Mitglieder
-ADD_MEMBER_TO_ORGANIZATION
-Mitglied zu Organisation hinzufügen
-ADD_USER
-Benutzer hinzufügen
-CURRENTLY_ADMIN_NOTE
-Sie sind momentan Administrator einer Organisation. Bitte vergeben sie an einen anderen Benutzer Adminrechte, bevor Sie ihren Account löschen.
-DELETE_ACCOUNT
-Account löschen
-NO_USERS_TO_ADD
-Keine Benutzer verfügbar
-CHANGE_PROFILE_PICTURE
-Profilbild ändern
-DELETE_PROFILE_PICTURE
-Profilbild löschen
-NEW_ITEM
-Neuer Gegenstand
-CREDITS
-Credits
-LANGUAGE
-Sprache
-UNFOLLOW
-Nicht mehr folgen
-LATEST_ORGANIZATION_ACTIVITIES
-Neuste Organisationsaktivitäten
-FOLLOW
-Folgen
-VIEWING_PROFILE
-Profil
-ORGANIZATION
-Organisation
-CREATE_ORGANIZATION
-Organisation erstellen
-DELETE_ACCOUNT_QUESTION
-Account löschen?
-NO_KEEP_IT
-Nein, ich will ihn nicht löschen
-REALLY_DELETE_QUESTION
-Wollen Sie wirklich ihren Account löschen?
-NO_LONGER_EDITABLE_AFTER_FIRST_BID
-Es ist nicht möglich, Auktionen zu bearbeiten, welche schon Gebote haben
-CANNOT_EDIT_ACTIVE
-Aktive Gegenstände können nicht bearbeitet werden.
-BUY_ITEM
-Gegenstand kaufen
-INACTIVATE_ITEM
-Gegenstand deaktivieren
-ACTIVATE_ITEM
-Gegenstand aktivieren
-EDIT_AUCTION
-Auktion bearbeiten
-EDIT_ITEM_AUCTION
-Auktion bearbeiten
-ERROR
-Fehler
-EDIT_ITEM
-Gegenstand bearbeiten
-USERS
-Benutzer
-ABOUT
-Über
-USERNAME
-Benutzername
-PASSWORD
-Passwort
-MUST_BE_STRONG
-Muss stark genug sein.
-RETYPE_PASSWORD
-Passwort erneut eingeben
-INTERESTS
-Interessen
-CREATE_ACCOUNT
-Account erstellen
-PICTURE
-Bild
-DESCRIPTION
-Beschreibung
-PRICE
-Preis
-START_PRICE
-Startpreis
-REMOVE_FROM_WISHLIST
-Von Wunschliste entfernen
-ADD_TO_WISHLIST
-Zu Wunschliste hinzufügen
-NO_WISHLIST_ITEMS
-Die Wunschliste dieses Benutzers ist leer.
-NOT_FOLLOWING
-Dieser Benutzer folgt niemandem.
-WISHLIST
-Wunschliste
-OWNER
-Eigentümer
-NEXT
-Weiter
+PNS_NOT_UPPER
+Passwort nicht stark: Enthält keine Grossbuchstaben A-Z.
+PNS_USERNAME
+Passwort nicht stark: Beinhaltet ihren Nutzernamen
 PREV
 Zurück
-LOGGED_IN_AS
-Angemeldet als
-CURRENT_PRICE
-Momentaner Preis
-BID_ON_AUCTION
-Gebot abgeben
-MINIMAL_BID_INCREMENT
-Kleinster Erhöhungsschritt
-INCREMENT
-Erhöhungsschritt
-SAVE
-Speichern
-END_TIME
-Endet:
-MINIMAL_PRICE
-Mindestpreis
-CURRENT_WINNER
-Momentaner Gewinner
-COMMENTS
-Kommentare
-WROTE
-schrieb
+PRICE
+Preis
+PRICE_MUST_BE_INTEGER
+Preis muss eine Zahl sein.
+PRICE_MUST_BE_LESS_CREDITS
+Der offerierte Preis muss kleiner sein als das Guthaben
+PRICE_MUST_BE_POSITIVE
+Preis muss eine positive Gazzahl sein.
+PROMOTE_ADMIN
+Administratorrechte geben
+REALLY_DELETE_QUESTION
+Wollen Sie wirklich ihren Account löschen?
+REGISTER
+Registrieren
+REGISTERED_NOTIFICATION
+<strong>Registriert!</strong><br />Ihr Account wurde erfolgreich erstellt und Sie wurden automatisch eingeloggt.
+REGISTRATION
+Registration
+REMOVE_FROM_WISHLIST
+Von Wunschliste entfernen
+REMOVE_MEMBER
+Mitglied entfernen
 REPLY
 Antworten
-NO_COMMENTS
-Dieser Gegenstand hat noch keine Kommentare.
-PAST_WINNERS
-Frühere Gewinner
-CLICK_TO_EXPAND
-klicken, um alles anzuzeigen
-ITEMS_ON_THE_MARKET
-Gegenstände auf dem Markt
-FOLLOWEES_ACTIVITIES
-Aktivitäten von gefolgten Benutzern
+RETYPE_PASSWORD
+Passwort erneut eingeben
+REVOKE_ADMIN
+Administratorrechte entziehen
+S_MEMBERS
+ - Mitglieder
+SAVE
+Speichern
 SEARCH
 Suchen
+SEARCH_MAY_NOT_BE_EMPTY
+Suchanfrage darf nicht leer sein.
+SEARCH_RESULT
+Suchergebnis
+SELECT_USERNAME_AND_PASSWORD
+Wählen sie einen Benutzernamen sowie ein Passwort aus
+SELL_ITEM
+Verkaufen
+SELLERS
+Verkäufer
+START_PRICE
+Startpreis
 STRONG_PASSWORD
 Starkes Passwort
 STRONG_PASSWORD_TEXT
-<h1>Tipps für ein starkes Passwort</h1> <p>Was macht ein Passwort stark (oder schwach)? Ein starkes Passwort: <ul> <li>Ist mindestens acht Zeichen lang.</li> <li>Enthält weder Ihren Benutzernamen, Ihren richtigen Namen noch den Namen ihrer Firma.</li> <li>Enthält kein ganzes Wort.</li> <li>Ist ausreichend verschieden von früheren Passwörtern.</li> <li>Enthält Zeichen aus sämtlichen folgenden Kategorien: <ul> <li> Grosse Buchstaben: <i>A, B, C</i> </li> <li> Kleine Buchstaben: <i>a, b, c</i> </li> <li> Ziffern: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Auf der Tastatur verfügbare Symbole (sämtliche Zeichen, welche weder Buchstaben noch Ziffern sind) und Leerschläge: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
-CURRENTLY_NOT_IN_AUCTION
-Momentan nicht in einer Auktion.
-AUCTION_ENDS_AT
-Auktion endet um
-CREATE_AUCTION
-Auktion erstellen
-CREATE_NEW_ITEM
-Neuen Gegenstand erstellen
-ITEM
-Gegenstand
-ADD_COMMENT
-Kommentar hinzufügen
-CAN_USE_MARKDOWN
-Sie können markdown verwenden, z.B: **<b>fetter Text</b>**
-NEW_OFFER
-Neues Angebot
-CREATE_NEW_OFFER
-Neues Angebot
-OFFERS
-Angebote
-SELL_ITEM
-Verkaufen
-OFFER
-Angebot
-PRICE_MUST_BE_LESS_CREDITS
-Der offerierte Preis muss kleiner sein als das Guthaben
-NO_OFFERS_FOUND
-Keine Angebote gefunden.
-NO_ITEMS_FOUND
-Keine Gegenstände gefunden.
+<h1>Tipps für ein starkes Passwort</h1> <p>Was macht ein Passwort stark (oder schwach)? Ein starkes Passwort: <ul> <li>Ist mindestens acht Zeichen lang.</li> <li>Enthält weder Ihren Benutzernamen, Ihren richtigen Namen noch den Namen ihrer Firma.</li> <li>Enthält kein ganzes Wort.</li> <li>Ist ausreichend verschieden von früheren Passwörtern.</li> <li>Enthält Zeichen aus sämtlichen folgenden Kategorien: <ul> <li> Grosse Buchstaben: <i>A, B, C</i> </li> <li> Kleine Buchstaben: <i>a, b, c</i> </li> <li> Ziffern: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Auf der Tastatur verfügbare Symbole (sämtliche Zeichen, welche weder Buchstaben noch Ziffern sind) und Leerschläge: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /</i> </li> </ul> </li> </ul>
+SWITCHED_USER_NOTIFICATION
+<strong>Benutzer geändert!</strong>
+TIME_INVALID
+Unzulässiges Zeitformat
+TIME_MUST_FUTURE
+Zeitpunkt muss in der Zukunft sein
+UNFOLLOW
+Nicht mehr folgen
+USER
+Benutzer
+USER_PROFILE
+Benutzerprofil
+USERNAME
+Benutzername
+USERNAME_EXISTS
+Benutzer mit diesem Namen existiert bereits
+USERS
+Benutzer
+VIEWING_PROFILE
+Profil
+WISHLIST
+Wunschliste
+WRONG_PASSWORD
+Falsches Passwort
+WROTE
+schrieb
+YOU_ARE_FOLLOWING
+Sie folgen
+YOUR_ORGANIZATIONS
+Ihre Organisationen

@@ -1,378 +1,378 @@
-LANG_OF_DESC_AND_NAME
-Lang. du desc. & name
-I_WANT_PROVIDE_DESC_MORE_LANGS
-Je veux donne le nom et description en plusierus langues.
-LOCAL_DATE_TIME_FORMAT
-%d.%m.%Y %H:%M
-PLACED_BID_AT_FOR_CREDITS
-<span class='past-winner-name'>%s</span> a fait un offre à <span class='past-winner-time'>%s</span> de <span class='past-winner-price'>%s</span> crédits
-LANGUAGE_NAME
-Français
-INCREMENT_MUST_SET
-incrément doit être réglé
-END_TIME_MUST_SET
-temps de fin doit être réglé
-MINPRICE_MUST_SET
-prix minimal doit être réglé
-INCREMENT_POSITIVE_INT
-incrément doit être un entier positif
-INCREMENT_GT_0
-incrément doit être supérieur à zéro
-COMMENTED_ON
-à commenté sur
-CREATED_ITEM
-a crée l'article
+ABOUT
+Sur
+ACCOUNT_SETTINGS
+Compte
+ACTIVATE_ITEM
+Activer cet article
 ACTIVATED_ITEM
 a activé l'article
-MINPRICE_POSITIVE_INT
-prix minimal doit être un entier positif
-TIME_MUST_FUTURE
-temps doit être dans le futur
-TIME_INVALID
-format de temps invalid
+ACTIVATING
+Activations
+ADD_COMMENT
+Ajouter commentaire
+ADD_MEMBER_TO_ORGANIZATION
+Ajouter membres à l'organisation
+ADD_TO_WISHLIST
+Ajouter aux objet désirés
+ADD_USER
+Ajouter utilisateur
+AT_TIME
+à
+AUCTION
+Enchère
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>Ooops!</strong><br /> Vous ne pouvez plus faire des enchères.
+AUCTION_ENDS_AT
+Enchères se terminent
+AUCTION_FOR
+Enchères pour
 BID_GIVEN_CHOOSE_HIGHER
 ce offre a déjà été fait, offrez plus
 BID_MUST_BE_AT_LEAST
 L'offre dois être prix actual + incrément au moins
+BID_ON_AUCTION
+Faire une enchère
 BOUGHT_ITEM
 a acheté
-NOT_ENOUGH_MONEY
-Vous n'avez pas assez d'argent!
+BUY_ITEM
+Acheter cet article
+BUYING
+Achats
+CAN_USE_MARKDOWN
+Vous pouvez utiliser la syntaxe \"markdown\" dans ce texte. Par example: **<b>texte en gras</b>**
+CANNOT_EDIT_ACTIVE
+Les articles actifs ne peuvent pas être modifié.
+CHANGE_PASSWORD
+Changer mot de passe
+CHANGE_PROFILE_PICTURE
+Changer photo de profil
+CLICK_HERE_TO_REGISTER
+Cliquez içi pour vous enregistrer!
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+Cliquez içi pour voir vos autres articles.
+CLICK_TO_EXPAND
+cliquer pour agrandir
+COMMENT_MAY_NOT_BE_EMPTY
+comment ne doit pas être vide
+COMMENTED_ON
+à commenté sur
+COMMENTING
+Commentaires
+COMMENTS
+Commentaires
+CREATE_ACCOUNT
+Créer nouveau compte.
+CREATE_AUCTION
+Créer enchères
+CREATE_NEW_ITEM
+Créer nouvel article
+CREATE_NEW_OFFER
+Faire nouvel offre
+CREATE_ORGANIZATION
+Créer organisation
+CREATED_ITEM
+a crée l'article
+CREDITS
+Crédits
+CURRENT_PASS_WRONG
+mots de passe actuel est faux
+CURRENT_PASSWORD
+Mot de passe actuel
+CURRENT_PRICE
+Prix actuel
+CURRENT_WINNER
+Gagnant actuel
+CURRENTLY_ADMIN_NOTE
+Au moment, vous êtes administrateur d'une organisation. Promouvez un autre membre administrateur pour effacer votre compte.
+CURRENTLY_NOT_IN_AUCTION
+Actuellement pas en vente aux enchères
+DELETE_ACCOUNT
+Supprimer compte
+DELETE_ACCOUNT_QUESTION
+Supprimer votre compte?
+DELETE_PROFILE_PICTURE
+Supprimer photo de profil
+DESCRIPTION
+Description
+DOES_NOT_EXIST
+n'existe pas
+DONT_HAVE_ACCOUNT_QUESTION
+Pas de compte?
+EDIT_AUCTION
+Modifier enchères
+EDIT_AUCTION_FOR
+Modifier enchères pour
+EDIT_ITEM
+Modifier cet article
+EDIT_ITEM_AUCTION
+Modifier enchères de cet article
+END_TIME
+Heure de fin
+END_TIME_MUST_SET
+temps de fin doit être réglé
+ERROR
+Erreur
+FILTER_LIST
+Filtrer liste:
+FOLLOW
+Suivre
+FOLLOWEES_ACTIVITIES
+Activités des suivis
+FOLLOWING
+Suivis
+FOLLOWS
+suit
+FOUND_ITEMS
+articles
+I_WANT_PROVIDE_DESC_MORE_LANGS
+Je veux donne le nom et description en plusierus langues.
+IMAGE_TOO_LARGE
+Fichier image trop grande, doit être
+INACTIVATE_ITEM
+Désactiver cet article
+INCREMENT
+Surenchère
+INCREMENT_GT_0
+incrément doit être supérieur à zéro
+INCREMENT_MUST_SET
+incrément doit être réglé
+INCREMENT_POSITIVE_INT
+incrément doit être un entier positif
+INTERESTS
+Intérêts
+ITEM
+Article
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>Item bought!</strong><br />Vous avez acheté l'article!
+ITEM_CREATION
+Créations d'articles
 ITEM_MUST_HAVE_NAME
 article doit avoir un nom!
 ITEM_MUST_HAVE_PRICE
 article doit avoir un prix!
-PRICE_MUST_BE_POSITIVE
-prix doit être un entier positif
-PRICE_MUST_BE_INTEGER
-prix doit être un quantité
-ORG_MUST_HAVE_NAME
-organisation doit avoir un nom!
-COMMENT_MAY_NOT_BE_EMPTY
-comment ne doit pas être vide
-SEARCH_MAY_NOT_BE_EMPTY
-recherche ne doit pas être vide
-NO_PASSWORD_CONFIRM_GIVEN
-Pas de confirmation du mot de passe donné
-USERNAME_EXISTS
-Il y a déjà un utilisateur du nom d'utilisateur donné
-NO_ORG_FOUND
-pas d'organisation trouvé
-PASS_AND_RETYPED_PASS_DONT_MATCH
-le mots de passe et la répetition ne sont pas la même
-NO_PROFILE_PICTURE
-Vous n'avez pas de photo de profil
-NO_USER_TO_PROMOTE_FOUND
-pas d'utilisateur trouvé pour promouvoir
-NO_FILE_CHOSEN
-Vous n'avez pas choisi un image
-NO_USER_TO_ADD_FOUND
-pas d'utilisateur trouvé pour en ajouter
+ITEMS_ON_THE_MARKET
+Articles sur le marché
+LANG_OF_DESC_AND_NAME
+Lang. du desc. & name
+LANGUAGE
+Langue
+LANGUAGE_NAME
+Français
+LATEST_ORGANIZATION_ACTIVITIES
+Dernières activités de cette Organisation
+LEAVE_ORGANIZATION
+Quitter cette organisation
+LOCAL_DATE_TIME_FORMAT
+%d.%m.%Y %H:%M
+LOGGED_IN_AS
+Connecté comme
+LOGGEDIN_NOTIFICATION
+<strong>Logged in!</strong><br />Vous avez été connecté avec succès!
+LOGIN
+Connexion
+LOGOUT
+Déconnexion
+MARKETPLACE
+Marché
+MINIMAL_BID_INCREMENT
+Surenchère minimum
+MINIMAL_PRICE
+Prix minimal
+MINPRICE_MUST_SET
+prix minimal doit être réglé
+MINPRICE_POSITIVE_INT
+prix minimal doit être un entier positif
+MUST_BE_STRONG
+Doit être assez fort.
+MY_PROFILE
+Mon profil
+NAME
+Nom
+NEW_ITEM
+Nouvel article
+NEW_OFFER
+Nouvel offre
+NEW_ORGANIZATION
+Nouvelle organisation
+NEXT
+Suivant
 NO_ADMIN_RIGHTS
 vous n'avez pas de privileges administrateur 
-CURRENT_PASS_WRONG
-mots de passe actuel est faux
+NO_AUCTION_NOTIFICATION
+<strong>Ooops!</strong><br /> Il n'y a pas d'enchères pour cet article.
+NO_COMMENTS
+Cet article n'a pas encore reçu de commentaires
+NO_FILE_CHOSEN
+Vous n'avez pas choisi un image
+NO_ITEMS_FOUND
+Pas d'articles ont été trouvé.
+NO_KEEP_IT
+Non, j'aimerais le garder.
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+Vous ne pouvez pas modifiér après la première enchère
 NO_LONGER_FOLLOWS
 ne suit plus
-FOLLOWS
-suit
-USER
-Utilisateur
-DOES_NOT_EXIST
-n'existe pas
-NO_USERNAME_GIVEN
-Pas de nom d'utilisateur donné
+NO_OFFERS_FOUND
+Pas d'offres ont été trouvé.
+NO_ORG_FOUND
+pas d'organisation trouvé
+NO_ORGANIZATIONS
+Pas d'organisations
 NO_PASS_AND_USER
 Pas de mot de passe et  nom d'utilisateur donné
-PNS_NOT_8
-Mot de passe non solide: N'a pas 8 caractères au moins.
-PNS_USERNAME
-Mot de passe non solide: Contient vôtre nom d'utilisateur.
+NO_PASSWORD_CONFIRM_GIVEN
+Pas de confirmation du mot de passe donné
+NO_PASSWORD_GIVEN
+Pas de mot de passe doné
+NO_PROFILE_PICTURE
+Vous n'avez pas de photo de profil
+NO_USER_TO_ADD_FOUND
+pas d'utilisateur trouvé pour en ajouter
+NO_USER_TO_PROMOTE_FOUND
+pas d'utilisateur trouvé pour promouvoir
+NO_USERNAME_GIVEN
+Pas de nom d'utilisateur donné
+NO_USERS_TO_ADD
+Pas d'utilisateurs disponibles
+NO_WISHLIST_ITEMS
+Cet utilisateur n'a pas d'objets désirés.
+NOT_ENOUGH_MONEY
+Vous n'avez pas assez d'argent!
+NOT_FOLLOWING
+Cet utilisateur ne suit personne.
+NOT_REPRESENTING_ORG
+Vous n'êtes pas un représentant d'une organisation.
+NOW_REPRESENTING
+Vous êtes maintenant un représentant de l'organisation
+OFFER
+Offre
+OFFERS
+Offres
+ORG_MUST_HAVE_NAME
+organisation doit avoir un nom!
+ORG_SETTINGS
+Préferences d'organisations
+ORGANIZATION
+Organisation
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>Organization created!</strong><br />L'organisation a été créée avec succès.
+ORGANIZATION_HAS_NO_ITEMS
+Cette organisation n'a pas d'articles.
+ORGANIZATION_SETTINGS
+Préferences d'organisations
+ORGANIZATIONS
+Organisations
+OWNER
+Propriétaire
+PASS_AND_RETYPED_PASS_DONT_MATCH
+le mots de passe et la répetition ne sont pas la même
+PASSWORD
+Mot de passe
+PASSWORD_CHANGED_NOTIFICATION
+<strong>Password changed!</strong><br />Votre mot de passe a été changé avec succès.
+PAST_WINNERS
+Gagnants précédent
+PICTURE
+Image
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> a fait un offre à <span class='past-winner-time'>%s</span> de <span class='past-winner-price'>%s</span> crédits
 PNS_CONTAINS_WORD
 Mot de passe non solide: Contient un mot connu
+PNS_NOT_8
+Mot de passe non solide: N'a pas 8 caractères au moins.
 PNS_NOT_DIFF
 Mot de passe non solide: N'est pas significativement différent du mot de passe précédent.
-PNS_NOT_UPPER
-Mot de passe non solide: Ne contient pas de lettres majuscules A-Z.
 PNS_NOT_LOWER
 Mot de passe non solide: Ne contient pas de lettres minuscules a-z.
 PNS_NOT_NUMBER
 Mot de passe non solide: Ne contient pas de chiffres 0-9.
 PNS_NOT_SPECIAL
 Mot de passe non solide: Ne contient pas de caractères spéciaux ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
-NO_PASSWORD_GIVEN
-Pas de mot de passe doné
-WRONG_PASSWORD
-mot de passe est faux
-IMAGE_TOO_LARGE
-Fichier image trop grande, doit être
-LOGIN
-Connexion
-LOGOUT
-Déconnexion
-DONT_HAVE_ACCOUNT_QUESTION
-Pas de compte?
-REGISTERED_NOTIFICATION
-<strong>Registered!</strong><br />Votre compte a été créé et vous avez été connecté.
-SWITCHED_USER_NOTIFICATION
-<strong>L'utilisateur a été changé!</strong>
-NOT_REPRESENTING_ORG
-Vous n'êtes pas un représentant d'une organisation.
-NOW_REPRESENTING
-Vous êtes maintenant un représentant de l'organisation
-AUCTION_ALREADY_CLOSED_NOTIFICATION
-<strong>Ooops!</strong><br /> Vous ne pouvez plus faire des enchères.
-ITEM_BOUGHT_YOU_PURCHASED
-<strong>Item bought!</strong><br />Vous avez acheté l'article!
-CLICK_HERE_TO_SEE_OTHER_ITEMS
-Cliquez içi pour voir vos autres articles.
-LOGGEDIN_NOTIFICATION
-<strong>Logged in!</strong><br />Vous avez été connecté avec succès!
-PASSWORD_CHANGED_NOTIFICATION
-<strong>Password changed!</strong><br />Votre mot de passe a été changé avec succès.
-ORGANIZATION_CREATED_NOTIFICATION
-<strong>Organization created!</strong><br />L'organisation a été créée avec succès.
-NO_AUCTION_NOTIFICATION
-<strong>Ooops!</strong><br /> Il n'y a pas d'enchères pour cet article.
-REGISTER
-Enregister
-CLICK_HERE_TO_REGISTER
-Cliquez içi pour vous enregistrer!
-AT_TIME
-à
-COMMENTING
-Commentaires
-YOU_ARE_FOLLOWING
-Vous suivez
-FOLLOWING
-Suivis
-REMOVE_MEMBER
-Enlever ce membre
-LEAVE_ORGANIZATION
-Quitter cette organisation
-YOUR_ORGANIZATIONS
-Vos organisations
-NO_ORGANIZATIONS
-Pas d'organisations
-ORGANIZATIONS
-Organisations
-ACTIVATING
-Activations
-BUYING
-Achats
-ITEM_CREATION
-Créations d'articles
-PROMOTE_ADMIN
-Promouvoir administrateur
-REVOKE_ADMIN
-Révoquer administrateur
-FILTER_LIST
-Filtrer liste:
-AUCTION
-Enchère
-AUCTION_FOR
-Enchères pour
-EDIT_AUCTION_FOR
-Modifier enchères pour
-MARKETPLACE
-Marché
-REGISTRATION
-Enregistration
-SELECT_USERNAME_AND_PASSWORD
-Choisissez nom d'utilisateur et mot de passe
-NAME
-Nom
-ORG_SETTINGS
-Préferences d'organisations
-ORGANIZATION_SETTINGS
-Préferences d'organisations
-ACCOUNT_SETTINGS
-Compte
-NEW_ORGANIZATION
-Nouvelle organisation
-SELLERS
-Vendeurs
-SEARCH_RESULT
-Résultat de la recherche
-FOUND_ITEMS
-articles
-CHANGE_PASSWORD
-Changer mot de passe
-CURRENT_PASSWORD
-Mot de passe actuel
-USER_PROFILE
-Profil d'utilisateur
-MY_PROFILE
-Mon profil
-S_MEMBERS
- - membres
-ADD_MEMBER_TO_ORGANIZATION
-Ajouter membres à l'organisation
-ADD_USER
-Ajouter utilisateur
-CURRENTLY_ADMIN_NOTE
-Au moment, vous êtes administrateur d'une organisation. Promouvez un autre membre administrateur pour effacer votre compte.
-DELETE_ACCOUNT
-Supprimer compte
-NO_USERS_TO_ADD
-Pas d'utilisateurs disponibles
-CHANGE_PROFILE_PICTURE
-Changer photo de profil
-DELETE_PROFILE_PICTURE
-Supprimer photo de profil
-NEW_ITEM
-Nouvel article
-CREDITS
-Crédits
-LANGUAGE
-Langue
-UNFOLLOW
-Arrêter de suivre
-S_ITEMS
-- articles
-LATEST_ORGANIZATION_ACTIVITIES
-Dernières activités de cette Organisation
-FOLLOW
-Suivre
-ORGANIZATION_HAS_NO_ITEMS
-Cette organisation n'a pas d'articles.
-VIEWING_PROFILE
-Profil
-ORGANIZATION
-Organisation
-CREATE_ORGANIZATION
-Créer organisation
-DELETE_ACCOUNT_QUESTION
-Supprimer votre compte?
-NO_KEEP_IT
-Non, j'aimerais le garder.
-REALLY_DELETE_QUESTION
-Voulez-vous le vraiment supprimer?
-NO_LONGER_EDITABLE_AFTER_FIRST_BID
-Vous ne pouvez pas modifiér après la première enchère
-CANNOT_EDIT_ACTIVE
-Les articles actifs ne peuvent pas être modifié.
-BUY_ITEM
-Acheter cet article
-INACTIVATE_ITEM
-Désactiver cet article
-ACTIVATE_ITEM
-Activer cet article
-EDIT_AUCTION
-Modifier enchères
-EDIT_ITEM_AUCTION
-Modifier enchères de cet article
-ERROR
-Erreur
-EDIT_ITEM
-Modifier cet article
-USERS
-Utilisateurs
-ABOUT
-Sur
-USERNAME
-Nom d'utilisateur
-PASSWORD
-Mot de passe
-MUST_BE_STRONG
-Doit être assez fort.
-RETYPE_PASSWORD
-Confirmer le mot de passe
-INTERESTS
-Intérêts
-CREATE_ACCOUNT
-Créer nouveau compte.
-PICTURE
-Image
-DESCRIPTION
-Description
-PRICE
-Prix
-START_PRICE
-Prix initial
-REMOVE_FROM_WISHLIST
-Supprimer des objets désirés
-ADD_TO_WISHLIST
-Ajouter aux objet désirés
-NO_WISHLIST_ITEMS
-Cet utilisateur n'a pas d'objets désirés.
-NOT_FOLLOWING
-Cet utilisateur ne suit personne.
-WISHLIST
-Objet désirés
-OWNER
-Propriétaire
-NEXT
-Suivant
+PNS_NOT_UPPER
+Mot de passe non solide: Ne contient pas de lettres majuscules A-Z.
+PNS_USERNAME
+Mot de passe non solide: Contient vôtre nom d'utilisateur.
 PREV
 Précédent
-LOGGED_IN_AS
-Connecté comme
-CURRENT_PRICE
-Prix actuel
-BID_ON_AUCTION
-Faire une enchère
-MINIMAL_BID_INCREMENT
-Surenchère minimum
-INCREMENT
-Surenchère
-SAVE
-Sauver
-END_TIME
-Heure de fin
-MINIMAL_PRICE
-Prix minimal
-CURRENT_WINNER
-Gagnant actuel
-COMMENTS
-Commentaires
-WROTE
-a écrit:
+PRICE
+Prix
+PRICE_MUST_BE_INTEGER
+prix doit être un quantité
+PRICE_MUST_BE_LESS_CREDITS
+prix ne soit pas être plus que les credits
+PRICE_MUST_BE_POSITIVE
+prix doit être un entier positif
+PROMOTE_ADMIN
+Promouvoir administrateur
+REALLY_DELETE_QUESTION
+Voulez-vous le vraiment supprimer?
+REGISTER
+Enregister
+REGISTERED_NOTIFICATION
+<strong>Registered!</strong><br />Votre compte a été créé et vous avez été connecté.
+REGISTRATION
+Enregistration
+REMOVE_FROM_WISHLIST
+Supprimer des objets désirés
+REMOVE_MEMBER
+Enlever ce membre
 REPLY
 Répondre
-NO_COMMENTS
-Cet article n'a pas encore reçu de commentaires
-PAST_WINNERS
-Gagnants précédent
-CLICK_TO_EXPAND
-cliquer pour agrandir
-ITEMS_ON_THE_MARKET
-Articles sur le marché
-FOLLOWEES_ACTIVITIES
-Activités des suivis
+RETYPE_PASSWORD
+Confirmer le mot de passe
+REVOKE_ADMIN
+Révoquer administrateur
+S_ITEMS
+- articles
+S_MEMBERS
+ - membres
+SAVE
+Sauver
 SEARCH
 Chercher
+SEARCH_MAY_NOT_BE_EMPTY
+recherche ne doit pas être vide
+SEARCH_RESULT
+Résultat de la recherche
+SELECT_USERNAME_AND_PASSWORD
+Choisissez nom d'utilisateur et mot de passe
+SELL_ITEM
+Vendre article
+SELLERS
+Vendeurs
+START_PRICE
+Prix initial
 STRONG_PASSWORD
 Mot de passe fort
 STRONG_PASSWORD_TEXT
-<h1>Conseils pour créer un mot de passe fort</h1> <p>Qu'est-ce qu'un mot de passe fort (ou faible)? Un mot de passe fort: <ul> <li>Est au minimum huite caractères.</li> <li>Ne contient ni votre nom d'utilisateur, ni votre nom réel, ni le nom de votre entreprise</li> <li>Ne contient pas un mot complet.</li> <li>Est significativement différent de mots de passe précédents</li> <li>Contient des caractères de chacune de ces quatre catégories: <ul> <li> Lettres majuscules: <i>A, B, C</i> </li> <li> Lettres miniscules: <i>a, b, c</i> </li> <li> Nombres: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symboles trouvés sur le clavier (Tous les caractères du clavier qui ne sont pas définie comme lettres ou chiffres) et des espaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
-CURRENTLY_NOT_IN_AUCTION
-Actuellement pas en vente aux enchères
-AUCTION_ENDS_AT
-Enchères se terminent
-CREATE_AUCTION
-Créer enchères
-CREATE_NEW_ITEM
-Créer nouvel article
-ITEM
-Article
-ADD_COMMENT
-Ajouter commentaire
-CAN_USE_MARKDOWN
-Vous pouvez utiliser la syntaxe "markdown" dans ce texte. Par example: **<b>texte en gras</b>**
-NEW_OFFER
-Nouvel offre
-CREATE_NEW_OFFER
-Faire nouvel offre
-OFFERS
-Offres
-SELL_ITEM
-Vendre article
-OFFER
-Offre
-PRICE_MUST_BE_LESS_CREDITS
-prix ne soit pas être plus que les credits
-NO_OFFERS_FOUND
-Pas d'offres ont été trouvé.
-NO_ITEMS_FOUND
-Pas d'articles ont été trouvé.
+<h1>Conseils pour créer un mot de passe fort</h1> <p>Qu'est-ce qu'un mot de passe fort (ou faible)? Un mot de passe fort: <ul> <li>Est au minimum huite caractères.</li> <li>Ne contient ni votre nom d'utilisateur, ni votre nom réel, ni le nom de votre entreprise</li> <li>Ne contient pas un mot complet.</li> <li>Est significativement différent de mots de passe précédents</li> <li>Contient des caractères de chacune de ces quatre catégories: <ul> <li> Lettres majuscules: <i>A, B, C</i> </li> <li> Lettres miniscules: <i>a, b, c</i> </li> <li> Nombres: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symboles trouvés sur le clavier (Tous les caractères du clavier qui ne sont pas définie comme lettres ou chiffres) et des espaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /</i> </li> </ul> </li> </ul>
+SWITCHED_USER_NOTIFICATION
+<strong>L'utilisateur a été changé!</strong>
+TIME_INVALID
+format de temps invalid
+TIME_MUST_FUTURE
+temps doit être dans le futur
+UNFOLLOW
+Arrêter de suivre
+USER
+Utilisateur
+USER_PROFILE
+Profil d'utilisateur
+USERNAME
+Nom d'utilisateur
+USERNAME_EXISTS
+Il y a déjà un utilisateur du nom d'utilisateur donné
+USERS
+Utilisateurs
+VIEWING_PROFILE
+Profil
+WISHLIST
+Objet désirés
+WRONG_PASSWORD
+mot de passe est faux
+WROTE
+a écrit:
+YOU_ARE_FOLLOWING
+Vous suivez
+YOUR_ORGANIZATIONS
+Vos organisations

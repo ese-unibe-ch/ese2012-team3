@@ -1,382 +1,382 @@
-EDIT_OFFER
-Edit Offer
-NOT_CURRENTLY_MEMBER
-You are not currently a member of this organization and may therefore not access this page.
-NO_USER_FOUND
-no user found
+ABOUT
+About
 ACCESS_DENIED
 Access denied.
-LANG_OF_DESC_AND_NAME
-Lang. of desc. & name
-I_WANT_PROVIDE_DESC_MORE_LANGS
-I want to provide description and name in more languages.
-LOCAL_DATE_TIME_FORMAT
-%d/%m/%Y %H:%M
-PLACED_BID_AT_FOR_CREDITS
-<span class='past-winner-name'>%s</span> placed a bid at <span class='past-winner-time'>%s</span> for <span class='past-winner-price'>%s</span> credits
-LANGUAGE_NAME
-English
-INCREMENT_MUST_SET
-increment must be set
-END_TIME_MUST_SET
-end time must be set
-MINPRICE_MUST_SET
-minimal price must be set
-INCREMENT_POSITIVE_INT
-increment must be positive integer
-INCREMENT_GT_0
-increment must be more than zero
-COMMENTED_ON
-commented on
-CREATED_ITEM
-created item
+ACCOUNT_SETTINGS
+Account Settings
+ACTIVATE_ITEM
+Activate item
 ACTIVATED_ITEM
 activated item
-MINPRICE_POSITIVE_INT
-minimal price must be positive integer
-TIME_MUST_FUTURE
-time must be in future
-TIME_INVALID
-Invalid time format
+ACTIVATING
+Activating
+ADD_COMMENT
+Add comment
+ADD_MEMBER_TO_ORGANIZATION
+Add member to organization
+ADD_TO_WISHLIST
+Add to wishlist
+ADD_USER
+Add user
+AT_TIME
+at
+AUCTION
+Auction
+AUCTION_ALREADY_CLOSED_NOTIFICATION
+<strong>Ooops!</strong><br /> Auction has already closed.
+AUCTION_ENDS_AT
+Auction ends at
+AUCTION_FOR
+Auction for
 BID_GIVEN_CHOOSE_HIGHER
 This bid has been already given, choose an higher one
 BID_MUST_BE_AT_LEAST
 The bid must be at least the current price + increment
+BID_ON_AUCTION
+Bid on auction
 BOUGHT_ITEM
 bought item
-NOT_ENOUGH_MONEY
-You don't have enough money!
+BUY_ITEM
+Buy Item
+BUYING
+Buying
+CAN_USE_MARKDOWN
+You can use markdown syntax to style this text. For example: **<b>bold text</b>**
+CANNOT_EDIT_ACTIVE
+Cannot edit active items
+CHANGE_PASSWORD
+Change Password
+CHANGE_PROFILE_PICTURE
+Change profile picture
+CLICK_HERE_TO_REGISTER
+Click here to register!
+CLICK_HERE_TO_SEE_OTHER_ITEMS
+Click here to see your other items.
+CLICK_TO_EXPAND
+click to expand
+COMMENT_MAY_NOT_BE_EMPTY
+comment must not be empty
+COMMENTED_ON
+commented on
+COMMENTING
+Commenting
+COMMENTS
+Comments
+CREATE_ACCOUNT
+Create My Account
+CREATE_AUCTION
+Create auction
+CREATE_NEW_ITEM
+Create new item
+CREATE_NEW_OFFER
+Create new offer
+CREATE_ORGANIZATION
+Create Organization
+CREATED_ITEM
+created item
+CREDITS
+Credits
+CURRENT_PASS_WRONG
+Current password is wrong
+CURRENT_PASSWORD
+Current Password
+CURRENT_PRICE
+Current price
+CURRENT_WINNER
+Current winner
+CURRENTLY_ADMIN_NOTE
+You are currently admin of an organization. Make another member admin before deleting your account.
+CURRENTLY_NOT_IN_AUCTION
+Currently not in auction
+DELETE_ACCOUNT
+Delete account
+DELETE_ACCOUNT_QUESTION
+Delete Account?
+DELETE_PROFILE_PICTURE
+Delete profile picture
+DESCRIPTION
+Description
+DOES_NOT_EXIST
+does not exist
+DONT_HAVE_ACCOUNT_QUESTION
+Don't have an account?
+EDIT_AUCTION
+Edit auction
+EDIT_AUCTION_FOR
+Edit Auction for
+EDIT_ITEM
+Edit item
+EDIT_ITEM_AUCTION
+Edit item auction
+EDIT_OFFER
+Edit Offer
+END_TIME
+End time
+END_TIME_MUST_SET
+end time must be set
+ERROR
+Error
+FILTER_LIST
+Filter list:
+FOLLOW
+Follow
+FOLLOWEES_ACTIVITIES
+Followee's Activities
+FOLLOWING
+Following
+FOLLOWS
+follows
+FOUND_ITEMS
+Items
+I_WANT_PROVIDE_DESC_MORE_LANGS
+I want to provide description and name in more languages.
+IMAGE_TOO_LARGE
+Image file too large, must be
+INACTIVATE_ITEM
+Inactivate item
+INCREMENT
+Increment
+INCREMENT_GT_0
+increment must be more than zero
+INCREMENT_MUST_SET
+increment must be set
+INCREMENT_POSITIVE_INT
+increment must be positive integer
+INTERESTS
+Interests
+ITEM
+Item
+ITEM_BOUGHT_YOU_PURCHASED
+<strong>Item bought!</strong><br />You successfully purchased the item
+ITEM_CREATION
+Item creation
 ITEM_MUST_HAVE_NAME
 item must have a name!
 ITEM_MUST_HAVE_PRICE
 item must have a price!
-PRICE_MUST_BE_POSITIVE
-price must be a positive integer!
-PRICE_MUST_BE_INTEGER
-price has to be a number!
-ORG_MUST_HAVE_NAME
-organization must have a name!
-COMMENT_MAY_NOT_BE_EMPTY
-comment must not be empty
-SEARCH_MAY_NOT_BE_EMPTY
-search must not be empty
-NO_PASSWORD_CONFIRM_GIVEN
-No password confirmation given
-USERNAME_EXISTS
-User with given username already exists
-NO_ORG_FOUND
-no organization found
-PASS_AND_RETYPED_PASS_DONT_MATCH
-Password and retyped password don't match
-NO_PROFILE_PICTURE
-You don't have a profile picture
-NO_USER_TO_PROMOTE_FOUND
-no user found to promote
-NO_FILE_CHOSEN
-You didn't choose a file
-NO_USER_TO_ADD_FOUND
-no user found to add
+ITEMS_ON_THE_MARKET
+Items on the Market
+LANG_OF_DESC_AND_NAME
+Lang. of desc. & name
+LANGUAGE
+Language
+LANGUAGE_NAME
+English
+LATEST_ORGANIZATION_ACTIVITIES
+Latest Organization Activities
+LEAVE_ORGANIZATION
+Leave Organization
+LOCAL_DATE_TIME_FORMAT
+%d/%m/%Y %H:%M
+LOGGED_IN_AS
+Logged in as
+LOGGEDIN_NOTIFICATION
+<strong>Logged in!</strong><br />You've been logged in successfully!
+LOGIN
+Login
+LOGOUT
+Logout
+MARKETPLACE
+Marketplace
+MINIMAL_BID_INCREMENT
+Minimal bid increment
+MINIMAL_PRICE
+Minimal price
+MINPRICE_MUST_SET
+minimal price must be set
+MINPRICE_POSITIVE_INT
+minimal price must be positive integer
+MUST_BE_STRONG
+Must be strong.
+MY_PROFILE
+My profile
+NAME
+Name
+NEW_ITEM
+New item
+NEW_OFFER
+New offer
+NEW_ORGANIZATION
+New organization
+NEXT
+Next
 NO_ADMIN_RIGHTS
 you don't have admin privileges
-CURRENT_PASS_WRONG
-Current password is wrong
+NO_AUCTION_NOTIFICATION
+<strong>Ooops!</strong><br /> There is no auction for this item.
+NO_COMMENTS
+This item has no comments yet.
+NO_FILE_CHOSEN
+You didn't choose a file
+NO_ITEMS_FOUND
+No items found.
+NO_KEEP_IT
+No, I want to keep it
+NO_LONGER_EDITABLE_AFTER_FIRST_BID
+No longer editable after first bid
 NO_LONGER_FOLLOWS
 no longer follows
-FOLLOWS
-follows
-USER
-User
-DOES_NOT_EXIST
-does not exist
-NO_USERNAME_GIVEN
-No username given
+NO_OFFERS_FOUND
+No offers found.
+NO_ORG_FOUND
+no organization found
+NO_ORGANIZATIONS
+No Organizations
 NO_PASS_AND_USER
 No password and according username given
-PNS_NOT_8
-Password not strong: Is not at least eight characters long.
-PNS_USERNAME
-Password not strong: Contains your user name.
+NO_PASSWORD_CONFIRM_GIVEN
+No password confirmation given
+NO_PASSWORD_GIVEN
+No password given
+NO_PROFILE_PICTURE
+You don't have a profile picture
+NO_USER_FOUND
+no user found
+NO_USER_TO_ADD_FOUND
+no user found to add
+NO_USER_TO_PROMOTE_FOUND
+no user found to promote
+NO_USERNAME_GIVEN
+No username given
+NO_USERS_TO_ADD
+No users to add available
+NO_WISHLIST_ITEMS
+This user has no items in his wishlist.
+NOT_CURRENTLY_MEMBER
+You are not currently a member of this organization and may therefore not access this page.
+NOT_ENOUGH_MONEY
+You don't have enough money!
+NOT_FOLLOWING
+This user is not following anybody.
+NOT_REPRESENTING_ORG
+You are not representing an organization.
+NOW_REPRESENTING
+You are now representing
+OFFER
+Offer
+OFFERS
+Offers
+ORG_MUST_HAVE_NAME
+organization must have a name!
+ORG_SETTINGS
+Org. Settings
+ORGANIZATION
+Organization
+ORGANIZATION_CREATED_NOTIFICATION
+<strong>Organization created!</strong><br />The organization was successfully created.
+ORGANIZATION_SETTINGS
+Organization Settings
+ORGANIZATIONS
+Organizations
+OWNER
+Owner
+PASS_AND_RETYPED_PASS_DONT_MATCH
+Password and retyped password don't match
+PASSWORD
+Password
+PASSWORD_CHANGED_NOTIFICATION
+<strong>Password changed!</strong><br />Your password has been successfully changed.
+PAST_WINNERS
+Past winners
+PICTURE
+Picture
+PLACED_BID_AT_FOR_CREDITS
+<span class='past-winner-name'>%s</span> placed a bid at <span class='past-winner-time'>%s</span> for <span class='past-winner-price'>%s</span> credits
 PNS_CONTAINS_WORD
 Password not strong: Contains a known word
+PNS_NOT_8
+Password not strong: Is not at least eight characters long.
 PNS_NOT_DIFF
 Password not strong: Is not significantly different from previous password.
-PNS_NOT_UPPER
-Password not strong: Contains no uppercase letters A-Z.
 PNS_NOT_LOWER
 Password not strong: Contains no lowercase letters a-z.
 PNS_NOT_NUMBER
 Password not strong: Contains no numbers 0-9.
 PNS_NOT_SPECIAL
 Password not strong: Contains no special characters ` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /.
-NO_PASSWORD_GIVEN
-No password given
-WRONG_PASSWORD
-Wrong password
-IMAGE_TOO_LARGE
-Image file too large, must be
-LOGIN
-Login
-LOGOUT
-Logout
-DONT_HAVE_ACCOUNT_QUESTION
-Don't have an account?
-REGISTERED_NOTIFICATION
-<strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
-SWITCHED_USER_NOTIFICATION
-<strong>Switched user!</strong>
-NOT_REPRESENTING_ORG
-You are not representing an organization.
-NOW_REPRESENTING
-You are now representing
-AUCTION_ALREADY_CLOSED_NOTIFICATION
-<strong>Ooops!</strong><br /> Auction has already closed.
-ITEM_BOUGHT_YOU_PURCHASED
-<strong>Item bought!</strong><br />You successfully purchased the item
-CLICK_HERE_TO_SEE_OTHER_ITEMS
-Click here to see your other items.
-LOGGEDIN_NOTIFICATION
-<strong>Logged in!</strong><br />You've been logged in successfully!
-PASSWORD_CHANGED_NOTIFICATION
-<strong>Password changed!</strong><br />Your password has been successfully changed.
-ORGANIZATION_CREATED_NOTIFICATION
-<strong>Organization created!</strong><br />The organization was successfully created.
-NO_AUCTION_NOTIFICATION
-<strong>Ooops!</strong><br /> There is no auction for this item.
-REGISTER
-Register
-CLICK_HERE_TO_REGISTER
-Click here to register!
-AT_TIME
-at
-COMMENTING
-Commenting
-YOU_ARE_FOLLOWING
-You are following
-FOLLOWING
-Following
-REMOVE_MEMBER
-Remove member
-LEAVE_ORGANIZATION
-Leave Organization
-YOUR_ORGANIZATIONS
-Your organizations
-NO_ORGANIZATIONS
-No Organizations
-ORGANIZATIONS
-Organizations
-ACTIVATING
-Activating
-BUYING
-Buying
-ITEM_CREATION
-Item creation
-PROMOTE_ADMIN
-Promote admin
-REVOKE_ADMIN
-Revoke admin
-FILTER_LIST
-Filter list:
-AUCTION
-Auction
-AUCTION_FOR
-Auction for
-EDIT_AUCTION_FOR
-Edit Auction for
-MARKETPLACE
-Marketplace
-REGISTRATION
-Registration
-SELECT_USERNAME_AND_PASSWORD
-Select a username and password
-NAME
-Name
-ORG_SETTINGS
-Org. Settings
-ORGANIZATION_SETTINGS
-Organization Settings
-ACCOUNT_SETTINGS
-Account Settings
-NEW_ORGANIZATION
-New organization
-SELLERS
-Sellers
-SEARCH_RESULT
-Search result
-FOUND_ITEMS
-Items
-CHANGE_PASSWORD
-Change Password
-CURRENT_PASSWORD
-Current Password
-USER_PROFILE
-User profile
-MY_PROFILE
-My profile
-S_MEMBERS
-'s Members
-ADD_MEMBER_TO_ORGANIZATION
-Add member to organization
-ADD_USER
-Add user
-CURRENTLY_ADMIN_NOTE
-You are currently admin of an organization. Make another member admin before deleting your account.
-DELETE_ACCOUNT
-Delete account
-NO_USERS_TO_ADD
-No users to add available
-CHANGE_PROFILE_PICTURE
-Change profile picture
-DELETE_PROFILE_PICTURE
-Delete profile picture
-NEW_ITEM
-New item
-CREDITS
-Credits
-LANGUAGE
-Language
-UNFOLLOW
-Unfollow
-LATEST_ORGANIZATION_ACTIVITIES
-Latest Organization Activities
-FOLLOW
-Follow
-VIEWING_PROFILE
-Viewing profile
-ORGANIZATION
-Organization
-CREATE_ORGANIZATION
-Create Organization
-DELETE_ACCOUNT_QUESTION
-Delete Account?
-NO_KEEP_IT
-No, I want to keep it
-REALLY_DELETE_QUESTION
-Do you really want to delete your Account?
-NO_LONGER_EDITABLE_AFTER_FIRST_BID
-No longer editable after first bid
-CANNOT_EDIT_ACTIVE
-Cannot edit active items
-BUY_ITEM
-Buy Item
-INACTIVATE_ITEM
-Inactivate item
-ACTIVATE_ITEM
-Activate item
-EDIT_AUCTION
-Edit auction
-EDIT_ITEM_AUCTION
-Edit item auction
-ERROR
-Error
-EDIT_ITEM
-Edit item
-USERS
-Users
-ABOUT
-About
-USERNAME
-Username
-PASSWORD
-Password
-MUST_BE_STRONG
-Must be strong.
-RETYPE_PASSWORD
-Re-type Password
-INTERESTS
-Interests
-CREATE_ACCOUNT
-Create My Account
-PICTURE
-Picture
-DESCRIPTION
-Description
-PRICE
-Price
-START_PRICE
-Start price
-REMOVE_FROM_WISHLIST
-Remove from wishlist
-ADD_TO_WISHLIST
-Add to wishlist
-NO_WISHLIST_ITEMS
-This user has no items in his wishlist.
-NOT_FOLLOWING
-This user is not following anybody.
-WISHLIST
-Wishlist
-OWNER
-Owner
-NEXT
-Next
+PNS_NOT_UPPER
+Password not strong: Contains no uppercase letters A-Z.
+PNS_USERNAME
+Password not strong: Contains your user name.
 PREV
 Prev
-LOGGED_IN_AS
-Logged in as
-CURRENT_PRICE
-Current price
-BID_ON_AUCTION
-Bid on auction
-MINIMAL_BID_INCREMENT
-Minimal bid increment
-INCREMENT
-Increment
-SAVE
-Save
-END_TIME
-End time
-MINIMAL_PRICE
-Minimal price
-CURRENT_WINNER
-Current winner
-COMMENTS
-Comments
-WROTE
-wrote
+PRICE
+Price
+PRICE_MUST_BE_INTEGER
+price has to be a number!
+PRICE_MUST_BE_LESS_CREDITS
+price needs to be smaller than your credits
+PRICE_MUST_BE_POSITIVE
+price must be a positive integer!
+PROMOTE_ADMIN
+Promote admin
+REALLY_DELETE_QUESTION
+Do you really want to delete your Account?
+REGISTER
+Register
+REGISTERED_NOTIFICATION
+<strong>Registered!</strong><br />Your account has been successfully created and you have been logged in automatically.
+REGISTRATION
+Registration
+REMOVE_FROM_WISHLIST
+Remove from wishlist
+REMOVE_MEMBER
+Remove member
 REPLY
 Reply
-NO_COMMENTS
-This item has no comments yet.
-PAST_WINNERS
-Past winners
-CLICK_TO_EXPAND
-click to expand
-ITEMS_ON_THE_MARKET
-Items on the Market
-FOLLOWEES_ACTIVITIES
-Followee's Activities
+RETYPE_PASSWORD
+Re-type Password
+REVOKE_ADMIN
+Revoke admin
+S_MEMBERS
+'s Members
+SAVE
+Save
 SEARCH
 Search
+SEARCH_MAY_NOT_BE_EMPTY
+search must not be empty
+SEARCH_RESULT
+Search result
+SELECT_USERNAME_AND_PASSWORD
+Select a username and password
+SELL_ITEM
+Sell item
+SELLERS
+Sellers
+START_PRICE
+Start price
 STRONG_PASSWORD
 Strong password
 STRONG_PASSWORD_TEXT
-<h1>Tips for creating a strong password</h1> <p>What makes a password strong (or weak)? A strong password: <ul> <li>Is at least eight characters long.</li> <li>Does not contain your user name, real name, or company name.</li> <li>Does not contain a complete word.</li> <li>Is significantly different from previous passwords.</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; " ' < > , . ? /</i> </li> </ul> </li> </ul>
-CURRENTLY_NOT_IN_AUCTION
-Currently not in auction
-AUCTION_ENDS_AT
-Auction ends at
-CREATE_AUCTION
-Create auction
-CREATE_NEW_ITEM
-Create new item
-ITEM
-Item
-ADD_COMMENT
-Add comment
-CAN_USE_MARKDOWN
-You can use markdown syntax to style this text. For example: **<b>bold text</b>**
-NEW_OFFER
-New offer
-CREATE_NEW_OFFER
-Create new offer
-OFFERS
-Offers
-SELL_ITEM
-Sell item
-OFFER
-Offer
-PRICE_MUST_BE_LESS_CREDITS
-price needs to be smaller than your credits
-NO_OFFERS_FOUND
-No offers found.
-NO_ITEMS_FOUND
-No items found.
+<h1>Tips for creating a strong password</h1> <p>What makes a password strong (or weak)? A strong password: <ul> <li>Is at least eight characters long.</li> <li>Does not contain your user name, real name, or company name.</li> <li>Does not contain a complete word.</li> <li>Is significantly different from previous passwords.</li> <li>Contains characters from each of the following four categories: <ul> <li> Uppercase letters: <i>A, B, C</i> </li> <li> Lowercase letters: <i>a, b, c</i> </li> <li> Numbers: <i>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</i> </li> <li> Symbols found on the keyboard (all keyboard characters not defined as letters or numerals) and spaces: <i>` ~ ! @ # $ % ^ & * ( ) _ - + = { } [ ] \ | : ; \" ' < > , . ? /</i> </li> </ul> </li> </ul>
+SWITCHED_USER_NOTIFICATION
+<strong>Switched user!</strong>
+TIME_INVALID
+Invalid time format
+TIME_MUST_FUTURE
+time must be in future
+UNFOLLOW
+Unfollow
+USER
+User
+USER_PROFILE
+User profile
+USERNAME
+Username
+USERNAME_EXISTS
+User with given username already exists
+USERS
+Users
+VIEWING_PROFILE
+Viewing profile
+WISHLIST
+Wishlist
+WRONG_PASSWORD
+Wrong password
+WROTE
+wrote
+YOU_ARE_FOLLOWING
+You are following
+YOUR_ORGANIZATIONS
+Your organizations
