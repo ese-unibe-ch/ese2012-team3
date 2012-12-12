@@ -4,7 +4,7 @@
 def before_get_org_by_id 
   @org = nil 
   
-  if params.has_key?("id") && params[:id]
+  if params.has_key?("id") && params[:id] &&  params[:id] != "create"
     halt erb :error, :locals => {:message => localized_message_single_key("NO_ORG_FOUND")} unless Organization.has_organization_with_id?(params[:id].to_i)
     @org = Organization.organization_by_id(params[:id].to_i)
   end

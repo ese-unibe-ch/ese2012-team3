@@ -39,7 +39,7 @@ Acheter cet article
 BUYING
 Achats
 CAN_USE_MARKDOWN
-Vous pouvez utiliser la syntaxe \"markdown\" dans ce texte. Par example: **<b>texte en gras</b>**
+Vous pouvez utiliser la syntaxe "markdown" dans ce texte. Par example: **<b>texte en gras</b>**
 CANNOT_EDIT_ACTIVE
 Les articles actifs ne peuvent pas être modifié.
 CHANGE_PASSWORD
