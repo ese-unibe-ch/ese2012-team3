@@ -166,8 +166,6 @@ PROMOTE_ADMIN
 Administratorrechte geben
 REVOKE_ADMIN
 Administratorrechte entziehen
-APPLY_ACTIVITY_FILTER
-Aktivitätenfilter anwenden
 FILTER_LIST
 Liste filtern:
 AUCTION
@@ -198,10 +196,6 @@ SEARCH_RESULT
 Suchergebnis
 FOUND_ITEMS
 Gegenstände
-FOUND_OFFERS
-Angebote
-ACCOUNT_SETTINGS
-Einstellungen
 CHANGE_PASSWORD
 Passwort ändern
 CURRENT_PASSWORD
@@ -234,34 +228,18 @@ LANGUAGE
 Sprache
 UNFOLLOW
 Nicht mehr folgen
-S_ITEMS
-s Items
 LATEST_ORGANIZATION_ACTIVITIES
 Neuste Organisationsaktivitäten
 FOLLOW
 Folgen
-ORGANIZATION_HAS_NO_ITEMS
-Diese Organisation hat keine Gegenstände
 VIEWING_PROFILE
 Profil
-YOUR_ITEMS
-Ihre Gegenstände
-USERS_ITEMS
-Gegenstände des Benutzers
-YOU_HAVE_NO_ITEMS
-Sie haben keine Gegenstände.
-THIS_USER_HAS_NO_ITEMS
-Dieser Benutzer hat keine Gegenstände.
-ADD_A_NEW_ITEM
-Neuen Gegenstand hinzufügen...
 ORGANIZATION
 Organisation
 CREATE_ORGANIZATION
 Organisation erstellen
 DELETE_ACCOUNT_QUESTION
 Account löschen?
-DELETE_ACCOUNT
-Account löschen
 NO_KEEP_IT
 Nein, ich will ihn nicht löschen
 REALLY_DELETE_QUESTION
