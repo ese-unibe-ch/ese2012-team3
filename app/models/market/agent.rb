@@ -60,7 +60,7 @@ module Market
       item.owner = self
       @@items_sold += 1
       @@money_spent += item.price
-      item.status_change
+      item.change_status
     end
 
     #Same as add_item/remove_item, but in one method
