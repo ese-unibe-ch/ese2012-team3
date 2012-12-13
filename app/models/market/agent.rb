@@ -63,6 +63,18 @@ module Market
       item.status_change
     end
 
+    #Same as add_item/remove_item, but in one method
+    def change_wishlist(item)
+      assert_kind_of(Item, item)
+      if wishlist.include?(item)
+        wishlist.delete(item)
+      else
+        wishlist << item
+      end
+    end
+
+
+    #THESE ARE ESSENTIALLY OBSOLETE
     # currently the button is only displayed for {User}s
     # @param [Item] item item to be added to the wishlist
     def add_item_to_wishlist(item)

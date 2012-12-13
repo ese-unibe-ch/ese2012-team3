@@ -158,12 +158,7 @@ end
 
 post "/item/:id/watchlist" do
   # Puts to or removes item from wishlist of the current agent
-  if @current_agent.wishlist.include?(@item)
-    @current_agent.remove_item_from_wishlist(@item)
-  else
-    @current_agent.add_item_to_wishlist(@item)
-  end
-
+  @current_agent.change_wishlist(@item)
   redirect "/item/#{@item.id.to_s}"
 end
 
