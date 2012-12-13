@@ -228,21 +228,20 @@ end
 
 post "/item/:id/status_change" do
   assert_owner
-  
-  # new_state is provided by the form
-  @item.inactivate if params[:new_state] == "inactive"
-  if params[:new_state] == "active"
-    @item.activate
 
-    #add to activity list of the agent
+    #Changes the current status of the item,
+    #irrelevant of what it is.
+    @item.change_status
+
+
+    #add to activity list of the agent if item was activated
+  if @item.active == true
     @current_agent.add_activity(Activity::new_activate_activity(@current_agent, @item))
     # If the user activates an item in the name of an organization, an organization activity is created.
     if @current_user != @current_agent
       @current_agent.add_orgactivity(Activity::new_activate_activity(@current_user, @item))
     end
-
   end
-
   redirect back
 end
 

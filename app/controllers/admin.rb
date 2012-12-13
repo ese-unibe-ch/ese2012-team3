@@ -67,7 +67,7 @@ end
 post "/admin/auction/delete" do
   # auction is removed if item is inactivated
   begin
-    Market::Item.by_id(params[:id_to_delete].to_i).inactivate
+    Market::Item.by_id(params[:id_to_delete].to_i).change_status
   rescue Exception => e
     halt erb :"admin/admin_error", :locals => {:message => e.message}, :layout => :"admin/admin_layout"
   end

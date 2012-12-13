@@ -5,7 +5,6 @@
             <form action="/item/<%= item.id %>/status_change" method="post">
               <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
               <input type="hidden" name="item" value="<%= xss item.id %>" />
-              <input type="hidden" name="new_state" value="inactive" />
               <button type="submit" class="btn btn-info small"><%=@LANG["INACTIVATE_ITEM"]%></button>
             </form>
           </td>
@@ -52,7 +51,6 @@
             <form action="/item/<%= item.id %>/status_change" method="post">
               <input type="hidden" name="owner" value="<%= xss item.owner.name %>" />
               <input type="hidden" name="item" value="<%= xss item.id %>" />
-              <input type="hidden" name="new_state" value="active" />
               <button type="submit" class="btn btn-info small" name="submit"><%=@LANG["ACTIVATE_ITEM"]%></button>
             </form>
           </td>

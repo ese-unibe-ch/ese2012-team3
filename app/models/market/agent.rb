@@ -60,7 +60,7 @@ module Market
       item.owner = self
       @@items_sold += 1
       @@money_spent += item.price
-      item.inactivate
+      item.status_change
     end
 
     # currently the button is only displayed for {User}s

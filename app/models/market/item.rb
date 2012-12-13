@@ -61,17 +61,18 @@ module Market
       item
     end
 
-    # activate the item
-    def activate
-      self.active = true
+    # Changes the status of an item, dismissing ongoing auction in case there is one
+    def change_status
+      if self.active == true
+        self.active = false
+        self.auction.dismiss unless auction.nil?
+      else
+        self.active = true
+      end
     end
 
-    # Deactivates item and
-    # dismissed an ongoing auction
-
-    def inactivate
-      self.active = false
-      self.auction.dismiss unless auction.nil?
+    def activate
+      self.active = true
     end
 
     def active?

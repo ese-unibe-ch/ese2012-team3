@@ -241,7 +241,7 @@ module Market
       self.item.auction = nil
 
       if @winner.nil?
-        self.item.inactivate
+        self.item.change_status
       else
         safe.return
         self.item.price = current_price
