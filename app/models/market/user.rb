@@ -112,6 +112,10 @@ module Market
       return org.is_admin?(self)
     end
 
+    def self.all_outside_organization(org)
+      all.select {|user| !user.is_member_of?(org)}
+    end
+
     # @internal_note TODO move to a more appropriate place
     # @return the server route the the users profile page
     def profile_route

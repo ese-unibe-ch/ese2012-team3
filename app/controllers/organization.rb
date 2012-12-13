@@ -65,7 +65,7 @@ end
 
 get "/organization/:id/settings" do
   # Obviously, any user that is not already in the organization is eligible for membership.
-  addable_users = User.all.select {|u| !u.is_member_of?(@org)}
+  addable_users = User.all_outside_organization(@org)
 
   erb :organization_settings, :locals => {:addable_users   => addable_users}
 end
