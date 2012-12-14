@@ -57,6 +57,7 @@ before do
   return if request.path_info.include?(".") # files are ok
   return if PUBLIC_ROUTES.include?(request.path_info)
   return if request.path_info.include?("/set_language/")
+  return if request.path_info.include?("/admin")
   ensure_logged_in!
 end
 
