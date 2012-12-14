@@ -346,6 +346,8 @@ SELL_ITEM
 Sell item
 SELLERS
 Sellers
+START_ADDING_MEMBERS
+Start adding members to it!
 START_PRICE
 Start price
 STRONG_PASSWORD

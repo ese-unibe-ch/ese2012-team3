@@ -346,6 +346,8 @@ SELL_ITEM
 Vendre article
 SELLERS
 Vendeurs
+START_ADDING_MEMBERS
+Commencez à ajouter des membres!
 START_PRICE
 Prix initial
 STRONG_PASSWORD

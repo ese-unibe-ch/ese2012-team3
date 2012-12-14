@@ -45,8 +45,8 @@ post "/organization/create" do
   org = Organization.init(:name => name, :about => about, :admin => @current_user)
   org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id)
   flash[:success] = 'org_created'
-
-  redirect back
+  session[:organization_id] = org.id
+  redirect "/"
 end
 
 get "/organization/:id" do
