@@ -32,7 +32,7 @@ if @org.admins.include?(@current_user) and @current_agent == @org %>
   <% else %>
     <p><%=@LANG["NO_USERS_TO_ADD"]%></p>
   <% end %>
-  <form class="form-horizontal" method="POST" action="/organization/#{@org.id}/change_profile_picture" enctype="multipart/form-data">
+  <form class="form-horizontal" method="POST" action="/organization/<%= @org.id %>/change_profile_picture" enctype="multipart/form-data">
     <h3><%=@LANG["CHANGE_PROFILE_PICTURE"]%></h3>
     <%= erb :_image_rect, :locals => {:filename => @current_agent.image_file_name, :size => SMALLIMAGESIZE} %>
     <fieldset>
