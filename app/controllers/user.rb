@@ -121,7 +121,7 @@ post "/follow" do
 
   # There is a form param :agent which either says @current_user or organization.
   # This is necessary because they have separate IDs.
-  if params[:agent] == "@current_user"
+  if params[:agent] == "user"
     follow = User.user_by_id(params[:follow_id].to_i)
   else
     follow = Organization.organization_by_id(params[:follow_id].to_i)
