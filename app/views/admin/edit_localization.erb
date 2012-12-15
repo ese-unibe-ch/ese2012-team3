@@ -72,7 +72,7 @@
           <% i = 0 %>
           <% KEY_CATEGORIES.each{|category, language_keys| %>
             <div class="category">
-              <a href="#" class="toggler"><h4><i id="symbol<%= i %>" class="symbol icon-chevron-up"></i><%=category%></h4></a>
+              <span class="toggler"><h4><i id="symbol<%= i %>" class="symbol icon-chevron-up"></i><%=category%></h4></span>
               <div class="category-content hiddencategory" id="categoryelement<%= i %>">
                 <hr/>
                 <% for key in language_keys
