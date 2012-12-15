@@ -57,6 +57,7 @@ MAXIMAGEFILESIZE       = 400*1024 # in bytes
 LISTIMAGESIZE          = 64 # in pixels
 LISTROWWITHIMAGEHEIGHT = LISTIMAGESIZE + 8 # 72
 LARGEIMAGESIZE         = 300
+SMALLIMAGESIZE         = 100
 USERIMAGESROOT         = "userimages" # relative to {PUBLIC_FOLDER}
 ITEMIMAGESROOT         = "itemimages" # relative to {PUBLIC_FOLDER}
 ORGANIZATIONIMAGESROOT = "organizationimages" # relative to {PUBLIC_FOLDER}
