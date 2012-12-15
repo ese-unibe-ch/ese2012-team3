@@ -1,127 +1,117 @@
 <% @title = @LANG["AUCTION"] %>
 
-<section id="content" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-  <div class="row">
-    <%= erb :_sidebar %>
-    <div class="span10">
-      <h2><%=@LANG["AUCTION_FOR"]%> <%= xss item.name[@LANGCODE] %></h2>
-      <%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LARGEIMAGESIZE} %>
-      </br>
-      <table class="table">
-        <tbody>
-          <tr>
-            <td><%=@LANG["DESCRIPTION"]%></td>
-            <td><%= mdown_to_html(xss item.about[@LANGCODE]) %></td>
-          </tr>
-          <tr>
-            <td><%=@LANG["START_PRICE"]%></td>
-            <td><%= item.auction.minimal_price %></td>
-          </tr>
-          <tr>
-            <td><%=@LANG["CURRENT_PRICE"]%></td>
-            <td><%= (item.auction.current_price.nil?) ? "-" : item.auction.current_price %>
-          </tr>
-          <tr>
-            <td><%=@LANG["MINIMAL_BID_INCREMENT"]%></td>
-            <td><%= item.auction.increment %></td>
-          </tr>
-          <tr>
-            <td><%=@LANG["CURRENT_WINNER"]%></td>
-            <td><%= (item.auction.winner.nil?) ? "-" : item.auction.winner.name %></td>
-          </tr>
-        </tbody>
-      </table>
+<h2><%=@LANG["AUCTION_FOR"]%> <%= xss item.name[@LANGCODE] %></h2>
+<%= erb :_image_rect, :locals => {:filename => item.image_file_name, :size => LARGEIMAGESIZE} %>
+</br>
+<table class="table">
+  <tbody>
+    <tr>
+      <td><%=@LANG["DESCRIPTION"]%></td>
+      <td><%= mdown_to_html(xss item.about[@LANGCODE]) %></td>
+    </tr>
+    <tr>
+      <td><%=@LANG["START_PRICE"]%></td>
+      <td><%= item.auction.minimal_price %></td>
+    </tr>
+    <tr>
+      <td><%=@LANG["CURRENT_PRICE"]%></td>
+      <td><%= (item.auction.current_price.nil?) ? "-" : item.auction.current_price %>
+    </tr>
+    <tr>
+      <td><%=@LANG["MINIMAL_BID_INCREMENT"]%></td>
+      <td><%= item.auction.increment %></td>
+    </tr>
+    <tr>
+      <td><%=@LANG["CURRENT_WINNER"]%></td>
+      <td><%= (item.auction.winner.nil?) ? "-" : item.auction.winner.name %></td>
+    </tr>
+  </tbody>
+</table>
 
-      <style type="text/css">
-          .past-winner {
-              margin-bottom: 0.5em;
-              padding-left: 15px;
-          }
+<style type="text/css">
+    .past-winner {
+        margin-bottom: 0.5em;
+        padding-left: 15px;
+    }
 
-          .past-winner-name {
-              font-weight: bold
-          }
+    .past-winner-name {
+        font-weight: bold
+    }
 
-          #past-winner-title {
-              padding-top: 2px;
-              padding-bottom: 2px;
-              padding-left: 10px;
-              margin-bottom: 20px;
-              margin-top: 20px;
-              background-color: #f5f5f5;
-              border: 1px solid #eee;
-              border: 1px solid rgba(0, 0, 0, 0.05);
-              -webkit-border-radius: 4px;
-              -moz-border-radius: 4px;
-              border-radius: 4px;
-              -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-              -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-              box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-          }
+    #past-winner-title {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        padding-left: 10px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        background-color: #f5f5f5;
+        border: 1px solid #eee;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    }
 
-          #past-winner-title .text {
-           padding-left: 10px;
-          }
+    #past-winner-title .text {
+        padding-left: 10px;
+    }
 
-          #past-winner-content {
-              margin-top: -20px;
-              margin-bottom: 20px;
-          }
-      </style>
+    #past-winner-content {
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
+</style>
 
-      <script type="text/javascript">
-          if (document.getElementById){
-              document.write('<style type="text/css">\n')
-              document.write('#past-winner-content{display: none;}\n')
-              document.write('</style>\n')
-          }
+<script type="text/javascript">
+    if (document.getElementById) {
+        document.write('<style type="text/css">\n')
+        document.write('#past-winner-content{display: none;}\n')
+        document.write('</style>\n')
+    }
 
-          function SwitchMenu(obj){
-              if(document.getElementById){
-                  var title = document.getElementById('past-winner-title')
-                  var icon = title.getElementsByClassName('symbol')[0]
-                  var text = title.getElementsByClassName('text')[0]
-                  var content = document.getElementById(obj);
-                  if(content.style.display != "block"){
-                      content.style.display = "block";
-                      icon.className = "symbol icon-chevron-up"
-                      text.textContent = "<%=@LANG["PAST_WINNERS"]%>"
-                  }else{
-                      content.style.display = "none";
-                      icon.className = "symbol icon-chevron-down"
-                      text.textContent = "<%=@LANG["PAST_WINNERS"]%> (<%=@LANG["CLICK_TO_EXPAND"]%>)"
-                  }
-              }
-          }
-      </script>
+    function SwitchMenu(obj) {
+        if(document.getElementById){
+            var title = document.getElementById('past-winner-title')
+            var icon = title.getElementsByClassName('symbol')[0]
+            var text = title.getElementsByClassName('text')[0]
+            var content = document.getElementById(obj);
+            if(content.style.display != "block") {
+                content.style.display = "block";
+                icon.className = "symbol icon-chevron-up"
+                text.textContent = "<%=@LANG["PAST_WINNERS"]%>"
+            } else {
+                content.style.display = "none";
+                icon.className = "symbol icon-chevron-down"
+                text.textContent = "<%=@LANG["PAST_WINNERS"]%> (<%=@LANG["CLICK_TO_EXPAND"]%>)"
+            }
+        }
+    }
+</script>
 
-      <% if item.auction.past_winners.size > 0 %>
-          <div id='past-winner-expandable'>
-            <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">
-              <i class="symbol icon-chevron-down"></i><span class="text"><%=@LANG["PAST_WINNERS"]%> (<%=@LANG["CLICK_TO_EXPAND"]%>)</span>
-            </div>
-            <div id="past-winner-content">
-              <% item.auction.past_winners.each do |past_winner| %>
-                  <div class="past-winner">
-                    <%=sprintf(@LANG["PLACED_BID_AT_FOR_CREDITS"], past_winner.agent.name.to_s, past_winner.time.strftime(@LANG["LOCAL_DATE_TIME_FORMAT"]), past_winner.price.to_s)  %>
-                  </div>
-              <% end %>
-            </div>
-          </div>
-      <% end %>
-
-      <form class="form-horizontal" method="POST" action="<%="/item/#{item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
-        <fieldset>
-          <%= erb :_text_control, :locals => {:name => :bid, :label => "Your bid" }%>
-
-          <div class="form-actions">
-            <button class="btn btn-info" type="submit">Save</button>
-          </div>
-        </fieldset>
-      </form>
-
+<% if item.auction.past_winners.size > 0 %>
+  <div id='past-winner-expandable'>
+    <div id="past-winner-title" onclick="SwitchMenu('past-winner-content')">
+      <i class="symbol icon-chevron-down"></i><span class="text"><%=@LANG["PAST_WINNERS"]%> (<%=@LANG["CLICK_TO_EXPAND"]%>)</span>
     </div>
+    <div id="past-winner-content">
+      <% item.auction.past_winners.each do |past_winner| %>
+        <div class="past-winner">
+          <%= sprintf(@LANG["PLACED_BID_AT_FOR_CREDITS"], past_winner.agent.name.to_s, past_winner.time.strftime(@LANG["LOCAL_DATE_TIME_FORMAT"]), past_winner.price.to_s)  %>
+        </div>
+      <% end %>
     </div>
   </div>
-</section>
+<% end %>
 
+<form class="form-horizontal" method="POST" action="<%="/item/#{item.id}/bid" %>" enctype="multipart/form-data" style="margin-top: 5px;">
+  <fieldset>
+    <%= erb :_text_control, :locals => {:name => :bid, :label => "Your bid" }%>
+
+    <div class="form-actions">
+      <button class="btn btn-info" type="submit">Save</button>
+    </div>
+  </fieldset>
+</form>

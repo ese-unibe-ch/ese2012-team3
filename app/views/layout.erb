@@ -43,7 +43,14 @@
           <%= erb :"notifications/#{flash[:success]}" if flash[:success] %>
           <%= erb :"notifications/#{flash[:error]}" if flash[:error] %>
 
-          <%= yield %>
+          <section id="content">
+            <div class="row">
+              <%= erb :_sidebar %>
+              <div class="span10">
+                <%= yield %>
+              </div>
+            </div>
+          </section>
         </div>
         
 

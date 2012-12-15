@@ -2,14 +2,5 @@
    @current_nav_item = :sellers
 %>
 
-<section id="content">
-<div class="row">
-  <%= erb :_sidebar %>
-  <div class="span10">
-    <h2><%=@LANG["USERS"]%></h2>
-
-    <%=erb :_agent_list, :locals=>{:agents => @users}%>
-
-  </div>
-</div>
-</section>
+<h2><%=@LANG["USERS"]%></h2>
+<%=erb :_agent_list, :locals=>{:agents => @users}%>

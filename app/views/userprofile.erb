@@ -8,95 +8,84 @@
    end
 %>
 
-<section id="content">
-<div class="row">
-  <%= erb :_sidebar %>
-  <div class="span10">
-    <% if @user == @current_agent%>
-    <h2><%= xss @user.name %> - <%=@LANG["MY_PROFILE"]%></h2>
-    <% else %>
-    <h2><%=@LANG["VIEWING_PROFILE"]%>: <%= xss @user.name %></h2>
-    <% if @user != @current_user && @current_user == @current_agent%>
-      <form action="/follow" method="POST" style="display: inline">
-        <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
-        <input type="hidden" name="agent" value="user" />
-        <% if @current_user.following.include?(@user) %>
-          <input type="submit" class="btn btn-danger small" name="submit" value="<%=@LANG["UNFOLLOW"]%>" />
-        <% else %>
-          <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["FOLLOW"]%>" />
-        <% end %>
-      </form>
-    <% end %>
-    <% end %>
-
-    <%= erb :_image_rect, :locals => {:filename => @user.image_file_name, :size => LARGEIMAGESIZE} %>
-
-    <% if @user.about.length > 0 %>
-      <p><%= mdown_to_html (xss @user.about) %></p>
-    <% end %>
-
-    <!-- Items -->
-        <%=erb :_item_list, :locals=>{
-                :items => @items,
-                :offers => @offers,
-                :highlight_active => true
-        }%>
-
-
-    <% if @user == @current_agent %>
-        <form class="form-inline" method="GET" action="/item/create">
-            <fieldset>
-              <button class="btn btn-info" type="submit"><%=@LANG["NEW_ITEM"]%></button>
-            </fieldset>
-          </form>
-          <form class="form-inline" method="GET" action="/item/offer">
-            <fieldset>
-              <button class="btn btn-info" type="submit"><%=@LANG["NEW_OFFER"]%></button>
-            </fieldset>
-          </form>
-    <% end %>
-
-    <h3 style="padding-top: 50px;">
-      <% if @user == @current_agent %>
-          <%=@LANG["YOUR_ORGANIZATIONS"]%>
+<% if @user == @current_agent%>
+  <h2><%= xss @user.name %> - <%=@LANG["MY_PROFILE"]%></h2>
+<% else %>
+  <h2><%=@LANG["VIEWING_PROFILE"]%>: <%= xss @user.name %></h2>
+  <% if @user != @current_user && @current_user == @current_agent%>
+    <form action="/follow" method="POST" style="display: inline">
+      <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
+      <input type="hidden" name="agent" value="user" />
+      <% if @current_user.following.include?(@user) %>
+        <input type="submit" class="btn btn-danger small" name="submit" value="<%=@LANG["UNFOLLOW"]%>" />
       <% else %>
-          <%=@LANG["ORGANIZATIONS"]%>
+        <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["FOLLOW"]%>" />
       <% end %>
-    </h3>
+    </form>
+  <% end %>
+<% end %>
 
-    <% if @organizations.empty? %>
-        <p><%=@LANG["NO_ORGANIZATIONS"]%></p>
-    <% else %>
-        <%=erb :_agent_list, :locals=>{
-                :agents => @organizations,
-                :version => (@user == @current_agent ? :leave_organization : nil),
-                :user => @user
-        }%>
-    <% end %>
+<%= erb :_image_rect, :locals => {:filename => @user.image_file_name, :size => LARGEIMAGESIZE} %>
 
-    <h3>
-      <% if @user == @current_agent %>
-          <%=@LANG["YOU_ARE_FOLLOWING"]%>
-      <% else %>
-          <%=@LANG["FOLLOWING"]%>
-      <% end %>
-    </h3>
+<% if @user.about.length > 0 %>
+  <p><%= mdown_to_html (xss @user.about) %></p>
+<% end %>
 
-    <% if @following.empty? %>
-        <p><%=@LANG["NOT_FOLLOWING"]%></p>
-    <% else %>
-        <%=erb :_agent_list, :locals=>{:agents => @following}%>
-    <% end %>
+<!-- Items -->
+<%= erb :_item_list, :locals => {
+                       :items => @items,
+                       :offers => @offers,
+                       :highlight_active => true
+} %>
 
-    <h3><%=@LANG["WISHLIST"]%></h3>
-    <% if @current_agent.wishlist.empty? %>
-       <p><%=@LANG["NO_WISHLIST_ITEMS"]%></p>
-    <% else %>
-       <%= erb :_wish_list %>
-    <% end %>
+<% if @user == @current_agent %>
+  <form class="form-inline" method="GET" action="/item/create">
+    <fieldset>
+      <button class="btn btn-info" type="submit"><%=@LANG["NEW_ITEM"]%></button>
+    </fieldset>
+  </form>
+  <form class="form-inline" method="GET" action="/item/offer">
+    <fieldset>
+      <button class="btn btn-info" type="submit"><%=@LANG["NEW_OFFER"]%></button>
+    </fieldset>
+  </form>
+<% end %>
 
-  </div>
-</div>
-</section>
+<h3 style="padding-top: 50px;">
+  <% if @user == @current_agent %>
+    <%=@LANG["YOUR_ORGANIZATIONS"]%>
+  <% else %>
+    <%=@LANG["ORGANIZATIONS"]%>
+  <% end %>
+</h3>
 
+<% if @organizations.empty? %>
+  <p><%=@LANG["NO_ORGANIZATIONS"]%></p>
+<% else %>
+  <%= erb :_agent_list, :locals => {
+                          :agents => @organizations,
+                          :version => (@user == @current_agent ? :leave_organization : nil),
+                          :user => @user
+  } %>
+<% end %>
 
+<h3>
+  <% if @user == @current_agent %>
+    <%=@LANG["YOU_ARE_FOLLOWING"]%>
+  <% else %>
+    <%=@LANG["FOLLOWING"]%>
+  <% end %>
+</h3>
+
+<% if @following.empty? %>
+  <p><%=@LANG["NOT_FOLLOWING"]%></p>
+<% else %>
+  <%= erb :_agent_list, :locals=>{:agents => @following} %>
+<% end %>
+
+<h3><%=@LANG["WISHLIST"]%></h3>
+<% if @current_agent.wishlist.empty? %>
+  <p><%=@LANG["NO_WISHLIST_ITEMS"]%></p>
+<% else %>
+  <%= erb :_wish_list %>
+<% end %>

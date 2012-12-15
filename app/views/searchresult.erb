@@ -2,18 +2,11 @@
    @title = @LANG["SEARCH_RESULT"]
    @current_nav_item = :marketplace
 %>
-<section id="content">
-<div class="row">
-  <%= erb :_sidebar %>
-  <div class="span10">
-    <h2><%=@LANG["SEARCH_RESULT"]%></h2>
-    
-    <%=erb :_item_list, :locals=>{
-            :items => @found_items,
-            :offers => @found_offers,
-            :show_owner => true
-    }%>
 
-  </div>
-</div>
-</section>
+<h2><%=@LANG["SEARCH_RESULT"]%></h2>
+
+<%= erb :_item_list, :locals => {
+                       :items => @found_items,
+                       :offers => @found_offers,
+                       :show_owner => true
+} %>

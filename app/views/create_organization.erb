@@ -3,27 +3,17 @@
    @current_nav_item = :new_org
 %>
 
-<section id="content">
-  <div class="row">
-    <%= erb :_sidebar %>
-    <div class="span10">
-      <h2><%=@LANG["CREATE_ORGANIZATION"]%></h2>
+<h2><%=@LANG["CREATE_ORGANIZATION"]%></h2>
 
-      <form class="form-horizontal" method="POST" action="/organization/create" enctype="multipart/form-data">
-        <fieldset>
+<form class="form-horizontal" method="POST" action="/organization/create" enctype="multipart/form-data">
+  <fieldset>
 
-          <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["NAME"]}%>
+    <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["NAME"]}%>
+    <%= erb :_image_file_control %>
+    <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["ABOUT"]}%>
 
-          <%= erb :_image_file_control %>
-
-          <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["ABOUT"]}%>
-
-          <div class="form-actions">
-            <button class="btn btn-info" type="submit"><%=@LANG["CREATE_ORGANIZATION"]%></button>
-          </div>
-        </fieldset>
-
-      </form>
+    <div class="form-actions">
+      <button class="btn btn-info" type="submit"><%=@LANG["CREATE_ORGANIZATION"]%></button>
     </div>
-  </div>
-</section>
+  </fieldset>
+</form>

@@ -1,14 +1,6 @@
 <% @title = (@item.is_offer?) ? @LANG["EDIT_OFFER"] : @LANG["EDIT_ITEM"] %>
 
-<section id="content">
-<div class="row">
-  <%= erb :_sidebar %>
-  <div class="span10">
-    <h2><%=@title%></h2>
-    <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/edit"%>" enctype="multipart/form-data">
-      <%=erb :_create_edit_item_offer %>
-    </form>
-  </div>
-</div>
-</section>
-
+<h2><%=@title%></h2>
+<form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/edit"%>" enctype="multipart/form-data">
+  <%=erb :_create_edit_item_offer %>
+</form>

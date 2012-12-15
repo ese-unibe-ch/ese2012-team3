@@ -1,32 +1,17 @@
 <% @title = "Register" %>
 
-<section id="content">
-  <div class="row">
-    <%= erb :_sidebar %>
-    <div class="span10">
-      <h2><%=@LANG["REGISTRATION"]%></h2>
-      <p><%=@LANG["SELECT_USERNAME_AND_PASSWORD"]%></p>
-      <form class="form-horizontal" method="POST" action="/register" enctype="multipart/form-data">
+<h2><%=@LANG["REGISTRATION"]%></h2>
+<p><%=@LANG["SELECT_USERNAME_AND_PASSWORD"]%></p>
+<form class="form-horizontal" method="POST" action="/register" enctype="multipart/form-data">
+  <fieldset>
+    <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["USERNAME"]}%>
+    <%= erb :_default_password_control%>
+    <%= erb :_text_control, :locals => {:name => :passwordc, :label => @LANG["RETYPE_PASSWORD"], :password => true}%>
+    <%= erb :_image_file_control %>
+    <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["INTERESTS"]}%>
 
-        <fieldset>
-          <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["USERNAME"]}%>
-
-          <%= erb :_default_password_control%>
-
-          <%= erb :_text_control, :locals => {:name => :passwordc, :label => @LANG["RETYPE_PASSWORD"], :password => true}%>
-
-          <%= erb :_image_file_control %>
-
-          <%= erb :_textarea_control, :locals => {:name => :about, :label => @LANG["INTERESTS"]}%>
-
-
-          <div class="form-actions">
-            <button class="btn btn-info" type="submit"><%=@LANG["CREATE_ACCOUNT"]%></button>
-          </div>
-        </fieldset>
-
-      </form>
+    <div class="form-actions">
+      <button class="btn btn-info" type="submit"><%=@LANG["CREATE_ACCOUNT"]%></button>
     </div>
-  </div>
-</section>
-
+  </fieldset>
+</form>

@@ -2,24 +2,17 @@
    @title = @LANG["MARKETPLACE"]
    @current_nav_item = :marketplace
 %>
-<section id="content">
-<div class="row">
-  <%= erb :_sidebar %>
-  <div class="span10">
-    <h2><%=@LANG["MARKETPLACE"]%></h2>
 
-    <%if !activity_list.empty? && @current_user == @current_agent%>
-        <h3><%=@LANG["FOLLOWEES_ACTIVITIES"]%></h3>
-        <%=erb :_activity_list, :locals=>{:activities => activity_list}%>
-        <h3><%=@LANG["ITEMS_ON_THE_MARKET"]%></h3>
-    <%end%>
+<h2><%=@LANG["MARKETPLACE"]%></h2>
 
-    <%=erb :_item_list, :locals=>{
-            :items => @all_items,
-            :offers => @all_offers,
-            :show_owner => true
-    }%>
+<% if !activity_list.empty? && @current_user == @current_agent %>
+  <h3><%=@LANG["FOLLOWEES_ACTIVITIES"]%></h3>
+  <%= erb :_activity_list, :locals=>{:activities => activity_list} %>
+  <h3><%=@LANG["ITEMS_ON_THE_MARKET"]%></h3>
+<% end %>
 
-  </div>
-</div>
-</section>
+<%= erb :_item_list, :locals=>{
+                       :items => @all_items,
+                       :offers => @all_offers,
+                       :show_owner => true
+} %>

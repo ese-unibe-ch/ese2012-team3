@@ -1,13 +1,6 @@
 <% @title = "#{@LANG["EDIT_AUCTION_FOR"]} #{item.name}" %>
 
-<section id="content">
-  <div class="row">
-    <%= erb :_sidebar %>
-    <div class="span10">
-      <h2><%=@LANG["EDIT_ITEM_AUCTION"]%></h2>
-      <form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/auction/edit" %>" enctype="multipart/form-data">
-        <%=erb :_create_edit_auction %>
-      </form>
-    </div>
-  </div>
-</section>
+<h2><%=@LANG["EDIT_ITEM_AUCTION"]%></h2>
+<form class="form-horizontal" method="POST" action="<%="/item/#{@item.id}/auction/edit" %>" enctype="multipart/form-data">
+  <%=erb :_create_edit_auction %>
+</form>

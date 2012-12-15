@@ -1,102 +1,88 @@
 <% @title = "#{@LANG["ITEM"]}: #{@item.name[@LANGCODE]}" %>
 
-<section id="content" xmlns="http://www.w3.org/1999/html">
-  <div class="row">
-    <%= erb :_sidebar %>
+<h1>
+  <% if @item.is_offer? %>
+    <%=@LANG["OFFER"]%>
+  <% else %>
+    <%=@LANG["ITEM"]%>
+  <% end %>
+  : <%= xss @item.name[@LANGCODE] %>
+</h1>
 
-    <div class="span10">
-      <h1>
-        <% if @item.is_offer? %>
-          <%=@LANG["OFFER"]%>
-        <% else %>
-          <%=@LANG["ITEM"]%>
-        <% end %>
-        : <%= xss @item.name[@LANGCODE] %>
-      </h1>
+<table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %>
+  <% if !@item.is_offer? %>
+    <%= erb :_item_wishlist_button %>
+  <% end %>
+</tr></table>
 
-      <table class="table" style="width: 66%"><tr><%= erb :_item_button, :locals => {:item => @item, :current_user => @current_agent} %>
-      <% if !@item.is_offer? %>
-        <%= erb :_item_wishlist_button %>
-      <% end %>
-      </tr></table>
+<%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
 
-      <%= erb :_image_rect, :locals => {:filename => @item.image_file_name, :size => LARGEIMAGESIZE} %>
+<table class="table table-bordered" style="width: 66%">
+  <tr>
+    <td><%=@LANG["OWNER"]%></td>
+    <td><%= erb :_user_link, :locals => {:user => @item.owner} %></td>
+  </tr>
+  <tr>
+    <td><%=@LANG["PRICE"]%></td>
+    <td><%= xss ts(@item.price) %></td>
+  </tr>
+  <tr>
+    <td><%=@LANG["DESCRIPTION"]%></td>
+    <td><%= mdown_to_html(xss @item.about[@LANGCODE]) %></td>
+  </tr>
+</table>
 
-      <table class="table table-bordered" style="width: 66%">
+<h3><%=@LANG["COMMENTS"]%></h3>
+<% if @item.comments.length == 0 %>
+  <%=@LANG["NO_COMMENTS"]%>
+<% else %>
+  <% page = params[:commentspage] ? params[:commentspage].to_i : 0 %>
+  <%= erb :_pages_links, :locals => { :cur_page => page,
+                                      :size => @item.comments.size,
+                                      :per_page => COMMENTS_PER_PAGE,
+                                      :identifier => :commentspage}
+  %>
+
+  <table class="table table-striped" style="width: 66%">
+    <% @item.comments.reverse.each_with_index do |comment, index| %>
+      <% next unless index/COMMENTS_PER_PAGE == page %>
         <tr>
-          <td><%=@LANG["OWNER"]%></td>
-          <td><%= erb :_user_link, :locals => {:user => @item.owner} %></td>
-        </tr>
-        <tr>
-          <td><%=@LANG["PRICE"]%></td>
-          <td><%= xss ts(@item.price) %></td>
-        </tr>
-        <tr>
-          <td><%=@LANG["DESCRIPTION"]%></td>
-          <td><%= mdown_to_html(xss @item.about[@LANGCODE]) %></td>
-        </tr>
-      </table>
-
-
-      <h3><%=@LANG["COMMENTS"]%></h3>
-      <%if @item.comments.length == 0%>
-          <%=@LANG["NO_COMMENTS"]%>
-      <%else%>
-
-          <%
-          page = params[:commentspage] ? params[:commentspage].to_i : 0
-            %>
-          <%= erb :_pages_links, :locals => {:cur_page => page,
-                                             :size => @item.comments.size,
-                                             :per_page => COMMENTS_PER_PAGE,
-                                             :identifier => :commentspage}
-          %>
-
-          <table class="table table-striped" style="width: 66%">
-            <% @item.comments.reverse.each_with_index do |comment, index| %>
-            <% next unless index/COMMENTS_PER_PAGE == page %>
-            <tr>
-              <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>
-                <%if comment.creator == @item.owner %>
-                <span class="label label-success">Owner</span>
-                <%end%>
-              </td>
-              <td> <%= mdown_to_html(xss comment.text) %> </td>
-              <td>
-                <form action="#" method="POST">
-                  <input type="hidden" name="creator" value="<%= xss comment.creator %>" />
-                  <input type="hidden" name="quote" value="<%= xss comment.text %>" />
-                  <button class="btn btn-info small" name="reply"
-                      onClick="document.getElementById('newCommentArea').value='<%= xss comment.creator.name; %> <%=@LANG["WROTE"]%>:\n > <%= xss comment.text.tr("\r\n", " ") %>'; return false;"><%=@LANG["REPLY"]%></button>
-                </form>
-              </td>
-            </tr>
+          <td> <%= erb :_user_link, :locals => {:user => comment.creator} %>
+            <% if comment.creator == @item.owner %>
+              <span class="label label-success">Owner</span>
             <%end%>
-          </table>
+          </td>
+          <td> <%= mdown_to_html(xss comment.text) %> </td>
+          <td>
+            <form action="#" method="POST">
+              <input type="hidden" name="creator" value="<%= xss comment.creator %>" />
+              <input type="hidden" name="quote" value="<%= xss comment.text %>" />
+              <button class="btn btn-info small" name="reply"
+                      onClick="document.getElementById('newCommentArea').value='<%= xss comment.creator.name; %> <%=@LANG["WROTE"]%>:\n > <%= xss comment.text.tr("\r\n", " ") %>'; return false;"><%=@LANG["REPLY"]%></button>
+            </form>
+          </td>
+        </tr>
+    <%end%>
+  </table>
 
-          <%= erb :_pages_links, :locals => {:cur_page => page,
-                                             :size => @item.comments.size,
-                                             :per_page => COMMENTS_PER_PAGE,
-                                             :identifier => :commentspage}
-          %>
+  <%= erb :_pages_links, :locals => { :cur_page => page,
+                                      :size => @item.comments.size,
+                                      :per_page => COMMENTS_PER_PAGE,
+                                      :identifier => :commentspage}
+  %>
 
+<%end%>
 
-      <%end%>
-
-      <h2><%=@LANG["ADD_COMMENT"]%></h2>
-      <p><%=@LANG["CAN_USE_MARKDOWN"]%></p>
-      <form action="<%= "/item/#{@item.id}/add_comment" %>" method="POST">
-        <input type="hidden" name="commenter" value="<%= @current_agent %>" />
-        <div class="control-group <%= "error" if !@errors.empty? %>">
-            <textarea id="newCommentArea" class="field span7" name="comment"
-                rows="7"></textarea>
-            <br />
-            <% if @errors[:comment] %>
-                <span class="help-inline"><%= xss @errors[:comment].to_string(@LANG) %></span>
-            <% end %>
-        </div>
-        <input type="submit" class="btn btn-info" name="submit" value="<%=@LANG["ADD_COMMENT"]%>" />
-      </form>
-    </div>
+<h2><%=@LANG["ADD_COMMENT"]%></h2>
+<p><%=@LANG["CAN_USE_MARKDOWN"]%></p>
+<form action="<%= "/item/#{@item.id}/add_comment" %>" method="POST">
+  <input type="hidden" name="commenter" value="<%= @current_agent %>" />
+  <div class="control-group <%= "error" if !@errors.empty? %>">
+    <textarea id="newCommentArea" class="field span7" name="comment" rows="7"></textarea>
+    <br />
+    <% if @errors[:comment] %>
+      <span class="help-inline"><%= xss @errors[:comment].to_string(@LANG) %></span>
+    <% end %>
   </div>
-</section>
+  <input type="submit" class="btn btn-info" name="submit" value="<%=@LANG["ADD_COMMENT"]%>" />
+</form>

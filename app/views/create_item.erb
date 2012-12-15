@@ -3,15 +3,7 @@
    @current_nav_item = :new_item
 %>
 
-<section id="content">
-<div class="row">
-  <%= erb :_sidebar %>
-  <div class="span10">
-    <h2><%=@LANG["CREATE_NEW_ITEM"]%></h2>
-    <form class="form-horizontal" method="POST" action="/item/create" enctype="multipart/form-data">
-      <%=erb :_create_edit_item_offer, :locals => {:offer => true} %>
-
-    </form>
-  </div>
-</div>
-</section>
+<h2><%=@LANG["CREATE_NEW_ITEM"]%></h2>
+<form class="form-horizontal" method="POST" action="/item/create" enctype="multipart/form-data">
+  <%= erb :_create_edit_item_offer, :locals => {:offer => true} %>
+</form>
