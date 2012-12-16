@@ -1,4 +1,4 @@
-<div class="alert-success alert">
+<div class="alert-success alert" id="itembought">
   <%=@LANG["ITEM_BOUGHT_YOU_PURCHASED"]%> <%= erb :_item_link, :locals => {:item => Item.by_id(session[:last_bought_item_id]), :highlight_active => false} %>.
   <a href= <%= @current_agent.profile_route %>><%=@LANG["CLICK_HERE_TO_SEE_OTHER_ITEMS"]%></a>
 </div>

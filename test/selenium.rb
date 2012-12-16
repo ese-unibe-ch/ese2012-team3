@@ -11,4 +11,5 @@ require_relative "selenium_login.rb" # BBB Class
 require_relative "selenium_marketplace.rb" # CCC Class
 require_relative "selenium_allusers.rb" # DDD Class
 require_relative "selenium_additem.rb" # EEE Class
-#require_relative "selenium_account.rb" # FFF Class
+require_relative "selenium_profile.rb" # FFF Class
+require_relative "selenium_account.rb" # GGG Class

@@ -1,7 +1,7 @@
 <% @title = @LANG["MARKETPLACE"] %>
 
 <h1><%=@LANG["LOGIN"]%></h1>
-<p><%=@LANG["DONT_HAVE_ACCOUNT_QUESTION"]%> <a href="/register"><%=@LANG["CLICK_HERE_TO_REGISTER"]%></a></p>
+<p><%=@LANG["DONT_HAVE_ACCOUNT_QUESTION"]%> <a href="/register" id="no_account_infolink"><%=@LANG["CLICK_HERE_TO_REGISTER"]%></a></p>
 <form class="form-horizontal" method="POST" action="/login">
   <fieldset>
     <%= erb :_text_control, :locals => {:name => :name, :label => @LANG["USERNAME"]}%>

@@ -14,26 +14,25 @@ class EEEAddItemTest < Test::Unit::TestCase
     element = @driver.find_element :name => "price"
     element.send_keys "1000"
     element.submit
-    element = @driver.find_element :css => "div.span10"
+    element = @driver.find_element :id => "content"
     assert(element.text.include?("item must have"), "no error shown!")
   end
   
   def test_2_error_on_name
-    element = @driver.find_element :name => "name"
+    element = @driver.find_element :name => "name_0"
     element.send_keys "foo"
     element.submit
-    element = @driver.find_element :css => "div.span10"
+    element = @driver.find_element :id => "content"
     assert(element.text.include?("price must"), "no error shown!")
   end
   
   def test_3_add_works
-    element = @driver.find_element :name => "name"
+    element = @driver.find_element :name => "name_0"
     element.send_keys "foo"
     element = @driver.find_element :name => "price"
     element.send_keys "100"
     element.submit
-    Selenium::WebDriver::Wait.new(:timeout => 10).until { @driver.find_element(:tag_name => "table") }
-    element = @driver.find_element :tag_name => "h1"
-    assert(element.text.include?("My account"), "not redirected to account page!")
+    element = @driver.find_element :tag_name => "h2"
+    assert(element.text.include?("My profile"), "not redirected to account page!")
   end
 end

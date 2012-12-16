@@ -41,12 +41,12 @@
 <% if @user == @current_agent %>
   <form class="form-inline" method="GET" action="/item/create">
     <fieldset>
-      <button class="btn btn-info" type="submit"><%=@LANG["NEW_ITEM"]%></button>
+      <button id="new_item_button" class="btn btn-info" type="submit"><%=@LANG["NEW_ITEM"]%></button>
     </fieldset>
   </form>
   <form class="form-inline" method="GET" action="/item/offer">
     <fieldset>
-      <button class="btn btn-info" type="submit"><%=@LANG["NEW_OFFER"]%></button>
+      <button id="new_offer_button" class="btn btn-info" type="submit"><%=@LANG["NEW_OFFER"]%></button>
     </fieldset>
   </form>
 <% end %>
