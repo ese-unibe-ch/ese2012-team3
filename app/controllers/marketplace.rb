@@ -109,8 +109,8 @@ post "/item/:id/sell" do
   assert_offer
   
   # TODO move selling logic to model:
-  Market::Item.transform_offer_to_item(@item)
   @current_agent.credit += @item.safe.savings
+  Market::Item.transform_offer_to_item(@item)
   
   redirect '/'
 end
