@@ -4,7 +4,6 @@ class Language
   #attr_reader :s # the strings
   attr_reader :icon # path to the icon, relative to the PUBLIC_FOLDER, including initial slash/
 
-
   # lookup language string
   def [](k)
     return @s[k] if @s.has_key?(k)

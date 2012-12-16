@@ -12,7 +12,7 @@ module Market
   # A user provides a method that lists his/her active items to sell.
   class User < Agent
 
-    attr_accessor_typesafe_not_nil String, :password
+    attr_accessor_typesafe_not_nil String, :password # TODO have only set_password and check_password? methods to interact with this - noone may know read this password
 
     attr_accessor :following # an <tt>Array</tt> of {Agent}s
     attr_accessor :logged_in # true/false
@@ -117,12 +117,11 @@ module Market
       all.select {|user| !user.is_member_of?(org)}
     end
 
-    # @internal_note TODO move to a more appropriate place
-    # @return the server route the the users profile page
     def profile_route
       "/profile/#{self.id}"
     end
 
+    # @return Sum of all credits of all users. Statistics.
     def self.total_user_credits
       sum = 0
       for user in @@users
@@ -131,7 +130,7 @@ module Market
       return sum
     end
 
-    # toggles following the specified agent
+    # toggles following the specified {Agent}
     # @param follow [Agent]
     def follow(follow)
       unless self.following.include?(follow)
@@ -141,7 +140,7 @@ module Market
       end
     end
 
-    #collect all activities of followees
+    # collect all {Activity activities} of followees in self.{#following}
     def get_followees_activities
       activities = []
       for user in self.following do

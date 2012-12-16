@@ -1,6 +1,9 @@
 module Market
-  class Auction #:nodoc: all #dummy
+  # @internal_note We need these for attr_accessor_typesafe(_not_nil)
+  class Safe #:nodoc: all #dummy
+  end
 
+  class Auction #:nodoc: all #dummy
   end
 
   # Items are the goods traded in this system.
@@ -12,18 +15,20 @@ module Market
   class Item
 
 
+    attr_accessor_typesafe_not_nil Numeric, :id
     attr_accessor_typesafe_not_nil Agent,   :owner
     attr_accessor_typesafe_not_nil LocalizedLiteral,   :name    # Hash of Language prefix @LANGCODE (de, en, fr, jp) => String (internally converted to LocalizedLiteral)
     attr_accessor_typesafe_not_nil LocalizedLiteral,   :about # Hash of Language prefix @LANGCODE (de, en, fr, jp) => String
 
     attr_accessor_typesafe         Auction, :auction # nil signifies no auction
     attr_accessor_typesafe         String,  :image_file_name # nil signifies no image
+    attr_accessor_typesafe         Safe,    :safe # nil signifies no offer (together with not being in @@offers)
 
-    attr_accessor :id,
-                  :active, # true or false
-                  :price, # positive number
-                  :comments, # List of Comment objects
-                  :safe
+    attr_reader :price # <tt>Numeric</tt>, positive
+
+    attr_accessor :active,  # <tt>Boolean</tt> (true, false)
+                  :comments # <tt>Array</tt> of {Comment} objects
+
 
     @@item_id_counter = 0
     @@items = []
@@ -48,7 +53,7 @@ module Market
       item = self.new
       item.id = @@item_id_counter
       item.name = (params[:name].kind_of? LocalizedLiteral) ? params[:name] : LocalizedLiteral.new(params[:name] || {"en" => "default item"})
-      item.price = params[:price] || 0
+      item.set_price(params[:price] || 0)
       item.active = params[:active] || false
       item.auction = params[:auction] || nil
       item.owner = params[:owner]
@@ -61,7 +66,16 @@ module Market
       item
     end
 
-    # Changes the status of an item, dismissing ongoing auction in case there is one
+    # Resets and recreates the safe if this is an offer.
+    def set_price(price)
+      @price = price
+      if self.is_offer?
+        self.safe.return
+        self.safe.fill(self.owner, self.price)
+      end
+    end
+
+    # Toggles the {#active} status of an item, dismissing ongoing auction in case there is one
     def change_status
       if self.active == true
         self.active = false
@@ -126,14 +140,17 @@ module Market
       @@offers.delete(self)
     end
 
+    # @internal_note Breaks layers somewhat, but if we don't do this here we'd need some way of communicating with the application, which would break layers too
     def delete_image_file
       delete_public_file(self.image_file_name)
     end
+
 
     def add_comment new_comment
       comments << new_comment unless comments.include?(new_comment)
     end
 
+    # @param [String] pattern The string to be found in the name or about. Case ignored, all languages checked.
     def self.find_item(pattern)
       @@items.select { |item|
         item.active && (item.name.include_i?(pattern) || item.about.include_i?(pattern))
@@ -144,7 +161,14 @@ module Market
       Item.offer_by_id(self.id) == self # what about @@offers.include?(self)
     end
 
-    # same as {find_item} but for offers.
+    # @param [Agent] selling_agent The agent selling the item (getting the money)
+    def sell(selling_agent)
+      fail "no offer" unless self.is_offer?()
+      selling_agent.credit += self.safe.savings
+      Item.transform_offer_to_item(@item)
+    end
+
+    # same as {#find_item} but for offers.
     def self.find_offer(pattern)
       @@offers.select { |offer| offer.name.include_i?(pattern) || offer.name.include_i?(pattern)}
     end
@@ -161,6 +185,7 @@ module Market
       @@offers.detect{ |offer| offer.id.to_i == id }
     end
 
+    # @internal_note This is static (class method) because it modifies class data.
     def self.transform_offer_to_item(offer)
       offer.safe = nil
       @@items.push(offer)

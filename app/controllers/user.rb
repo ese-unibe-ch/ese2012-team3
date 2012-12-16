@@ -1,4 +1,4 @@
-# We define queries manipulating {User}s here.
+# We define queries manipulating {User Users} here.
 
 get "/settings" do
   erb :settings
@@ -33,9 +33,9 @@ end
 
 # sets the error codes if the password and confirmation given in params (<tt>params[:passwordc], params[:passwordc]</tt>) are invalid
 def passwordcheck()
-  set_error :password, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_GIVEN")]) unless params[:password] && params[:password].size > 0
-  set_error :passwordc, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_CONFIRM_GIVEN")]) unless params[:password] && params[:password].size > 0
-  set_error :passwordc, LocalizedMessage.new([LocalizedMessage::LangKey.new("PASS_AND_RETYPED_PASS_DONT_MATCH")]) unless params[:passwordc] == params[:password]
+  set_error :password, localized_message_single_key("NO_PASSWORD_GIVEN") unless params[:password] && params[:password].size > 0
+  set_error :passwordc, localized_message_single_key("NO_PASSWORD_CONFIRM_GIVEN") unless params[:password] && params[:password].size > 0
+  set_error :passwordc, localized_message_single_key("PASS_AND_RETYPED_PASS_DONT_MATCH") unless params[:passwordc] == params[:password]
 
   begin
     PasswordCheck::ensure_password_strong(params[:password], params[:name], params[:currentpassword])
@@ -52,9 +52,9 @@ post "/register" do
   image_file_check()
 
   # ======================= Error handling... basically copy of what exceptions already do, but with categorizing
-  # TODO think of better way
-  set_error :name, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_USERNAME_GIVEN")]) unless params[:name] && params[:name].size > 0
-  set_error :name, LocalizedMessage.new([LocalizedMessage::LangKey.new("USERNAME_EXISTS")]) if Market::User.user_by_name(params[:name])
+  # TODO think of better way - we could move all exception throwing to the model just like ensure_password_strong does, but it's a lot of effort to change this now
+  set_error :name, localized_message_single_key("NO_USERNAME_GIVEN") unless params[:name] && params[:name].size > 0
+  set_error :name, localized_message_single_key("USERNAME_EXISTS") if Market::User.user_by_name(params[:name])
 
   passwordcheck()
 
@@ -63,7 +63,7 @@ post "/register" do
 
   user = User.init(:name => params[:name], :credit => DEFAULT_CREDITS,
                    :password => params[:password], :about => params[:about])
-  user.image_file_name = add_image(USERIMAGESROOT, user.id)
+  user.image_file_name = add_image(USERIMAGESROOT, user.id,params[:image_file])
 
   session[:user_id] = user.id
   flash[:success] = 'registered'
@@ -78,7 +78,7 @@ end
 
 post "/change_password" do
 
-  set_error :currentpassword, LocalizedMessage.new([LocalizedMessage::LangKey.new("CURRENT_PASS_WRONG")]) unless @current_user.password == params[:currentpassword]
+  set_error :currentpassword, localized_message_single_key("CURRENT_PASS_WRONG") unless @current_user.password == params[:currentpassword]
 
   params[:name] = @current_user.name
   passwordcheck()
@@ -87,30 +87,33 @@ post "/change_password" do
 
   @current_user.password = params[:password]
   flash[:success] = 'password_changed'
-  redirect back
+  redirect "/settings" # cannot redirect back since we might come from /change_password which is not really a page
 end
 
 post "/change_profile_picture" do
 
-  set_error :image_file, LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_FILE_CHOSEN")]) unless  params[:image_file]
+  set_error :image_file, localized_message_single_key("NO_FILE_CHOSEN") unless  params[:image_file]
 
   image_file_check()
 
-  halt erb :settings unless @errors.empty?
+  if !@errors.empty?
+    response['Content-Location'] = "/settings" # doesn't seem to work.
+    halt erb :settings
+  end
 
   @current_user = @current_user
   if @current_user.image_file_name != nil && params[:image_file] != nil
-    @current_user.delete_profile_picture
+    @current_user.delete_image_file
   end
 
-  @current_user.image_file_name = add_image(USERIMAGESROOT, @current_user.id)
+  @current_user.image_file_name = add_image(USERIMAGESROOT, @current_user.id,params[:image_file])
 
-  redirect back
+  redirect "/settings"
 end
 
 delete "/delete_profile_picture" do
   halt erb :error, :locals =>
-      {:message => LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PROFILE_PICTURE")])} unless @current_user.image_file_name
+      {:message => localized_message_single_key("NO_PROFILE_PICTURE")} unless @current_user.image_file_name
 
   @current_user.delete_image_file
 

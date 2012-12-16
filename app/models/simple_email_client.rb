@@ -1,10 +1,9 @@
 
 ##
-#
-# Sending E-mail via ruby
+# Used in {Auction}.
+# Sends E-mail
 # Not implemented because not required to be functional.
 ##
-
 class SimpleEmailClient
 
   def self.setup
@@ -22,9 +21,9 @@ class SimpleEmailClient
   #
   # Sending email from specified email address
   #
-  # @param to : Receiver of the e-mail
-  # @param subject : e-mail header
-  # @param content : text to be send
+  # @param [String] to Receiver of the e-mail
+  # @param [String] subject e-mail header
+  # @param [String] content text to be send
   #
   ##
   def send_email(to, subject, content)

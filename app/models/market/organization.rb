@@ -44,7 +44,7 @@ module Market
     #   * :admin => admin, an {Agent} (required)
     def self.init(params={})
       fail "Organization name missing" unless params[:name] && params[:name].length > 0
-      fail "Organization with given name already exists" if self.organization_by_name(params[:name])
+      fail "Organization with given name already exists" if self.organization_with_name_exists?(params[:name])
       fail "Organization needs an admin" unless params[:admin].is_a?(Market::User)
       org = self.new
       org.orgmembers = []
@@ -85,12 +85,13 @@ module Market
       return @@organizations.detect { |user| user.id == id.to_i } != nil
     end
 
-    # @internal_note TODO Reduce usage - use id instead
-    def self.organization_by_name(name)
-      @@organizations.detect { |user| user.name == name }
+    #@param [String] name
+    def self.organization_with_name_exists?(name)
+      return @@organizations.detect { |user| user.name == name }  != nil
     end
 
     # Lists organizations the user works for
+    # @param [User] user
     def self.organizations_by_user(user)
       @@organizations.select { |org| org.members.include?(user) }
     end
@@ -111,7 +112,7 @@ module Market
       return ms
     end
 
-    # returns nil if this agent is not a member, otherwise the {OrganizationMember} object that manifests this membership
+    # @return nil if this agent is not a member (not in {#orgmembers}), otherwise the {OrganizationMember} object that manifests this membership
     def get_orgmember_by_agent(agent)
       return self.orgmembers.find(nil) {|om| om.agent == agent}
     end
@@ -128,7 +129,8 @@ module Market
       return om.role == :admin
     end
 
-    # role any of {Market::Organization::OrganizationMember#@@roles}
+    # @param role any of {@@roles}
+    #@param [Agent] agent
     def set_member_role(agent, role)
       om = self.get_orgmember_by_agent(agent)
       raise "agent is not a member" unless om
@@ -136,17 +138,21 @@ module Market
       om.role = role
     end
 
+    #@param [Agent] agent
     def toggle_admin_rights(agent)
       om = self.get_orgmember_by_agent(agent)
       raise "agent is not a member" unless om
       set_member_role(om.agent, om.role == :admin ? :normal_member : :admin)
     end
 
+    #@return Whether this user is a member
+    #@param [Agent] agent
     def has_member?(user)
       self.members.include?(user)
     end
 
-    # returns the OrganizationMember object representing this membership
+    # @param [User] user the user to be added as a member. This is the only thing stopping us from allowing {Organization} to be passed here - it would be compatible with all internal handling
+    # @return the {OrganizationMember} object representing this membership
     def add_member(user)
       assert_kind_of(User, user)
       raise "cannot add same user twice!" if self.has_member?(user)
@@ -156,13 +162,13 @@ module Market
     end
 
     def remove_member(user)
-      set_member_role(user, :normal_member)
       raise "cannot remove member #{user.name}, he isn't a member!" unless self.members.include?(user)
+      set_member_role(user, :normal_member)
       om = self.get_orgmember_by_agent(user)
       self.orgmembers.delete(om)
     end
 
-    # TODO move to a more appropriate place
+
     def profile_route
       "/organization/#{self.id}"
     end
@@ -188,9 +194,11 @@ module Market
       return sum
     end
 
+    # @param [Activity] orgactivity An activity caused by a member of this organization working for it.
     def add_orgactivity(orgactivity)
       raise "cannot add non activity as activity" unless orgactivity && orgactivity.kind_of?(Activity)
       raise "cannot add same orgactivity multiple times" if self.orgactivities.include?(orgactivity)
+      raise "cannot Activity not caused by a member" unless self.has_member?(orgactivity.creator)
       self.orgactivities << orgactivity
     end
 

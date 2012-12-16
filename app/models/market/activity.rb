@@ -5,14 +5,12 @@ module Market
   class Activity
     @@activity_types = [:comment, :follow, :activate, :buy, :createitem]
 
-    attr_reader :creator # The agent that caused this activity to be created. Always a user for activities within organization orgactivities
+    attr_reader :creator # The agent that caused this activity to be created. Always a {User} for activities within {Organization#orgactivities}
     attr_reader :timestamp # Time.now at init (use timestamp.to_i for comparisons (?))
-    attr_reader :type # any of :comment, :follow, :activate, :buy, :createitem  - last two only used within orgactivities
+    attr_reader :type # any of {@@activity_types}  - <tt>:buy</tt>, <tt>:createitem</tt> only used within orgactivities, see {Organization#add_orgactivity} and {Organization#orgactivities}, only Users can generate <tt>:follow</tt> for now
 
     # The complete message, as a {LocalizedMessage}.
     # All strings can use markdown.
-    # @internal_note TODO Store more information and generate message later on?
-    #   Problem: Will have to store old item names, price, links to users which might not exist anymore... -->
     attr_reader :message
 
     # Called by ruby on new
@@ -33,15 +31,11 @@ module Market
       @timestamp = Time.now
     end
 
-    # See {Activity#initialize}
-    def self.init(params={})
-      return self.new(params)
-    end
 
     # @param creator [Market::Agent]
     # @param item [Market::Item]
     def self.new_activate_activity(creator, item)
-      Activity.init({:creator => creator,
+      Activity.new({:creator => creator,
                      :type => :activate,
                      :message => LocalizedMessage.new([
                                                           LocalizedMessage::LangKey.new("ACTIVATED_ITEM"),
@@ -54,7 +48,7 @@ module Market
     # @param creator [Market::Agent]
     # @param item [Market::Item]
     def self.new_buy_activity(creator, item)
-      Activity.init({:creator => creator,
+      Activity.new({:creator => creator,
                      :type => :buy,
                      :message => LocalizedMessage.new([
                                                           LocalizedMessage::LangKey.new("BOUGHT_ITEM"),
@@ -67,7 +61,7 @@ module Market
     # @param creator [Market::Agent]
     # @param item [Market::Item]
     def self.new_createitem_activity(creator, item)
-      Activity.init({:creator => creator,
+      Activity.new({:creator => creator,
                      :type => :createitem,
                      :message => LocalizedMessage.new([
                                                           LocalizedMessage::LangKey.new("CREATED_ITEM"),
@@ -80,7 +74,7 @@ module Market
     # @param creator [Market::Agent]
     # @param item [Market::Item]
     def self.new_comment_activity(creator, item)
-      Activity.init({:creator => creator,
+      Activity.new({:creator => creator,
                      :type => :comment,
                      :message => LocalizedMessage.new([
                                                           LocalizedMessage::LangKey.new("COMMENTED_ON"),
@@ -93,7 +87,7 @@ module Market
     # @param creator [Market::Agent]
     # @param follow [Market::Agent]
     def self.new_follow_activity(creator, follow)
-      Activity.init({:creator => creator,
+      Activity.new({:creator => creator,
                      :type => :follow,
                      :message =>
                          LocalizedMessage.new([

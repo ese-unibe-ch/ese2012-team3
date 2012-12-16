@@ -52,7 +52,7 @@ class ItemTest < Test::Unit::TestCase
   def test_add_comment
     item = Item.init(:name => "testItem", :owner => @user)
     assert(item.comments.length == 0, "item should not have comments after creation!")
-    comment = Comment.init(:creator => @user, :text => "This is my item")
+    comment = Comment.new(:creator => @user, :text => "This is my item")
     item.add_comment(comment)
     assert(item.comments.length == 1, "item should have 1 comment!")
     assert(item.comments[0] == comment)

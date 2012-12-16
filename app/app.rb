@@ -161,7 +161,7 @@ end
 
 
 eseo.add_item(pizza)
-pizza.add_comment(Comment.init(:creator => john, :text => "can i get that without the garlic?"))
+pizza.add_comment(Comment.new(:creator => john, :text => "can i get that without the garlic?"))
 beret = Item.init(:name => "blue beret", :price => 10, :active => true, :owner => uno)
 beret.image_file_name="itemimages/beret.jpg"
 uno.add_item(beret)
@@ -171,10 +171,10 @@ uno.add_item(map)
 User.all.each_with_index do |user, i|
   about = "This is a **Pet Stone**. it's very easy to keep, doesn't need any special diet; it's house-trained."
   item = Item.init(:name => "Pet Stone", :price => 100, :owner => user, :about => about)
-  comment = Comment.init(:creator => user, :text => "This is my stone. I want to sell it")
+  comment = Comment.new(:creator => user, :text => "This is my stone. I want to sell it")
   item.add_comment(comment)
-  item.add_comment(Comment.init(:creator => user, :text => "Very *nice* stone! And **cheap**"))
-  item.add_comment(Comment.init(:creator => john, :text => "I'll give you **10** credits, max!"))
+  item.add_comment(Comment.new(:creator => user, :text => "Very *nice* stone! And **cheap**"))
+  item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max!"))
   item.image_file_name="itemimages/stone.jpg"
   user.add_item(item)
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
@@ -206,7 +206,7 @@ end
 
 # Some dummy comments to test paging to LAST dummyitem
 for i in 0...DUMMYTHINGSCOUNT
-  lastdummyitem.add_comment(Comment.init(:creator => jack, :text => "very *nice* item! And **cheap** the #{i}th"))
+  lastdummyitem.add_comment(Comment.new(:creator => jack, :text => "very *nice* item! And **cheap** the #{i}th"))
 end
 
 # end

@@ -1,5 +1,8 @@
-<a href="<%= user.profile_route %>">
-  <%if user.class.name == "Market::User" %>
+<%
+# used to create links to Organizations and users.
+   %>
+   <a href="<%= user.profile_route %>">
+  <%if user.kind_of?(User) %>
       <i class="icon-user">
   <%else%>
       <i class="icon-briefcase">

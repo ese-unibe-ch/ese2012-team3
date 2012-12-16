@@ -7,7 +7,7 @@ To run:
 
 * Simply run `ruby app/app.rb` (current directory doesn't matter). 
 * Then access under http://localhost:4567 (you can specify another port via the [Sinatra commandline options](http://www.sinatrarb.com/intro.html#Command%20Line))
-* There are usernames "ese", "John", "Jack" with password "Ax1301!3" set up for testing.
+* There are usernames "ese" (member of "The ESE Org"), "John" (member of "UNO"), "Jack" with password "Ax1301!3" set up for testing.
 
 * Access the admin panel under http://localhost:4567/admin The credentials are "admin", "password"
 

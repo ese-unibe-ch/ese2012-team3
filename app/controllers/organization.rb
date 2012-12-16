@@ -1,4 +1,4 @@
-# We define queries manipulating {Organization}s here.
+# We define queries manipulating {Organization Organizations} here.
 
 # Some stuff we use often.
 def before_get_org_by_id 
@@ -43,7 +43,7 @@ post "/organization/create" do
   end
   # Create organization
   org = Organization.init(:name => name, :about => about, :admin => @current_user)
-  org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id)
+  org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, org.id,params[:image_file])
   flash[:success] = 'org_created'
   session[:organization_id] = org.id
   redirect "/"
@@ -119,9 +119,9 @@ post "/organization/:id/change_profile_picture" do
     @org.delete_image_file
   end
 
-  @org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, @org.id)
+  @org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, @org.id,params[:image_file])
 
-  redirect "/organization/#{@org.id}"
+  redirect "/organization/#{@org.id}/settings"
 end
 
 delete "/organization/:id/delete_profile_picture" do
@@ -130,5 +130,5 @@ delete "/organization/:id/delete_profile_picture" do
 
   @org.delete_image_file
 
-  redirect "/organization/#{@org.id}"
+  redirect "/organization/#{@org.id}/settings"
 end

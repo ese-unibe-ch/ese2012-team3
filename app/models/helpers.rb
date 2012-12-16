@@ -1,6 +1,15 @@
 # This Module defines some cusom ruby "language extensions" if you will to make our lives easier.
 module ModelHelpers
 
+  ## @internal_note This could be used for implementing all error handlin in the model - we just throw these together with a category so the controllers don't have to check and set any errors, but just catch an exception
+  ##class CategorizedLocalizedError < RuntimeError
+  #
+  #  # @param [Identifier] category
+  #  def initialize(msg, category)
+  #    assert_kind_of(LocalizedMessage)
+  #  end
+  #end
+
   # raises an exception if v is nil or not kind of class (that is , has class as one of its superclasses)
   def assert_kind_of(kclass,v)
     raise "\n<#{v}> expected to be kind_of?

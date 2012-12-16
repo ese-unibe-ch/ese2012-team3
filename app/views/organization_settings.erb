@@ -44,7 +44,7 @@ if @org.admins.include?(@current_user) and @current_agent == @org %>
   </form>
   <% if @org.image_file_name != nil %>
     <h3><%=@LANG["DELETE_PROFILE_PICTURE"]%></h3>
-    <form class="form-horizontal" method="POST" action="/organization/#{@org.id}/delete_profile_picture" >
+    <form class="form-horizontal" method="POST" action="/organization/<%= @org.id %>/delete_profile_picture" >
       <fieldset>
         <div class="form-actions">
           <input type="hidden" name="_method" value="delete"/>

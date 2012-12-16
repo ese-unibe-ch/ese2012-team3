@@ -5,7 +5,7 @@
   <div class="span10">
     <h1>Delete item</h1>
     <% if @all_items.length > 0 %>
-      <form action="/admin/item/delete" value = "delete" method="POST">
+      <form class="form-horizontal" action="/admin/item/delete" value = "delete" method="POST">
         <fieldset>
           <select name="id_to_delete">
             <% for item in @all_items %>

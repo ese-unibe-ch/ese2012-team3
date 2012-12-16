@@ -5,8 +5,8 @@ module Market
   # sold to the highest bidder after the timeout.
   class Auction
 
-    @@auctions_finished = 0 # for statistics
-    @@bids_made = 0         # for statistics
+    @@auctions_finished = 0 # <tt>Numeric</tt>, counter for statistics
+    @@bids_made = 0         # <tt>Numeric</tt>, counter for statistics
 
     # statistics
     def self.bids_made
@@ -18,20 +18,29 @@ module Market
     end
 
     attr_accessor_only_if_editable :minimal_price, :increment
+
     attr_accessor :event # the {TimedEvent} that causes the auction to end
 
     attr_accessor_typesafe_not_nil Item,  :item
-    attr_accessor_typesafe         Agent, :winner
+    attr_accessor_typesafe         Agent, :winner # The currently highest bidding {Agent}.
 
     attr_reader :current_price # <tt>Numeric</tt>, positive
     attr_reader :safe # the {Safe} locking the currently winning (winner) {Agent}'s credits he bid
-    attr_reader :bids # A hase bid value (<tt>Numeric</tt>) to {Agent}
+    attr_reader :bids # A hash of bid value (<tt>Numeric</tt>) => {Agent}
     attr_reader :past_winners # an <tt>Array</tt> of {PastWinner}s
 
     # stores an agent and his bid and the time of the bid
     class PastWinner
       attr_accessor :agent, :time, :price
+
+      # @param [Agent] agent
+      # @param [Time] time
+      # @param [Numeric] price strictly positive
       def self.create(agent, time, price)
+        assert_kind_of(Agent, params[:creator])
+        assert_kind_of(Time, time)
+        assert_kind_of(Numeric, price)
+        fail "negative/0 bid" unless price > 0
         past_winner = PastWinner.new
         past_winner.agent = agent
         past_winner.time = time
@@ -78,9 +87,16 @@ module Market
       self.item.auction = nil
     end
 
+    # @param [Item] item
+    # @param [Time] time
+    # @param [Numeric] price strictly positive
+    # @param [Numeric] increment strictly positive
     def self.create(item, price, increment, time)
+      assert_kind_of(Time, time)
       fail "Can't set an auction that starts in past" if time < Time.now
-      fail "Price should not be negative" if price < 0
+      assert_kind_of(Numeric, price)
+      fail "Price should not be negative or 0" if price <= 0
+      assert_kind_of(Numeric, price)
       fail "Increment should be greater than 0" if increment <= 0
       assert_kind_of(Item, item)
 
@@ -131,8 +147,13 @@ module Market
     # Bids that don't fit with increment are rounded
     # down.
     #
-
+    # @param [Numeric] price strictly positive
+    # @param [Agent] agent
     def bid(agent, price)
+      assert_kind_of(Agent, agent)
+      assert_kind_of(Numeric, price)
+      fail "Price should not be negative or 0" if price <= 0
+
       fail "This auction is closed" if closed?
       fail "Offer must be equal or smaller than credits owned by agent" if agent.credit.to_i < price.to_i
       if (self.current_price.nil?)
@@ -158,10 +179,10 @@ module Market
     # Gets current bid (in credits) of an agent
     # Returns nil if agent didn't bid on this auction.
     #
-    # bidder : agent looking for his bid
+    # @param [Agent] bidder agent looking for his bid
     #
-
     def get_bid_of(bidder)
+      assert_kind_of(Agent, bidder)
       self.bids.each do |price, agent|
         return price if (agent == bidder)
       end
@@ -172,8 +193,9 @@ module Market
     #
     # Removes all previous bids of this agent
     #
-
+    # @param [Agent] agent_to_remove
     def remove_previous_bids_of(agent_to_remove)
+      assert_kind_of(Agent, agent_to_remove)
       self.bids.delete_if do |price, agent|
         agent == agent_to_remove
       end
@@ -244,7 +266,7 @@ module Market
         self.item.change_status
       else
         safe.return
-        self.item.price = current_price
+        self.item.set_price(current_price)
         SimpleEmailClient.setup.send_email(@winner.name,"Auction Update","You won #{@item.name} in an auction")
         @winner.buy_item(self.item)
         @@auctions_finished +=1
@@ -260,10 +282,12 @@ module Market
       value
     end
 
+    # @return Whether a bid of this value has already been made
     def already_bid?(price)
       bids.key?(price)
     end
 
+    # @return Whether a bid of this value can be made. True if {#current_price} + {#increment} <= <tt>price</tt>
     def valid_bid?(price)
       if current_price.to_i + increment.to_i <= price.to_i
         true
@@ -273,6 +297,7 @@ module Market
 
     end
 
+    # @return The value (price) of the highest bid, that is the highest key in {#bids}
     def highest_bid
       bids.keys.sort!.reverse![0]
     end

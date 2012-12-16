@@ -6,12 +6,12 @@ module Market
   # They have a profile picture, a name and further information.
   class Agent
 
-    @@items_sold = 0  # for statistics
-    @@money_spent = 0 # for statistics
+    @@items_sold = 0  # <tt>Numeric</tt>, counter for statistics
+    @@money_spent = 0 # <tt>Numeric</tt>, counter for statistics
 
     attr_accessor_typesafe_not_nil String, :name
     attr_accessor_typesafe_not_nil String, :about # Markdown allowed
-    attr_accessor_typesafe String, :image_file_name
+    attr_accessor_typesafe String, :image_file_name # Relative to the public folder
 
     attr_accessor :credit # <tt>Numeric</tt>
     attr_accessor :id     # <tt>Numeric</tt>
@@ -63,7 +63,8 @@ module Market
       item.change_status
     end
 
-    #Same as add_item/remove_item, but in one method
+    # Toggles in-wishlist state of an {Item}.
+    # @param [Item] item
     def change_wishlist(item)
       assert_kind_of(Item, item)
       if wishlist.include?(item)
@@ -73,21 +74,6 @@ module Market
       end
     end
 
-
-    #THESE ARE ESSENTIALLY OBSOLETE
-    # currently the button is only displayed for {User}s
-    # @param [Item] item item to be added to the wishlist
-    def add_item_to_wishlist(item)
-      assert_kind_of(Item, item)
-      wishlist << item unless wishlist.include?(item)
-    end
-
-    # @param [Item] item item to be removed from wishlist
-    def remove_item_from_wishlist(item)
-      assert_kind_of(Item, item)
-      wishlist.delete(item)
-    end
-
     # @param [Activity] activity
     def add_activity(activity)
       assert_kind_of(Activity, activity)
@@ -95,11 +81,25 @@ module Market
       self.activities.push(activity)
     end
 
+    # null implementation, to be implemented by {Organization}
+    # @params [Activity] activity
+    def add_orgactivity(activity)
+
+    end
+
+    # null implementation, to be implemented by {User} (an {Organization} doesn't have cannot follow anybody)
     def get_followees_activities
       []
     end
 
-    # Removes all items of this agent and all arganizations he joined plus deletes his picture.
+    # @internal_note TODO move to a more appropriate place - however if we do, we will have to use ugly kind_of?
+    # null implementation, implemented in {User} and {Organization}
+    # @return the server route the the user's/organization's profile page
+    def profile_route
+      "/"
+    end
+
+    # Removes all {Item Items} of this agent and all memberships in {Organization Organizations} he joined plus deletes his picture via {#delete_image_file}.
     def delete_as_agent
       for item in Item.items_by_agent(self)
         item.delete
@@ -111,16 +111,19 @@ module Market
       self.delete_image_file
     end
 
+    # internal_note We could store images on the application level, but then we'd have to handle Agent deletion over that as well...
     def delete_image_file
       delete_public_file(self.image_file_name)
       self.image_file_name = nil
     end
 
-
+    # Amount of items sold
+    # Statistics
     def self.items_sold
       return @@items_sold
     end
 
+    # Statistics
     def self.money_spent
       return @@money_spent
     end

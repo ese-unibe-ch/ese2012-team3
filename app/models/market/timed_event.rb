@@ -1,6 +1,6 @@
 module Market
 
-  # Implements the timeout of an {Auction}. Can have subscribers that must implement <tt>timed_out</tt> which will be called when the time sepcified is reached.
+  # Implements the timeout of an {Auction}. Can have subscribers that must implement <tt>timed_out</tt> which will be called when the time specified is reached.
   class TimedEvent
 
     attr_accessor :time # a <tt>Time</tt> object specifing the time when this ends
@@ -9,12 +9,10 @@ module Market
     attr_accessor :timed_out # whether this event is timed out <tt>Boolean</tt>
     attr_accessor :job # the internal job (a function) to be executed when the timer runs out.
 
-    # @param object_to_time must implement "timed_out"
+    # @param subscriber must implement "timed_out", called when timer runs out
     # @param time [Time]
-    def self.create(object_to_time, time)
+    def self.create(subscriber, time)
       assert_kind_of(Time, time)
-      fail "Object to be called should not be nil" if object_to_time.nil?
-      fail "Should have method #timed_out implemented" unless object_to_time.respond_to?(:timed_out)
       fail "Time should not be in past" if time < Time.now
 
       event = TimedEvent.new
@@ -23,7 +21,7 @@ module Market
       event.time = time
       event.timed_out = false
       event.subscribers = Array.new
-      event.subscribers.push(object_to_time)
+      event.subscribe(subscriber)
 
       time = Rufus.to_datetime time
 
@@ -35,11 +33,19 @@ module Market
       event
     end
 
-    def subscribe(object_to_time)
-      self.subscribers.push(object_to_time)
+    # @internal_not Curently, only the Acution object itself subscribes to this
+    # @param subscriber must implement "timed_out", called when timer runs out
+    def subscribe(subscriber)
+      fail "Object to be called should not be nil" if subscriber.nil?
+      fail "Should have method #timed_out implemented" unless subscriber.respond_to?(:timed_out)
+      self.subscribers.push(subscriber)
     end
 
+    # Change the end time
     def reschedule(time)
+      assert_kind_of(Time, time)
+      fail "Time should not be in past" if time < Time.now
+
       time = Rufus.to_datetime time
 
       self.job.unschedule
@@ -50,6 +56,7 @@ module Market
       end
     end
 
+    # Reset (remove timer)
     def unschedule
       self.job.unschedule
     end

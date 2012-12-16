@@ -19,8 +19,9 @@ class PasswordCheck
 
   PASSWORD_FORBIDDEN_WORDS = read_words_from_CSV
 
-  # Maybe make return error enumeration instead?
-  # Though exception seems fine, can be formatted.
+  # @param [String] pw the new password
+  # @param [String] username of the user getting this password
+  # @param [String] previousPassword of the user getting this password
   def self.ensure_password_strong(pw, username, previousPassword)
     fail localized_message_single_key("NO_PASS_AND_USER") unless pw and pw.length > 0 and username and username.length > 0
 
@@ -50,6 +51,8 @@ class PasswordCheck
     fail localized_message_single_key("PNS_NOT_SPECIAL") unless pw =~ /[\`\~\!\@\#\$\%\^\&\*\(\)\_\-\+\=\{\}\[\]\\\|\:\;\"\'\<\>\,\.\?\/\.]/
   end
 
+  # @param [String] a
+  # @param [String] b
   # Algorithm: Make sure no block of 3 characters in a is in b
   def self.significantly_different?(a,b)
     a = a.downcase

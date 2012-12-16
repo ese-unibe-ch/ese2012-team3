@@ -4,7 +4,7 @@ LOCALIZED_FALLBACKLANGCODE = "en" # This is defined here instead of in app.rb be
 # A string literal given in several different languages.
 # @see LocalizedLiteral.[]
 class LocalizedLiteral
-  attr_reader :s # the <tt>Hash</tt> of Language codes ("en", "de",...) to string literals, e.g. {"en" => "Cheese", "de" => "Käse"}
+  attr_reader :s # the <tt>Hash</tt> of Language codes ("en", "de",...) to string literals, e.g. <tt>{"en" => "Cheese", "de" => "Käse"}</tt>
 
   # @return [String] a localized version of the string this represents.
   # Falls back to LOCALIZED_FALLBACKLANGCODE if not present for requested key - if not even that is available, returns first available
@@ -16,14 +16,18 @@ class LocalizedLiteral
     return @s.values.first
   end
 
+  # @param [Hash] hash_langcode_to_string see #s
   def initialize(hash_langcode_to_string)
     @s = hash_langcode_to_string
   end
 
+  # Implements this common interface of all multi language things.
+  # @param lang [Language] the language to use to choose the localizd version of this string. We just call <tt>self[lang["LANGUAGE_CODE"]]</tt>
   def to_string(lang)
     return self[lang["LANGUAGE_CODE"]]
   end
 
+  #return {#s}.has_key?(langcode)
   def defined_for_langcode? langcode
     @s.has_key?(langcode)
   end
@@ -45,7 +49,7 @@ class LocalizedLiteral
 end
 
 
-# A localized message is an ordered list of Strings and {LocalizedMessage#LangKey LangKeys}, e.g. ["John", LangKey("WROTE")]
+# A localized message is an ordered list of Strings and {LocalizedMessage#LangKey LangKeys}, e.g. <tt>["John", LangKey("WROTE")]</tt>
 # Given a {Language}, {LocalizedMessage#to_string} will compile this to e.g. "John wrote", "John schrieb", "John a écrit" etc.
 # This allows throwing localised errors in {PasswordCheck} and storing {Activity} messages internally in a language independent format.
 class LocalizedMessage < RuntimeError
@@ -76,16 +80,15 @@ class LocalizedMessage < RuntimeError
     #end
   #end
 
+  attr_reader :message_ary # an array of {LangKey LangKeys}, <tt>Strings</tt> and {LocalizedLiteral LocalizedLiterals}
 
-  attr_reader :message_ary # an array of LangIdentifiers, Strings and LocalizedLiterals
-
-  # @param message_ary An array of String and {LangKey} objects, composing a message.
+  # @param message_ary An array of String, {LangKey} objects and {LocalizedLiteral LocalizedLiterals}, composing a message in the order given.
   def initialize(message_ary)
     @message_ary = message_ary
   end
 
   # Creates a sinlge localised string from this message.
-  # @param lang [Language] The language that knows how to translate each LangKey.
+  # @param lang [Language] The language that knows how to translate each {LangKey} in {#message_ary} and whose code is given to all {LocalizedLiteral LocalizedLiterals} to determine their choice.
   def to_string(lang)
      s = ""
      message_ary.each {|m| s += m.to_string(lang)}
@@ -94,7 +97,7 @@ class LocalizedMessage < RuntimeError
 end
 
 String.class_eval do
-  # We overload this to be able to treat all elements in {LocalizedMessage#message_ary} the same way, instead of testing for LangKey type.
+  # We overload this to be able to treat all elements in {LocalizedMessage#message_ary} the same way, instead of testing for {LangKey}, String or {}LocalizedLiteral} type.
   def to_string(lang)
     return self
   end
