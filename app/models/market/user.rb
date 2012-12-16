@@ -103,10 +103,7 @@ module Market
 
     # @return true if this user is admin of <i>any</i> of his organizations (that is, of any in {User#list_organizations})
     def is_admin?
-      for org in self.list_organizations
-        return true if org.is_admin?(self)
-      end
-      return false
+      self.list_organizations.any? {|org| org.is_admin?(self)}
     end
 
     def is_admin_of?(org)

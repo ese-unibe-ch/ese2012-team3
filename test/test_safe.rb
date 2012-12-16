@@ -61,4 +61,16 @@ class TestSafe < Test::Unit::TestCase
 
      assert_raise(RuntimeError) { @safe.fill(MockUser.new, 100) }
    end
+
+  def test_should_fail_no_amount
+    assert_raise(RuntimeError) { @safe.fill(MockUser.new, nil) }
+  end
+
+  def test_should_fail_negative_amount
+    assert_raise(RuntimeError) { @safe.fill(MockUser.new, -1) }
+  end
+
+  def test_should_fail_more_than_users_credits
+    assert_raise(RuntimeError) { @safe.fill(MockUser.new, 151) }
+  end
 end

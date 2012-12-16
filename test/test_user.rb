@@ -182,11 +182,24 @@ class UserTest < Test::Unit::TestCase
     assert(!donald.following.include?(dagobert))
   end
 
-  def test_is_admin?
+  def test_is_admin_in_one?
     dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
 
     org = Organization.init(:name => "org15", :admin => dagobert)
     assert(dagobert.is_admin?)
+  end
+
+  def test_is_admin_in_two?
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+
+    org1 = Organization.init(:name => "org15", :admin => dagobert)
+    org1 = Organization.init(:name => "org16", :admin => dagobert)
+    assert(dagobert.is_admin?)
+  end
+
+  def test_is_not_admin?
+    dagobert = User.init(:name => "dagobert", :password => 'Ax1301!3')
+    assert(!dagobert.is_admin?)
   end
 
   def test_is_member_of?
