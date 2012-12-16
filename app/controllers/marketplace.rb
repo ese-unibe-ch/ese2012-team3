@@ -80,10 +80,7 @@ def item_create_common(is_offer, halt_at)
   item.about = LocalizedLiteral.new({})         
 
   if !is_offer
-    # If the user creates an item in the name of an organization, an organization activity is created.
-    if @current_user != @current_agent
-      @current_agent.add_orgactivity(Activity::new_createitem_activity(@current_user, item))
-    end
+    @current_agent.add_orgactivity(Activity::new_createitem_activity(@current_user, item))
   else
     Market::Item.add_offer(item) # offers must be added separately
   end
@@ -145,10 +142,7 @@ post "/item/:id/buy" do
   rescue Exception => e
     halt erb :error, :locals => {:message => e.message}
   end
-  # If the user buys an item in the name of an organization, an organization activity is created.
-  if @current_user != @current_agent
-    @current_agent.add_orgactivity(Activity::new_buy_activity(@current_user, @item))
-  end
+  @current_agent.add_orgactivity(Activity::new_buy_activity(@current_user, @item))
 
   session[:last_bought_item_id] = @item.id
   flash[:success] = 'item_bought'
@@ -174,10 +168,7 @@ post "/item/:id/add_comment" do
 
     # Add to activity list of the current agent
     @current_agent.add_activity(Activity::new_comment_activity(@current_agent, @item))
-    # If the user comments an item in the name of an organization, an organization activity is created.
-    if @current_user != @current_agent
-      @current_agent.add_orgactivity(Activity::new_comment_activity(@current_user, @item))
-    end
+    @current_agent.add_orgactivity(Activity::new_comment_activity(@current_user, @item))
 
     redirect "/item/#{params[:id]}"
   else
@@ -232,10 +223,7 @@ post "/item/:id/status_change" do
     #add to activity list of the agent if item was activated
   if @item.active == true
     @current_agent.add_activity(Activity::new_activate_activity(@current_agent, @item))
-    # If the user activates an item in the name of an organization, an organization activity is created.
-    if @current_user != @current_agent
-      @current_agent.add_orgactivity(Activity::new_activate_activity(@current_user, @item))
-    end
+    @current_agent.add_orgactivity(Activity::new_activate_activity(@current_user, @item))
   end
   redirect back
 end

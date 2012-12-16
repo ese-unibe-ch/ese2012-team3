@@ -124,5 +124,11 @@ module Market
     def self.money_spent
       return @@money_spent
     end
+
+    #noop implementation, only organisations have orgactivities
+    #but this here allows the controllers to be agnostic about agent type
+    def add_orgactivity(orgactivity)
+    end
+
   end
 end
