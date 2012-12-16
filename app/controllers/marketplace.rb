@@ -26,9 +26,14 @@ def assert_auction
   halt erb :error, :locals => {:message => localized_message_single_key("CURRENTLY_NOT_IN_AUCTION")} unless @item.auction?
 end
 
-before "/item/:id/auction*" do 
+before "/item/:id/auction" do
   get_item_by_id
   assert_auction
+end
+
+before "/item/:id/auction/:what*" do
+  get_item_by_id
+  assert_auction if params[:what] != "create"
 end
 
 # =============== Public
@@ -270,7 +275,7 @@ end
 # ************* Private, auction related
 get "/item/:id/auction/create" do
   assert_owner
-  erb :create_auction, :locals => { :item => checkAndGetItem(params[:id]) }
+  erb :create_auction, :locals => { :item => @item }
 end
 
 # Creates a time object from a different time
@@ -351,7 +356,7 @@ end
 #
 post "/item/:id/auction/edit" do
   assert_owner
-  @item = checkAndGetItem(params[:id].to_i)
+
   begin
     end_time = paramToTime(params[:end_time])
   rescue

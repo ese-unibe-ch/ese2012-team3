@@ -17,6 +17,10 @@ class TestAuction < Test::Unit::TestCase
     def active?
       self.active
     end
+
+    def id
+      1
+    end
   end
 
   class MockUser < User

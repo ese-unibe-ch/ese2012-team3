@@ -37,7 +37,7 @@ module Market
       # @param [Time] time
       # @param [Numeric] price strictly positive
       def self.create(agent, time, price)
-        assert_kind_of(Agent, params[:creator])
+        assert_kind_of(Agent,agent)
         assert_kind_of(Time, time)
         assert_kind_of(Numeric, price)
         fail "negative/0 bid" unless price > 0
