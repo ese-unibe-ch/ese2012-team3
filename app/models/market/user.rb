@@ -106,6 +106,7 @@ module Market
       for org in self.list_organizations
         return true if org.is_admin?(self)
       end
+      return false
     end
 
     def is_admin_of?(org)
