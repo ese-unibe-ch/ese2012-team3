@@ -103,6 +103,11 @@ post "/organization/:id/remove_member" do
   #Remove user
   user_to_remove = User.user_by_id(params[:user_to_remove])
   @org.remove_member(user_to_remove)
+  if user_to_remove == @current_user
+    session[:organization_id] = nil
+    flash[:success] = 'agent_switched'
+    redirect "/"
+  end
 
   redirect back
 end
