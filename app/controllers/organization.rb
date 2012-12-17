@@ -63,14 +63,6 @@ end
 
 # it would have been a better design to not include a parameter in all of the following:
 
-get "/organization/:id/settings" do
-  # Obviously, any user that is not already in the organization is eligible for membership.
-  addable_users = User.all_outside_organization(@org)
-
-  erb :organization_settings, :locals => {:addable_users   => addable_users}
-end
-
-
 # ============ Private for admins only
 post "/organization/:id/add_member" do
   user_to_add = User.user_by_id(params[:user_to_add])

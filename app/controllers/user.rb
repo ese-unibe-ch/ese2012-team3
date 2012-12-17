@@ -1,9 +1,5 @@
 # We define queries manipulating {User Users} here.
 
-get "/settings" do
-  erb :settings
-end
-
 before "/profile/:id" do
   halt erb :error, :locals => {:message => localized_message_single_key("NO_USER_FOUND")} unless User.has_user_with_id?(params[:id].to_i)
   @user = User.user_by_id(params[:id])

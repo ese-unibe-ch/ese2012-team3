@@ -79,6 +79,18 @@ get "/error" do
   erb :error
 end
 
+get "/settings" do
+  # Show user settings if logged in as a user, show org settings otherwise.
+  if @current_user == @current_agent
+    erb :settings
+  else
+    # Obviously, any user that is not already in the organization is eligible for membership.
+    addable_users = User.all_outside_organization(@current_agent)
+    @org = @current_agent
+    erb :organization_settings, :locals => {:addable_users   => addable_users}
+  end
+end
+
 post "/set_activity_filter" do
   session[:activity_filter] = []
   session[:activity_filter] << "comment"    if params[:comment]
