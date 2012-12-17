@@ -74,7 +74,7 @@ post "/organization/:id/add_member" do
     halt erb :error, :locals => {:message => e.message}
   end
 
-  redirect "/organization/#{params[:id]}/settings"
+  redirect "/settings"
 end
 
 post "/organization/:id/toggle_admin_member" do
@@ -88,7 +88,7 @@ post "/organization/:id/toggle_admin_member" do
     halt erb :error, :locals => {:message => e.message}
   end
 
-  redirect "/organization/#{params[:id]}/settings"
+  redirect "/settings"
 end
 
 post "/organization/:id/remove_member" do
@@ -98,7 +98,7 @@ post "/organization/:id/remove_member" do
   if user_to_remove == @current_user
     session[:organization_id] = nil
     flash[:success] = 'agent_switched'
-    redirect "/"
+    redirect "settings"
   end
 
   redirect back
@@ -118,7 +118,7 @@ post "/organization/:id/change_profile_picture" do
 
   @org.image_file_name = add_image(ORGANIZATIONIMAGESROOT, @org.id,params[:image_file])
 
-  redirect "/organization/#{@org.id}/settings"
+  redirect "/settings"
 end
 
 delete "/organization/:id/delete_profile_picture" do
@@ -127,5 +127,5 @@ delete "/organization/:id/delete_profile_picture" do
 
   @org.delete_image_file
 
-  redirect "/organization/#{@org.id}/settings"
+  redirect "/settings"
 end
