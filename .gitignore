@@ -19,7 +19,7 @@ _yardoc
 doc/
 
 #rubymine stuff
-.idea/
+.idea
 .DS_Store
 Gemfile.lock
 
