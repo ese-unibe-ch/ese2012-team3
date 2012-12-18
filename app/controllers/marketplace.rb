@@ -128,7 +128,7 @@ def set_item_values_from_params(item)
 
   i = 0
   while params.has_key?("language_#{i}")
-    print "Language #{i} is set to "+params["language_#{i}"]+"\n"
+    #print "Language #{i} is set to "+params["language_#{i}"]+"\n"
     item.name.set  params["language_#{i}"], params["name_#{i}"]
     item.about.set params["language_#{i}"], params["about_#{i}"]
     i+=1

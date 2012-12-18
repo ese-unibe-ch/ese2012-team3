@@ -54,7 +54,7 @@ post "/register" do
 
   passwordcheck()
 
-  print @errors
+  #print @errors
   halt erb :register unless @errors.empty?
 
   user = User.init(:name => params[:name], :credit => DEFAULT_CREDITS,

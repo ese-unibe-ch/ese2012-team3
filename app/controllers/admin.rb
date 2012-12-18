@@ -108,7 +108,7 @@ end
 post "/admin/edit_localization/submit" do
   l = session[:admin_loc_language]
   params.each{|k,v|
-     print "KEy #{k} and val #{v}\n"
+     #print "KEy #{k} and val #{v}\n"
      LANGUAGES[l].set k,v
 
   }

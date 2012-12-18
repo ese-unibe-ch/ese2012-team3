@@ -20,7 +20,7 @@ class Language
   def initialize(langcode,basefolder)
     basefolder = File.join(basefolder,langcode)
     @icon = basefolder[PUBLIC_FOLDER.length..-1] + "/icon.png"
-    print "lang icon path: #{@icon}\n"
+    #print "lang icon path: #{@icon}\n"
 
     begin
     text=File.open(basefolder+'/strings.txt').read
@@ -40,7 +40,7 @@ class Language
       else
         value = line
         @s[k] = value
-        print "loaded lang key '#{k}' = '#{value}'\n"
+        #print "loaded lang key '#{k}' = '#{value}'\n"
         k = ""
       end
     end
@@ -54,15 +54,15 @@ end
 # Loads all LANGUAGES and stores them in the LANGUAGES hash via langcode => Language
 # Also loads the categorisations for the language keys used on the admin panel.
 def load_languages(basefolder)
-  print "loading langs from #{basefolder}\n"
+  #print "loading langs from #{basefolder}\n"
   Dir.entries(basefolder).each {
       |entry|
-      print "found entry #{entry}\n"
+      #print "found entry #{entry}\n"
       next if (entry =='.' || entry == '..')
       e = File.join(basefolder,entry)
       next if !File.directory?(e)
 
-      print "loading lang #{entry} from #{e}\n"
+      #print "loading lang #{entry} from #{e}\n"
       begin
       LANGUAGES[entry] = Language.new(entry, basefolder)
       rescue  => e
@@ -70,8 +70,8 @@ def load_languages(basefolder)
       end
   }
 
-  print "Loaded Langs: "
-  LANGUAGES.each {| key, value | print key+", " }
+  #print "Loaded Langs: "
+  #LANGUAGES.each {| key, value | print key+", " }
 
   # Load lang key categories
   begin
@@ -94,7 +94,7 @@ def load_languages(basefolder)
     end
   end
 
-  print "Loaded lang key categories: "
-  KEY_CATEGORIES.each {| key, value | print key+", " }
+  #print "Loaded lang key categories: "
+  #KEY_CATEGORIES.each {| key, value | print key+", " }
 
 end
