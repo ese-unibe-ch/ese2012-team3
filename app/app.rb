@@ -94,7 +94,7 @@ john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
 jimmy = User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
 jack = User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
-ese.password = "ese" # TODO the model should not allow this
+ese.password = "ese"
 john.image_file_name="userimages/1.png"
 jimmy.image_file_name="userimages/1.png"
 jack.image_file_name="userimages/1.png"

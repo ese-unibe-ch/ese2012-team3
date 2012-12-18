@@ -110,7 +110,6 @@ class AgentTest < Test::Unit::TestCase
 
   def test_buy_nil_item_fails
     agent = User.init(:name => "agent13", :password => "Zz!45678")
-    owner = User.init(:name => "owner8", :password => "Zz!45678")
     item = nil
     assert_raise RuntimeError do
       agent.buy_item(item)
