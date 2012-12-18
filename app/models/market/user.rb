@@ -94,6 +94,11 @@ module Market
     def is_member_of?(organization)
       organization.has_member?(self)
     end
+    
+    # @return Whether this Agent can follow someone. Users can.
+    def can_follow?
+      true
+    end
 
     # list organizations this user is member of
     # @see Market::Organization.organizations_by_user

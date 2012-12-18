@@ -61,10 +61,12 @@ SMALLIMAGESIZE         = 100
 USERIMAGESROOT         = "userimages" # relative to {PUBLIC_FOLDER}
 ITEMIMAGESROOT         = "itemimages" # relative to {PUBLIC_FOLDER}
 ORGANIZATIONIMAGESROOT = "organizationimages" # relative to {PUBLIC_FOLDER}
+
 ITEMS_PER_PAGE         = 20
 AGENTS_PER_PAGE        = 20
 ACTIVITIES_PER_PAGE    = 7
 COMMENTS_PER_PAGE      = 20
+
 DUMMYTHINGSCOUNT       = 30
 
 # Set constans in sinatra
@@ -80,22 +82,19 @@ enable :sessions # never forget
 # ===================== Load languages =====================
 load_languages(LANGUAGES_FOLDER)
 
-TEST_LANG_MSG = LocalizedMessage.new([
-                              LocalizedMessage::LangKey.new("CURRENT_WINNER"),
-                              " von MX"])
-
-
-begin
-  fail LocalizedMessage.new([LocalizedMessage::LangKey.new("NO_PASSWORD_GIVEN")])
-rescue => e
-   print e.to_string(LANGUAGES["en"])
+# ===================== Global error handler =====================
+error do
+  erb :error, :locals => {:message => request.env['sinatra.error'].message }
 end
 
 # ===================== TEST DATA =====================
+# You can delete or "if 0==1 ... end"-out all of the code below till the end of this file
+#if 0 == 1
 john = User.init(:name => "John", :credit => 500, :password => DEFAULT_PASSWORD)
 jimmy = User.init(:name => "Jimmy", :credit => 30, :password => DEFAULT_PASSWORD)
 jack = User.init(:name => "Jack", :credit => 400, :password => DEFAULT_PASSWORD)
 ese = User.init(:name => "ese", :credit => 1000, :password => DEFAULT_PASSWORD)
+ese.password = "ese" # TODO the model should not allow this
 john.image_file_name="userimages/1.png"
 jimmy.image_file_name="userimages/1.png"
 jack.image_file_name="userimages/1.png"
@@ -157,6 +156,7 @@ john.add_activity(Activity::new_comment_activity(john, pizza))
 for i in 0...DUMMYTHINGSCOUNT
   dummyUser = User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "This is a dummy user. Please just leave him alone.")
   dummyUser.image_file_name="userimages/1.png"
+  ese.follow(dummyUser)
 end
 
 
@@ -169,14 +169,17 @@ map = Item.init(:name => "map of the world", :price => 75, :active => true, :own
 map.image_file_name="itemimages/map.jpg"
 uno.add_item(map)
 User.all.each_with_index do |user, i|
-  about = "This is a **Pet Stone**. it's very easy to keep, doesn't need any special diet; it's house-trained."
-  item = Item.init(:name => "Pet Stone", :price => 100, :owner => user, :about => about)
-  comment = Comment.new(:creator => user, :text => "This is my stone. I want to sell it")
+  about = "This is a **Pet Rock**. It's very easy to keep, doesn't need any special diet; it's house-trained."
+  item = Item.init(:name => "Pet Rock", :price => 100, :owner => user, :about => about)
+  comment = Comment.new(:creator => user, :text => "This is my rock. I want to sell it")
   item.add_comment(comment)
-  item.add_comment(Comment.new(:creator => user, :text => "Very *nice* stone! And **cheap**"))
+  item.add_comment(Comment.new(:creator => user, :text => "Very *nice* rock! And **cheap**"))
   item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max!"))
   item.image_file_name="itemimages/stone.jpg"
   user.add_item(item)
+
+  ese.change_wishlist(item) # Add to wishlist. ese loves pet rocks huh!? xD
+
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
 
@@ -209,9 +212,6 @@ for i in 0...DUMMYTHINGSCOUNT
   lastdummyitem.add_comment(Comment.new(:creator => jack, :text => "very *nice* item! And **cheap** the #{i}th"))
 end
 
-# end
+#end
 
-# ===================== Global error handler =====================
-error do
-  erb :error, :locals => {:message => request.env['sinatra.error'].message }
-end
+

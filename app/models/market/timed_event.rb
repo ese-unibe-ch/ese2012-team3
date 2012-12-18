@@ -33,7 +33,7 @@ module Market
       event
     end
 
-    # @internal_not Curently, only the Acution object itself subscribes to this
+    # @internal_note Curently, only the Acution object itself subscribes to this
     # @param subscriber must implement "timed_out", called when timer runs out
     def subscribe(subscriber)
       fail "Object to be called should not be nil" if subscriber.nil?

@@ -263,7 +263,7 @@ Org. Settings
 ORGANIZATION
 Organization
 ORGANIZATION_CREATED_NOTIFICATION
-<strong>Organization created!</strong><br />The organization was successfully created.
+<strong>Organization created!</strong><br />The organization was successfully created and you have been switched to represent it.
 ORGANIZATION_SETTINGS
 Organization Settings
 ORGANIZATIONS

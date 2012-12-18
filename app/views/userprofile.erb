@@ -12,11 +12,11 @@
   <h2><%= xss @user.name %> - <%=@LANG["MY_PROFILE"]%></h2>
 <% else %>
   <h2><%=@LANG["VIEWING_PROFILE"]%>: <%= xss @user.name %></h2>
-  <% if @user != @current_user && @current_user == @current_agent%>
+  <% if @current_agent.can_follow? %>
     <form action="/follow" method="POST" style="display: inline">
       <input type="hidden" name="follow_id" value="<%= xss @user.id%>" />
       <input type="hidden" name="agent" value="user" />
-      <% if @current_user.following.include?(@user) %>
+      <% if @current_agent.following.include?(@user) %>
         <input type="submit" class="btn btn-danger small" name="submit" value="<%=@LANG["UNFOLLOW"]%>" />
       <% else %>
         <input type="submit" class="btn btn-info small" name="submit" value="<%=@LANG["FOLLOW"]%>" />
@@ -35,7 +35,8 @@
 <%= erb :_item_list, :locals => {
                        :items => @items,
                        :offers => @offers,
-                       :highlight_active => true
+                       :highlight_active => true,
+                       :identifier => :item_list_pagenum
 } %>
 
 <% if @user == @current_agent %>
@@ -65,7 +66,8 @@
   <%= erb :_agent_list, :locals => {
                           :agents => @organizations,
                           :version => (@user == @current_agent ? :leave_organization : nil),
-                          :user => @user
+                          :user => @user,
+                          :identifier => :org_list_pagenum
   } %>
 <% end %>
 
@@ -80,12 +82,18 @@
 <% if @following.empty? %>
   <p><%=@LANG["NOT_FOLLOWING"]%></p>
 <% else %>
-  <%= erb :_agent_list, :locals=>{:agents => @following} %>
+  <%= erb :_agent_list, :locals=>{:agents => @following, :identifier => :following_list_pagenum} %>
 <% end %>
 
 <h3><%=@LANG["WISHLIST"]%></h3>
 <% if @current_agent.wishlist.empty? %>
   <p><%=@LANG["NO_WISHLIST_ITEMS"]%></p>
 <% else %>
-  <%= erb :_wish_list %>
+    <%= erb :_item_list, :locals=>{
+            :items => @current_agent.wishlist,
+            :offers => nil,
+            :identifier => :wishlist_pagenum,
+            :show_owner => true,
+            :hide_title => true
+    } %>
 <% end %>

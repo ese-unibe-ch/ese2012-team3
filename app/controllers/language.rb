@@ -33,7 +33,8 @@ class Language
     @s = {}
     k = ""
     text.each_line do |line|
-      line = line.strip
+      line.rstrip!
+
       if k == ""
         k = line
       else

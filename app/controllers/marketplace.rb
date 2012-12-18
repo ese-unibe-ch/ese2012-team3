@@ -6,7 +6,10 @@ def get_item_by_id
   halt erb :error, :locals => {:message => localized_message_single_key("NO_ITEMS_FOUND")} if @item.nil?
 end
 
-before "/item/:id*" do get_item_by_id end
+before "/item/:id*" do 
+  return unless params[:id].to_i > 0
+  get_item_by_id
+end
 
 # Assertions about @item (set by get_item_by_id automatically for all pages that require it) state
 

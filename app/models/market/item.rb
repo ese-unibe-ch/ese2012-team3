@@ -30,7 +30,7 @@ module Market
                   :comments # <tt>Array</tt> of {Comment} objects
 
 
-    @@item_id_counter = 0
+    @@item_id_counter = 1
     @@items = []
     @@offers = [] # Offers are special items that are stored here instead of in @@items
 
@@ -165,7 +165,7 @@ module Market
     def sell(selling_agent)
       fail "no offer" unless self.is_offer?()
       selling_agent.credit += self.safe.savings
-      Item.transform_offer_to_item(@item)
+      Item.transform_offer_to_item(self)
     end
 
     # same as {#find_item} but for offers.

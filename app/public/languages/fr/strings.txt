@@ -223,7 +223,7 @@ pas d'organisation trouvé
 NO_ORGANIZATIONS
 Pas d'organisations
 NO_PASS_AND_USER
-Pas de mot de passe et  nom d'utilisateur donné
+Pas de mot de passe et nom d'utilisateur donné
 NO_PASSWORD_CONFIRM_GIVEN
 Pas de confirmation du mot de passe donné
 NO_PASSWORD_GIVEN

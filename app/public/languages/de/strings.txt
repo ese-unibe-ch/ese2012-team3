@@ -35,7 +35,7 @@ Das Gebot muss mindestens momentaner Preis + Erhöhung sein
 BID_ON_AUCTION
 Gebot abgeben
 BOUGHT_ITEM
-kaufte item
+kaufte Gegenstand
 BUY_ITEM
 Gegenstand kaufen
 BUYING
@@ -223,7 +223,7 @@ keine Organisation gefunden
 NO_ORGANIZATIONS
 Keine Organisationen
 NO_PASS_AND_USER
-No password and according username given
+Kein Passwort und zugehöriger Benutzername angegeben
 NO_PASSWORD_CONFIRM_GIVEN
 Keine Passwortbestätigung eingegeben
 NO_PASSWORD_GIVEN
@@ -319,7 +319,7 @@ Registrieren
 REGISTERED_NOTIFICATION
 <strong>Registriert!</strong><br />Ihr Account wurde erfolgreich erstellt und Sie wurden automatisch eingeloggt.
 REGISTRATION
-Registration
+Registrieren
 REMOVE_FROM_WISHLIST
 Von Wunschliste entfernen
 REMOVE_MEMBER

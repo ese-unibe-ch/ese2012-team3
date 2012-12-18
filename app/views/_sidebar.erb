@@ -1,14 +1,24 @@
 <div class="span2">
   <div class="well" style="padding: 8px 0;">
     <ul class="nav nav-list">
-
-      <li
-        <%if @current_nav_item == :marketplace%>
+      <% if !@current_agent # if not logged in %>
+          <li
+          <%if @current_nav_item == :login%>
           class="active"
-        <%end%>
-      ><a href="/"><i class="icon-home"></i><%=@LANG["MARKETPLACE"]%></a></li>
+          <%end%>
+          ><a href="/login"><i class="icon-home"></i><%=@LANG["LOGIN"]%></a></li>
+          <li
+          <%if @current_nav_item == :register%>
+          class="active"
+          <%end%>
+          ><a href="/register"><i class="icon-none"></i><%=@LANG["REGISTRATION"]%></a></li>
+    <% else # if logged in %>
+          <li
+          <%if @current_nav_item == :marketplace%>
+          class="active"
+          <%end%>
+          ><a href="/"><i class="icon-home"></i><%=@LANG["MARKETPLACE"]%></a></li>
 
-      <% if @current_agent %>
         <li
           <%if @current_nav_item == :sellers%>
             class="active"
@@ -39,7 +49,7 @@
          <%end%>
        ><a href="/item/offer"><i class="icon-plus"></i><%=@LANG["NEW_OFFER"]%></a></li>
 
-       <% if @current_agent == @current_user %>
+       <% if @current_agent == @current_user #if is no organization %>
 
          <li
             <%if @current_nav_item == :new_org%>
@@ -53,7 +63,7 @@
            <%end%>
          ><a href="/settings"><i class="icon-wrench"></i><%=@LANG["ACCOUNT_SETTINGS"]%></a></li>
 
-       <% else %>
+       <% else # is organization %>
 
          <li
            <%if @current_nav_item == :settings%>
@@ -61,8 +71,8 @@
            <%end%>
          ><a href="/settings"><i class="icon-wrench"></i><%=@LANG["ORG_SETTINGS"]%></a></li>
 
-       <% end %>
-     <% end %>
+       <% end # org...%>
+     <% end #logged in %>
     </ul>
   </div>
 
@@ -71,13 +81,23 @@
     <p style="font-weight: bold;"><%=@LANG["CREDITS"]%>: <%= xss ts(@current_agent.credit) %></p>
   <% end %>
 
-  <p>
-    <%=@LANG["LANGUAGE"]%>:<%
-      LANGUAGES.each{| key, value |
-    %>
-        <a href='/set_language/<%= key %>' title='<%= value["LANGUAGE_NAME"] %>'><img src="<%= value.icon%>"/></a>
-    <%
-      }
-    %>
-  </p>
+  <div class="dropdown">
+    <div class="dropdown-toggle" style="cursor: pointer;
+            cursor: hand;"
+          data-toggle="dropdown"
+          href="#">
+    <%=@LANG["LANGUAGE"]%>:
+      <img src="<%= @LANG.icon%>"/>
+      <b class="caret"></b>
+
+    </div>
+    <ul class="dropdown-menu">
+      <% LANGUAGES.each{| key, value | next if value == @LANG%>
+              <li>
+              <a href='/set_language/<%= key %>'><img src="<%= value.icon%>"/> <%= value["LANGUAGE_NAME"] %></a>
+              </li>
+         
+      <% } %>
+    </ul>
+  </div>
 </div>

@@ -36,7 +36,9 @@ page_offers = params[identifier_offers] ? params[identifier_offers].to_i : 0
   });
 </script>
 
+<%if !(defined? hide_title)%>
 <h3><%= @LANG["FOUND_ITEMS"] %></h3>
+<%end%>
 <%= erb :_pages_links, :locals => {:cur_page => page,
                                    :size => items.size,
                                    :per_page => ITEMS_PER_PAGE,
@@ -82,7 +84,7 @@ page_offers = params[identifier_offers] ? params[identifier_offers].to_i : 0
   <p><%= @LANG["NO_ITEMS_FOUND"] %></p>
 <% end %>
 
-
+<% if (defined? offers) && offers %>
 <h3><%=@LANG["OFFERS"]%></h3>
 <%= erb :_pages_links, :locals => {:cur_page => page_offers,
                                    :size => offers.size,
@@ -125,3 +127,5 @@ page_offers = params[identifier_offers] ? params[identifier_offers].to_i : 0
 <% else %>
   <p><%= @LANG["NO_OFFERS_FOUND"] %></p>
 <% end %>
+
+<%end%>

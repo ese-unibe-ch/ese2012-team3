@@ -28,6 +28,11 @@ module Market
       fail "Not enough credit (#{self.credit}) to subtract #{amount}" unless self.credit >= amount
       self.credit -= amount
     end
+    
+    # @return Whether this Agent can follow someone. Only {User Users} can
+    def can_follow?
+      false
+    end
 
     # add a specified item to the selling list
     # @param [Item] item item to be added
@@ -84,7 +89,7 @@ module Market
     # null implementation, to be implemented by {Organization}
     #@internal_note noop implementation, only organisations have orgactivities
     #   but this here allows the controllers to be agnostic about agent type
-    # @params [Activity] activity
+    # @param [Activity] activity
     def add_orgactivity(activity)
 
     end

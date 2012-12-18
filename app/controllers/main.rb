@@ -12,7 +12,7 @@ before do
     session[:user_id] = nil
   end
 
-  if session[:organization_id] and !Organization.has_organization_with_id?(session[:organization_id].to_i)
+  if (session[:organization_id] and !Organization.has_organization_with_id?(session[:organization_id].to_i)) or session[:user_id] == nil # cannot stay logged in as org if there's no backing user
     session[:organization_id] = nil
   end
 

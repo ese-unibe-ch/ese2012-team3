@@ -1,10 +1,9 @@
 <%
 # used to create links to Organizations and users.
    %>
-   <a href="<%= user.profile_route %>">
   <%if user.kind_of?(User) %>
       <i class="icon-user">
   <%else%>
       <i class="icon-briefcase">
   <%end%>
-  </i><%= xss user.name %></a>
+  </i> <a href="<%= user.profile_route %>"><%= xss user.name %></a>

@@ -1,0 +1,16 @@
+.navbar-vertical-centered {
+padding-top:10px
+}
+
+#activeuserslist {
+margin-top: 2em;
+}
+
+#activeuserstable{
+width: 66%;
+}
+
+#adminsidebar
+{
+padding: 9px 0;
+}
