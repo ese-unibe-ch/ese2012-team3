@@ -154,7 +154,9 @@ john.add_activity(Activity::new_comment_activity(john, pizza))
 
 # Some dummy users to test paging
 for i in 0...DUMMYTHINGSCOUNT
-  dummyUser = User.init(:name => "dummyuser"+i.to_s, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "This is a dummy user. Please just leave him alone.")
+  first_name = random_first_name
+  surname = random_surname
+  dummyUser = User.init(:name => first_name + " " + surname, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "This is a dummy user. Please just leave him alone.")
   dummyUser.image_file_name="userimages/1.png"
   ese.follow(dummyUser)
 end
