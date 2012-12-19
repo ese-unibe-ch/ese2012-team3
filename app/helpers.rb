@@ -31,6 +31,16 @@ def random_surname
   return surnames[rand(surnames.length)]
 end
 
+def random_item_attribute
+  attributes = ["New", "Old", "Used", "Delicious", "Excellent", "Dubious", "Dusty", "Great", "Blue", "Green", "Yellow", "Red", "Simple", "Striped", "Antique", "Lovely", "Shabby", "Awesome", "Mysterious", "Fresh", "Cool", "Unused", "Slightly used", "Perfect"]
+  return attributes[rand(attributes.length)]
+end
+
+def random_item_name
+  items = ["pizza", "cupboard", "bike", "bicycle", "car", "laptop", "desk", "lamp", "children's book", "playstation", "gloves", "hockey stick", "basketball", "football", "soccer shoes", "shoes", "shoe", "shirt", "coat", "hat", "painting", "photograph of a dog", "dog", "book", "novel", "newspaper", "pants", "mp3 player", "walkman", "tv", "radio", "car radio", "cell", "sled", "dvd", "snowboard", "snowman", "leaf", "stick", "stone", "rock", "trash can", "bottle o' rum", "tricycle", "child", "cat", "baseball bat", "soul"]
+  return items[rand(items.length)]
+end
+
 # ================= Client area (Marketplace) ================
 
 # Redirects to login if not logged in.

@@ -156,9 +156,12 @@ john.add_activity(Activity::new_comment_activity(john, pizza))
 for i in 0...DUMMYTHINGSCOUNT
   first_name = random_first_name
   surname = random_surname
-  dummyUser = User.init(:name => first_name + " " + surname, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "This is a dummy user. Please just leave him alone.")
-  dummyUser.image_file_name="userimages/1.png"
-  ese.follow(dummyUser)
+  random_name = first_name + " " + surname
+  if !User.user_by_name(random_name)
+    dummyUser = User.init(:name => first_name + " " + surname, :credit => 1000, :password => DEFAULT_PASSWORD, :about => "I'm a dummy user. Please just leave me alone.")
+    dummyUser.image_file_name="userimages/1.png"
+    ese.follow(dummyUser)
+  end
 end
 
 
@@ -171,6 +174,12 @@ map = Item.init(:name => "map of the world", :price => 75, :active => true, :own
 map.image_file_name="itemimages/map.jpg"
 uno.add_item(map)
 User.all.each_with_index do |user, i|
+  attribute = random_item_attribute
+  item_name = random_item_name
+  random_item = Item.init(:name => attribute + " " + item_name, :price => (rand(80))+20.to_i, :owner => user, :about => attribute + " " + item_name + "- get it now, before someone else grabs it!")
+  random_item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max! This " + item_name + " doesn't look like anybody would want to pay more!"))
+  random_item.image_file_name="itemimages/demo.png"
+  user.add_item(random_item)
   about = "This is a **Pet Rock**. It's very easy to keep, doesn't need any special diet; it's house-trained."
   item = Item.init(:name => "Pet Rock", :price => 100, :owner => user, :about => about)
   comment = Comment.new(:creator => user, :text => "This is my rock. I want to sell it")
@@ -179,9 +188,7 @@ User.all.each_with_index do |user, i|
   item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max!"))
   item.image_file_name="itemimages/stone.jpg"
   user.add_item(item)
-
   ese.change_wishlist(item) # Add to wishlist. ese loves pet rocks huh!? xD
-
   Item.init(:name => "secondItem", :price => 200, :active => false, :owner => john) if i == 2
 end
 
@@ -204,7 +211,8 @@ for i in 0...DUMMYTHINGSCOUNT
   dummyabout = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua"
   lastdummyitem = Item.init(:name => "dummyitem"+i.to_s, :price => rand(100)+1, :active => true, :owner => uno, :about => dummyabout)
   lastdummyitem.image_file_name="itemimages/quarta.jpg"
-  uno.add_item(lastdummyitem)
+  #they should only be seen inside the org
+  lastdummyitem.change_status
 end
 
 
