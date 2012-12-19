@@ -10,7 +10,7 @@ class UserTest < Test::Unit::TestCase
     User.all.delete_if { |user| user != nil }
     user = User.init(:name => "user15", :password => "Zz!45678")
     owner = User.init(:name => "owner9", :password => "Zz!45678")
-    # we should have 2 students now
+    # we should have 2 users now
     assert_equal(2, User.all.length, "there are not 2 users in the users list!")
   end
 

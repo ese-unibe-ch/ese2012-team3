@@ -137,7 +137,7 @@ class OrganizationTest < Test::Unit::TestCase
   def test_all_orgs
     org = Organization.init(:name => "org15", :admin => @user)
     org2 = Organization.init(:name => "owner9", :admin => @user)
-    # we should have 2 students now
+    # we should have 2 organizations now
     assert_equal(2, Organization.all.length, "there are not 2 orgs in the orgs list!")
   end
 
