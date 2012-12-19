@@ -67,6 +67,7 @@ module Market
     end
 
     # Resets and recreates the safe if this is an offer.
+    # @param price Number
     def set_price(price)
       @price = price
       if self.is_offer?
@@ -85,55 +86,68 @@ module Market
       end
     end
 
+    # Puts the item into the {#active} state.
     def activate
       self.active = true
     end
 
+    # Returns if the item is {#active}.
     def active?
       :active?
     end
 
+    # Returns whether the item has an {Auction}.
     def auction?
       ! self.auction.nil?
     end
 
+    # Returns a string containing name and price.
     def to_s
       "#{self.name} (#{self.price})"
     end
 
+    # Returns the {Item} belonging to the id.
+    # @param id: Integer
     def self.by_id id
       @@items.detect{ |item| item.id.to_i == id }
     end
 
+    # Returns all {Item}s.
     def self.all
       @@items
     end
 
-    # list of all active item
+    # List of all active {Item}s.
     def self.active_items
       @@items.select { |item| item.active }
     end
 
-    # list of user's items to sell
+    # List of {User}'s {Item}s to sell.
+    # @param user: {User}
     def self.sell_items_by_agent (user)
       @@items.select { |item| item.active && item.owner == user }
     end
 
-    # @return list of user's items
+    # @return List of {User}'s items
+    # @param user: {User}
     def self.items_by_agent(user)
       @@items.select { |item| item.owner == user }
     end
-    
-    def self.offers_by_agent(user)
-      @@offers.select { |item| item.owner == user }
+
+    # @return List of {Agent}'s {Offer}s
+    # @param agent: {Agent}
+    def self.offers_by_agent(agent)
+      @@offers.select { |item| item.owner == agent }
     end
 
+    # Deletes all {Item}s.
     def self.delete_all
       while @@items.length > 0
         @@items[0].delete
       end
     end
 
+    # Deletes this {Item}.
     def delete
       delete_image_file
       @@items.delete(self)
@@ -145,7 +159,8 @@ module Market
       delete_public_file(self.image_file_name)
     end
 
-
+    # Adds a new {Comment}.
+    # @param new_comment: {Comment}
     def add_comment new_comment
       comments << new_comment unless comments.include?(new_comment)
     end
@@ -157,6 +172,7 @@ module Market
       }
     end
 
+    # Returns whether this {Item} is an offer.
     def is_offer?()
       Item.offer_by_id(self.id) == self # what about @@offers.include?(self)
     end
@@ -191,7 +207,8 @@ module Market
       @@items.push(offer)
       @@offers.delete(offer)
     end
-    
+
+    # Returns all {Auction}s
     def self.all_auctions
       @all_auctions = @@items.select{ |item| !item.auction.nil? }
     end

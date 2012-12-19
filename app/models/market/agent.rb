@@ -79,7 +79,7 @@ module Market
       end
     end
 
-    # @param [Activity] activity
+    # @param [Activity] adds an {Activity}.
     def add_activity(activity)
       assert_kind_of(Activity, activity)
       raise "cannot add same activity multiple times" if self.activities.include?(activity)
@@ -124,13 +124,12 @@ module Market
       self.image_file_name = nil
     end
 
-    # Amount of items sold
-    # Statistics
+    # Amount of items sold - Value for statistics
     def self.items_sold
       return @@items_sold
     end
 
-    # Statistics
+    # Total money spent in purchases - Value for statistics
     def self.money_spent
       return @@money_spent
     end

@@ -19,12 +19,13 @@ module Market
        @@comments << self
     end
 
+    # Returns stored text.
     # @return {#text}
     def to_s
       @text
     end
 
-    # For statistics.
+    # List for statistics.
     def self.all
       return @@comments
     end

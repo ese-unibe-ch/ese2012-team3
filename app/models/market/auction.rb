@@ -8,11 +8,12 @@ module Market
     @@auctions_finished = 0 # <tt>Numeric</tt>, counter for statistics
     @@bids_made = 0         # <tt>Numeric</tt>, counter for statistics
 
-    # statistics
+    # Value for statistics
     def self.bids_made
       return @@bids_made
     end
-    # statistics
+
+    # Value for statistics
     def self.auctions_finished
       return @@auctions_finished
     end
