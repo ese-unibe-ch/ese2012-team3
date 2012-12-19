@@ -33,3 +33,48 @@ Gemfile.lock
 !/app/public/itemimages/quarta.jpg
 /app/public/organizationimages/*
 !/app/public/organizationimages/2.jpg
+#random images
+!/app/public/itemimages/car radio.jpg
+!/app/public/itemimages/hockey stick.jpg
+!/app/public/itemimages/cupboard.jpg
+!/app/public/itemimages/rock.jpg
+!/app/public/itemimages/bottle of rum.jpg
+!/app/public/itemimages/childrens book.jpg
+!/app/public/itemimages/trash can.jpg
+!/app/public/itemimages/baseball bat.jpg
+!/app/public/itemimages/pizza.jpg
+!/app/public/itemimages/playstation.jpg
+!/app/public/itemimages/mp3 player.jpg
+!/app/public/itemimages/child.jpg
+!/app/public/itemimages/photograph of a dog.jpg
+!/app/public/itemimages/desk.jpg
+!/app/public/itemimages/basketball.jpg
+!/app/public/itemimages/cat.jpg
+!/app/public/itemimages/tricycle.jpg
+!/app/public/itemimages/stick.jpg
+!/app/public/itemimages/leaf.jpg
+!/app/public/itemimages/snowman.jpg
+!/app/public/itemimages/snowboard.jpg
+!/app/public/itemimages/DVD.jpg
+!/app/public/itemimages/sled.jpg
+!/app/public/itemimages/mobile phone.jpg
+!/app/public/itemimages/radio.jpg
+!/app/public/itemimages/TV.jpg
+!/app/public/itemimages/walkman.jpg
+!/app/public/itemimages/pants.jpg
+!/app/public/itemimages/newspaper.jpg
+!/app/public/itemimages/novel.jpg
+!/app/public/itemimages/book.jpg
+!/app/public/itemimages/dog.jpg
+!/app/public/itemimages/painting.jpg
+!/app/public/itemimages/hat.jpg
+!/app/public/itemimages/coat.jpg
+!/app/public/itemimages/shirt.jpg
+!/app/public/itemimages/shoe.jpg
+!/app/public/itemimages/football.jpg
+!/app/public/itemimages/gloves.jpg
+!/app/public/itemimages/lamp.jpg
+!/app/public/itemimages/laptop.jpg
+!/app/public/itemimages/car.jpg
+!/app/public/itemimages/bicycle.jpg
+!/app/public/itemimages/bike.jpg

@@ -32,12 +32,12 @@ def random_surname
 end
 
 def random_item_attribute
-  attributes = ["New", "Old", "Used", "Delicious", "Excellent", "Dubious", "Dusty", "Great", "Blue", "Green", "Yellow", "Red", "Simple", "Striped", "Antique", "Lovely", "Shabby", "Awesome", "Mysterious", "Fresh", "Cool", "Unused", "Slightly used", "Perfect"]
+  attributes = ["New", "Old", "Used", "Delicious", "Excellent", "Dubious", "Dusty", "Great", "Simple", "Striped", "Antique", "Lovely", "Shabby", "Awesome", "Mysterious", "Fresh", "Cool", "Unused", "Slightly used", "Perfect", "Illegal", "Secret", "Newly discovered", "Romanian", "Severely damaged", "Wet"]
   return attributes[rand(attributes.length)]
 end
 
 def random_item_name
-  items = ["pizza", "cupboard", "bike", "bicycle", "car", "laptop", "desk", "lamp", "children's book", "playstation", "gloves", "hockey stick", "basketball", "football", "soccer shoes", "shoes", "shoe", "shirt", "coat", "hat", "painting", "photograph of a dog", "dog", "book", "novel", "newspaper", "pants", "mp3 player", "walkman", "tv", "radio", "car radio", "cell", "sled", "dvd", "snowboard", "snowman", "leaf", "stick", "stone", "rock", "trash can", "bottle o' rum", "tricycle", "child", "cat", "baseball bat", "soul"]
+  items = ["pizza", "cupboard", "bike", "bicycle", "car", "laptop", "desk", "lamp", "childrens book", "playstation", "gloves", "hockey stick", "basketball", "football", "shoe", "shirt", "coat", "hat", "painting", "photograph of a dog", "dog", "book", "novel", "newspaper", "pants", "mp3 player", "walkman", "tv", "radio", "car radio", "mobile phone", "sled", "dvd", "snowboard", "snowman", "leaf", "stick", "stone", "rock", "trash can", "bottle of rum", "tricycle", "child", "cat", "baseball bat", "soul"]
   return items[rand(items.length)]
 end
 
