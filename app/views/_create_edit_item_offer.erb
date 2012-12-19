@@ -11,21 +11,41 @@
   <%if LANGUAGES.size > 0 %>
       <div class="control-group" id="moreLangsBtn">
         <div class="controls">
-          <div class="btn btn-info" onclick="addlang()"><%=@LANG["I_WANT_PROVIDE_DESC_MORE_LANGS"]%></div>
+          <div class="btn btn-info" id="add_lang_button"><%=@LANG["I_WANT_PROVIDE_DESC_MORE_LANGS"]%></div>
         </div>
       </div>
   <%end%>
 
   <script>
+      numOfLanguages = <%=LANGUAGES.size%>
+
+      $(document).on("click", "#add_lang_button", function(){$(".langselector").trigger("change")});
+
+      //disable already selected languages
+      $(document).on("change", ".langselector", function(){
+          //allow all options in all boxes
+          $(".langselector > option").removeAttr("disabled");
+          $(".langselector > option:selected").each(function() {
+              id = parseInt($(this).parent().attr("id").substr(-1, 1));
+              selected_value = $(this).attr("value");
+              //iterate over all lower select boxes. disable the options selected in current one
+              for(i=id+1; i<numOfLanguages; i++) {
+                  $("#langselector_"+i).children("option[value='"+selected_value+"']").attr("disabled","disabled").removeAttr("selected");
+              }
+          });
+
+      });
+
       languagesCounter = 0
 
-      function addlang() {
+
+      $("#add_lang_button").click(function(){
           <%
           for i in 0...LANGUAGES.size
           %>
 
-          if (languagesCounter == <%= i%>) {
 
+          if (languagesCounter == <%= i%>) {
               $('#moreLangs').append('<div><%=
               ((erb :_lang_id_select_control, :locals => {:num => i}).to_s).delete("\n").delete("\r") +
               (erb :_text_control, :locals => {:name => "name_#{i}", :label => @LANG["NAME"]}).to_s.delete("\n").delete("\r") +
@@ -41,15 +61,18 @@
           <%
           end
           %>
-      }
 
-      <%
-      for i in 0...LANGUAGES.size
+      });
 
-      if params.has_key?("language_#{i}") ||i == 0
-      %>
-      addlang()
-     <%end end%>
+      $(document).ready(function(){
+          <%
+          for i in 0...LANGUAGES.size
+            if params.has_key?("language_#{i}") ||i == 0
+          %>
+          $("#add_lang_button").trigger("click");
+          <%end%>
+     <%end%>
+      });
   </script>
 
 
