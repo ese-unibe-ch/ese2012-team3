@@ -177,15 +177,14 @@ User.all.each_with_index do |user, i|
   attribute = random_item_attribute
   item_name = random_item_name
   random_item = Item.init(:name => attribute + " " + item_name, :price => (rand(80))+20.to_i, :owner => user, :about => attribute + " " + item_name + " - get it now, before someone else grabs it!")
-  random_item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max! This " + item_name + " doesn't look like anybody would want to pay more!"))
+  random_item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max! This " + item_name + " doesn't look like anybody would want to pay more!")) unless item.owner == john
   random_item.image_file_name="itemimages/demo.png"
   user.add_item(random_item)
   about = "This is a **Pet Rock**. It's very easy to keep, doesn't need any special diet; it's house-trained."
   item = Item.init(:name => "Pet Rock", :price => 100, :owner => user, :about => about)
-  comment = Comment.new(:creator => user, :text => "This is my rock. I want to sell it")
-  item.add_comment(comment)
+  item.add_comment(Comment.new(:creator => user, :text => "This is my rock. I want to sell it"))
   item.add_comment(Comment.new(:creator => user, :text => "Very *nice* rock! And **cheap**"))
-  item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max!"))
+  item.add_comment(Comment.new(:creator => john, :text => "I'll give you **10** credits, max!")) unless item.owner == john
   item.image_file_name="itemimages/stone.jpg"
   user.add_item(item)
   ese.change_wishlist(item) # Add to wishlist. ese loves pet rocks huh!? xD
